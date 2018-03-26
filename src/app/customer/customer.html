@@ -1,0 +1,24 @@
+
+<div *ngIf="isUpdate">
+<h2>Add new Customer </h2>
+<form  id="formNewCustomer" name="formNewCustomer"  #customerData="ngForm">
+  <input class="form-control" name="name" placeholder="name" ngModel>
+  <input class="form-control" name="contact" placeholder="contact" ngModel>
+  <p-button label="Submit" (click)=addNewCustomer(customerData.value) ></p-button>
+  <br>
+  <br>
+  <p-button label="Reset" (click)=resetForm(customerData) ></p-button>
+</form>
+
+</div>
+
+<div *ngIf="!isUpdate" >
+<h2>Update Customer : {{customersData.name}}</h2>
+<form id="formNewCustomer2" name="formNewCustomerUpdate"  #customerDataUpdate="ngForm">
+  <input class="form-control" name="name" value="{{customersData.name}}" [(ngModel)]="customersData.name" ngModel>
+  <input class="form-control" name="contact" value="{{customersData.contact}}" [(ngModel)]="customersData.contact" ngModel>
+  <p-button label="Update" (click)=updateCustomer(customerDataUpdate.value) ></p-button>
+</form>
+
+
+</div>

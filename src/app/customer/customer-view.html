@@ -1,0 +1,57 @@
+
+<div class="ui-g-12">
+
+    <div class="ui-g-12">
+      <h2>{{customer.name}} </h2>
+    </div>
+
+  <div class="ui-g-12">
+
+    <b> Id : </b> {{customer.id}} <br><br>
+    <b> Name : </b> {{customer.name}} <br><br>
+    <b> Contact Number : </b> {{customer.contact}} <br><br>
+
+  </div>
+
+  <h3>Customer Goals</h3>
+  <div class="ui-g-12 tos-button-right">
+  <button pButton label="Add Goals" icon="fa-plus" (click)="navigateNewGoals(customer.id)"></button>
+  </div>
+
+  <p-card *ngFor = "let goals of customerGoals" class="ui-g-3">
+      <p-header>
+          {{goals.description}}
+      </p-header>
+      {{goals.tenure}} <br>
+    {{goals.status}}<br>
+    {{goals.details}}<br>
+    {{goals.signedBy}}<br>
+    {{ goals.createdAt | date : 'd-M-yy, h:mm a'}}
+    <p-footer>
+      <p-button label="Delete" (click)="delelteGoal(goals.id)" icon="fa fa-minus-circle"></p-button>
+    </p-footer>
+  </p-card>
+  <span *ngIf="customerGoals.length === 0 ">No Goals Defined</span>
+
+<br>
+  <h3>Customer Teams</h3>
+  <div class="ui-g-12 tos-button-right">
+  <button pButton label="Add Teams" icon="fa-plus" (click)="navigateNewGoals(customer.id)"></button>
+  </div>
+
+  <p-card *ngFor = "let goals of customerGoals" class="ui-g-3">
+      <p-header>
+        {{goals.description}}
+      </p-header>
+      {{goals.tenure}} <br>
+      {{goals.status}}<br>
+      {{goals.details}}<br>
+      {{goals.signedBy}}<br>
+      {{ goals.createdAt | date : 'd-M-yy, h:mm a'}}
+    <p-footer>
+      <p-button label="Delete" (click)="delelteGoal(goals.id)" icon="fa fa-minus-circle"></p-button>
+    </p-footer>
+  </p-card>
+  <span *ngIf="customerGoals.length === 0 ">No Teams Assigned</span>
+
+</div>

@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('ng5-material App', () => {
+describe('ng5-tos App', () => {
   let page: AppPage;
 
   beforeEach(() => {

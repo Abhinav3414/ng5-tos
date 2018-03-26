@@ -1,0 +1,9 @@
+
+<h2>Add new Employee </h2>
+<form id="formNewEmployee" name="formNewEmployee" #employeeData="ngForm">
+  <input class="form-control" name="name" placeholder="name" ngModel>
+  <input class="form-control" name="joiningDate" placeholder="joiningDate" ngModel>
+  <input class="form-control" name="yearsOfExperience" placeholder="yearsOfExperience" ngModel>
+  <input class="form-control" name="responsibilities" placeholder="responsibilities" ngModel>
+  <p-button label="Submit" (click)=addNewEmployee(employeeData.value) ></p-button>
+</form>

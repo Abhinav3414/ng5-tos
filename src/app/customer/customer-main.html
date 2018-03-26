@@ -1,0 +1,63 @@
+
+
+<div class="ui-g-12">
+
+  <div class="ui-g-2">
+  </div>
+
+
+  <div class="ui-g-8">
+
+
+    <h3>Customer Operations</h3>
+
+    <div class="ui-g-12 tos-button-right">
+    <button pButton label="Add Customers" icon="fa-plus" (click)="navigateNewCustomer()"></button>
+    </div>
+
+    <table>
+      <tr *ngIf="customers.length===0"> No Customers Present </tr>
+    </table>
+
+
+    <div *ngFor = "let cust of customers" class="ui-g-12">
+
+      <div class="ui-g-12">
+          <div class="ui-g-2">
+
+          </div>
+          <div class="ui-g-10">
+            <div class="ui-g-12 tos-heading" >
+                <span (click)="navigateViewCustomer(cust.id)" class="tos-cust-heading"> {{cust.id}} {{cust.name}} </span>
+            </div>
+            <div class="ui-g-10">
+                <table>
+                  <th>Contact Number</th>
+                  <tr class="tos-table">
+                    <td>{{cust.contact}}</td>
+                  </tr>
+                </table>
+            </div>
+            <div class="ui-g-2">
+                <table>
+                  <tr class="tos-table tos-button">
+                    <td><button pButton label="Update" icon="fa-edit" (click)="navigateUpdateCustomer(cust.id)"></button></td>
+                  </tr>
+                  <tr class="tos-table tos-button">
+                    <td><p-button label="Delete" (click)="delelteCustomer(cust.id)" icon="fa fa-minus-circle"></p-button></td>
+                  </tr>
+                </table>
+            </div>
+          </div>
+        <hr>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+  <div class="ui-g-2">
+  </div>
+</div>

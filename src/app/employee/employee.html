@@ -1,0 +1,28 @@
+
+<div *ngIf="isUpdate">
+<h2>Add new Employee </h2>
+<form  id="formNewEmployee" name="formNewEmployee"  #employeeData="ngForm">
+  <input class="form-control" name="name" placeholder="name" ngModel>
+  <input class="form-control" name="joiningDate" placeholder="joiningDate" ngModel>
+  <input class="form-control" name="yearsOfExperience" placeholder="yearsOfExperience" ngModel>
+  <input class="form-control" name="responsibilities" placeholder="responsibilities" ngModel>
+  <p-button label="Submit" (click)=addNewEmployee(employeeData.value) ></p-button>
+  <br>
+  <br>
+  <p-button label="Reset" (click)=resetForm(employeeData) ></p-button>
+</form>
+
+</div>
+
+<div *ngIf="!isUpdate" >
+<h2>Update Employee : {{employeesData.name}}</h2>
+<form id="formNewEmployee2" name="formNewEmployeeUpdate"  #employeeDataUpdate="ngForm">
+  <input class="form-control" name="name" value="{{employeesData.name}}" [(ngModel)]="employeesData.name" ngModel>
+  <input class="form-control" name="joiningDate" value="{{employeesData.joiningDate}}" [(ngModel)]="employeesData.joiningDate" ngModel>
+  <input class="form-control" name="yearsOfExperience" value="{{employeesData.yearsOfExperience}}" [(ngModel)]="employeesData.yearsOfExperience" ngModel>
+  <input class="form-control" name="responsibilities" value="{{employeesData.responsibilities}}" [(ngModel)]="employeesData.responsibilities" ngModel>
+  <p-button label="Update" (click)=updateEmployee(employeeDataUpdate.value) ></p-button>
+</form>
+
+
+</div>

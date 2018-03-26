@@ -1,0 +1,26 @@
+
+<div *ngIf="!isUpdate">
+<h2>Add new Goal for {{customersData.name}} </h2>
+<form  id="formNewCustomerGoal" name="formNewCustomerGoal"  #customerGoalData="ngForm">
+  <input class="form-control" name="description" placeholder="description" ngModel>
+  <input class="form-control" name="tenure" placeholder="tenure" ngModel>
+  <input class="form-control" name="status" placeholder="status" ngModel>
+  <input class="form-control" name="details" placeholder="details" ngModel>
+  <input class="form-control" name="signedBy" placeholder="signedBy" ngModel>
+  <p-button label="Submit" (click)=addNewGoal(customerGoalData.value) ></p-button>
+  <br>
+  <br>
+  <p-button label="Reset" (click)=resetForm(customerGoalData) ></p-button>
+</form>
+
+</div>
+
+<div *ngIf="isUpdate" >
+<h2>Update Goals : {{customersData.name}}</h2>
+<form id="formNewCustomer2" name="formNewCustomerUpdate"  #customerDataUpdate="ngForm">
+  <input class="form-control" name="name" value="{{customersData.name}}" [(ngModel)]="customersData.name" ngModel>
+  <input class="form-control" name="contact" value="{{customersData.contact}}" [(ngModel)]="customersData.contact" ngModel>
+  <p-button label="Update" (click)=updateCustomer(customerDataUpdate.value) ></p-button>
+</form>
+
+</div>

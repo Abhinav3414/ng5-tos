@@ -1,0 +1,5 @@
+body > app-root > div > h2
+ {
+  font-family: sans-serif;
+  background: red !important;
+}
