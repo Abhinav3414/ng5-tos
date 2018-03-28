@@ -12,6 +12,7 @@ export class MenuComponent {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
     ngOnInit() {
+      /*
         this.items = [
             {
                 label: 'Home',
@@ -29,6 +30,7 @@ export class MenuComponent {
                 command: (onclick)=> {this.navigateCustomers()}
             }
         ];
+        */
     }
 
     navigateHome() {

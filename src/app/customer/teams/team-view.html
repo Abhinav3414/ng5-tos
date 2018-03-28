@@ -1,0 +1,66 @@
+<div *ngIf="team != undefined">
+      <h2>{{team.name}} </h2>
+      <b> Id : </b> {{team.id}} <br><br>
+      <b> Team Name : </b> {{team.name}} <br><br>
+      <b> Team Specialization : </b> {{team.specialization}} <br><br>
+</div>
+   <h3>Project Rythm</h3>
+   <button mat-button (click)="navigateNewProjectRythm(team.id)">Add Project Rythms</button>
+   <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
+      <div fxFlex="20%" *ngFor = "let projectRythm of customerProjectRythms">
+         <mat-card class="example-card" >
+            <mat-card-header>
+               <mat-card-title>Project Rythms</mat-card-title>
+               <mat-card-subtitle>{{projectRythm.id}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+               {{projectRythm.event}}<br>
+               {{projectRythm.frequency}} <br>{{projectRythm.whoRythm}} <br>{{projectRythm.whereRythm}} <br>
+            </mat-card-content>
+            <mat-card-actions>
+               <button mat-button (click)="delelteProjectRythm(projectRythm.id)">Delete</button>
+            </mat-card-actions>
+         </mat-card>
+      </div>
+      <div *ngIf="customerProjectRythms.length===0">No Project Rythm Available</div>
+   </div>
+   <h3>Customer Actions</h3>
+   <button mat-button (click)="navigateNewTeamAction(team.id)">Add Team Actions</button>
+   <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
+      <div fxFlex="20%" *ngFor = "let action of customerActions">
+         <mat-card class="example-card" >
+            <mat-card-header>
+               <mat-card-title>Team Action</mat-card-title>
+               <mat-card-subtitle>  {{action.details}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+               {{action.cause}} <br>
+               {{ team.createdAt | date : 'd-M-yy, h:mm a'}}
+            </mat-card-content>
+            <mat-card-actions>
+               <button mat-button (click)="delelteTeamAction(team.id)">Delete</button>
+            </mat-card-actions>
+         </mat-card>
+      </div>
+      <div *ngIf="customerActions.length===0">No Customer Actions Defined</div>
+   </div>
+   <h3>Team Members</h3>
+   <button mat-button (click)="navigateNewTeamMember(team.id)">Add Team Members</button>
+   <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
+      <div fxFlex="20%" *ngFor = "let member of customerTeamMembers">
+         <mat-card class="example-card" >
+            <mat-card-header>
+               <mat-card-title>Team Member</mat-card-title>
+               <mat-card-subtitle><span (click)="navigateViewEmployee(member.employeeId)" class="tos-cust-heading"> {{member.name}}</span></mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+               {{member.role}} <br>
+               {{ member.productivity}}
+            </mat-card-content>
+            <mat-card-actions>
+               <button mat-button (click)="delelteTeamMember(team.id)">Delete</button>
+            </mat-card-actions>
+         </mat-card>
+      </div>
+      <div *ngIf="customerActions.length===0">No Customer Actions Defined</div>
+   </div>

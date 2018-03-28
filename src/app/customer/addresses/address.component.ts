@@ -5,10 +5,10 @@ import { CustomerService } from '../customer.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'goals',
-  templateUrl: './goals.html'
+  selector: 'address',
+  templateUrl: './address.html'
 })
-export class GoalsComponent {
+export class AddressComponent {
   custid: number;
   id: number;
   customersData = undefined;
@@ -27,14 +27,16 @@ export class GoalsComponent {
           this.customerService.getCustomerData(this.custid)
           .then((resCustomerData) => {
             this.customersData = resCustomerData;
-          });
+          });          
         }
+
       });
+
     }
 
-  addNewGoal(goal) {
-    goal.customerId = this.custid;
-    this.customerService.postGoal(goal);
+  addNewAddress(address) {
+    address.customerId = this.custid;
+    this.customerService.postAddress(address);
     location.reload();
   }
 /*
@@ -45,7 +47,6 @@ export class GoalsComponent {
   }
 */
   resetForm(form: NgForm) {
-    console.log("hi")
     form.reset();
   }
 

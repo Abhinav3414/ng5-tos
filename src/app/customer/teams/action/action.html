@@ -1,0 +1,20 @@
+<div *ngIf="!isUpdate">
+   <h2>Add new Action for Team : {{customerTeamData.name}} </h2>
+   <form  id="formNewCustomerTeamAction" name="formNewCustomerTeamAction"  #customerTeamActionData="ngForm">
+      <mat-form-field>  <input matInput placeholder="details" name="details"ngModel><br>   </mat-form-field>
+      <mat-form-field> <input matInput placeholder="cause" name="cause"ngModel> </mat-form-field>
+      <mat-form-field>  <input matInput placeholder="platform" name="platform"ngModel><br>   </mat-form-field>
+      <mat-form-field> <input matInput placeholder="status" name="status"ngModel> </mat-form-field>
+      <button mat-button (click)="addNewAction(customerTeamActionData.value)">Submit</button>
+      <br>
+      <button mat-button (click)="resetForm(customerTeamActionData)">Reset</button>
+   </form>
+</div>
+<div *ngIf="isUpdate" >
+   <h2>Update Stakeholder for : {{customersData.name}}</h2>
+   <form id="formNewCustomer2" name="formNewCustomerUpdate"  #customerDataUpdate="ngForm">
+      <input class="form-control" name="name" value="{{customersData.name}}" [(ngModel)]="customersData.name" ngModel>
+      <input class="form-control" name="contact" value="{{customersData.contact}}" [(ngModel)]="customersData.contact" ngModel>
+      <p-button label="Update" (click)=updateCustomer(customerDataUpdate.value) ></p-button>
+   </form>
+</div>

@@ -1,6 +1,16 @@
 
 <p-menubar [model]="items">
   <!--  <input type="text" pInputText placeholder="Search"> -->
-    <button pButton label="About" icon="fa-info-circle" (click)="navigateAbout()"></button>
-    <button pButton label="Logout" icon="fa-sign-out"></button>
 </p-menubar>
+
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-button (click)="navigateHome()">Home</button>
+    <button mat-button (click)="navigateEmployeeHome()">Employee</button>
+    <button mat-button (click)="navigateCustomers()">Customer</button>
+
+    <span class="example-spacer"></span>
+    <button mat-button (click)="navigateAbout()">About</button>
+    <button mat-button>Logout</button>
+  </mat-toolbar-row>
+</mat-toolbar>

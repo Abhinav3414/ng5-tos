@@ -1,0 +1,18 @@
+<div *ngIf="!isUpdate">
+   <h2>Add new Team for {{customersData.name}} </h2>
+   <form  id="formNewCustomerTeam" name="formNewCustomerTeam"  #customerTeamData="ngForm">
+      <mat-form-field>  <input matInput placeholder="name" name="name"ngModel><br>   </mat-form-field>
+      <mat-form-field> <input matInput placeholder="specialization" name="specialization"ngModel> </mat-form-field>
+      <button mat-button (click)="addNewTeam(customerTeamData.value)">Submit</button>
+      <br>
+      <button mat-button (click)="resetForm(customerTeamData)">Reset</button>
+   </form>
+</div>
+<div *ngIf="isUpdate && customerTeamData != undefined" >
+   <h2>Update Teams for : {{customersData.name}}</h2>
+   <form id="formNewCustomer2" name="formNewCustomerUpdate"  #customerDataUpdate="ngForm">
+      <input class="form-control" name="name" value="{{customersData.name}}" [(ngModel)]="customersData.name" ngModel>
+      <input class="form-control" name="contact" value="{{customersData.contact}}" [(ngModel)]="customersData.contact" ngModel>
+      <p-button label="Update" (click)=updateCustomer(customerDataUpdate.value) ></p-button>
+   </form>
+</div>

@@ -1,0 +1,22 @@
+<h3>Employee Operations</h3>
+<div class=" tos-button-right">
+   <button mat-button color="primary" (click)="navigateNewEmployee()">Add Employee</button>
+</div>
+<div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
+   <div fxFlex="20%" *ngFor = "let emp of employees">
+      <mat-card class="example-card" >
+         <mat-card-header>
+            <mat-card-title><span (click)="navigateViewEmployee(emp.id)" class="tos-cust-heading"> {{emp.name}}</span></mat-card-title>
+            <mat-card-subtitle>Employee</mat-card-subtitle>
+         </mat-card-header>
+         <mat-card-content>
+            {{emp.joiningDate}} <br>  {{emp.responsibilities}}<br>  {{emp.yearsOfExperience}}<br>  {{ emp.createdAt | date : 'd-M-yy, h:mm a'}}<br>
+         </mat-card-content>
+         <mat-card-actions>
+            <button mat-button (click)="delelteEmployee(emp.id)">Delete</button>
+            <button mat-button (click)="navigateUpdateEmployee(emp.id)">Update</button>
+         </mat-card-actions>
+      </mat-card>
+   </div>
+   <div *ngIf="employees.length===0">No employees Present </div>
+</div>

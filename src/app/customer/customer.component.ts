@@ -12,6 +12,7 @@ export class CustomerComponent {
   id: number;
   customersData = undefined;
   isUpdate:boolean = true;
+  customer = undefined;
 
   constructor(private customerService:CustomerService,private route: ActivatedRoute) {
   }
@@ -22,13 +23,11 @@ export class CustomerComponent {
         if(!isNaN(this.id)){
           this.isUpdate=false;
           this.customerService.getCustomerData(this.id)
-          .subscribe(resCustomerData => {
+          .then((resCustomerData) => {
             this.customersData = resCustomerData;
           });
-        }
-
+}
       });
-
     }
 
   addNewCustomer(customer) {
@@ -37,9 +36,21 @@ export class CustomerComponent {
   }
 
   updateCustomer(customer) {
-    customer.id=this.id;
-    this.customerService.updateCustomer(customer);
-    location.reload();
+
+    this.customerService.getCustomerData(this.id)
+    .then((resCustomerData) => {
+      this.customer = resCustomerData;
+      this.customer.name = customer.name;
+      this.customer.contact = customer.contact;
+      this.customer.contactPerson = customer.contactPerson;
+      this.customer.domain = customer.domain;
+      this.customerService.updateCustomer(this.customer);
+    });
+
+    setTimeout(() => {
+        location.reload();
+    }, 1000);
+
   }
 
   resetForm(form: NgForm) {

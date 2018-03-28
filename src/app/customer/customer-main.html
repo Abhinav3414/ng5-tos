@@ -1,63 +1,39 @@
-
-
-<div class="ui-g-12">
-
-  <div class="ui-g-2">
-  </div>
-
-
-  <div class="ui-g-8">
-
-
-    <h3>Customer Operations</h3>
-
-    <div class="ui-g-12 tos-button-right">
-    <button pButton label="Add Customers" icon="fa-plus" (click)="navigateNewCustomer()"></button>
-    </div>
-
-    <table>
-      <tr *ngIf="customers.length===0"> No Customers Present </tr>
-    </table>
-
-
-    <div *ngFor = "let cust of customers" class="ui-g-12">
-
-      <div class="ui-g-12">
-          <div class="ui-g-2">
-
-          </div>
-          <div class="ui-g-10">
-            <div class="ui-g-12 tos-heading" >
-                <span (click)="navigateViewCustomer(cust.id)" class="tos-cust-heading"> {{cust.id}} {{cust.name}} </span>
-            </div>
-            <div class="ui-g-10">
-                <table>
-                  <th>Contact Number</th>
-                  <tr class="tos-table">
-                    <td>{{cust.contact}}</td>
-                  </tr>
-                </table>
-            </div>
-            <div class="ui-g-2">
-                <table>
-                  <tr class="tos-table tos-button">
-                    <td><button pButton label="Update" icon="fa-edit" (click)="navigateUpdateCustomer(cust.id)"></button></td>
-                  </tr>
-                  <tr class="tos-table tos-button">
-                    <td><p-button label="Delete" (click)="delelteCustomer(cust.id)" icon="fa fa-minus-circle"></p-button></td>
-                  </tr>
-                </table>
-            </div>
-          </div>
-        <hr>
+<div class="container">
+   <div fxFlex="20%">
+   </div>
+   <div fxFlex="60%">
+      <h3>Customer Operations</h3>
+      <button mat-button (click)="navigateNewCustomer()">Add Customers</button>
+      <div *ngIf="customers.length===0">No Customers Present</div>
+      <div class="container tos-cust-cards" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutWrap>
+         <div *ngFor = "let cust of customers">
+            <mat-card class="tos-cust-cards-style" >
+               <mat-card-header>
+                  <mat-card-title><span (click)="navigateViewCustomer(cust.id)" class="tos-cust-heading"> {{cust.id}} {{cust.name}} </span></mat-card-title>
+                  <mat-card-subtitle>{{cust.name}}</mat-card-subtitle>
+               </mat-card-header>
+               <mat-card-content>
+                  <table style="width: 100%;">
+                     <th > <a *ngIf="cust.domain.length > 0">Domain </a></th>
+                     <th > <a *ngIf="cust.contactPerson != null">Contact Person </a></th>
+                     <th > <a  *ngIf="cust.addresses.length > 0">Contact Address </a> </th>
+                     <th >Contact Number</th>
+                     <tr class="tos-table">
+                        <td> <a *ngIf="cust.domain.length > 0" >{{cust.domain}} </a> </td>
+                        <td> <a *ngIf="cust.contactPerson != null" >{{cust.contactPerson}} </a> </td>
+                        <td ><a *ngIf="cust.addresses.length > 0" >{{cust.addresses[0].state}},{{cust.addresses[0].country}} </a> </td>
+                        <td >{{cust.contact}}</td>
+                     </tr>
+                  </table>
+               </mat-card-content>
+               <mat-card-actions>
+                  <button mat-button (click)="navigateUpdateCustomer(cust.id)">Update</button>
+                  <button mat-button (click)="delelteCustomer(cust.id)">Delete</button>
+               </mat-card-actions>
+            </mat-card>
+         </div>
       </div>
-    </div>
-
-
-
-
-
-  </div>
-  <div class="ui-g-2">
-  </div>
+   </div>
+   <div fxFlex="20%">
+   </div>
 </div>

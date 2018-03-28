@@ -1,53 +1,71 @@
-<div *ngIf="customer != undefined">
-   <h2 >{{customer.name}} </h2>
-   <b> Id : </b> {{customer.id}} <br><br>
-   <b> Name : </b> {{customer.name}} <br><br>
-   <b> Contact Number : </b> {{customer.contact}} <br><br>
-   <b> Contact Person : </b> {{customer.contactPerson}} <br><br>
-   <b> Customer Domain : </b> {{customer.domain}} <br><br>
+<div *ngIf="employee != undefined">
+   <h2 >{{employee.name}} </h2>
+   <b> Id : </b> {{employee.id}} <br><br>
+   <b> Name : </b> {{employee.name}} <br><br>
+   <b> Joining Date : </b> {{employee.joiningDate}} <br><br>
+   <b> Responsibilities : </b> {{employee.responsibilities}} <br><br>
+   <b> Total years of Experience : </b> {{employee.yearsOfExperience}} <br><br>
 </div>
-<h3>Addresses</h3>
-<button mat-button (click)="navigateNewAddress(customer.id)">Add Address</button>
+<h3>Skills</h3>
+<button mat-button (click)="navigateNewSkill(employee.id)">Add Skill</button>
 <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
-   <div fxFlex="20%" *ngFor = "let address of customerAddresses">
+   <div fxFlex="20%" *ngFor = "let skill of employeeSkills" >
       <mat-card class="example-card" >
          <mat-card-header>
-            <mat-card-title>Address</mat-card-title>
-            <mat-card-subtitle>{{address.addressType}}</mat-card-subtitle>
+            <mat-card-title>skill</mat-card-title>
+            <mat-card-subtitle>{{skill.name}}</mat-card-subtitle>
          </mat-card-header>
          <mat-card-content>
-            {{address.houseNo}}, {{address.street}} <br>
-            {{address.landMark}} <br>
-            {{address.state}} , {{address.zip}}<br>
-            {{address.country}} <br>
-         </mat-card-content>
+            {{skill.duration}} <br>    {{skill.rating}} <br>
+            {{skill.lastUsed}}<br>    </mat-card-content>
          <mat-card-actions>
-            <button mat-button (click)="delelteAddress(address.id)">Delete</button>
+            <button mat-button (click)="delelteSkill(address.id)">Delete</button>
          </mat-card-actions>
       </mat-card>
    </div>
-   <div *ngIf="customerAddresses.length===0">No address Updated </div>
+   <div *ngIf="employeeSkills === undefined">No Skills Updated </div>
 </div>
-<h3>Customer Teams</h3>
-<button mat-button (click)="navigateNewTeams(customer.id)">Add Team</button>
+
+<h3>Certifications</h3>
+<button mat-button (click)="navigateNewCertification(employee.id)">Add Address</button>
 <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
-   <div fxFlex="20%" *ngFor = "let team of customerTeams">
+   <div fxFlex="20%" *ngFor = "let certification of employeeCertifications">
       <mat-card class="example-card" >
          <mat-card-header>
-            <mat-card-title><span (click)="navigateViewTeam(team.id)" class="tos-cust-heading"> Teams</span></mat-card-title>
-            <mat-card-subtitle><span (click)="navigateViewTeam(team.id)" class="tos-cust-heading"> {{team.name}}</span></mat-card-subtitle>
+            <mat-card-title>Certification</mat-card-title>
+            <mat-card-subtitle>{{certification.name}}</mat-card-subtitle>
          </mat-card-header>
          <mat-card-content>
-            <span (click)="navigateViewTeam(team.id)" class="tos-cust-heading">  {{team.specialization}} <br>
-            {{ team.createdAt | date : 'd-M-yy, h:mm a'}}</span>
+            {{certification.yearOfCertification}}
          </mat-card-content>
          <mat-card-actions>
-            <button mat-button (click)="delelteTeam(team.id)">Delete</button>
+            <button mat-button (click)="delelteCertification(certification.id)">Delete</button>
          </mat-card-actions>
       </mat-card>
    </div>
-   <div *ngIf="customerTeams.length===0">No Teams Assigned </div>
+   <div *ngIf="employeeCertifications === undefined">No Certifications </div>
 </div>
+<h3>Employee Trainings</h3>
+<button mat-button (click)="navigateNewTeams(customer.id)">Add Trainings</button>
+<div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
+   <div fxFlex="20%" *ngFor = "let training of employeeTrainings">
+      <mat-card class="example-card" >
+         <mat-card-header>
+            <mat-card-title>{{training.name}}</mat-card-title>
+            <mat-card-subtitle>Trainings</mat-card-subtitle>
+         </mat-card-header>
+         <mat-card-content>
+            {{ training.mode}}<br>
+            {{ training.proposedDate}}<br>  {{ training.reason}}
+         </mat-card-content>
+         <mat-card-actions>
+            <button mat-button (click)="delelteTraining(team.id)">Delete</button>
+         </mat-card-actions>
+      </mat-card>
+   </div>
+   <div *ngIf="employeeTrainings === undefined">No Trainings scheduled </div>
+</div>
+<!--
 <h3>Customer Goals</h3>
 <button mat-button (click)="navigateNewGoals(customer.id)">Add Goal</button>
 <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
@@ -92,3 +110,4 @@
    </div>
    <div *ngIf="customerStakeholders.length===0">No StakeHolders Present</div>
 </div>
+-->

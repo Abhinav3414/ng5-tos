@@ -14,9 +14,9 @@ export class EmployeeService {
     this.options = new RequestOptions({ headers: headers });
   }
 
-  getEmployeeData(id: number) {
+  getEmployeeData(id: number):Promise<any> {
 	  return this.http.get('http://localhost:8080/tos/employees/'+id)
-	  .map((response:Response) => response.json());
+	  .map((response:Response) => response.json()).toPromise();
   }
 
   getEmployeesData() {

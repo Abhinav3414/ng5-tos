@@ -16,10 +16,10 @@ export class CustomerMainComponent {
   ngOnInit() {
 
     this.customerService.getCustomersData()
-    .subscribe(resCustomerData => {
+    .then((resCustomerData) => {
       for(var i = 0; i < resCustomerData.length; i++) {
          this.customers.push(resCustomerData[i]);
-      }
+       }
     });
 
   }

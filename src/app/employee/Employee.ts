@@ -1,8 +1,9 @@
 export interface Employee {
-    id;
-    name;
-    joiningDate;
-    yearsOfExperience;
-    responsibilities;
-    createdAt;
+    id: number;
+    name: string;
+    joiningDate: string;
+    yearsOfExperience: string;
+    responsibilities: string;
+    createdAt: string;
+    skills: any;
 }

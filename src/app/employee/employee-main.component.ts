@@ -5,23 +5,23 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'employee-main',
-  templateUrl: './employee.main.html'
+  templateUrl: './employee-main.html'
 })
 export class EmployeeMainComponent {
   employeesData = undefined;
   employees = [];
 
-  constructor( private employeeService:EmployeeService, private router: Router, private route: ActivatedRoute) {
+  constructor(private employeeService: EmployeeService, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.employeeService.getEmployeesData()
-    .subscribe(resEmployeeData => {
-      this.employeesData = resEmployeeData;
-      for(var i = 0; i < this.employeesData.length; i++) {
-         this.employees.push(this.employeesData[i]);
-      }
-    });
+      .subscribe(resEmployeeData => {
+        this.employeesData = resEmployeeData;
+        for (var i = 0; i < this.employeesData.length; i++) {
+          this.employees.push(this.employeesData[i]);
+        }
+      });
 
   }
 
@@ -36,6 +36,10 @@ export class EmployeeMainComponent {
 
   navigateNewEmployee() {
     this.router.navigate(['/employee/new'], { skipLocationChange: true });
+  }
+
+  navigateViewEmployee(id) {
+    this.router.navigate(['/employee-view', id], { skipLocationChange: true });
   }
 
 }

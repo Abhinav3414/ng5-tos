@@ -4,5 +4,10 @@ export interface Customer {
     id;
     name: string;
     contact: string;
-    goals:Goals;
+    goals: any;
+    teams: any;
+    addresses: any;
+    stakeHolders: any;
+    contactPerson: string;
+    domain: string;
 }

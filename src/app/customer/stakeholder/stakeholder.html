@@ -1,0 +1,21 @@
+<div *ngIf="!isUpdate">
+   <h2>Add new Stakeholder for {{customersData.name}} </h2>
+   <form  id="formNewCustomerStakeholder" name="formNewCustomerStakeholder"  #customerStakeholderData="ngForm">
+      <mat-form-field>  <input matInput placeholder="name" name="name"ngModel><br>   </mat-form-field>
+      <mat-form-field> <input matInput placeholder="role" name="role"ngModel> </mat-form-field>
+      <mat-form-field>  <input matInput placeholder="email" name="email"ngModel><br>   </mat-form-field>
+      <mat-form-field> <input matInput placeholder="phoneNo" name="phoneNo"ngModel> </mat-form-field>
+      <mat-form-field>  <input matInput placeholder="raci" name="raci"ngModel><br>   </mat-form-field>
+      <button mat-button (click)="addNewStakeholder(customerStakeholderData.value)">Submit</button>
+      <br>
+      <button mat-button (click)="resetForm(customerStakeholderData)">Reset</button>
+   </form>
+</div>
+<div *ngIf="isUpdate" >
+   <h2>Update Stakeholder for : {{customersData.name}}</h2>
+   <form id="formNewCustomer2" name="formNewCustomerUpdate"  #customerDataUpdate="ngForm">
+      <input class="form-control" name="name" value="{{customersData.name}}" [(ngModel)]="customersData.name" ngModel>
+      <input class="form-control" name="contact" value="{{customersData.contact}}" [(ngModel)]="customersData.contact" ngModel>
+      <p-button label="Update" (click)=updateCustomer(customerDataUpdate.value) ></p-button>
+   </form>
+</div>

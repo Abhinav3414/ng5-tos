@@ -22,24 +22,26 @@ export class EmployeeComponent {
         if(!isNaN(this.id)){
           this.isUpdate=false;
           this.employeeService.getEmployeeData(this.id)
-          .subscribe(resEmployeeData => {
+          .then((resEmployeeData) => {
             this.employeesData = resEmployeeData;
           });
         }
-
       });
-
     }
 
   addNewEmployee(employee) {
     this.employeeService.postEmployee(employee);
-    location.reload();
+    setTimeout(() => {
+        location.reload();
+    }, 1000);
   }
 
   updateEmployee(employee) {
     employee.id=this.id;
     this.employeeService.updateEmployee(employee);
-    location.reload();
+    setTimeout(() => {
+        location.reload();
+    }, 1000);
   }
 
   resetForm(form: NgForm) {
