@@ -27,12 +27,11 @@ export class TeamViewComponent {
       if (!isNaN(this.id)) {
         this.isUpdate = false;
 
-        this.customerService.getCustomerTeamData(this.id)
+        this.customerService.getTeamData(this.id)
           .then((resCustomerData) => {
             this.team = resCustomerData;
             if (this.team.teamMembers.length > 0) {
               for (let i = 0; i < this.team.teamMembers.length; i++) {
-                console.log(this.team.teamMembers[i]);
                 this.customerTeamMembers.push(this.team.teamMembers[i]);
               }
             }

@@ -45,7 +45,6 @@ export class GoalsComponent {
   }
 */
   resetForm(form: NgForm) {
-    console.log("hi")
     form.reset();
   }
 

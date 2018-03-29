@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService } from './employee.service';
 import { Employee } from './employee';
+import { CustomerService } from '../customer/customer.service';
+
+import {EmployeeDialogComponent} from './employee-dialog.component';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'employee-view',
@@ -9,66 +13,90 @@ import { Employee } from './employee';
 })
 export class EmployeeViewComponent {
   id: number;
-
   employee: Employee;
   employeeSkills = [];
   employeeCertifications = [];
   employeeTrainings = [];
-
-  employeeFeedbacks: any;
-  employeeImprovementAreas: any;
-
-  employeeTeamMembers: any;
-
+  employeeFeedbacks = [];
+  employeeImprovementAreas = [];
+  employeeTeamMembers = [];
+  teams = [];
   isUpdate: boolean = true;
+  //fileNameDialogRef: MatDialogRef<EmployeeDialogComponent>;
 
-  constructor(private employeeService: EmployeeService, private router: Router, private route: ActivatedRoute) {
+  constructor(private employeeService: EmployeeService, private customerService: CustomerService, private router: Router, private route: ActivatedRoute,
+  private dialog: MatDialog) {
   }
 
   ngOnInit() {
-
     this.route.params.subscribe(params => {
       this.id = +params['id']; // (+) converts string 'id' to a number
       if (!isNaN(this.id)) {
         this.isUpdate = false;
-        console.log(this.employeeService)
         this.employeeService.getEmployeeData(this.id)
           .then((resemployeeData) => {
             this.employee = resemployeeData;
-            console.log(this.employee)
-            //  console.log(this.employee)
             if (this.employee.skills.length > 0) {
               for (var i = 0; i < this.employee.skills.length; i++) {
                 this.employeeSkills.push(this.employee.skills[i]);
-                console.log(this.employeeSkills);
               }
             }
             if (this.employee.certifications.length > 0) {
               for (var i = 0; i < this.employee.certifications.length; i++) {
                 this.employeeCertifications.push(this.employee.certifications[i]);
-                console.log(this.employeeCertifications);
               }
             }
             if (this.employee.trainings.length > 0) {
               for (var i = 0; i < this.employee.trainings.length; i++) {
                 this.employeeTrainings.push(this.employee.trainings[i]);
-                console.log(this.employeeTrainings);
               }
             }
-
+            if (this.employee.feedbacks.length > 0) {
+              for (var i = 0; i < this.employee.feedbacks.length; i++) {
+                this.employeeFeedbacks.push(this.employee.feedbacks[i]);
+              }
+            }
+            if (this.employee.improvementAreas.length > 0) {
+              for (var i = 0; i < this.employee.improvementAreas.length; i++) {
+                this.employeeImprovementAreas.push(this.employee.improvementAreas[i]);
+              }
+            }
+            if (this.employee.teamMembers.length > 0) {
+              for (var i = 0; i < this.employee.teamMembers.length; i++) {
+                this.employeeTeamMembers.push(this.employee.teamMembers[i]);
+              }
+            }
+          })
+          .then(() => {
+            for (let i = 0; i < this.employeeTeamMembers.length; i++) {
+              this.customerService.getTeamData(this.employeeTeamMembers[i].team_Id)
+                .then((resCustomerData) => {
+                  this.teams[i] = resCustomerData;
+                });
+            }
           });
-
-
       }
     });
-
   }
-  /*
+
+
+  openDialog(): void {
+      let dialogRef = this.dialog.open(EmployeeDialogComponent, {
+        data: "this is my data"
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        console.log(result)
+
+      });
+    //  dialogRef.close('Pizza!');
+    }
 
   navigateViewTeam(teamId) {
     this.router.navigate(['/team-view', teamId], { skipLocationChange: true });
   }
-
+  /*
   navigateNewGoals(custId) {
     this.router.navigate(['/goals/'+custId+'/new'], { skipLocationChange: true });
   }

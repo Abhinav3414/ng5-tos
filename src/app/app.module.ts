@@ -10,11 +10,13 @@ import { FlexLayoutModule } from '@angular/flex-layout'
 
 import { AppComponent } from './app.component';
 import { PrimeModule } from './prime.module';
-import { MaterialModule } from './material.module';
+import { CustomMaterialModule } from './custom-material.module';
 
 import { EmployeeMainComponent } from './employee/employee-main.component';
 import { EmployeeViewComponent } from './employee/employee-view.component';
 import { EmployeeComponent } from './employee/employee.component';
+import { EmployeeDialogComponent } from './employee/employee-dialog.component';
+
 
 import { AboutComponent } from './about/about.component';
 import { MenuComponent } from './menu/menu.component';
@@ -31,8 +33,10 @@ import { ActionComponent } from './customer/teams/action/action.component';
 
 import { EmployeeService } from './employee/employee.service';
 import { CustomerService } from './customer/customer.service';
-
 import { RouterModule, Routes } from '@angular/router';
+
+import { MatIconRegistry, MatIconModule } from '@angular/material/icon';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -51,17 +55,19 @@ import { RouterModule, Routes } from '@angular/router';
     StakeholderComponent,
     TeamViewComponent,
     ProjectrythmComponent,
-    ActionComponent
+    ActionComponent,
+    EmployeeDialogComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     PrimeModule,
-    MaterialModule,
+    CustomMaterialModule,
     FlexLayoutModule,
     FormsModule,
     HttpModule,
+    MatIconModule,
     RouterModule.forRoot([
       {path:'employee-home',component: EmployeeMainComponent},
       {path:'employee/:id',component: EmployeeComponent},
@@ -83,6 +89,15 @@ import { RouterModule, Routes } from '@angular/router';
   providers: [ EmployeeService, CustomerService
     /*{ provide: LocationStrategy, useClass: HashLocationStrategy },*/
   ],
+  entryComponents: [
+    EmployeeDialogComponent
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer){
+  //    matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl('/assets/materialdesignicons-webfont.svg'));
+  }
+
+ }

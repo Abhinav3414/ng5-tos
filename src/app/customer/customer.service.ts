@@ -31,7 +31,7 @@ export class CustomerService {
     .map((response:Response) => response.json()).toPromise();
   }
 
-  getCustomerTeamData(id: number):Promise<any> {
+  getTeamData(id: number):Promise<any> {
     return this.http.get('http://localhost:8080/tos/teams/'+id)
     .map((response:Response) => response.json()).toPromise();
   }
@@ -77,7 +77,6 @@ export class CustomerService {
   }
 
   updateCustomer(cust: Customer) {
-    console.log(cust)
     this.http.put('http://localhost:8080/tos/customers/'+ cust.id, cust, this.options)
     .subscribe((res:Response) => console.log(res));
   }

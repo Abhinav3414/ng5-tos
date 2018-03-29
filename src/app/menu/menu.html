@@ -1,16 +1,30 @@
+<div fxFlex="10%" fxHide.lt-md="true">
+</div>
+<div fxFlex="100%" >
+   <mat-toolbar >
 
-<p-menubar [model]="items">
-  <!--  <input type="text" pInputText placeholder="Search"> -->
-</p-menubar>
-
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <button mat-button (click)="navigateHome()">Home</button>
-    <button mat-button (click)="navigateEmployeeHome()">Employee</button>
-    <button mat-button (click)="navigateCustomers()">Customer</button>
-
-    <span class="example-spacer"></span>
-    <button mat-button (click)="navigateAbout()">About</button>
-    <button mat-button>Logout</button>
-  </mat-toolbar-row>
-</mat-toolbar>
+         <a href="/"> <h2>{{title}}</h2> </a>
+         <span class="example-spacer"></span>
+         <div fxShow="true" fxHide.lt-md="true">
+            <button mat-button (click)="navigateHome()">Home</button>
+            <button mat-button (click)="navigateEmployeeHome()">Employee</button>
+            <button mat-button (click)="navigateCustomers()">Customer</button>
+            <button mat-button (click)="navigateAbout()">About</button>
+            <button mat-button>Logout</button>
+         </div>
+         <div fxShow="false" fxShow.lt-md="true" fxLayout="column">
+            <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
+            <button mat-button (click)="navigateHome()">Home</button>
+            <button mat-button (click)="navigateEmployeeHome()">Employee</button>
+            <button mat-button (click)="navigateCustomers()">Customer</button>
+            <button mat-button (click)="navigateAbout()">About</button>
+            <button mat-button>Logout</button>
+            </mat-menu>
+            <button mat-icon-button [matMenuTriggerFor]="appMenu">
+               <mat-icon>more_vert</mat-icon>
+            </button>
+         </div>
+   </mat-toolbar>
+</div>
+<div fxFlex="10%" fxHide.lt-md="true">
+</div>

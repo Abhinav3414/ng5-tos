@@ -1,14 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+/*
+Available pre-built themes:
+deeppurple-amber.css
+indigo-pink.css
+pink-bluegrey.css
+purple-green.css
 
+*/
 .header {
   text-align: center;
 }
 
+.tos-material-button {
+    display: flex;
+    padding-left: 20%;
+    font-weight: bold;
+    line-height: .65em;
+}
+
+.mat-card-actions {
+  padding-left: 50% !important;
+}
 body {
   font-family: sans-serif;
   font-size: 14px;
+  margin: 0;
+}
+
+.mat-toolbar {
+  background: none;
 }
 table {
   text-align: justify;
@@ -62,6 +84,7 @@ tr:nth-child(even) {
 
 .tos-button-right {
   padding: 15px 0;
+  text-align: right;
 }
 
 .tos-heading {

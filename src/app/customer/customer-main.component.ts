@@ -41,10 +41,4 @@ export class CustomerMainComponent {
     this.router.navigate(['/customer-view', id], { skipLocationChange: true });
   }
 
-  myMethod()
-  {
-    console.log("clicked")
-  }
-
-
 }

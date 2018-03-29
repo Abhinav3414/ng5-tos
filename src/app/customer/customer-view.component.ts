@@ -30,29 +30,24 @@ export class CustomerViewComponent {
           this.customerService.getCustomerData(this.id)
           .then((resCustomerData) => {
             this.customer = resCustomerData;
-          //  console.log(this.customer)
             if(this.customer.goals.length > 0) {
             for(var i = 0; i < this.customer.goals.length; i++) {
                this.customerGoals.push(this.customer.goals[i]);
-            //   console.log(this.customer.goals[i]);
             }
             }
             if(this.customer.teams.length > 0) {
             for(var i = 0; i < this.customer.teams.length; i++) {
                this.customerTeams.push(this.customer.teams[i]);
-            //   console.log(this.customer.teams[i]);
             }
           }
           if(this.customer.addresses.length > 0) {
           for(var i = 0; i < this.customer.addresses.length; i++) {
              this.customerAddresses.push(this.customer.addresses[i]);
-             //console.log(this.customer.addresses[i]);
           }
         }
         if(this.customer.stakeHolders.length > 0) {
         for(var i = 0; i < this.customer.stakeHolders.length; i++) {
            this.customerStakeholders.push(this.customer.stakeHolders[i]);
-           //console.log(this.customer.stakeHolders[i]);
         }
       }
 

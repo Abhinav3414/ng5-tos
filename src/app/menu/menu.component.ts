@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class MenuComponent {
   items: any[];
+  title = 'Team Operations System';
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 

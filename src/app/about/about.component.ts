@@ -5,5 +5,10 @@ import { Component } from '@angular/core';
   templateUrl: './about.html'
 })
 export class AboutComponent {
+  selectedEmoji: string;
+  files = [];
+
+  constructor() {
+  }
 
 }

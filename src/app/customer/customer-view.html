@@ -1,3 +1,5 @@
+<div fxFlex="20%" fxHide.lt-md="true"></div>
+<div fxFlex="100%" >
 <div *ngIf="customer != undefined">
    <h2 >{{customer.name}} </h2>
    <b> Id : </b> {{customer.id}} <br><br>
@@ -9,7 +11,7 @@
 <h3>Addresses</h3>
 <button mat-button (click)="navigateNewAddress(customer.id)">Add Address</button>
 <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
-   <div fxFlex="20%" *ngFor = "let address of customerAddresses">
+   <div fxFlex="30%" *ngFor = "let address of customerAddresses">
       <mat-card class="example-card" >
          <mat-card-header>
             <mat-card-title>Address</mat-card-title>
@@ -31,7 +33,7 @@
 <h3>Customer Teams</h3>
 <button mat-button (click)="navigateNewTeams(customer.id)">Add Team</button>
 <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
-   <div fxFlex="20%" *ngFor = "let team of customerTeams">
+   <div fxFlex="30%" *ngFor = "let team of customerTeams">
       <mat-card class="example-card" >
          <mat-card-header>
             <mat-card-title><span (click)="navigateViewTeam(team.id)" class="tos-cust-heading"> Teams</span></mat-card-title>
@@ -51,7 +53,7 @@
 <h3>Customer Goals</h3>
 <button mat-button (click)="navigateNewGoals(customer.id)">Add Goal</button>
 <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
-   <div fxFlex="20%" *ngFor = "let goal of customerGoals">
+   <div fxFlex="30%" *ngFor = "let goal of customerGoals">
       <mat-card class="example-card" >
          <mat-card-header>
             <mat-card-title>Goal</mat-card-title>
@@ -73,7 +75,7 @@
 <h3>StakeHolders</h3>
 <button mat-button (click)="navigateNewStakeholders(customer.id)">Add StakeHolders</button>
 <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
-   <div fxFlex="20%" *ngFor = "let sholder of customerStakeholders">
+   <div fxFlex="30%" *ngFor = "let sholder of customerStakeholders">
       <mat-card class="example-card" >
          <mat-card-header>
             <mat-card-title>StakeHolder</mat-card-title>
@@ -92,3 +94,5 @@
    </div>
    <div *ngIf="customerStakeholders.length===0">No StakeHolders Present</div>
 </div>
+</div>
+<div fxFlex="20%" fxHide.lt-md="true"></div>

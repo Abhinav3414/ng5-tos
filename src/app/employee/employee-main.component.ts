@@ -22,7 +22,6 @@ export class EmployeeMainComponent {
           this.employees.push(this.employeesData[i]);
         }
       });
-
   }
 
   delelteEmployee(id) {

@@ -23,7 +23,7 @@ export class ActionComponent {
       this.id = +params['id']; // (+) converts string 'id' to a number
       if (!isNaN(this.teamid) && isNaN(this.id)) {
         this.isUpdate = false;
-        this.customerService.getCustomerTeamData(this.teamid)
+        this.customerService.getTeamData(this.teamid)
           .then((resCustomerData) => {
             this.customerTeamData = resCustomerData;
           });
