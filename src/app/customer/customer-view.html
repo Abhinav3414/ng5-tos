@@ -1,98 +1,189 @@
 <div fxFlex="20%" fxHide.lt-md="true"></div>
 <div fxFlex="100%" >
-<div *ngIf="customer != undefined">
-   <h2 >{{customer.name}} </h2>
-   <b> Id : </b> {{customer.id}} <br><br>
-   <b> Name : </b> {{customer.name}} <br><br>
-   <b> Contact Number : </b> {{customer.contact}} <br><br>
-   <b> Contact Person : </b> {{customer.contactPerson}} <br><br>
-   <b> Customer Domain : </b> {{customer.domain}} <br><br>
+<div *ngIf="customer != undefined" style="color: #818080;">
+   <h2 style="color: #000000;">{{customer.name}}</h2>
+   <mat-icon >phone</mat-icon>
+  {{customer.contact}} &emsp;&emsp;&emsp;
+   <mat-icon >face</mat-icon> {{customer.contactPerson}} &emsp;&emsp;&emsp; <mat-icon >domain</mat-icon>  {{customer.domain}} <br><br>
 </div>
-<h3>Addresses</h3>
-<button mat-button (click)="navigateNewAddress(customer.id)">Add Address</button>
-<div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
-   <div fxFlex="30%" *ngFor = "let address of customerAddresses">
-      <mat-card class="example-card" >
-         <mat-card-header>
-            <mat-card-title>Address</mat-card-title>
-            <mat-card-subtitle>{{address.addressType}}</mat-card-subtitle>
-         </mat-card-header>
-         <mat-card-content>
-            {{address.houseNo}}, {{address.street}} <br>
-            {{address.landMark}} <br>
-            {{address.state}} , {{address.zip}}<br>
-            {{address.country}} <br>
-         </mat-card-content>
-         <mat-card-actions>
-            <button mat-button (click)="delelteAddress(address.id)">Delete</button>
-         </mat-card-actions>
-      </mat-card>
-   </div>
-   <div *ngIf="customerAddresses.length===0">No address Updated </div>
-</div>
-<h3>Customer Teams</h3>
-<button mat-button (click)="navigateNewTeams(customer.id)">Add Team</button>
-<div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
-   <div fxFlex="30%" *ngFor = "let team of customerTeams">
-      <mat-card class="example-card" >
-         <mat-card-header>
-            <mat-card-title><span (click)="navigateViewTeam(team.id)" class="tos-cust-heading"> Teams</span></mat-card-title>
-            <mat-card-subtitle><span (click)="navigateViewTeam(team.id)" class="tos-cust-heading"> {{team.name}}</span></mat-card-subtitle>
-         </mat-card-header>
-         <mat-card-content>
-            <span (click)="navigateViewTeam(team.id)" class="tos-cust-heading">  {{team.specialization}} <br>
-            {{ team.createdAt | date : 'd-M-yy, h:mm a'}}</span>
-         </mat-card-content>
-         <mat-card-actions>
-            <button mat-button (click)="delelteTeam(team.id)">Delete</button>
-         </mat-card-actions>
-      </mat-card>
-   </div>
-   <div *ngIf="customerTeams.length===0">No Teams Assigned </div>
-</div>
-<h3>Customer Goals</h3>
-<button mat-button (click)="navigateNewGoals(customer.id)">Add Goal</button>
-<div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
-   <div fxFlex="30%" *ngFor = "let goal of customerGoals">
-      <mat-card class="example-card" >
-         <mat-card-header>
-            <mat-card-title>Goal</mat-card-title>
-            <mat-card-subtitle>{{goal.description}}</mat-card-subtitle>
-         </mat-card-header>
-         <mat-card-content>
-           {{goal.tenure}} <br>
-           {{goal.status}}<br>
-           {{goal.details}}<br>
-           {{goal.signedBy}}
-         </mat-card-content>
-         <mat-card-actions>
-            <button mat-button (click)="delelteGoal(goal.id, customer.id)">Delete</button>
-         </mat-card-actions>
-      </mat-card>
-   </div>
-   <div *ngIf="customerGoals.length===0">No Goals Defined </div>
-</div>
-<h3>StakeHolders</h3>
-<button mat-button (click)="navigateNewStakeholders(customer.id)">Add StakeHolders</button>
-<div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
-   <div fxFlex="30%" *ngFor = "let sholder of customerStakeholders">
-      <mat-card class="example-card" >
-         <mat-card-header>
-            <mat-card-title>StakeHolder</mat-card-title>
-            <mat-card-subtitle>{{sholder.name}}</mat-card-subtitle>
-         </mat-card-header>
-         <mat-card-content>
-           {{sholder.role}} <br>
-           {{sholder.email}}<br>
-           {{sholder.phoneNo}}<br>
-           {{sholder.raci}}
-         </mat-card-content>
-         <mat-card-actions>
-            <button mat-button (click)="delelteStakeholder(sholder.id, customer.id)">Delete</button>
-         </mat-card-actions>
-      </mat-card>
-   </div>
-   <div *ngIf="customerStakeholders.length===0">No StakeHolders Present</div>
-</div>
+
+<mat-accordion [multi]="true">
+
+<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <h3>Addresses</h3>
+    </mat-panel-title>
+    <mat-panel-description>
+        <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <div class=" tos-button-right">
+     <button mat-button color="primary" mat-mini-fab (click)="openAddressDialog()"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
+  </div>
+  <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
+     <div fxFlex="30%" *ngFor = "let address of customerAddresses">
+        <mat-card class="example-card" >
+           <mat-card-header>
+              <mat-card-title>Address</mat-card-title>
+              <mat-card-subtitle>{{address.addressType}}</mat-card-subtitle>
+           </mat-card-header>
+           <mat-card-content>
+              {{address.houseNo}}, {{address.street}} <br>
+              {{address.landMark}} <br>
+              {{address.state}} , {{address.zip}}<br>
+              {{address.country}} <br>
+           </mat-card-content>
+           <mat-card-actions>
+              <button mat-mini-fab (click)="openAddressUpdateDialog(address.id)" > <mat-icon >create</mat-icon> </button>
+              <button mat-mini-fab (click)="delelteAddress(address.id)"> <mat-icon >delete</mat-icon> </button>
+           </mat-card-actions>
+        </mat-card>
+     </div>
+     <div *ngIf="customerAddresses.length===0">No address Updated </div>
+  </div>
+</mat-expansion-panel>
+
+<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <h3>Customer Teams</h3>
+    </mat-panel-title>
+    <mat-panel-description>
+        <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <div class=" tos-button-right">
+     <button mat-button color="primary" mat-mini-fab (click)="openTeamDialog()"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
+  </div>
+  <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
+     <div fxFlex="30%" *ngFor = "let team of customerTeams">
+        <mat-card class="example-card" >
+           <mat-card-header>
+              <mat-card-title><span (click)="navigateViewTeam(team.id)" class="tos-cust-heading"> Teams</span></mat-card-title>
+              <mat-card-subtitle><span (click)="navigateViewTeam(team.id)" class="tos-cust-heading"> {{team.name}}</span></mat-card-subtitle>
+           </mat-card-header>
+           <mat-card-content>
+              <span (click)="navigateViewTeam(team.id)" class="tos-cust-heading"> {{team.specialization}} </span>
+           </mat-card-content>
+           <mat-card-actions>
+              <button mat-mini-fab (click)="openTeamUpdateDialog(team.id)" > <mat-icon >create</mat-icon> </button>
+              <button mat-mini-fab (click)="delelteTeam(team.id)"> <mat-icon >delete</mat-icon> </button>
+           </mat-card-actions>
+        </mat-card>
+     </div>
+     <div *ngIf="customerTeams.length===0">No Teams Assigned </div>
+  </div>
+</mat-expansion-panel>
+
+
+<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <h3>Customer Goals</h3>
+    </mat-panel-title>
+    <mat-panel-description>
+        <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <div class=" tos-button-right">
+     <button mat-button color="primary" mat-mini-fab (click)="openGoalDialog()"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
+  </div>
+  <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
+     <div fxFlex="30%" *ngFor = "let goal of customerGoals">
+        <mat-card class="example-card" >
+           <mat-card-header>
+              <mat-card-title>Goal</mat-card-title>
+              <mat-card-subtitle>{{goal.description}}</mat-card-subtitle>
+           </mat-card-header>
+           <mat-card-content>
+             {{goal.tenure}} <br>
+             {{goal.status}}<br>
+             {{goal.details}}<br>
+             {{goal.signedBy}}
+           </mat-card-content>
+           <mat-card-actions>
+              <button mat-mini-fab (click)="openGoalUpdateDialog(goal.id)" > <mat-icon >create</mat-icon> </button>
+              <button mat-mini-fab (click)="delelteGoal(goal.id)"> <mat-icon >delete</mat-icon> </button>
+           </mat-card-actions>
+        </mat-card>
+     </div>
+     <div *ngIf="customerGoals.length===0">No Goals Defined </div>
+  </div>
+</mat-expansion-panel>
+
+
+
+<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <h3>StakeHolders</h3>
+    </mat-panel-title>
+    <mat-panel-description>
+        <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <div class=" tos-button-right">
+     <button mat-button color="primary" mat-mini-fab (click)="openStakeholderDialog()"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
+  </div>
+  <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
+     <div fxFlex="30%" *ngFor = "let sholder of customerStakeholders">
+        <mat-card class="example-card" >
+           <mat-card-header>
+              <mat-card-title>StakeHolder</mat-card-title>
+              <mat-card-subtitle>{{sholder.name}}</mat-card-subtitle>
+           </mat-card-header>
+           <mat-card-content>
+             {{sholder.role}} <br>
+             {{sholder.email}}<br>
+             {{sholder.phoneNo}}<br>
+             {{sholder.raci}}
+           </mat-card-content>
+           <mat-card-actions>
+              <button mat-mini-fab (click)="openStakeholderUpdateDialog(sholder.id)" > <mat-icon >create</mat-icon> </button>
+              <button mat-mini-fab (click)="delelteStakeholder(sholder.id)"> <mat-icon >delete</mat-icon> </button>
+           </mat-card-actions>
+        </mat-card>
+     </div>
+     <div *ngIf="customerStakeholders.length===0">No StakeHolders Present</div>
+  </div>
+</mat-expansion-panel>
+
+<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <h3>Travels</h3>
+    </mat-panel-title>
+    <mat-panel-description>
+        <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <div class=" tos-button-right">
+     <button mat-button color="primary" mat-mini-fab (click)="openTravelDialog()"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
+  </div>
+  <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
+     <div fxFlex="30%" *ngFor = "let travel of customerTravels">
+        <mat-card class="example-card" >
+           <mat-card-header>
+              <mat-card-title>Travel</mat-card-title>
+              <mat-card-subtitle>{{travel.name}}</mat-card-subtitle>
+           </mat-card-header>
+           <mat-card-content>
+             {{travel.travellingFrom}} To {{travel.travellingTo}}<br>
+              {{travel.travellingFromDate}} To {{travel.travellingToDate}}<br>
+              {{travel.purpose}}
+           </mat-card-content>
+           <mat-card-actions>
+              <button mat-mini-fab (click)="openTravelUpdateDialog(travel.id)" > <mat-icon >create</mat-icon> </button>
+              <button mat-mini-fab (click)="delelteTravel(travel.id)"> <mat-icon >delete</mat-icon> </button>
+           </mat-card-actions>
+        </mat-card>
+     </div>
+     <div *ngIf="customerStakeholders.length===0">No Travels Scheduled</div>
+  </div>
+</mat-expansion-panel>
+</mat-accordion>
+
 </div>
 <div fxFlex="20%" fxHide.lt-md="true"></div>

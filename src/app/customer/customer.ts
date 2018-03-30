@@ -8,6 +8,7 @@ export interface Customer {
     teams: any;
     addresses: any;
     stakeHolders: any;
+    travels: any;
     contactPerson: string;
     domain: string;
 }

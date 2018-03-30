@@ -3,7 +3,9 @@
    </div>
    <div fxFlex="60%">
       <h3>Customer Operations</h3>
-      <button mat-button (click)="navigateNewCustomer()">Add Customers</button>
+      <div class=" tos-button-right">
+         <button mat-button color="primary" mat-mini-fab (click)="openDialog()"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
+      </div>
       <div *ngIf="customers.length===0">No Customers Present</div>
       <div class="container tos-cust-cards" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutWrap>
          <div *ngFor = "let cust of customers">
@@ -27,8 +29,8 @@
                   </table>
                </mat-card-content>
                <mat-card-actions>
-                  <button mat-button (click)="navigateUpdateCustomer(cust.id)">Update</button>
-                  <button mat-button (click)="delelteCustomer(cust.id)">Delete</button>
+                  <button mat-mini-fab (click)="openUpdateDialog(cust.id)" > <mat-icon >create</mat-icon> </button>
+                  <button mat-mini-fab (click)="deleteCustomer(cust.id)"> <mat-icon >delete</mat-icon> </button>
                </mat-card-actions>
             </mat-card>
          </div>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, RequestMethod } from '@angular/http';
-import 'rxjs/add/operator/map';
+
 import { Customer } from './customer';
 import { Goals } from './goals/goals';
 import { Teams } from './teams/teams';
@@ -8,6 +8,10 @@ import { Address } from './addresses/address';
 import { Stakeholder } from './stakeholder/stakeholder';
 import { Projectrythm } from './teams/projectrythm/projectrythm';
 import { Action } from './teams/action/action';
+import { TeamMember } from './teams/teammember/teammember';
+import { Travel } from './travel/travel';
+
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class CustomerService {
@@ -36,8 +40,38 @@ export class CustomerService {
     .map((response:Response) => response.json()).toPromise();
   }
 
+  getAddressData(id: number):Promise<any> {
+    return this.http.get('http://localhost:8080/tos/addresses/'+id)
+    .map((response:Response) => response.json()).toPromise();
+  }
+
+  getGoalData(id: number):Promise<any> {
+    return this.http.get('http://localhost:8080/tos/goals/'+id)
+    .map((response:Response) => response.json()).toPromise();
+  }
+
   getCustomersData():Promise<any> {
     return this.http.get('http://localhost:8080/tos/customers/')
+      .map((response:Response) => response.json()).toPromise();
+  }
+
+  getStakeholderData(id: number):Promise<any> {
+    return this.http.get('http://localhost:8080/tos/stakeholders/'+id)
+      .map((response:Response) => response.json()).toPromise();
+  }
+
+  getProjectRythmData(id: number):Promise<any> {
+    return this.http.get('http://localhost:8080/tos/projectrythms/'+id)
+      .map((response:Response) => response.json()).toPromise();
+  }
+
+  getActionData(id: number):Promise<any> {
+    return this.http.get('http://localhost:8080/tos/actions/'+id)
+      .map((response:Response) => response.json()).toPromise();
+  }
+
+  getTeamMemberData(id: number):Promise<any> {
+    return this.http.get('http://localhost:8080/tos/teammembers/'+id)
       .map((response:Response) => response.json()).toPromise();
   }
 
@@ -76,8 +110,48 @@ export class CustomerService {
     .subscribe((res:Response) => console.log(res));
   }
 
+  postTeamMember(teammember: any) {
+    this.http.post('http://localhost:8080/tos/teammembers/', teammember, this.options)
+    .subscribe((res:Response) => console.log(res));
+  }
+
   updateCustomer(cust: Customer) {
     this.http.put('http://localhost:8080/tos/customers/'+ cust.id, cust, this.options)
+    .subscribe((res:Response) => console.log(res));
+  }
+
+  updateAddress(address: Address) {
+    this.http.put('http://localhost:8080/tos/addresses/'+ address.id, address, this.options)
+    .subscribe((res:Response) => console.log(res));
+  }
+
+  updateGoal(goal: Goals) {
+    this.http.put('http://localhost:8080/tos/goals/'+ goal.id, goal, this.options)
+    .subscribe((res:Response) => console.log(res));
+  }
+
+  updateTeam(team: Teams) {
+    this.http.put('http://localhost:8080/tos/teams/'+ team.id, team, this.options)
+    .subscribe((res:Response) => console.log(res));
+  }
+
+  updateStakeholder(stakeholder: Stakeholder) {
+    this.http.put('http://localhost:8080/tos/stakeholders/'+ stakeholder.id, stakeholder, this.options)
+    .subscribe((res:Response) => console.log(res));
+  }
+
+  updateProjectRythm(projectRythm: Projectrythm) {
+    this.http.put('http://localhost:8080/tos/projectrythms/'+ projectRythm.id, projectRythm, this.options)
+    .subscribe((res:Response) => console.log(res));
+  }
+
+  updateAction(action: Action) {
+    this.http.put('http://localhost:8080/tos/actions/'+ action.id, action, this.options)
+    .subscribe((res:Response) => console.log(res));
+  }
+
+  updateTeamMember(teammember: any) {
+    this.http.put('http://localhost:8080/tos/teammembers/'+ teammember.id, teammember, this.options)
     .subscribe((res:Response) => console.log(res));
   }
 

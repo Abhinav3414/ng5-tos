@@ -2,6 +2,13 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerService } from '../customer.service';
 import { Teams } from './teams';
+import { ProjectRythmDialogComponent } from './projectrythm/projectrythm-dialog.component';
+import { ActionDialogComponent } from './action/action-dialog.component';
+import { TeamMemberDialogComponent } from './teammember/teammember-dialog.component';
+
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
+const dummyDialogEntity = { id: 0, name: "dummy" };
 
 @Component({
   selector: 'team-view',
@@ -10,6 +17,9 @@ import { Teams } from './teams';
 
 export class TeamViewComponent {
   id: number;
+  projectRythm: any;
+  action: any;
+  teammember: any;
   team: Teams;
   employee = [];
   customerTeamMembers = [];
@@ -17,7 +27,8 @@ export class TeamViewComponent {
   customerProjectRythms = [];
   isUpdate: boolean = true;
 
-  constructor(private customerService: CustomerService, private router: Router, private route: ActivatedRoute) {
+  constructor(private customerService: CustomerService, private router: Router, private route: ActivatedRoute,
+    private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -57,12 +68,153 @@ export class TeamViewComponent {
     });
   }
 
-  navigateNewProjectRythm(teamId) {
-    this.router.navigate(['/projectrythm/' + teamId + '/new'], { skipLocationChange: true });
+  openTeamMemberDialog(): void {
+    let dialogRef = this.dialog.open(TeamMemberDialogComponent, {
+      data: dummyDialogEntity
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != 'dialogDismissed') {
+        this.addNewTeamMember(result)
+      }
+    });
   }
 
-  navigateNewTeamAction(teamId) {
-    this.router.navigate(['/action/' + teamId + '/new'], { skipLocationChange: true });
+  openTeamMemberUpdateDialog(id: number): void {
+    for (let key in this.customerTeamMembers) {
+      if (this.customerTeamMembers[key].id === id) {
+        this.teammember = this.customerTeamMembers[key];
+      }
+    }
+    let dialogRef = this.dialog.open(TeamMemberDialogComponent, {
+      data: this.teammember
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != 'dialogDismissed') {
+        this.updateTeamMember(id, result);
+      }
+    });
+  }
+
+  openActionDialog(): void {
+    let dialogRef = this.dialog.open(ActionDialogComponent, {
+      data: dummyDialogEntity
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != 'dialogDismissed') {
+        this.addNewAction(result)
+      }
+    });
+  }
+
+  openActionUpdateDialog(id: number): void {
+    for (let key in this.customerActions) {
+      if (this.customerActions[key].id === id) {
+        this.action = this.customerActions[key];
+      }
+    }
+    let dialogRef = this.dialog.open(ActionDialogComponent, {
+      data: this.action
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != 'dialogDismissed') {
+        this.updateAction(id, result);
+      }
+    });
+  }
+
+  openProjectRythmDialog(): void {
+    let dialogRef = this.dialog.open(ProjectRythmDialogComponent, {
+      data: dummyDialogEntity
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != 'dialogDismissed') {
+        this.addNewProjectRythm(result)
+      }
+    });
+  }
+
+  openProjectRythmUpdateDialog(id: number): void {
+    for (let key in this.customerProjectRythms) {
+      if (this.customerProjectRythms[key].id === id) {
+        this.projectRythm = this.customerProjectRythms[key];
+      }
+    }
+
+    let dialogRef = this.dialog.open(ProjectRythmDialogComponent, {
+      data: this.projectRythm
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != 'dialogDismissed') {
+        this.updateProjectRythm(id, result);
+      }
+    });
+  }
+
+  addNewAction(action) {
+    action.teamId = this.id;
+    this.customerService.postAction(action);
+    location.reload();
+  }
+
+  addNewProjectRythm(projectrythm) {
+    projectrythm.teamId = this.id;
+    this.customerService.postProjectrythm(projectrythm);
+    location.reload();
+  }
+
+  addNewTeamMember(teammember) {
+    teammember.team_Id = this.id;
+    console.log(teammember)
+    this.customerService.postTeamMember(teammember);
+    location.reload();
+  }
+
+  updateTeamMember(id, teammember) {
+    this.customerService.getTeamMemberData(id)
+      .then((resCustomerData) => {
+        this.teammember = resCustomerData;
+        this.teammember.role = teammember.role;
+        this.teammember.productivity = teammember.productivity;
+        this.teammember.employeeId = teammember.employeeId;
+        console.log(this.teammember)
+        this.customerService.updateTeamMember(this.teammember);
+      });
+    setTimeout(() => {
+    //  location.reload();
+    }, 500);
+  }
+
+  updateAction(id, action) {
+    this.customerService.getActionData(id)
+      .then((resCustomerData) => {
+        this.action = resCustomerData;
+        this.action.details = action.details;
+        this.action.cause = action.cause;
+        this.action.platform = action.platform;
+        this.action.status = action.status;
+        this.customerService.updateAction(this.action);
+      });
+    setTimeout(() => {
+      location.reload();
+    }, 500);
+  }
+
+  updateProjectRythm(id, projectRythm) {
+    this.customerService.getProjectRythmData(id)
+      .then((resCustomerData) => {
+        this.projectRythm = resCustomerData;
+        this.projectRythm.event = projectRythm.event;
+        this.projectRythm.frequency = projectRythm.frequency;
+        this.projectRythm.whoRythm = projectRythm.whoRythm;
+        this.projectRythm.whereRythm = projectRythm.whereRythm;
+        this.customerService.updateProjectRythm(this.projectRythm);
+      });
+    setTimeout(() => {
+      location.reload();
+    }, 500);
   }
 
   navigateNewTeamMember(teamId) {

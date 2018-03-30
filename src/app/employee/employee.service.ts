@@ -19,9 +19,9 @@ export class EmployeeService {
             .map((response: Response) => response.json()).toPromise();
     }
 
-    getEmployeesData() {
-        return this.http.get('http://localhost:8080/tos/employees/')
-            .map((response: Response) => response.json());
+    getEmployeesData():Promise<any> {
+      return this.http.get('http://localhost:8080/tos/employees/')
+        .map((response:Response) => response.json()).toPromise();
     }
 
     postEmployee(emp: Employee) {

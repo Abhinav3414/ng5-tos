@@ -2,7 +2,7 @@
 <div fxFlex="100%" >
    <h3>Employee Operations</h3>
    <div class=" tos-button-right">
-      <button mat-button color="primary" mat-mini-fab (click)="navigateNewEmployee()"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
+      <button mat-button color="primary" mat-mini-fab (click)="openDialog()" > <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
    </div>
    <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
       <div fxFlex="30%" *ngFor = "let emp of employees">
@@ -15,11 +15,8 @@
                {{emp.joiningDate}} <br>  {{emp.responsibilities}}<br>  {{emp.yearsOfExperience}}<br>  {{ emp.createdAt | date : 'd-M-yy, h:mm a'}}<br>
             </mat-card-content>
             <mat-card-actions>
-               <button mat-mini-fab (click)="delelteEmployee(emp.id)"> <mat-icon >delete forever</mat-icon> </button>
-               <button mat-mini-fab (click)="navigateUpdateEmployee(emp.id)"> <mat-icon >create</mat-icon> </button>
-               <br>
-               <br>
-
+               <button mat-mini-fab (click)="delelteEmployee(emp.id)" > <mat-icon >delete forever</mat-icon> </button>
+               <button mat-mini-fab (click)="openUpdateDialog(emp.id)" > <mat-icon >create</mat-icon> </button>
             </mat-card-actions>
          </mat-card>
       </div>

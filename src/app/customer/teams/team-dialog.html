@@ -1,0 +1,32 @@
+<div *ngIf="data!==undefined && data.id === 0" >
+   <h2 mat-dialog-title>Create New Team</h2>
+   <mat-dialog-content>
+     <form  id="formNewCustomeTeam" name="formNewCustomerTeam"  #customerTeamData="ngForm">
+        <mat-form-field>  <input matInput placeholder="specialization" name="specialization"ngModel><br>   </mat-form-field>
+        <mat-form-field> <input matInput placeholder="name" name="name"ngModel> </mat-form-field>
+     </form>
+   </mat-dialog-content>
+   <mat-dialog-actions>
+      <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
+      <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+      <button mat-button [mat-dialog-close]=customerTeamData.value>Save</button>
+   </mat-dialog-actions>
+</div>
+<div *ngIf="  data!==undefined && data.id !== 0" >
+   <h2 mat-dialog-title>Update Team </h2>
+   <mat-dialog-content>
+      <form id="formNewteamrUpdate" name="formNewteamrUpdate"  #teamDataUpdate="ngForm">
+         <mat-form-field >
+            <input matInput placeholder="name" name="name" value="{{data.name}}" [(ngModel)]="data.name" ngModel><br>
+         </mat-form-field>
+         <mat-form-field >
+            <input matInput placeholder="specialization" name="specialization" value="{{data.specialization}}" [(ngModel)]="data.specialization" ngModel>
+         </mat-form-field>
+      </form>
+   </mat-dialog-content>
+   <mat-dialog-actions>
+      <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
+      <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+      <button mat-button [mat-dialog-close]=teamDataUpdate.value>Update</button>
+   </mat-dialog-actions>
+</div>

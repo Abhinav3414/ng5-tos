@@ -14,28 +14,32 @@ import { CustomMaterialModule } from './custom-material.module';
 
 import { EmployeeMainComponent } from './employee/employee-main.component';
 import { EmployeeViewComponent } from './employee/employee-view.component';
-import { EmployeeComponent } from './employee/employee.component';
 import { EmployeeDialogComponent } from './employee/employee-dialog.component';
-
 
 import { AboutComponent } from './about/about.component';
 import { MenuComponent } from './menu/menu.component';
 import { CustomerMainComponent } from './customer/customer-main.component';
 import { CustomerViewComponent } from './customer/customer-view.component';
-import { CustomerComponent } from './customer/customer.component';
-import { GoalsComponent } from './customer/goals/goals.component';
-import { TeamsComponent } from './customer/teams/teams.component';
-import { AddressComponent } from './customer/addresses/address.component';
-import { StakeholderComponent } from './customer/stakeholder/stakeholder.component';
+import { CustomerDialogComponent } from './customer/customer-dialog.component';
+
+import { GoalDialogComponent } from './customer/goals/goal-dialog.component';
+import { TeamDialogComponent } from './customer/teams/team-dialog.component';
+
+import { AddressDialogComponent } from './customer/addresses/address-dialog.component';
+
+import { StakeholderDialogComponent } from './customer/stakeholder/stakeholder-dialog.component';
+
 import { TeamViewComponent } from './customer/teams/team-view.component';
-import { ProjectrythmComponent } from './customer/teams/projectrythm/projectrythm.component';
-import { ActionComponent } from './customer/teams/action/action.component';
+import { ProjectRythmDialogComponent } from './customer/teams/projectrythm/projectrythm-dialog.component';
+import { TeamMemberDialogComponent } from './customer/teams/teammember/teammember-dialog.component';
+
+import { ActionDialogComponent } from './customer/teams/action/action-dialog.component';
 
 import { EmployeeService } from './employee/employee.service';
 import { CustomerService } from './customer/customer.service';
 import { RouterModule, Routes } from '@angular/router';
 
-import { MatIconRegistry, MatIconModule } from '@angular/material/icon';
+
 import {DomSanitizer} from '@angular/platform-browser';
 
 @NgModule({
@@ -45,18 +49,18 @@ import {DomSanitizer} from '@angular/platform-browser';
     AboutComponent,
     MenuComponent,
     CustomerMainComponent,
-    EmployeeComponent,
     EmployeeViewComponent,
-    CustomerComponent,
     CustomerViewComponent,
-    GoalsComponent,
-    TeamsComponent,
-    AddressComponent,
-    StakeholderComponent,
     TeamViewComponent,
-    ProjectrythmComponent,
-    ActionComponent,
-    EmployeeDialogComponent
+    EmployeeDialogComponent,
+    CustomerDialogComponent,
+    AddressDialogComponent,
+    StakeholderDialogComponent,
+    GoalDialogComponent,
+    TeamDialogComponent,
+    ProjectRythmDialogComponent,
+    ActionDialogComponent,
+    TeamMemberDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -67,21 +71,12 @@ import {DomSanitizer} from '@angular/platform-browser';
     FlexLayoutModule,
     FormsModule,
     HttpModule,
-    MatIconModule,
     RouterModule.forRoot([
       {path:'employee-home',component: EmployeeMainComponent},
-      {path:'employee/:id',component: EmployeeComponent},
       {path:'about',component: AboutComponent},
       {path:'customer-home', component: CustomerMainComponent},
-      {path:'customer/:id', component: CustomerComponent},
       {path:'customer-view/:id', component: CustomerViewComponent},
-      {path:'goals/:custid/:id', component: GoalsComponent},
-      {path:'teams/:custid/:id', component: TeamsComponent},
-      {path:'address/:custid/:id', component: AddressComponent},
-      {path:'stakeholder/:custid/:id', component: StakeholderComponent},
       {path:'team-view/:id', component: TeamViewComponent},
-      {path:'projectrythm/:teamid/:id', component: ProjectrythmComponent},
-      {path:'action/:teamid/:id', component: ActionComponent},
       {path:'employee-view/:id', component: EmployeeViewComponent}
     ])
   ],
@@ -90,14 +85,15 @@ import {DomSanitizer} from '@angular/platform-browser';
     /*{ provide: LocationStrategy, useClass: HashLocationStrategy },*/
   ],
   entryComponents: [
-    EmployeeDialogComponent
+    EmployeeDialogComponent, CustomerDialogComponent, AddressDialogComponent, StakeholderDialogComponent,
+    GoalDialogComponent, TeamDialogComponent, ProjectRythmDialogComponent, ActionDialogComponent,
+    TeamMemberDialogComponent
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
 
-  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer){
-  //    matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl('/assets/materialdesignicons-webfont.svg'));
+  constructor(){
   }
 
  }

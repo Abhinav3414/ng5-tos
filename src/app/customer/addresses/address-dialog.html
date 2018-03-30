@@ -1,0 +1,52 @@
+<div *ngIf="data!==undefined && data.id === 0" >
+   <h2 mat-dialog-title>Create New Address</h2>
+   <mat-dialog-content>
+     <form  id="formNewCustomerAddress" name="formNewCustomerAddress"  #customerAddressData="ngForm">
+        <mat-form-field>  <input matInput placeholder="addressType" name="addressType"ngModel><br>   </mat-form-field>
+        <mat-form-field> <input matInput placeholder="houseNo" name="houseNo"ngModel> </mat-form-field>
+        <mat-form-field> <input matInput placeholder="street" name="street"ngModel> </mat-form-field>
+        <mat-form-field>  <input matInput placeholder="landMark" name="landMark"ngModel> </mat-form-field>
+        <mat-form-field> <input matInput placeholder="zip" name="zip"ngModel> </mat-form-field>
+        <mat-form-field> <input matInput placeholder="state" name="state"ngModel> </mat-form-field>
+        <mat-form-field> <input matInput placeholder="country" name="country"ngModel> </mat-form-field>
+     </form>
+   </mat-dialog-content>
+   <mat-dialog-actions>
+      <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
+      <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+      <button mat-button [mat-dialog-close]=customerAddressData.value>Save</button>
+   </mat-dialog-actions>
+</div>
+<div *ngIf="  data!==undefined && data.id !== 0" >
+   <h2 mat-dialog-title>Update Address Details for : {{data.name}} </h2>
+   <mat-dialog-content>
+      <form id="formNewAddressUpdate" name="formNewAddressUpdate"  #addressDataUpdate="ngForm">
+         <mat-form-field >
+            <input matInput placeholder="addressType" name="addressType" value="{{data.addressType}}" [(ngModel)]="data.addressType" ngModel><br>
+         </mat-form-field>
+         <mat-form-field >
+            <input matInput placeholder="houseNo" name="houseNo" value="{{data.houseNo}}" [(ngModel)]="data.houseNo" ngModel>
+         </mat-form-field>
+         <mat-form-field >
+            <input matInput placeholder="street" name="street" value="{{data.street}}" [(ngModel)]="data.street" ngModel>
+         </mat-form-field>
+         <mat-form-field >
+            <input matInput placeholder="landMark" name="landMark" value="{{data.landMark}}" [(ngModel)]="data.landMark" ngModel>
+         </mat-form-field>
+         <mat-form-field >
+            <input matInput placeholder="zip" name="zip" value="{{data.zip}}" [(ngModel)]="data.zip" ngModel>
+         </mat-form-field>
+         <mat-form-field >
+            <input matInput placeholder="state" name="state" value="{{data.state}}" [(ngModel)]="data.state" ngModel>
+         </mat-form-field>
+         <mat-form-field >
+            <input matInput placeholder="country" name="country" value="{{data.country}}" [(ngModel)]="data.country" ngModel>
+         </mat-form-field>
+      </form>
+   </mat-dialog-content>
+   <mat-dialog-actions>
+      <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
+      <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+      <button mat-button [mat-dialog-close]=addressDataUpdate.value>Update</button>
+   </mat-dialog-actions>
+</div>

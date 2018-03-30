@@ -24,8 +24,8 @@ export class EmployeeViewComponent {
   isUpdate: boolean = true;
   //fileNameDialogRef: MatDialogRef<EmployeeDialogComponent>;
 
-  constructor(private employeeService: EmployeeService, private customerService: CustomerService, private router: Router, private route: ActivatedRoute,
-  private dialog: MatDialog) {
+  constructor(private employeeService: EmployeeService, private customerService: CustomerService,
+    private router: Router, private route: ActivatedRoute, private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -79,15 +79,15 @@ export class EmployeeViewComponent {
     });
   }
 
-
   openDialog(): void {
       let dialogRef = this.dialog.open(EmployeeDialogComponent, {
-        data: "this is my data"
+        data: this.isUpdate
       });
 
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
         console.log(result)
+      //  this.addNewEmployee(result)
 
       });
     //  dialogRef.close('Pizza!');

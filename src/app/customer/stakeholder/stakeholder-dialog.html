@@ -1,0 +1,44 @@
+<div *ngIf="data!==undefined && data.id === 0" >
+   <h2 mat-dialog-title>Create New Stakeholder</h2>
+   <mat-dialog-content>
+     <form  id="formNewCustomerStakeholder" name="formNewCustomerStakeholder"  #customerStakeholderData="ngForm">
+        <mat-form-field>  <input matInput placeholder="name" name="name"ngModel><br>   </mat-form-field>
+        <mat-form-field> <input matInput placeholder="role" name="role"ngModel> </mat-form-field>
+        <mat-form-field>  <input matInput placeholder="email" name="email"ngModel><br>   </mat-form-field>
+        <mat-form-field> <input matInput placeholder="phoneNo" name="phoneNo"ngModel> </mat-form-field>
+        <mat-form-field>  <input matInput placeholder="raci" name="raci"ngModel><br>   </mat-form-field>
+     </form>
+   </mat-dialog-content>
+   <mat-dialog-actions>
+      <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
+      <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+      <button mat-button [mat-dialog-close]=customerStakeholderData.value>Save</button>
+   </mat-dialog-actions>
+</div>
+<div *ngIf="  data!==undefined && data.id !== 0" >
+   <h2 mat-dialog-title>Update StakeHolder : {{data.name}} </h2>
+   <mat-dialog-content>
+      <form id="formNewStakeholderUpdate" name="formNewStakeholderUpdate"  #stakeholderDataUpdate="ngForm">
+         <mat-form-field >
+            <input matInput placeholder="name" name="name" value="{{data.name}}" [(ngModel)]="data.name" ngModel><br>
+         </mat-form-field>
+         <mat-form-field >
+            <input matInput placeholder="role" name="role" value="{{data.role}}" [(ngModel)]="data.role" ngModel>
+         </mat-form-field>
+         <mat-form-field >
+            <input matInput placeholder="email" name="email" value="{{data.email}}" [(ngModel)]="data.email" ngModel>
+         </mat-form-field>
+         <mat-form-field >
+            <input matInput placeholder="phoneNo" name="phoneNo" value="{{data.phoneNo}}" [(ngModel)]="data.phoneNo" ngModel>
+         </mat-form-field>
+         <mat-form-field >
+            <input matInput placeholder="raci" name="raci" value="{{data.raci}}" [(ngModel)]="data.raci" ngModel>
+         </mat-form-field>
+      </form>
+   </mat-dialog-content>
+   <mat-dialog-actions>
+      <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
+      <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+      <button mat-button [mat-dialog-close]=stakeholderDataUpdate.value>Update</button>
+   </mat-dialog-actions>
+</div>

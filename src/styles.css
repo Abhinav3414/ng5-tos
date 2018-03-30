@@ -21,7 +21,7 @@ purple-green.css
 }
 
 .mat-card-actions {
-  padding-left: 50% !important;
+  text-align: right;
 }
 body {
   font-family: sans-serif;

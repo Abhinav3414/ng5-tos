@@ -9,13 +9,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material';
-import {MatExpansionModule} from '@angular/material/expansion';
-
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
-  imports: [MatButtonModule, MatToolbarModule, MatCardModule, MatInputModule,
-    MatMenuModule, MatFormFieldModule,MatDialogModule, MatExpansionModule],
-  exports: [MatButtonModule, MatToolbarModule, MatCardModule, MatInputModule,
-    MatMenuModule, MatFormFieldModule, MatDialogModule, MatExpansionModule]
+  imports: [MatButtonModule, MatToolbarModule, MatCardModule, MatInputModule, MatIconModule,
+    MatMenuModule, MatFormFieldModule, MatDialogModule, MatExpansionModule, MatAutocompleteModule],
+  exports: [MatButtonModule, MatToolbarModule, MatCardModule, MatInputModule, MatIconModule,
+    MatMenuModule, MatFormFieldModule, MatDialogModule, MatExpansionModule, MatAutocompleteModule]
 })
 export class CustomMaterialModule { }
