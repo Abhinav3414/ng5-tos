@@ -7,6 +7,7 @@ import { AddressDialogComponent } from './addresses/address-dialog.component';
 import { StakeholderDialogComponent } from './stakeholder/stakeholder-dialog.component';
 import { GoalDialogComponent } from './goals/goal-dialog.component';
 import { TeamDialogComponent } from './teams/team-dialog.component';
+import { TravelDialogComponent } from './travel/travel-dialog.component';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
@@ -194,6 +195,35 @@ export class CustomerViewComponent {
         });
       }
 
+      openTravelDialog(): void {
+        let dialogRef = this.dialog.open(TravelDialogComponent, {
+          data: dummyDialogEntity
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          if (result != 'dialogDismissed') {
+            this.addNewTravel(result)
+          }
+        });
+      }
+
+      openTravelUpdateDialog(id: number): void {
+        for (let key in this.customerTravels) {
+          if (this.customerTravels[key].id === id) {
+            this.travel = this.customerTravels[key];
+          }
+        }
+
+        let dialogRef = this.dialog.open(TravelDialogComponent, {
+          data: this.travel
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          if (result != 'dialogDismissed') {
+            this.updateTravel(id, result);
+          }
+        });
+      }
+
   addNewAddress(address) {
     address.customerId = this.id;
     this.customerService.postAddress(address);
@@ -216,6 +246,13 @@ export class CustomerViewComponent {
     team.customerId = this.id;
     console.log(team)
     this.customerService.postTeam(team);
+    location.reload();
+  }
+
+  addNewTravel(travel) {
+    travel.customerId = this.id;
+    console.log(travel)
+    this.customerService.postTravel(travel);
     location.reload();
   }
 
@@ -281,6 +318,23 @@ export class CustomerViewComponent {
     }, 500);
   }
 
+  updateTravel(id, travel) {
+    this.customerService.getTravelData(id)
+      .then((resCustomerData) => {
+        this.travel = resCustomerData;
+        this.travel.name = travel.name;
+        this.travel.travellingFrom = travel.travellingFrom;
+        this.travel.travellingTo = travel.travellingTo;
+        this.travel.travellingFromDate = travel.travellingFromDate;
+        this.travel.travellingToDate = travel.travellingToDate;
+        this.travel.purpose = travel.purpose;
+        this.customerService.updateTravel(this.travel);
+      });
+    setTimeout(() => {
+      location.reload();
+    }, 500);
+  }
+
   navigateViewTeam(teamId) {
     this.router.navigate(['/team-view', teamId], { skipLocationChange: true });
   }
@@ -297,6 +351,11 @@ export class CustomerViewComponent {
 
   delelteStakeholder(id) {
     this.customerService.delelteStakeholder(id);
+    location.reload();
+  }
+
+  delelteTravel(id) {
+    this.customerService.delelteTravel(id);
     location.reload();
   }
 

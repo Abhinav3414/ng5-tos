@@ -85,7 +85,7 @@ export class CustomerMainComponent {
     location.reload();
   }
 
-  delelteCustomer(id) {
+  deleteCustomer(id) {
     this.customerService.delelteCustomer(id);
     location.reload();
   }

@@ -35,8 +35,8 @@
               {{address.country}} <br>
            </mat-card-content>
            <mat-card-actions>
-              <button mat-mini-fab (click)="openAddressUpdateDialog(address.id)" > <mat-icon >create</mat-icon> </button>
-              <button mat-mini-fab (click)="delelteAddress(address.id)"> <mat-icon >delete</mat-icon> </button>
+              <span (click)="openAddressUpdateDialog(address.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
+              <span (click)="delelteAddress(address.id)" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
            </mat-card-actions>
         </mat-card>
      </div>
@@ -68,8 +68,8 @@
               <span (click)="navigateViewTeam(team.id)" class="tos-cust-heading"> {{team.specialization}} </span>
            </mat-card-content>
            <mat-card-actions>
-              <button mat-mini-fab (click)="openTeamUpdateDialog(team.id)" > <mat-icon >create</mat-icon> </button>
-              <button mat-mini-fab (click)="delelteTeam(team.id)"> <mat-icon >delete</mat-icon> </button>
+              <span (click)="openTeamUpdateDialog(team.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
+              <span (click)="delelteTeam(team.id)" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
            </mat-card-actions>
         </mat-card>
      </div>
@@ -104,16 +104,14 @@
              {{goal.signedBy}}
            </mat-card-content>
            <mat-card-actions>
-              <button mat-mini-fab (click)="openGoalUpdateDialog(goal.id)" > <mat-icon >create</mat-icon> </button>
-              <button mat-mini-fab (click)="delelteGoal(goal.id)"> <mat-icon >delete</mat-icon> </button>
+              <span (click)="openGoalUpdateDialog(goal.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
+              <span (click)="delelteGoal(goal.id)" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
            </mat-card-actions>
         </mat-card>
      </div>
      <div *ngIf="customerGoals.length===0">No Goals Defined </div>
   </div>
 </mat-expansion-panel>
-
-
 
 <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
   <mat-expansion-panel-header>
@@ -141,8 +139,8 @@
              {{sholder.raci}}
            </mat-card-content>
            <mat-card-actions>
-              <button mat-mini-fab (click)="openStakeholderUpdateDialog(sholder.id)" > <mat-icon >create</mat-icon> </button>
-              <button mat-mini-fab (click)="delelteStakeholder(sholder.id)"> <mat-icon >delete</mat-icon> </button>
+              <span (click)="openStakeholderUpdateDialog(sholder.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
+              <span (click)="delelteStakeholder(sholder.id)" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
            </mat-card-actions>
         </mat-card>
      </div>
@@ -175,12 +173,13 @@
               {{travel.purpose}}
            </mat-card-content>
            <mat-card-actions>
-              <button mat-mini-fab (click)="openTravelUpdateDialog(travel.id)" > <mat-icon >create</mat-icon> </button>
-              <button mat-mini-fab (click)="delelteTravel(travel.id)"> <mat-icon >delete</mat-icon> </button>
+              <span (click)="openTravelUpdateDialog(travel.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
+              <span (click)="delelteTravel(travel.id)" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
+
            </mat-card-actions>
         </mat-card>
      </div>
-     <div *ngIf="customerStakeholders.length===0">No Travels Scheduled</div>
+     <div *ngIf="customerTravels.length===0">No Travels Scheduled</div>
   </div>
 </mat-expansion-panel>
 </mat-accordion>

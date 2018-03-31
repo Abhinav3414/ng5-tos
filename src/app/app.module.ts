@@ -32,6 +32,13 @@ import { StakeholderDialogComponent } from './customer/stakeholder/stakeholder-d
 import { TeamViewComponent } from './customer/teams/team-view.component';
 import { ProjectRythmDialogComponent } from './customer/teams/projectrythm/projectrythm-dialog.component';
 import { TeamMemberDialogComponent } from './customer/teams/teammember/teammember-dialog.component';
+import { TravelDialogComponent } from './customer/travel/travel-dialog.component';
+import { SkillDialogComponent } from './employee/skill/skill-dialog.component';
+import { CertificationDialogComponent } from './employee/certification/certification-dialog.component';
+
+import { ImprovementAreaDialogComponent } from './employee/improvementarea/improvementarea-dialog.component';
+import { FeedbackDialogComponent } from './employee/feedback/feedback-dialog.component';
+import { TrainingDialogComponent } from './employee/training/training-dialog.component';
 
 import { ActionDialogComponent } from './customer/teams/action/action-dialog.component';
 
@@ -60,7 +67,13 @@ import {DomSanitizer} from '@angular/platform-browser';
     TeamDialogComponent,
     ProjectRythmDialogComponent,
     ActionDialogComponent,
-    TeamMemberDialogComponent
+    TeamMemberDialogComponent,
+    TravelDialogComponent,
+    SkillDialogComponent,
+    CertificationDialogComponent,
+    TrainingDialogComponent,
+    ImprovementAreaDialogComponent,
+    FeedbackDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +100,8 @@ import {DomSanitizer} from '@angular/platform-browser';
   entryComponents: [
     EmployeeDialogComponent, CustomerDialogComponent, AddressDialogComponent, StakeholderDialogComponent,
     GoalDialogComponent, TeamDialogComponent, ProjectRythmDialogComponent, ActionDialogComponent,
-    TeamMemberDialogComponent
+    TeamMemberDialogComponent, TravelDialogComponent, SkillDialogComponent, CertificationDialogComponent,
+    TrainingDialogComponent, ImprovementAreaDialogComponent, FeedbackDialogComponent
   ],
   bootstrap: [AppComponent]
 })

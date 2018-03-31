@@ -17,7 +17,9 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-    <button mat-button (click)="navigateNewSkill(employee.id)">Add Skill</button>
+    <div class=" tos-button-right">
+   <button mat-button color="primary" mat-mini-fab (click)="openSkillDialog()"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
+</div>
     <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
        <div fxFlex="30%" *ngFor = "let skill of employeeSkills" >
           <mat-card class="example-card" >
@@ -29,7 +31,8 @@
                 {{skill.duration}} <br> {{skill.rating}} <br> {{skill.lastUsed}}<br>
               </mat-card-content>
              <mat-card-actions>
-                <button mat-button (click)="delelteSkill(address.id)">Delete</button>
+               <span (click)="openSkillUpdateDialog(skill.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
+               <span (click)="delelteSkill(skill.id)" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
              </mat-card-actions>
           </mat-card>
        </div>
@@ -46,8 +49,9 @@
         <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
     </mat-panel-description>
   </mat-expansion-panel-header>
-
-  <button mat-button (click)="navigateNewCertification(employee.id)">Add Certification</button>
+<div class=" tos-button-right">
+   <button mat-button color="primary" mat-mini-fab (click)="openCertificationDialog()"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
+</div>
   <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
      <div fxFlex="30%" *ngFor = "let certification of employeeCertifications">
         <mat-card class="example-card" >
@@ -59,7 +63,8 @@
               {{certification.yearOfCertification}}
            </mat-card-content>
            <mat-card-actions>
-              <button mat-button (click)="delelteCertification(certification.id)">Delete</button>
+             <span (click)="openCertificationUpdateDialog(certification.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
+             <span (click)="delelteCertification(certification.id)" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
            </mat-card-actions>
         </mat-card>
      </div>
@@ -70,14 +75,15 @@
 <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
   <mat-expansion-panel-header>
     <mat-panel-title>
-          <h3>Employee Trainings</h3>
+          <h3>Trainings</h3>
     </mat-panel-title>
     <mat-panel-description>
         <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
     </mat-panel-description>
   </mat-expansion-panel-header>
-
-  <button mat-button (click)="navigateNewTeams(customer.id)">Add Trainings</button>
+<div class=" tos-button-right">
+   <button mat-button color="primary" mat-mini-fab (click)="openTrainingDialog()"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
+</div>
   <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
      <div fxFlex="30%" *ngFor = "let training of employeeTrainings">
         <mat-card class="example-card" >
@@ -89,7 +95,8 @@
               {{ training.mode}}<br> {{ training.proposedDate}}<br>  {{ training.reason}}
            </mat-card-content>
            <mat-card-actions>
-              <button mat-button (click)="delelteTraining(team.id)">Delete</button>
+             <span (click)="openTrainingUpdateDialog(training.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
+             <span (click)="delelteTraining(training.id)" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
            </mat-card-actions>
         </mat-card>
      </div>
@@ -106,8 +113,9 @@
         <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
     </mat-panel-description>
   </mat-expansion-panel-header>
-
-  <button mat-button (click)="navigateNewFeedback(customer.id)">Add Feedback</button>
+<div class=" tos-button-right">
+   <button mat-button color="primary" mat-mini-fab (click)="openFeedbackDialog()"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
+</div>
   <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
      <div fxFlex="30%" *ngFor = "let feedback of employeeFeedbacks">
         <mat-card class="example-card" >
@@ -119,7 +127,8 @@
              {{feedback.receivedFrom}} <br> {{feedback.actionsTaken}}<br>
            </mat-card-content>
            <mat-card-actions>
-              <button mat-button (click)="delelteFeedback(feedback.id, employee.id)">Delete</button>
+             <span (click)="openFeedbackUpdateDialog(feedback.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
+             <span (click)="delelteFeedback(feedback.id)" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
            </mat-card-actions>
         </mat-card>
      </div>
@@ -130,13 +139,15 @@
 <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
   <mat-expansion-panel-header>
     <mat-panel-title>
-            <h3>Employee Improvement Areas</h3>
+            <h3>Improvement Areas</h3>
     </mat-panel-title>
     <mat-panel-description>
         <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
     </mat-panel-description>
   </mat-expansion-panel-header>
-  <button mat-button (click)="navigateNewImprovementArea(customer.id)">Add Improvement Area</button>
+  <div class=" tos-button-right">
+   <button mat-button color="primary" mat-mini-fab (click)="openImprovementAreaDialog()"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
+</div>
   <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
      <div fxFlex="30%" *ngFor = "let improvementArea of employeeImprovementAreas">
         <mat-card class="example-card" >
@@ -148,7 +159,8 @@
              {{improvementArea.improvementPlan}} <br> {{improvementArea.proposedDate}}<br>
            </mat-card-content>
            <mat-card-actions>
-              <button mat-button (click)="delelteImprovementArea(improvementArea.id, employee.id)">Delete</button>
+             <span (click)="openImprovementAreaUpdateDialog(improvementArea.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
+             <span (click)="delelteImprovementArea(improvementArea.id)" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
            </mat-card-actions>
         </mat-card>
      </div>
@@ -165,7 +177,6 @@
         <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
     </mat-panel-description>
   </mat-expansion-panel-header>
-  <button mat-button (click)="navigateNewTeams(employee.id)">Add Team</button>
   <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
      <div fxFlex="30%" *ngFor = "let team of teams">
         <mat-card class="example-card" >
@@ -177,11 +188,11 @@
 
            </mat-card-content>
            <mat-card-actions>
-              <button mat-button (click)="delelteTeam(team.id, employee.id)">Delete</button>
+
            </mat-card-actions>
         </mat-card>
      </div>
-     <div *ngIf="teams.length===0">No Goals Defined </div>
+     <div *ngIf="teams.length===0">No Teams Present </div>
   </div>
 </mat-expansion-panel>
 </mat-accordion>

@@ -1,0 +1,36 @@
+<div *ngIf="data!==undefined && data.id === 0" >
+   <h2 mat-dialog-title>Add ImprovementArea</h2>
+   <mat-dialog-content>
+     <form  id="formNewImprovementArea" name="formNewImprovementArea"  #employeeImprovementAreaData="ngForm">
+        <mat-form-field>  <input matInput placeholder="areasOfImprovement" name="areasOfImprovement"ngModel><br>   </mat-form-field>
+        <mat-form-field> <input matInput placeholder="improvementPlan" name="improvementPlan"ngModel> </mat-form-field>
+        <mat-form-field> <input matInput placeholder="proposedDate" name="proposedDate"ngModel> </mat-form-field>
+     </form>
+   </mat-dialog-content>
+   <mat-dialog-actions>
+      <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
+      <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+      <button mat-button [mat-dialog-close]=employeeImprovementAreaData.value>Save</button>
+   </mat-dialog-actions>
+</div>
+<div *ngIf="  data!==undefined && data.id !== 0" >
+   <h2 mat-dialog-title>Update ImprovementArea</h2>
+   <mat-dialog-content>
+      <form id="formNewImprovementAreaUpdate" name="formNewImprovementAreaUpdate"  #improvementAreaDataUpdate="ngForm">
+         <mat-form-field >
+            <input matInput placeholder="areasOfImprovement" name="areasOfImprovement" value="{{data.areasOfImprovement}}" [(ngModel)]="data.areasOfImprovement" ngModel><br>
+         </mat-form-field>
+         <mat-form-field >
+            <input matInput placeholder="improvementPlan" name="improvementPlan" value="{{data.improvementPlan}}" [(ngModel)]="data.improvementPlan" ngModel>
+         </mat-form-field>
+         <mat-form-field >
+            <input matInput placeholder="proposedDate" name="proposedDate" value="{{data.proposedDate}}" [(ngModel)]="data.proposedDate" ngModel><br>
+         </mat-form-field>
+      </form>
+   </mat-dialog-content>
+   <mat-dialog-actions>
+      <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
+      <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+      <button mat-button [mat-dialog-close]=improvementAreaDataUpdate.value>Update</button>
+   </mat-dialog-actions>
+</div>

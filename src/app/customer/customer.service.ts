@@ -60,6 +60,11 @@ export class CustomerService {
       .map((response:Response) => response.json()).toPromise();
   }
 
+  getTravelData(id: number):Promise<any> {
+    return this.http.get('http://localhost:8080/tos/travels/'+id)
+      .map((response:Response) => response.json()).toPromise();
+  }
+
   getProjectRythmData(id: number):Promise<any> {
     return this.http.get('http://localhost:8080/tos/projectrythms/'+id)
       .map((response:Response) => response.json()).toPromise();
@@ -87,6 +92,11 @@ export class CustomerService {
 
   postTeam(team: Teams) {
     this.http.post('http://localhost:8080/tos/teams/', team, this.options)
+    .subscribe((res:Response) => console.log(res));
+  }
+
+  postTravel(travel: Travel) {
+    this.http.post('http://localhost:8080/tos/travels/', travel, this.options)
     .subscribe((res:Response) => console.log(res));
   }
 
@@ -140,6 +150,11 @@ export class CustomerService {
     .subscribe((res:Response) => console.log(res));
   }
 
+  updateTravel(travel: Travel) {
+    this.http.put('http://localhost:8080/tos/travels/'+ travel.id, travel, this.options)
+    .subscribe((res:Response) => console.log(res));
+  }
+
   updateProjectRythm(projectRythm: Projectrythm) {
     this.http.put('http://localhost:8080/tos/projectrythms/'+ projectRythm.id, projectRythm, this.options)
     .subscribe((res:Response) => console.log(res));
@@ -177,6 +192,11 @@ export class CustomerService {
 
   delelteStakeholder(id: number) {
     this.http.delete('http://localhost:8080/tos/stakeholders/'+ id)
+    .subscribe((res:Response) => console.log(res));
+  }
+
+  delelteTravel(id: number) {
+    this.http.delete('http://localhost:8080/tos/travels/'+ id)
     .subscribe((res:Response) => console.log(res));
   }
 

@@ -19,6 +19,11 @@ export class EmployeeService {
             .map((response: Response) => response.json()).toPromise();
     }
 
+    getEntityData(entityName: string, id: number): Promise<any> {
+        return this.http.get('http://localhost:8080/tos/' +entityName + "/"+ id)
+            .map((response: Response) => response.json()).toPromise();
+    }
+
     getEmployeesData():Promise<any> {
       return this.http.get('http://localhost:8080/tos/employees/')
         .map((response:Response) => response.json()).toPromise();
@@ -29,14 +34,29 @@ export class EmployeeService {
             .subscribe((res: Response) => console.log(res));
     }
 
+    postEntity(entityName: string, entity: any) {
+      this.http.post('http://localhost:8080/tos/' + entityName + "/", entity, this.options)
+          .subscribe((res: Response) => console.log(res));
+    }
+
     updateEmployee(emp: Employee) {
         this.http.put('http://localhost:8080/tos/employees/' + emp.id, emp, this.options)
             .subscribe((res: Response) => console.log(res));
+    }
 
+
+    updateEntity(entityName:string, id:number, entity: any) {
+        this.http.put('http://localhost:8080/tos/'+entityName +"/" + id, entity, this.options)
+            .subscribe((res: Response) => console.log(res));
     }
 
     delelteEmployee(id: number) {
         return this.http.delete('http://localhost:8080/tos/employees/' + id)
+            .subscribe((res: Response) => console.log(res));
+    }
+
+    delelteEntity(entityName: string, id: number) {
+        return this.http.delete('http://localhost:8080/tos/'+entityName+ "/" + id)
             .subscribe((res: Response) => console.log(res));
     }
 
