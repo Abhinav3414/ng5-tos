@@ -1,4 +1,3 @@
-Hi
 <div *ngIf="data!==undefined && data.id === 0" >
    <h2 mat-dialog-title>Create New Goal</h2>
    <mat-dialog-content>
@@ -21,19 +20,19 @@ Hi
    <mat-dialog-content>
       <form id="formNewGoalUpdate" name="formNewGoalUpdate"  #goalDataUpdate="ngForm">
          <mat-form-field >
-            <input matInput placeholder="description" name="description" value="{{data.description}}" [(ngModel)]="data.description" ngModel><br>
+            <input matInput placeholder="description" name="description" value="{{data.description}}" [ngModel]="data.description" ngModel><br>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="tenure" name="tenure" value="{{data.tenure}}" [(ngModel)]="data.tenure" ngModel>
+            <input matInput placeholder="tenure" name="tenure" value="{{data.tenure}}" [ngModel]="data.tenure" ngModel>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="status" name="status" value="{{data.status}}" [(ngModel)]="data.status" ngModel>
+            <input matInput placeholder="status" name="status" value="{{data.status}}" [ngModel]="data.status" ngModel>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="details" name="details" value="{{data.details}}" [(ngModel)]="data.details" ngModel>
+            <input matInput placeholder="details" name="details" value="{{data.details}}" [ngModel]="data.details" ngModel>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="signedBy" name="signedBy" value="{{data.signedBy}}" [(ngModel)]="data.signedBy" ngModel>
+            <input matInput placeholder="signedBy" name="signedBy" value="{{data.signedBy}}" [ngModel]="data.signedBy" ngModel>
          </mat-form-field>
       </form>
    </mat-dialog-content>

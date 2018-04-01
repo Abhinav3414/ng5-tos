@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DataService } from '../services/data.service';
 
-import { CustomerService } from './customer.service';
-
+import { EmployeeMainComponent } from '../employee/employee-main.component'
 import { CustomerDialogComponent } from './customer-dialog.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Location } from '@angular/common';
+
+const dummyDialogEntity = { id: 0, name: "dummy" };
 
 @Component({
   selector: 'customer-main',
@@ -12,32 +15,30 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 })
 export class CustomerMainComponent {
   customers = [];
-  customer : any;
+  customer: any;
 
-  constructor(private customerService:CustomerService, private router: Router, private route: ActivatedRoute,
-    private dialog: MatDialog) {
+  constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
+    private dialog: MatDialog, private location: Location) {
   }
 
   ngOnInit() {
 
-    this.customerService.getCustomersData()
-    .then((resCustomerData) => {
-      for(var i = 0; i < resCustomerData.length; i++) {
-         this.customers.push(resCustomerData[i]);
-       }
-    });
+    this.dataService.getEntityAllData('customers')
+      .then((resCustomerData) => {
+        for (var i = 0; i < resCustomerData.length; i++) {
+          this.customers.push(resCustomerData[i]);
+        }
+      });
 
   }
 
   openDialog(): void {
-    let cust = this.customers[0];
-    cust.id = 0;
     let dialogRef = this.dialog.open(CustomerDialogComponent, {
-      data: cust
+      data: dummyDialogEntity
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result != 'dialogDismissed') {
+      if (result !== 'dialogDismissed' && result !== undefined) {
         this.addNewCustomer(result)
       }
     });
@@ -55,7 +56,7 @@ export class CustomerMainComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result != 'dialogDismissed') {
+      if (result !== 'dialogDismissed' && result !== undefined) {
         this.updateCustomer(id, result);
       }
     });
@@ -63,39 +64,46 @@ export class CustomerMainComponent {
   }
 
   updateCustomer(id, customer) {
-    this.customerService.getCustomerData(id)
-    .then((resCustomerData) => {
-      this.customer = resCustomerData;
-      this.customer.name = customer.name;
-      this.customer.contact = customer.contact;
-      this.customer.contactPerson = customer.contactPerson;
-      this.customer.domain = customer.domain;
-      this.customerService.updateCustomer(this.customer);
-    });
-
-    setTimeout(() => {
-        location.reload();
-    }, 1000);
-
+    this.dataService.getEntityData('customers', id)
+      .then((resCustomerData) => {
+        this.customer = resCustomerData;
+        this.customer.name = customer.name;
+        this.customer.contact = customer.contact;
+        this.customer.contactPerson = customer.contactPerson;
+        this.customer.domain = customer.domain;
+        let tempCust = this.customer;
+        this.dataService.updateEntity('customers', this.customer.id, this.customer)
+          .then((resCustomerData) => {
+            let index;
+            this.customers.forEach(function(cust, i) {
+              if (cust.id === tempCust.id)
+                index = i;
+            });
+            this.customers[index] = tempCust;
+          },
+          (err) => console.log("Customer " + customer.name + " could not be updated :" + err)
+          );
+      });
   }
 
-
   addNewCustomer(customer) {
-    this.customerService.postCustomer(customer);
-    location.reload();
+    this.dataService.postEntity('customers', customer)
+      .then((resCustomerData) => {
+        this.customers.push(resCustomerData);
+      },
+      (err) => console.log("Customer " + customer.name + " could not be added :" + err)
+      );
   }
 
   deleteCustomer(id) {
-    this.customerService.delelteCustomer(id);
-    location.reload();
-  }
-
-  navigateUpdateCustomer(id) {
-    this.router.navigate(['/customer', id], { skipLocationChange: true });
-  }
-
-  navigateNewCustomer() {
-    this.router.navigate(['/customer/new'], { skipLocationChange: true });
+    this.dataService.delelteEntity('customers', id)
+      .then((resCustomerData) => {
+        this.customers.splice(this.customers.findIndex(function(i) {
+          return i.id === id;
+        }), 1);
+      },
+      (err) => console.log("Customer could not be deleted :" + err)
+      );
   }
 
   navigateViewCustomer(id) {

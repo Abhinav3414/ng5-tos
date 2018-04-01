@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 /*
 Available pre-built themes:
@@ -9,15 +10,83 @@ pink-bluegrey.css
 purple-green.css
 
 */
+
+body {
+  background: linear-gradient(96deg, #f4f4f4, #f1f1f1)
+}
+html {
+    overflow-y:scroll;
+}
+
+#cdk-overlay-0 > div {
+  border-radius: 2px;
+}
+
+#cdk-overlay-0 > div > div {
+display: flex;
+flex-direction: column;
+}
+#cdk-overlay-0 > div > div > a {
+  cursor: pointer;
+  padding: .8em;
+}
+
+#cdk-overlay-0 > div > div > a:hover {
+  color: #fcd307;
+    transition: all 300ms ease;
+}
+
+.mat-dialog-actions {
+  flex-direction: row-reverse;
+}
+
 .header {
   text-align: center;
 }
 
+.tos-title-style > h2 {
+  font-family: georgia, palatino, "book antiqua", "palatino linotype", serif;
+  font-size: 1.5em;
+}
+
+.tos-menu-buttons > a {
+  font-size: .8em;
+  cursor: pointer;
+  padding: 0 1em;
+}
+
+body > app-root > customer-view > div:nth-child(2) > div > mat-icon:nth-child(2) {
+  font-size: 1.5em;
+}
+
+.tos-text {
+  padding: 0 .7em;
+}
+
+body > app-root > customer-view > div:nth-child(2) > div > span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #818080;
+    padding: 1em;
+}
+
+.tos-text:hover {
+  color: #818080;
+}
+
+
+
+.tos-menu-buttons > a:hover {
+  color: #fcd307;
+  transition: all 300ms ease;
+}
+
 .tos-material-button {
     display: flex;
-    padding-left: 20%;
-    font-weight: bold;
-    line-height: .65em;
+      padding-left: 22%;
+      font-weight: bold;
+      line-height: 0.5em;
 }
 
 .mat-card-actions {
@@ -83,8 +152,12 @@ tr:nth-child(even) {
 }
 
 .tos-button-right {
-  padding: 15px 0;
   text-align: right;
+}
+
+.mat-fab.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary {
+  height: 35px;
+      width: 35px;
 }
 
 .tos-heading {

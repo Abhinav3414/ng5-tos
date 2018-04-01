@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { EmployeeService } from './employee.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
+import { DataService } from '../services/data.service';
 import { EmployeeDialogComponent } from './employee-dialog.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
@@ -17,12 +17,12 @@ export class EmployeeMainComponent {
   isUpdate: boolean = true;
   employee: any;
 
-  constructor(private employeeService: EmployeeService, private router: Router, private route: ActivatedRoute,
+  constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
     private dialog: MatDialog) {
   }
 
   ngOnInit() {
-    this.employeeService.getEmployeesData()
+    this.dataService.getEntityAllData('employees')
       .then((resEmployeeData) => {
         this.employeesData = resEmployeeData;
         for (var i = 0; i < this.employeesData.length; i++) {
@@ -39,7 +39,7 @@ export class EmployeeMainComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result != 'dialogDismissed') {
+      if (result !== 'dialogDismissed' && result !== undefined) {
         this.addNewEmployee(result)
       }
     });
@@ -56,29 +56,30 @@ export class EmployeeMainComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result != 'dialogDismissed') {
+      if (result !== 'dialogDismissed' && result !== undefined) {
         this.updateEmployee(id, result);
+        console.log(result)
       }
     });
 
   }
 
   addNewEmployee(employee) {
-    this.employeeService.postEmployee(employee);
+    this.dataService.postEntity('employees', employee);
     setTimeout(() => {
       location.reload();
     }, 1000);
   }
 
   updateEmployee(id, employee) {
-    this.employeeService.getEmployeeData(id)
+    this.dataService.getEntityData('employees', id)
       .then((resCustomerData) => {
         let emp = resCustomerData;
         emp.name = employee.name;
         emp.joiningDate = employee.joiningDate;
         emp.yearsOfExperience = employee.yearsOfExperience;
         emp.responsibilities = employee.responsibilities;
-        this.employeeService.updateEmployee(emp);
+        this.dataService.updateEntity('employees',emp.id, emp);
       });
 
     setTimeout(() => {
@@ -87,7 +88,7 @@ export class EmployeeMainComponent {
   }
 
   delelteEmployee(id) {
-    this.employeeService.delelteEmployee(id);
+    this.dataService.delelteEntity('employees', id);
     location.reload();
   }
 

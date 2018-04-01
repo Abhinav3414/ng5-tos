@@ -1,7 +1,7 @@
 import { Goals } from './goals/goals';
 
 export interface Customer {
-    id;
+    id: number;
     name: string;
     contact: string;
     goals: any;

@@ -42,8 +42,7 @@ import { TrainingDialogComponent } from './employee/training/training-dialog.com
 
 import { ActionDialogComponent } from './customer/teams/action/action-dialog.component';
 
-import { EmployeeService } from './employee/employee.service';
-import { CustomerService } from './customer/customer.service';
+import { DataService } from './services/data.service';
 import { RouterModule, Routes } from '@angular/router';
 
 
@@ -83,18 +82,10 @@ import {DomSanitizer} from '@angular/platform-browser';
     CustomMaterialModule,
     FlexLayoutModule,
     FormsModule,
-    HttpModule,
-    RouterModule.forRoot([
-      {path:'employee-home',component: EmployeeMainComponent},
-      {path:'about',component: AboutComponent},
-      {path:'customer-home', component: CustomerMainComponent},
-      {path:'customer-view/:id', component: CustomerViewComponent},
-      {path:'team-view/:id', component: TeamViewComponent},
-      {path:'employee-view/:id', component: EmployeeViewComponent}
-    ])
+    HttpModule
   ],
   exports: [  ],
-  providers: [ EmployeeService, CustomerService
+  providers: [ DataService
     /*{ provide: LocationStrategy, useClass: HashLocationStrategy },*/
   ],
   entryComponents: [

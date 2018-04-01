@@ -1,10 +1,18 @@
 <div fxFlex="20%" fxHide.lt-md="true"></div>
 <div fxFlex="100%" >
-<div *ngIf="customer != undefined" style="color: #818080;">
-   <h2 style="color: #000000;">{{customer.name}}</h2>
+<div *ngIf="customer != undefined" >
+   <h2 >{{customer.name}}</h2>
+
+<span>
    <mat-icon >phone</mat-icon>
-  {{customer.contact}} &emsp;&emsp;&emsp;
-   <mat-icon >face</mat-icon> {{customer.contactPerson}} &emsp;&emsp;&emsp; <mat-icon >domain</mat-icon>  {{customer.domain}} <br><br>
+  <a class="tos-text"> {{customer.contact}} &emsp;&emsp;&emsp;</a>
+   <mat-icon >face</mat-icon>
+   <a class="tos-text"> {{customer.contactPerson}} &emsp;&emsp;&emsp;</a>
+    <mat-icon >domain</mat-icon>
+    <a class="tos-text"> {{customer.domain}} </a>
+    <br><br>
+</span>
+
 </div>
 
 <mat-accordion [multi]="true">

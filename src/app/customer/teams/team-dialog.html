@@ -17,10 +17,10 @@
    <mat-dialog-content>
       <form id="formNewteamrUpdate" name="formNewteamrUpdate"  #teamDataUpdate="ngForm">
          <mat-form-field >
-            <input matInput placeholder="name" name="name" value="{{data.name}}" [(ngModel)]="data.name" ngModel><br>
+            <input matInput placeholder="name" name="name" value="{{data.name}}" [ngModel]="data.name" ngModel><br>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="specialization" name="specialization" value="{{data.specialization}}" [(ngModel)]="data.specialization" ngModel>
+            <input matInput placeholder="specialization" name="specialization" value="{{data.specialization}}" [ngModel]="data.specialization" ngModel>
          </mat-form-field>
       </form>
    </mat-dialog-content>

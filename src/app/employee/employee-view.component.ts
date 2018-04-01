@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EmployeeService } from './employee.service';
-import { Employee } from './employee';
-import { CustomerService } from '../customer/customer.service';
 
-import { EmployeeDialogComponent } from './employee-dialog.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
+import { DataService } from '../services/data.service';
+import { Employee } from './employee';
+import { EmployeeDialogComponent } from './employee-dialog.component';
 import { SkillDialogComponent } from './skill/skill-dialog.component';
 import { CertificationDialogComponent } from './certification/certification-dialog.component';
 import { TrainingDialogComponent } from './training/training-dialog.component';
@@ -39,8 +38,8 @@ export class EmployeeViewComponent {
   isUpdate: boolean = true;
   //fileNameDialogRef: MatDialogRef<EmployeeDialogComponent>;
 
-  constructor(private employeeService: EmployeeService, private customerService: CustomerService,
-    private router: Router, private route: ActivatedRoute, private dialog: MatDialog) {
+  constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
+    private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -48,7 +47,7 @@ export class EmployeeViewComponent {
       this.id = +params['id']; // (+) converts string 'id' to a number
       if (!isNaN(this.id)) {
         this.isUpdate = false;
-        this.employeeService.getEmployeeData(this.id)
+        this.dataService.getEntityData('employees', this.id)
           .then((resemployeeData) => {
             this.employee = resemployeeData;
             if (this.employee.skills.length > 0) {
@@ -84,7 +83,7 @@ export class EmployeeViewComponent {
           })
           .then(() => {
             for (let i = 0; i < this.employeeTeamMembers.length; i++) {
-              this.customerService.getTeamData(this.employeeTeamMembers[i].team_Id)
+              this.dataService.getEntityData('teams', this.employeeTeamMembers[i].team_Id)
                 .then((resCustomerData) => {
                   this.teams[i] = resCustomerData;
                 });
@@ -99,7 +98,7 @@ export class EmployeeViewComponent {
       data: dummyDialogEntity
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result != 'dialogDismissed') {
+      if (result !== 'dialogDismissed' && result !== undefined) {
         this.addNewSkill(result)
       }
     });
@@ -117,7 +116,7 @@ export class EmployeeViewComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result != 'dialogDismissed') {
+      if (result !== 'dialogDismissed' && result !== undefined) {
         this.updateSkill(id, result);
       }
     });
@@ -128,7 +127,7 @@ export class EmployeeViewComponent {
       data: dummyDialogEntity
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result != 'dialogDismissed') {
+      if (result !== 'dialogDismissed' && result !== undefined) {
         this.addNewCertification(result)
       }
     });
@@ -146,7 +145,7 @@ export class EmployeeViewComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result != 'dialogDismissed') {
+      if (result !== 'dialogDismissed' && result !== undefined) {
         this.updateCertification(id, result);
       }
     });
@@ -157,7 +156,7 @@ export class EmployeeViewComponent {
       data: dummyDialogEntity
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result != 'dialogDismissed') {
+      if (result !== 'dialogDismissed' && result !== undefined) {
         this.addNewTraining(result)
       }
     });
@@ -175,7 +174,7 @@ export class EmployeeViewComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result != 'dialogDismissed') {
+      if (result !== 'dialogDismissed' && result !== undefined) {
         this.updateTraining(id, result);
       }
     });
@@ -186,7 +185,7 @@ export class EmployeeViewComponent {
       data: dummyDialogEntity
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result != 'dialogDismissed') {
+      if (result !== 'dialogDismissed' && result !== undefined) {
         this.addNewFeedback(result)
       }
     });
@@ -204,7 +203,7 @@ export class EmployeeViewComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result != 'dialogDismissed') {
+      if (result !== 'dialogDismissed' && result !== undefined) {
         this.updateFeedback(id, result);
       }
     });
@@ -215,8 +214,8 @@ export class EmployeeViewComponent {
       data: dummyDialogEntity
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result != 'dialogDismissed') {
-        this.addNewFeedback(result)
+      if (result !== 'dialogDismissed' && result !== undefined) {
+        this.addNewImprovementArea(result)
       }
     });
   }
@@ -233,8 +232,8 @@ export class EmployeeViewComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result != 'dialogDismissed') {
-        this.updateFeedback(id, result);
+      if (result !== 'dialogDismissed' && result !== undefined) {
+        this.updateImprovementArea(id, result);
       }
     });
   }
@@ -242,43 +241,43 @@ export class EmployeeViewComponent {
 
   addNewSkill(skill) {
     skill.employeeId = this.id;
-    this.employeeService.postEntity('skills',skill);
+    this.dataService.postEntity('skills', skill);
     location.reload();
   }
 
   addNewCertification(certification) {
     certification.employeeId = this.id;
-    this.employeeService.postEntity('certifications',certification);
+    this.dataService.postEntity('certifications', certification);
     location.reload();
   }
 
   addNewTraining(training) {
     training.employeeId = this.id;
-    this.employeeService.postEntity('trainings',training);
+    this.dataService.postEntity('trainings', training);
     location.reload();
   }
 
   addNewFeedback(feedback) {
     feedback.employeeId = this.id;
-    this.employeeService.postEntity('feedbacks',feedback);
+    this.dataService.postEntity('feedbacks', feedback);
     location.reload();
   }
 
   addNewImprovementArea(improvementArea) {
     improvementArea.employeeId = this.id;
-    this.employeeService.postEntity('improvementareas',improvementArea);
+    this.dataService.postEntity('improvementareas', improvementArea);
     location.reload();
   }
 
   updateTraining(id, training) {
-    this.employeeService.getEntityData('trainings',id)
+    this.dataService.getEntityData('trainings', id)
       .then((resCustomerData) => {
         this.training = resCustomerData;
         this.training.name = training.name;
         this.training.mode = training.mode;
         this.training.proposedDate = training.proposedDate;
         this.training.reason = training.reason;
-        this.employeeService.updateEntity('trainings',this.training.id, this.training);
+        this.dataService.updateEntity('trainings', this.training.id, this.training);
       });
     setTimeout(() => {
       location.reload();
@@ -286,12 +285,12 @@ export class EmployeeViewComponent {
   }
 
   updateCertification(id, certification) {
-    this.employeeService.getEntityData('certifications',id)
+    this.dataService.getEntityData('certifications', id)
       .then((resCustomerData) => {
         this.certification = resCustomerData;
         this.certification.name = certification.name;
         this.certification.yearOfCertification = certification.yearOfCertification;
-        this.employeeService.updateEntity('certifications',this.certification.id, this.certification);
+        this.dataService.updateEntity('certifications', this.certification.id, this.certification);
       });
     setTimeout(() => {
       location.reload();
@@ -299,14 +298,14 @@ export class EmployeeViewComponent {
   }
 
   updateSkill(id, skill) {
-    this.employeeService.getEntityData('skills',id)
+    this.dataService.getEntityData('skills', id)
       .then((resCustomerData) => {
         this.skill = resCustomerData;
         this.skill.name = skill.name;
         this.skill.duration = skill.duration;
         this.skill.rating = skill.rating;
         this.skill.lastUsed = skill.lastUsed;
-        this.employeeService.updateEntity('skills',this.skill.id, this.skill);
+        this.dataService.updateEntity('skills', this.skill.id, this.skill);
       });
     setTimeout(() => {
       location.reload();
@@ -314,11 +313,11 @@ export class EmployeeViewComponent {
   }
 
   updateFeedback(id, feedback) {
-    this.employeeService.getEntityData('feedbacks',id)
+    this.dataService.getEntityData('feedbacks', id)
       .then((resCustomerData) => {
         this.feedback = resCustomerData;
         this.feedback.name = feedback.name;
-        this.employeeService.updateEntity('feedbacks',this.feedback.id, this.feedback);
+        this.dataService.updateEntity('feedbacks', this.feedback.id, this.feedback);
       });
     setTimeout(() => {
       location.reload();
@@ -326,11 +325,11 @@ export class EmployeeViewComponent {
   }
 
   updateImprovementArea(id, improvementArea) {
-    this.employeeService.getEntityData('improvementareas',id)
+    this.dataService.getEntityData('improvementareas', id)
       .then((resCustomerData) => {
         this.improvementArea = resCustomerData;
         this.improvementArea.name = improvementArea.name;
-        this.employeeService.updateEntity('improvementareas',this.improvementArea.id, this.improvementArea);
+        this.dataService.updateEntity('improvementareas', this.improvementArea.id, this.improvementArea);
       });
     setTimeout(() => {
       location.reload();
@@ -342,27 +341,27 @@ export class EmployeeViewComponent {
   }
 
   delelteSkill(id) {
-    this.employeeService.delelteEntity('skills',id);
+    this.dataService.delelteEntity('skills', id);
     location.reload();
   }
 
   delelteCertification(id) {
-    this.employeeService.delelteEntity('certifications',id);
+    this.dataService.delelteEntity('certifications', id);
     location.reload();
   }
 
   delelteTraining(id) {
-    this.employeeService.delelteEntity('trainings',id);
+    this.dataService.delelteEntity('trainings', id);
     location.reload();
   }
 
   delelteFeedback(id) {
-    this.employeeService.delelteEntity('feedbacks',id);
+    this.dataService.delelteEntity('feedbacks', id);
     location.reload();
   }
 
   delelteImprovementArea(id) {
-    this.employeeService.delelteEntity('improvementareas',id);
+    this.dataService.delelteEntity('improvementareas', id);
     location.reload();
   }
 

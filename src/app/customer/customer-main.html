@@ -8,6 +8,7 @@
       </div>
       <div *ngIf="customers.length===0">No Customers Present</div>
       <div class="container tos-cust-cards" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutWrap>
+        <br>
          <div *ngFor = "let cust of customers">
             <mat-card class="tos-cust-cards-style" >
                <mat-card-header>
@@ -16,14 +17,16 @@
                </mat-card-header>
                <mat-card-content>
                   <table style="width: 100%;">
-                     <th > <a *ngIf="cust.domain.length > 0">Domain </a></th>
+                     <th > <a *ngIf="cust.domain != null">Domain </a></th>
                      <th > <a *ngIf="cust.contactPerson != null">Contact Person </a></th>
-                     <th > <a  *ngIf="cust.addresses.length > 0">Contact Address </a> </th>
+                     <th > <a  *ngIf="cust.addresses !==null">Contact Address </a> </th>
                      <th >Contact Number</th>
                      <tr class="tos-table">
-                        <td> <a *ngIf="cust.domain.length > 0" >{{cust.domain}} </a> </td>
+                        <td> <a *ngIf="cust.domain != null" >{{cust.domain}} </a> </td>
                         <td> <a *ngIf="cust.contactPerson != null" >{{cust.contactPerson}} </a> </td>
-                        <td ><a *ngIf="cust.addresses.length > 0" >{{cust.addresses[0].state}},{{cust.addresses[0].country}} </a> </td>
+                        <td ><a *ngIf="cust.addresses !== null && cust.addresses[0] !== undefined" >{{cust.addresses[0].state}},{{cust.addresses[0].country}} </a>
+                            <a  > </a>
+                        </td>
                         <td >{{cust.contact}}</td>
                      </tr>
                   </table>

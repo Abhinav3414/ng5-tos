@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CustomerService } from '../customer.service';
+import { DataService } from '../../services/data.service';
 import { Teams } from './teams';
 import { ProjectRythmDialogComponent } from './projectrythm/projectrythm-dialog.component';
 import { ActionDialogComponent } from './action/action-dialog.component';
@@ -27,7 +27,7 @@ export class TeamViewComponent {
   customerProjectRythms = [];
   isUpdate: boolean = true;
 
-  constructor(private customerService: CustomerService, private router: Router, private route: ActivatedRoute,
+  constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
     private dialog: MatDialog) {
   }
 
@@ -38,7 +38,7 @@ export class TeamViewComponent {
       if (!isNaN(this.id)) {
         this.isUpdate = false;
 
-        this.customerService.getTeamData(this.id)
+        this.dataService.getEntityData('teams', this.id)
           .then((resCustomerData) => {
             this.team = resCustomerData;
             if (this.team.teamMembers.length > 0) {
@@ -58,7 +58,7 @@ export class TeamViewComponent {
             }
           }).then(() => {
             for (let i = 0; i < this.customerTeamMembers.length; i++) {
-              this.customerService.getEmployeeData(this.customerTeamMembers[i].employeeId)
+              this.dataService.getEntityData('employees', this.customerTeamMembers[i].employeeId)
                 .then((resCustomerData) => {
                   this.customerTeamMembers[i].name = resCustomerData.name;
                 });
@@ -73,7 +73,7 @@ export class TeamViewComponent {
       data: dummyDialogEntity
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result != 'dialogDismissed') {
+      if (result !== 'dialogDismissed' && result !== undefined) {
         this.addNewTeamMember(result)
       }
     });
@@ -90,7 +90,7 @@ export class TeamViewComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result != 'dialogDismissed') {
+      if (result !== 'dialogDismissed' && result !== undefined) {
         this.updateTeamMember(id, result);
       }
     });
@@ -101,7 +101,7 @@ export class TeamViewComponent {
       data: dummyDialogEntity
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result != 'dialogDismissed') {
+      if (result !== 'dialogDismissed' && result !== undefined) {
         this.addNewAction(result)
       }
     });
@@ -118,7 +118,7 @@ export class TeamViewComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result != 'dialogDismissed') {
+      if (result !== 'dialogDismissed' && result !== undefined) {
         this.updateAction(id, result);
       }
     });
@@ -129,7 +129,7 @@ export class TeamViewComponent {
       data: dummyDialogEntity
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result != 'dialogDismissed') {
+      if (result !== 'dialogDismissed' && result !== undefined) {
         this.addNewProjectRythm(result)
       }
     });
@@ -147,7 +147,7 @@ export class TeamViewComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result != 'dialogDismissed') {
+      if (result !== 'dialogDismissed' && result !== undefined) {
         this.updateProjectRythm(id, result);
       }
     });
@@ -155,47 +155,47 @@ export class TeamViewComponent {
 
   addNewAction(action) {
     action.teamId = this.id;
-    this.customerService.postAction(action);
+    this.dataService.postEntity('actions', action);
     location.reload();
   }
 
   addNewProjectRythm(projectrythm) {
     projectrythm.teamId = this.id;
-    this.customerService.postProjectrythm(projectrythm);
+    this.dataService.postEntity('projectrythms', projectrythm);
     location.reload();
   }
 
   addNewTeamMember(teammember) {
     teammember.team_Id = this.id;
     console.log(teammember)
-    this.customerService.postTeamMember(teammember);
+    this.dataService.postEntity('teammembers', teammember);
     location.reload();
   }
 
   updateTeamMember(id, teammember) {
-    this.customerService.getTeamMemberData(id)
+    this.dataService.getEntityData('teammembers', id)
       .then((resCustomerData) => {
         this.teammember = resCustomerData;
         this.teammember.role = teammember.role;
         this.teammember.productivity = teammember.productivity;
         this.teammember.employeeId = teammember.employeeId;
         console.log(this.teammember)
-        this.customerService.updateTeamMember(this.teammember);
+        this.dataService.updateEntity('teammembers', this.teammember.id, this.teammember);
       });
     setTimeout(() => {
-    //  location.reload();
+      //  location.reload();
     }, 500);
   }
 
   updateAction(id, action) {
-    this.customerService.getActionData(id)
+    this.dataService.getEntityData('actions', id)
       .then((resCustomerData) => {
         this.action = resCustomerData;
         this.action.details = action.details;
         this.action.cause = action.cause;
         this.action.platform = action.platform;
         this.action.status = action.status;
-        this.customerService.updateAction(this.action);
+        this.dataService.updateEntity('actions', this.action.id, this.action);
       });
     setTimeout(() => {
       location.reload();
@@ -203,14 +203,14 @@ export class TeamViewComponent {
   }
 
   updateProjectRythm(id, projectRythm) {
-    this.customerService.getProjectRythmData(id)
+    this.dataService.getEntityData('projectrythms', id)
       .then((resCustomerData) => {
         this.projectRythm = resCustomerData;
         this.projectRythm.event = projectRythm.event;
         this.projectRythm.frequency = projectRythm.frequency;
         this.projectRythm.whoRythm = projectRythm.whoRythm;
         this.projectRythm.whereRythm = projectRythm.whereRythm;
-        this.customerService.updateProjectRythm(this.projectRythm);
+        this.dataService.updateEntity('projectrythms', this.projectRythm.id, this.projectRythm);
       });
     setTimeout(() => {
       location.reload();
@@ -226,17 +226,17 @@ export class TeamViewComponent {
   }
 
   delelteTeamAction(id) {
-    this.customerService.delelteAction(id);
+    this.dataService.delelteEntity('actions',id);
     location.reload();
   }
 
   delelteProjectRythm(id) {
-    this.customerService.delelteProjectRythm(id);
+    this.dataService.delelteEntity('projectrythms',id);
     location.reload();
   }
 
   delelteTeamMember(id) {
-    this.customerService.delelteTeamMember(id);
+    this.dataService.delelteEntity('teammembers',id);
     location.reload();
   }
 

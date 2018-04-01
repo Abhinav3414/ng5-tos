@@ -19,16 +19,16 @@
    <mat-dialog-content>
       <form id="formNewActionUpdate" name="formNewActionUpdate"  #actionUpdate="ngForm">
          <mat-form-field >
-            <input matInput placeholder="details" name="details" value="{{data.details}}" [(ngModel)]="data.details" ngModel><br>
+            <input matInput placeholder="details" name="details" value="{{data.details}}" [ngModel]="data.details" ngModel><br>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="cause" name="cause" value="{{data.cause}}" [(ngModel)]="data.cause" ngModel>
+            <input matInput placeholder="cause" name="cause" value="{{data.cause}}" [ngModel]="data.cause" ngModel>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="platform" name="platform" value="{{data.platform}}" [(ngModel)]="data.platform" ngModel><br>
+            <input matInput placeholder="platform" name="platform" value="{{data.platform}}" [ngModel]="data.platform" ngModel><br>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="status" name="status" value="{{data.status}}" [(ngModel)]="data.status" ngModel>
+            <input matInput placeholder="status" name="status" value="{{data.status}}" [ngModel]="data.status" ngModel>
          </mat-form-field>
       </form>
    </mat-dialog-content>

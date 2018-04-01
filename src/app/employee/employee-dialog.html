@@ -27,16 +27,16 @@
    <mat-dialog-content>
       <form id="formNewEmployee2" name="formNewEmployeeUpdate"  #employeeDataUpdate="ngForm">
          <mat-form-field >
-            <input matInput placeholder="name" name="name" value="{{data.name}}" [(ngModel)]="data.name" ngModel><br>
+            <input matInput placeholder="name" name="name" value="{{data.name}}" [ngModel]="data.name" ngModel><br>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="joiningDate" name="joiningDate" value="{{data.joiningDate}}" [(ngModel)]="data.joiningDate" ngModel>
+            <input matInput placeholder="joiningDate" name="joiningDate" value="{{data.joiningDate}}" [ngModel]="data.joiningDate" ngModel>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="yearsOfExperience" name="yearsOfExperience" value="{{data.yearsOfExperience}}" [(ngModel)]="data.yearsOfExperience" ngModel>
+            <input matInput placeholder="yearsOfExperience" name="yearsOfExperience" value="{{data.yearsOfExperience}}" [ngModel]="data.yearsOfExperience" ngModel>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="responsibilities" name="responsibilities" value="{{data.responsibilities}}" [(ngModel)]="data.responsibilities" ngModel>
+            <input matInput placeholder="responsibilities" name="responsibilities" value="{{data.responsibilities}}" [ngModel]="data.responsibilities" ngModel>
          </mat-form-field>
       </form>
    </mat-dialog-content>
