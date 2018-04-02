@@ -11,4 +11,5 @@ export interface Customer {
     travels: any;
     contactPerson: string;
     domain: string;
+    createdAt: any;
 }

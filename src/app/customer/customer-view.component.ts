@@ -49,45 +49,57 @@ export class CustomerViewComponent {
         this.dataService.getEntityData('customers', this.id)
           .then((resCustomerData) => {
             this.customer = resCustomerData;
-            if (this.customer.goals.length > 0) {
-              for (var i = 0; i < this.customer.goals.length; i++) {
-                this.customerGoals.push(this.customer.goals[i]);
-              }
-            }
-            if (this.customer.teams.length > 0) {
-              for (var i = 0; i < this.customer.teams.length; i++) {
-                this.customerTeams.push(this.customer.teams[i]);
-              }
-            }
-            if (this.customer.addresses.length > 0) {
-              for (var i = 0; i < this.customer.addresses.length; i++) {
-                this.customerAddresses.push(this.customer.addresses[i]);
-              }
-            }
-            if (this.customer.stakeHolders.length > 0) {
-              for (var i = 0; i < this.customer.stakeHolders.length; i++) {
-                this.customerStakeholders.push(this.customer.stakeHolders[i]);
-              }
-            }
-            if (this.customer.travels.length > 0) {
-              for (var i = 0; i < this.customer.travels.length; i++) {
-                this.customerTravels.push(this.customer.travels[i]);
-              }
-            }
+
+            this.customer.goals.forEach(e => this.customerGoals.push(e));
+            this.customer.teams.forEach(e => this.customerTeams.push(e));
+            this.customer.addresses.forEach(e => this.customerAddresses.push(e));
+            this.customer.stakeHolders.forEach(e => this.customerStakeholders.push(e));
+            this.customer.travels.forEach(e => this.customerTravels.push(e));
           });
       }
     });
   }
 
   openAddressDialog(): void {
-    let dialogRef = this.dialog.open(AddressDialogComponent, {
+    this.openDialog(AddressDialogComponent, 'teams', this.customerAddresses);
+  }
+
+  openTeamDialog(): void {
+    this.openDialog(TeamDialogComponent, 'teams', this.customerTeams);
+  }
+
+  openGoalDialog(): void {
+    this.openDialog(GoalDialogComponent, 'goals', this.customerGoals);
+  }
+
+  openStakeholderDialog(): void {
+    this.openDialog(StakeholderDialogComponent, 'stakeholders', this.customerStakeholders);
+  }
+
+  openTravelDialog(): void {
+    this.openDialog(TravelDialogComponent, 'travels', this.customerTravels);
+  }
+
+  openDialog(dialogComponent, entityName, entityArray) {
+    let dialogRef = this.dialog.open(dialogComponent, {
       data: dummyDialogEntity
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== 'dialogDismissed' && result !== undefined) {
-        this.addNewAddress(result)
+        this.addNewEntity(entityName, result, entityArray)
       }
     });
+
+  }
+
+  addNewEntity(entityName, entity, entityArray) {
+    entity.customerId = this.id;
+    this.dataService.postEntity(entityName, entity)
+      .then((resCustomerData) => {
+        entityArray.push(resCustomerData);
+      },
+      (err) => console.log("address could not be added :" + err)
+      );
   }
 
   openAddressUpdateDialog(id: number): void {
@@ -108,16 +120,6 @@ export class CustomerViewComponent {
     });
   }
 
-  openTeamDialog(): void {
-    let dialogRef = this.dialog.open(TeamDialogComponent, {
-      data: dummyDialogEntity
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result !== 'dialogDismissed' && result !== undefined) {
-        this.addNewTeam(result)
-      }
-    });
-  }
 
   openTeamUpdateDialog(id: number): void {
     for (let key in this.customerTeams) {
@@ -137,17 +139,6 @@ export class CustomerViewComponent {
     });
   }
 
-  openGoalDialog(): void {
-    let dialogRef = this.dialog.open(GoalDialogComponent, {
-      data: dummyDialogEntity
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result !== 'dialogDismissed' && result !== undefined) {
-        console.log(result)
-        this.addNewGoal(result)
-      }
-    });
-  }
 
   openGoalUpdateDialog(id: number): void {
     for (let key in this.customerGoals) {
@@ -167,16 +158,6 @@ export class CustomerViewComponent {
     });
   }
 
-  openStakeholderDialog(): void {
-    let dialogRef = this.dialog.open(StakeholderDialogComponent, {
-      data: dummyDialogEntity
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result !== 'dialogDismissed' && result !== undefined) {
-        this.addNewStakeholder(result)
-      }
-    });
-  }
 
   openStakeholderUpdateDialog(id: number): void {
     for (let key in this.customerStakeholders) {
@@ -196,16 +177,7 @@ export class CustomerViewComponent {
     });
   }
 
-  openTravelDialog(): void {
-    let dialogRef = this.dialog.open(TravelDialogComponent, {
-      data: dummyDialogEntity
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result !== 'dialogDismissed' && result !== undefined) {
-        this.addNewTravel(result)
-      }
-    });
-  }
+
 
   openTravelUpdateDialog(id: number): void {
     for (let key in this.customerTravels) {
@@ -225,55 +197,6 @@ export class CustomerViewComponent {
     });
   }
 
-  addNewAddress(address) {
-    address.customerId = this.id;
-    this.dataService.postEntity('addresses', address)
-      .then((resCustomerData) => {
-        this.customerAddresses.push(resCustomerData);
-      },
-      (err) => console.log("address could not be added :" + err)
-      );
-  }
-
-  addNewStakeholder(stakeholder) {
-    stakeholder.customerId = this.id;
-    this.dataService.postEntity('stakeholders', stakeholder)
-      .then((resCustomerData) => {
-        this.customerStakeholders.push(resCustomerData);
-      },
-      (err) => console.log("address could not be added :" + err)
-      );
-  }
-
-  addNewGoal(goal) {
-    goal.customerId = this.id;
-    this.dataService.postEntity('goals', goal)
-      .then((resCustomerData) => {
-        this.customerGoals.push(resCustomerData);
-      },
-      (err) => console.log("address could not be added :" + err)
-      );
-  }
-
-  addNewTeam(team) {
-    team.customerId = this.id;
-    this.dataService.postEntity('teams', team)
-      .then((resCustomerData) => {
-        this.customerTeams.push(resCustomerData);
-      },
-      (err) => console.log("address could not be added :" + err)
-      );
-  }
-
-  addNewTravel(travel) {
-    travel.customerId = this.id;
-    this.dataService.postEntity('travels', travel)
-      .then((resCustomerData) => {
-        this.customerTravels.push(resCustomerData);
-      },
-      (err) => console.log("address could not be added :" + err)
-      );
-  }
 
   updateAddress(id, address) {
     this.dataService.getEntityData('addresses', id)
@@ -283,6 +206,7 @@ export class CustomerViewComponent {
         this.address.houseNo = address.houseNo;
         this.address.street = address.street;
         this.address.landMark = address.landMark;
+        this.address.city = address.city;
         this.address.zip = address.zip;
         this.address.state = address.state;
         this.address.country = address.country;
@@ -335,17 +259,17 @@ export class CustomerViewComponent {
 
         let tempTeam = this.team;
         this.dataService.updateEntity('teams', this.team.id, this.team)
-        .then((resCustomerData) => {
-          let index;
-          this.customerTeams.forEach(function(add, i) {
-            if (add.id === tempTeam.id)
-              index = i;
-          });
-          this.customerTeams[index] = tempTeam;
-        },
-        (err) => console.log("Team could not be updated :" + err)
-        );
-    });
+          .then((resCustomerData) => {
+            let index;
+            this.customerTeams.forEach(function(add, i) {
+              if (add.id === tempTeam.id)
+                index = i;
+            });
+            this.customerTeams[index] = tempTeam;
+          },
+          (err) => console.log("Team could not be updated :" + err)
+          );
+      });
   }
 
   updateGoal(id, goal) {
@@ -357,102 +281,52 @@ export class CustomerViewComponent {
         this.goal.details = goal.details;
         this.goal.signedBy = goal.signedBy;
         let tempGoal = this.goal;
+
+        console.log(this.goal)
         this.dataService.updateEntity('goals', this.goal.id, this.goal)
-        .then((resCustomerData) => {
-          let index;
-          this.customerGoals.forEach(function(add, i) {
-            if (add.id === tempGoal.id)
-              index = i;
-          });
-          this.customerGoals[index] = tempGoal;
-        },
-        (err) => console.log("Goal could not be updated :" + err)
-        );
-    });
+          .then((resCustomerData) => {
+            let index;
+            this.customerGoals.forEach(function(add, i) {
+              if (add.id === tempGoal.id)
+                index = i;
+            });
+            this.customerGoals[index] = tempGoal;
+          },
+          (err) => console.log("Goal could not be updated :" + err)
+          );
+      });
   }
 
   updateTravel(id, travel) {
-    this.dataService.getEntityData('travels', id)
-      .then((resCustomerData) => {
-        this.travel = resCustomerData;
-        this.travel.name = travel.name;
-        this.travel.travellingFrom = travel.travellingFrom;
-        this.travel.travellingTo = travel.travellingTo;
-        this.travel.travellingFromDate = travel.travellingFromDate;
-        this.travel.travellingToDate = travel.travellingToDate;
-        this.travel.purpose = travel.purpose;
+    travel.id = id;
+    travel.customerId = this.travel.customerId;
+    console.log(this.customerTravels)
 
-        let tempTravel = this.travel;
-        this.dataService.updateEntity('travels', this.travel.id, this.travel)
-        .then((resCustomerData) => {
-          let index;
-          this.customerTravels.forEach(function(add, i) {
-            if (add.id === tempTravel.id)
-              index = i;
-          });
-          this.customerTravels[index] = tempTravel;
-        },
-        (err) => console.log("Travel could not be updated :" + err)
-        );
-    });
+    this.dataService.updateEntity('travels', this.travel.id, travel)
+      .then((resCustomerData) => {
+        let index;
+        this.customerTravels.forEach(function(add, i) {
+          if (add.id === id)
+            index = i;
+        });
+        this.customerTravels[index] = travel;
+      },
+      (err) => console.log("Travel could not be updated :" + err)
+      );
   }
 
   navigateViewTeam(teamId) {
     this.router.navigate(['/team-view', teamId], { skipLocationChange: true });
   }
 
-  delelteTeam(id) {
-    this.dataService.delelteEntity('teams', id)
+  delelteEntity(entityName, id, entityArray) {
+    this.dataService.delelteEntity(entityName, id)
       .then((resCustomerData) => {
-        this.customerTeams.splice(this.customerTeams.findIndex(function(i) {
+        entityArray.splice(entityArray.findIndex(function(i) {
           return i.id === id;
         }), 1);
       },
-      (err) => console.log("Customer could not be deleted :" + err)
-      );
-  }
-
-  delelteAddress(id) {
-    this.dataService.delelteEntity('addresses', id)
-      .then((resCustomerData) => {
-        this.customerAddresses.splice(this.customerAddresses.findIndex(function(i) {
-          return i.id === id;
-        }), 1);
-      },
-      (err) => console.log("Customer could not be deleted :" + err)
-      );
-  }
-
-  delelteStakeholder(id) {
-    this.dataService.delelteEntity('stakeholders', id)
-      .then((resCustomerData) => {
-        this.customerStakeholders.splice(this.customerStakeholders.findIndex(function(i) {
-          return i.id === id;
-        }), 1);
-      },
-      (err) => console.log("Customer could not be deleted :" + err)
-      );
-  }
-
-  delelteTravel(id) {
-    this.dataService.delelteEntity('travels', id)
-      .then((resCustomerData) => {
-        this.customerTravels.splice(this.customerTravels.findIndex(function(i) {
-          return i.id === id;
-        }), 1);
-      },
-      (err) => console.log("Customer could not be deleted :" + err)
-      );
-  }
-
-  delelteGoal(id) {
-    this.dataService.delelteEntity('goals', id)
-      .then((resCustomerData) => {
-        this.customerGoals.splice(this.customerGoals.findIndex(function(i) {
-          return i.id === id;
-        }), 1);
-      },
-      (err) => console.log("Customer could not be deleted :" + err)
+      (err) => console.log("array could not be deleted :" + err)
       );
   }
 

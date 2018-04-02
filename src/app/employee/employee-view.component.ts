@@ -12,6 +12,12 @@ import { TrainingDialogComponent } from './training/training-dialog.component';
 import { FeedbackDialogComponent } from './feedback/feedback-dialog.component';
 import { ImprovementAreaDialogComponent } from './improvementarea/improvementarea-dialog.component';
 
+import { Skill } from './skill/skill';
+import { ImprovementArea } from './improvementarea/improvementarea';
+import { Feedback } from './feedback/feedback';
+import { Certification } from './certification/certification';
+import { Training } from './training/training';
+
 const dummyDialogEntity = { id: 0, name: "dummy" };
 
 @Component({
@@ -36,7 +42,6 @@ export class EmployeeViewComponent {
   employeeTeamMembers = [];
   teams = [];
   isUpdate: boolean = true;
-  //fileNameDialogRef: MatDialogRef<EmployeeDialogComponent>;
 
   constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
     private dialog: MatDialog) {
@@ -50,36 +55,13 @@ export class EmployeeViewComponent {
         this.dataService.getEntityData('employees', this.id)
           .then((resemployeeData) => {
             this.employee = resemployeeData;
-            if (this.employee.skills.length > 0) {
-              for (var i = 0; i < this.employee.skills.length; i++) {
-                this.employeeSkills.push(this.employee.skills[i]);
-              }
-            }
-            if (this.employee.certifications.length > 0) {
-              for (var i = 0; i < this.employee.certifications.length; i++) {
-                this.employeeCertifications.push(this.employee.certifications[i]);
-              }
-            }
-            if (this.employee.trainings.length > 0) {
-              for (var i = 0; i < this.employee.trainings.length; i++) {
-                this.employeeTrainings.push(this.employee.trainings[i]);
-              }
-            }
-            if (this.employee.feedbacks.length > 0) {
-              for (var i = 0; i < this.employee.feedbacks.length; i++) {
-                this.employeeFeedbacks.push(this.employee.feedbacks[i]);
-              }
-            }
-            if (this.employee.improvementAreas.length > 0) {
-              for (var i = 0; i < this.employee.improvementAreas.length; i++) {
-                this.employeeImprovementAreas.push(this.employee.improvementAreas[i]);
-              }
-            }
-            if (this.employee.teamMembers.length > 0) {
-              for (var i = 0; i < this.employee.teamMembers.length; i++) {
-                this.employeeTeamMembers.push(this.employee.teamMembers[i]);
-              }
-            }
+
+            this.employee.skills.forEach(e => this.employeeSkills.push(e));
+            this.employee.certifications.forEach(e => this.employeeCertifications.push(e));
+            this.employee.trainings.forEach(e => this.employeeTrainings.push(e));
+            this.employee.feedbacks.forEach(e => this.employeeFeedbacks.push(e));
+            this.employee.improvementAreas.forEach(e => this.employeeImprovementAreas.push(e));
+            this.employee.teamMembers.forEach(e => this.employeeTeamMembers.push(e));
           })
           .then(() => {
             for (let i = 0; i < this.employeeTeamMembers.length; i++) {
@@ -94,275 +76,107 @@ export class EmployeeViewComponent {
   }
 
   openSkillDialog(): void {
-    let dialogRef = this.dialog.open(SkillDialogComponent, {
-      data: dummyDialogEntity
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result !== 'dialogDismissed' && result !== undefined) {
-        this.addNewSkill(result)
-      }
-    });
-  }
-
-  openSkillUpdateDialog(id: number): void {
-    for (let key in this.employeeSkills) {
-      if (this.employeeSkills[key].id === id) {
-        this.skill = this.employeeSkills[key];
-      }
-    }
-
-    let dialogRef = this.dialog.open(SkillDialogComponent, {
-      data: this.skill
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result !== 'dialogDismissed' && result !== undefined) {
-        this.updateSkill(id, result);
-      }
-    });
+    this.openDialog(SkillDialogComponent, 'skills', new Skill(), this.employeeSkills);
   }
 
   openCertificationDialog(): void {
-    let dialogRef = this.dialog.open(CertificationDialogComponent, {
-      data: dummyDialogEntity
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result !== 'dialogDismissed' && result !== undefined) {
-        this.addNewCertification(result)
-      }
-    });
-  }
-
-  openCertificationUpdateDialog(id: number): void {
-    for (let key in this.employeeCertifications) {
-      if (this.employeeCertifications[key].id === id) {
-        this.certification = this.employeeCertifications[key];
-      }
-    }
-
-    let dialogRef = this.dialog.open(CertificationDialogComponent, {
-      data: this.certification
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result !== 'dialogDismissed' && result !== undefined) {
-        this.updateCertification(id, result);
-      }
-    });
+    this.openDialog(CertificationDialogComponent, 'certifications', new Certification(), this.employeeCertifications);
   }
 
   openTrainingDialog(): void {
-    let dialogRef = this.dialog.open(TrainingDialogComponent, {
-      data: dummyDialogEntity
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result !== 'dialogDismissed' && result !== undefined) {
-        this.addNewTraining(result)
-      }
-    });
-  }
-
-  openTrainingUpdateDialog(id: number): void {
-    for (let key in this.employeeTrainings) {
-      if (this.employeeTrainings[key].id === id) {
-        this.training = this.employeeTrainings[key];
-      }
-    }
-
-    let dialogRef = this.dialog.open(TrainingDialogComponent, {
-      data: this.training
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result !== 'dialogDismissed' && result !== undefined) {
-        this.updateTraining(id, result);
-      }
-    });
+    this.openDialog(TrainingDialogComponent, 'trainings', new Training(), this.employeeTrainings);
   }
 
   openFeedbackDialog(): void {
-    let dialogRef = this.dialog.open(FeedbackDialogComponent, {
-      data: dummyDialogEntity
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result !== 'dialogDismissed' && result !== undefined) {
-        this.addNewFeedback(result)
-      }
-    });
-  }
-
-  openFeedbackUpdateDialog(id: number): void {
-    for (let key in this.employeeFeedbacks) {
-      if (this.employeeFeedbacks[key].id === id) {
-        this.feedback = this.employeeFeedbacks[key];
-      }
-    }
-
-    let dialogRef = this.dialog.open(FeedbackDialogComponent, {
-      data: this.feedback
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result !== 'dialogDismissed' && result !== undefined) {
-        this.updateFeedback(id, result);
-      }
-    });
+    this.openDialog(FeedbackDialogComponent, 'feedbacks', new Feedback(), this.employeeFeedbacks);
   }
 
   openImprovementAreaDialog(): void {
-    let dialogRef = this.dialog.open(ImprovementAreaDialogComponent, {
-      data: dummyDialogEntity
+    this.openDialog(ImprovementAreaDialogComponent, 'improvementareas', new ImprovementArea(), this.employeeImprovementAreas);
+  }
+
+  openDialog(dialogComponent, entityName, entity, entityArray) {
+    let dialogRef = this.dialog.open(dialogComponent, {
+      data: entity
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== 'dialogDismissed' && result !== undefined) {
-        this.addNewImprovementArea(result)
+        this.addNewEntity(entityName, result, entityArray);
       }
     });
+  }
+
+  addNewEntity(entityName, entity, entityArray) {
+    entity.employeeId = this.id;
+    this.dataService.postEntity(entityName, entity)
+      .then((resCustomerData) => {
+        entityArray.push(resCustomerData);
+      },
+      (err) => console.log(entityName + " could not be added :" + err)
+      );
+  }
+
+  openSkillUpdateDialog(id: number): void {
+    this.openUpdateDialog('skills', SkillDialogComponent, id, this.employeeSkills);
+  }
+
+  openCertificationUpdateDialog(id: number): void {
+    this.openUpdateDialog('certifications', CertificationDialogComponent, id, this.employeeCertifications);
+  }
+
+  openTrainingUpdateDialog(id: number): void {
+    this.openUpdateDialog('trainings', TrainingDialogComponent, id, this.employeeTrainings);
+  }
+
+  openFeedbackUpdateDialog(id: number): void {
+    this.openUpdateDialog('feedbacks', FeedbackDialogComponent, id, this.employeeFeedbacks);
   }
 
   openImprovementAreaUpdateDialog(id: number): void {
-    for (let key in this.employeeImprovementAreas) {
-      if (this.employeeImprovementAreas[key].id === id) {
-        this.improvementArea = this.employeeImprovementAreas[key];
-      }
-    }
+    this.openUpdateDialog('improvementareas', ImprovementAreaDialogComponent, id, this.employeeImprovementAreas);
+  }
 
-    let dialogRef = this.dialog.open(ImprovementAreaDialogComponent, {
-      data: this.improvementArea
+  openUpdateDialog(entityName, dialogComponent, id, entityArray): void {
+    const index = entityArray.findIndex(e => e.id === id);
+    let entity = entityArray[index];
+    var entityCopy = Object.assign({}, entity);
+
+    let dialogRef = this.dialog.open(dialogComponent, {
+      data: entity
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result !== 'dialogDismissed' && result !== undefined) {
-        this.updateImprovementArea(id, result);
+        this.updateEntity(entityName, id, result, entityArray);
+      } else {
+        entityArray[index] = entityCopy;
       }
     });
   }
 
-
-  addNewSkill(skill) {
-    skill.employeeId = this.id;
-    this.dataService.postEntity('skills', skill);
-    location.reload();
-  }
-
-  addNewCertification(certification) {
-    certification.employeeId = this.id;
-    this.dataService.postEntity('certifications', certification);
-    location.reload();
-  }
-
-  addNewTraining(training) {
-    training.employeeId = this.id;
-    this.dataService.postEntity('trainings', training);
-    location.reload();
-  }
-
-  addNewFeedback(feedback) {
-    feedback.employeeId = this.id;
-    this.dataService.postEntity('feedbacks', feedback);
-    location.reload();
-  }
-
-  addNewImprovementArea(improvementArea) {
-    improvementArea.employeeId = this.id;
-    this.dataService.postEntity('improvementareas', improvementArea);
-    location.reload();
-  }
-
-  updateTraining(id, training) {
-    this.dataService.getEntityData('trainings', id)
+  updateEntity(entityName, id, entity, entityArray) {
+    this.dataService.updateEntity(entityName, id, entity)
       .then((resCustomerData) => {
-        this.training = resCustomerData;
-        this.training.name = training.name;
-        this.training.mode = training.mode;
-        this.training.proposedDate = training.proposedDate;
-        this.training.reason = training.reason;
-        this.dataService.updateEntity('trainings', this.training.id, this.training);
-      });
-    setTimeout(() => {
-      location.reload();
-    }, 500);
-  }
-
-  updateCertification(id, certification) {
-    this.dataService.getEntityData('certifications', id)
-      .then((resCustomerData) => {
-        this.certification = resCustomerData;
-        this.certification.name = certification.name;
-        this.certification.yearOfCertification = certification.yearOfCertification;
-        this.dataService.updateEntity('certifications', this.certification.id, this.certification);
-      });
-    setTimeout(() => {
-      location.reload();
-    }, 500);
-  }
-
-  updateSkill(id, skill) {
-    this.dataService.getEntityData('skills', id)
-      .then((resCustomerData) => {
-        this.skill = resCustomerData;
-        this.skill.name = skill.name;
-        this.skill.duration = skill.duration;
-        this.skill.rating = skill.rating;
-        this.skill.lastUsed = skill.lastUsed;
-        this.dataService.updateEntity('skills', this.skill.id, this.skill);
-      });
-    setTimeout(() => {
-      location.reload();
-    }, 500);
-  }
-
-  updateFeedback(id, feedback) {
-    this.dataService.getEntityData('feedbacks', id)
-      .then((resCustomerData) => {
-        this.feedback = resCustomerData;
-        this.feedback.name = feedback.name;
-        this.dataService.updateEntity('feedbacks', this.feedback.id, this.feedback);
-      });
-    setTimeout(() => {
-      location.reload();
-    }, 500);
-  }
-
-  updateImprovementArea(id, improvementArea) {
-    this.dataService.getEntityData('improvementareas', id)
-      .then((resCustomerData) => {
-        this.improvementArea = resCustomerData;
-        this.improvementArea.name = improvementArea.name;
-        this.dataService.updateEntity('improvementareas', this.improvementArea.id, this.improvementArea);
-      });
-    setTimeout(() => {
-      location.reload();
-    }, 500);
+        let index = entityArray.findIndex(e => e.id === entity.id);
+        entityArray[index] = entity;
+      },
+      (err) => console.log(entityName + " could not be updated :" + err)
+      );
   }
 
   navigateViewTeam(teamId) {
     this.router.navigate(['/team-view', teamId], { skipLocationChange: true });
   }
 
-  delelteSkill(id) {
-    this.dataService.delelteEntity('skills', id);
-    location.reload();
-  }
-
-  delelteCertification(id) {
-    this.dataService.delelteEntity('certifications', id);
-    location.reload();
-  }
-
-  delelteTraining(id) {
-    this.dataService.delelteEntity('trainings', id);
-    location.reload();
-  }
-
-  delelteFeedback(id) {
-    this.dataService.delelteEntity('feedbacks', id);
-    location.reload();
-  }
-
-  delelteImprovementArea(id) {
-    this.dataService.delelteEntity('improvementareas', id);
-    location.reload();
+  delelteEntity(entityName, id, entityArray) {
+    this.dataService.delelteEntity(entityName, id)
+      .then((resCustomerData) => {
+        entityArray.splice(entityArray.findIndex(function(i) {
+          return i.id === id;
+        }), 1);
+      },
+      (err) => console.log("array could not be deleted :" + err)
+      );
   }
 
 }

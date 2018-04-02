@@ -1,48 +1,23 @@
-<div *ngIf="data!==undefined && data.id === 0" >
-   <h2 mat-dialog-title>Create New Employee</h2>
-   <mat-dialog-content>
-      <form  id="formNewEmployee" name="formNewEmployee"  #employeeDatas="ngForm">
-         <mat-form-field >
-            <input matInput placeholder="name" name="name"ngModel><br>
-         </mat-form-field>
-         <mat-form-field >
-            <input matInput placeholder="joiningDate" name="joiningDate"ngModel><br>
-         </mat-form-field>
-         <mat-form-field >
-            <input matInput placeholder="yearsOfExperience" name="yearsOfExperience"ngModel><br>
-         </mat-form-field>
-         <mat-form-field >
-            <input matInput placeholder="responsibilities" name="responsibilities"ngModel><br>
-         </mat-form-field>
-      </form>
-   </mat-dialog-content>
-   <mat-dialog-actions>
-      <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
-      <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-      <button mat-button [mat-dialog-close]=employeeDatas.value>Save</button>
-   </mat-dialog-actions>
-</div>
-<div *ngIf="  data!==undefined && data.id !== 0" >
-   <h2 mat-dialog-title>Update Employee Details for : {{data.name}} </h2>
+<div *ngIf="  data!==undefined ">
+   <h2 mat-dialog-title>Update Employee Details </h2>
    <mat-dialog-content>
       <form id="formNewEmployee2" name="formNewEmployeeUpdate"  #employeeDataUpdate="ngForm">
          <mat-form-field >
-            <input matInput placeholder="name" name="name" value="{{data.name}}" [ngModel]="data.name" ngModel><br>
+            <input matInput placeholder="name" name="name" [value]="data.name" [(ngModel)]="data.name" ngModel><br>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="joiningDate" name="joiningDate" value="{{data.joiningDate}}" [ngModel]="data.joiningDate" ngModel>
+            <input matInput placeholder="joiningDate" name="joiningDate" [value]="data.joiningDate" [(ngModel)]="data.joiningDate" ngModel>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="yearsOfExperience" name="yearsOfExperience" value="{{data.yearsOfExperience}}" [ngModel]="data.yearsOfExperience" ngModel>
+            <input matInput placeholder="yearsOfExperience" name="yearsOfExperience" [value]="data.yearsOfExperience" [(ngModel)]="data.yearsOfExperience" ngModel>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="responsibilities" name="responsibilities" value="{{data.responsibilities}}" [ngModel]="data.responsibilities" ngModel>
+            <input matInput placeholder="responsibilities" name="responsibilities" [value]="data.responsibilities" [(ngModel)]="data.responsibilities" ngModel>
          </mat-form-field>
       </form>
    </mat-dialog-content>
    <mat-dialog-actions>
       <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
-      <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-      <button mat-button [mat-dialog-close]=employeeDataUpdate.value>Update</button>
+      <button mat-button [mat-dialog-close]=data>Update</button>
    </mat-dialog-actions>
 </div>

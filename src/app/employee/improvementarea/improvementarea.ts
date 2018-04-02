@@ -1,8 +1,12 @@
-export interface ImprovementArea {
-    id;
-    areasOfImprovement;
-    employeeId;
-    improvementPlan;
-    proposedDate;
-    createdAt;
+export class ImprovementArea {
+  areasOfImprovement = '';
+  employeeId = '';
+  improvementPlan = '';
+  proposedDate = '';
+  createdAt = '';
+
+  constructor(values: Object = {}) {
+    Object.assign(this, values);
+  }
+
 }

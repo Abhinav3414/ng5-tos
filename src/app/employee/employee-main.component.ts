@@ -6,6 +6,9 @@ import { NgForm } from '@angular/forms';
 import { DataService } from '../services/data.service';
 import { EmployeeDialogComponent } from './employee-dialog.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Employee } from './employee';
+
+const dummyDialogEntity = { id: 0, name: "dummy" };
 
 @Component({
   selector: 'employee-main',
@@ -16,6 +19,7 @@ export class EmployeeMainComponent {
   employees = [];
   isUpdate: boolean = true;
   employee: any;
+  employeeClass: any;
 
   constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
     private dialog: MatDialog) {
@@ -25,17 +29,16 @@ export class EmployeeMainComponent {
     this.dataService.getEntityAllData('employees')
       .then((resEmployeeData) => {
         this.employeesData = resEmployeeData;
-        for (var i = 0; i < this.employeesData.length; i++) {
-          this.employees.push(this.employeesData[i]);
-        }
+
+        this.employeesData.forEach(e => this.employees.push(e));
       });
   }
 
   openDialog(): void {
-    let emp = this.employees[0];
-    emp.id = 0;
+    this.employeeClass = new Employee();
+
     let dialogRef = this.dialog.open(EmployeeDialogComponent, {
-      data: emp
+      data: this.employeeClass
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -46,11 +49,10 @@ export class EmployeeMainComponent {
   }
 
   openUpdateDialog(id: number): void {
-    for (let key in this.employees) {
-      if (this.employees[key].id === id) {
-        this.employee = this.employees[key];
-      }
-    }
+    const index = this.employees.findIndex(e => e.id === id);
+    this.employee = this.employees[index];
+    var employeeCopy = Object.assign({}, this.employee);
+
     let dialogRef = this.dialog.open(EmployeeDialogComponent, {
       data: this.employee
     });
@@ -58,38 +60,41 @@ export class EmployeeMainComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result !== 'dialogDismissed' && result !== undefined) {
         this.updateEmployee(id, result);
-        console.log(result)
+      } else {
+        this.employees[index] = employeeCopy;
       }
     });
-
   }
 
   addNewEmployee(employee) {
-    this.dataService.postEntity('employees', employee);
-    setTimeout(() => {
-      location.reload();
-    }, 1000);
+    console.log(employee)
+    this.dataService.postEntity('employees', employee)
+      .then((resCustomerData) => {
+        this.employees.push(resCustomerData);
+      },
+      (err) => console.log("Employee could not be added :" + err)
+      );
   }
 
   updateEmployee(id, employee) {
-    this.dataService.getEntityData('employees', id)
+    this.dataService.updateEntity('employees', employee.id, employee)
       .then((resCustomerData) => {
-        let emp = resCustomerData;
-        emp.name = employee.name;
-        emp.joiningDate = employee.joiningDate;
-        emp.yearsOfExperience = employee.yearsOfExperience;
-        emp.responsibilities = employee.responsibilities;
-        this.dataService.updateEntity('employees',emp.id, emp);
-      });
-
-    setTimeout(() => {
-      location.reload();
-    }, 1000);
+        let index = this.employees.findIndex(e => e.id === employee.id);
+        this.employees[index] = employee;
+      },
+      (err) => console.log("Employee could not be updated :" + err)
+      );
   }
 
   delelteEmployee(id) {
-    this.dataService.delelteEntity('employees', id);
-    location.reload();
+    this.dataService.delelteEntity('employees', id)
+      .then((resCustomerData) => {
+        this.employees.splice(this.employees.findIndex(function(i) {
+          return i.id === id;
+        }), 1);
+      },
+      (err) => console.log("Customer could not be deleted :" + err)
+      );
   }
 
   navigateViewEmployee(id) {

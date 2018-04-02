@@ -41,21 +41,11 @@ export class TeamViewComponent {
         this.dataService.getEntityData('teams', this.id)
           .then((resCustomerData) => {
             this.team = resCustomerData;
-            if (this.team.teamMembers.length > 0) {
-              for (let i = 0; i < this.team.teamMembers.length; i++) {
-                this.customerTeamMembers.push(this.team.teamMembers[i]);
-              }
-            }
-            if (this.team.actions.length > 0) {
-              for (let i = 0; i < this.team.actions.length; i++) {
-                this.customerActions.push(this.team.actions[i]);
-              }
-            }
-            if (this.team.projectRythms.length > 0) {
-              for (let i = 0; i < this.team.projectRythms.length; i++) {
-                this.customerProjectRythms.push(this.team.projectRythms[i]);
-              }
-            }
+
+            this.team.teamMembers.forEach(e => this.customerTeamMembers.push(e));
+            this.team.actions.forEach(e => this.customerActions.push(e));
+            this.team.projectRythms.forEach(e => this.customerProjectRythms.push(e));
+
           }).then(() => {
             for (let i = 0; i < this.customerTeamMembers.length; i++) {
               this.dataService.getEntityData('employees', this.customerTeamMembers[i].employeeId)
@@ -74,6 +64,7 @@ export class TeamViewComponent {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== 'dialogDismissed' && result !== undefined) {
+        console.log(result)
         this.addNewTeamMember(result)
       }
     });
@@ -155,21 +146,39 @@ export class TeamViewComponent {
 
   addNewAction(action) {
     action.teamId = this.id;
-    this.dataService.postEntity('actions', action);
-    location.reload();
+    this.dataService.postEntity('actions', action)
+      .then((resCustomerData) => {
+        this.customerActions.push(resCustomerData);
+      },
+      (err) => console.log("address could not be added :" + err)
+      );
   }
 
   addNewProjectRythm(projectrythm) {
     projectrythm.teamId = this.id;
-    this.dataService.postEntity('projectrythms', projectrythm);
-    location.reload();
+    this.dataService.postEntity('projectrythms', projectrythm)
+      .then((resCustomerData) => {
+        this.customerProjectRythms.push(resCustomerData);
+      },
+      (err) => console.log("ProjectRythm could not be added :" + err)
+      );
   }
 
   addNewTeamMember(teammember) {
     teammember.team_Id = this.id;
-    console.log(teammember)
-    this.dataService.postEntity('teammembers', teammember);
-    location.reload();
+    this.dataService.postEntity('teammembers', teammember)
+      .then((resCustomerData) => {
+        let tempMember = resCustomerData;
+        this.dataService.getEntityData('employees', teammember.employeeId)
+          .then((resData) => {
+            tempMember.name = resData.name;
+          },
+          (err) => console.log("Emplyee name could not be fetched :" + err)
+          );
+        this.customerTeamMembers.push(tempMember);
+      },
+      (err) => console.log("TeamMember could not be added :" + err)
+      );
   }
 
   updateTeamMember(id, teammember) {
@@ -179,12 +188,27 @@ export class TeamViewComponent {
         this.teammember.role = teammember.role;
         this.teammember.productivity = teammember.productivity;
         this.teammember.employeeId = teammember.employeeId;
-        console.log(this.teammember)
-        this.dataService.updateEntity('teammembers', this.teammember.id, this.teammember);
+        let empName;
+        this.dataService.getEntityData('employees', teammember.employeeId)
+          .then((resData) => {
+            empName = resData.name;
+            this.teammember.name = empName;
+            let tempTeamMember = this.teammember;
+            this.dataService.updateEntity('teammembers', this.teammember.id, this.teammember)
+              .then((resCustomerData) => {
+                let index;
+                this.customerTeamMembers.forEach(function(teamMemb, i) {
+                  if (teamMemb.id === tempTeamMember.id)
+                    index = i;
+                });
+                this.customerTeamMembers[index] = tempTeamMember;
+              },
+              (err) => console.log("Emplyee name could not be fetched :" + err)
+              );
+          },
+          (err) => console.log("TeamMember could not be updated :" + err)
+          );
       });
-    setTimeout(() => {
-      //  location.reload();
-    }, 500);
   }
 
   updateAction(id, action) {
@@ -195,11 +219,20 @@ export class TeamViewComponent {
         this.action.cause = action.cause;
         this.action.platform = action.platform;
         this.action.status = action.status;
-        this.dataService.updateEntity('actions', this.action.id, this.action);
+        let tempAction = this.action;
+
+        this.dataService.updateEntity('actions', this.action.id, this.action)
+          .then((resCustomerData) => {
+            let index;
+            this.customerActions.forEach(function(act, i) {
+              if (act.id === tempAction.id)
+                index = i;
+            });
+            this.customerActions[index] = tempAction;
+          },
+          (err) => console.log("Action could not be updated :" + err)
+          );
       });
-    setTimeout(() => {
-      location.reload();
-    }, 500);
   }
 
   updateProjectRythm(id, projectRythm) {
@@ -210,34 +243,59 @@ export class TeamViewComponent {
         this.projectRythm.frequency = projectRythm.frequency;
         this.projectRythm.whoRythm = projectRythm.whoRythm;
         this.projectRythm.whereRythm = projectRythm.whereRythm;
-        this.dataService.updateEntity('projectrythms', this.projectRythm.id, this.projectRythm);
-      });
-    setTimeout(() => {
-      location.reload();
-    }, 500);
-  }
 
-  navigateNewTeamMember(teamId) {
-    this.router.navigate(['/action/' + teamId + '/new'], { skipLocationChange: true });
+        let tempProjectRythm = this.projectRythm;
+
+        this.dataService.updateEntity('projectrythms', this.projectRythm.id, this.projectRythm)
+          .then((resCustomerData) => {
+            let index;
+            this.customerProjectRythms.forEach(function(act, i) {
+              if (act.id === tempProjectRythm.id)
+                index = i;
+            });
+            this.customerProjectRythms[index] = tempProjectRythm;
+          },
+          (err) => console.log("ProjectRythm could not be updated :" + err)
+          );
+      });
   }
 
   navigateViewEmployee(id) {
     this.router.navigate(['/employee-view', id], { skipLocationChange: true });
   }
 
+
   delelteTeamAction(id) {
-    this.dataService.delelteEntity('actions',id);
-    location.reload();
+    this.dataService.delelteEntity('actions', id)
+      .then((resCustomerData) => {
+        this.customerActions.splice(this.customerActions.findIndex(function(i) {
+          return i.id === id;
+        }), 1);
+      },
+      (err) => console.log("TeamAction could not be deleted :" + err)
+      );
   }
 
   delelteProjectRythm(id) {
-    this.dataService.delelteEntity('projectrythms',id);
-    location.reload();
+    this.dataService.delelteEntity('projectrythms', id)
+      .then((resCustomerData) => {
+        this.customerProjectRythms.splice(this.customerProjectRythms.findIndex(function(i) {
+          return i.id === id;
+        }), 1);
+      },
+      (err) => console.log("ProjectRythm could not be deleted :" + err)
+      );
   }
 
   delelteTeamMember(id) {
-    this.dataService.delelteEntity('teammembers',id);
-    location.reload();
+    this.dataService.delelteEntity('teammembers', id)
+      .then((resCustomerData) => {
+        this.customerTeamMembers.splice(this.customerTeamMembers.findIndex(function(i) {
+          return i.id === id;
+        }), 1);
+      },
+      (err) => console.log("TeamMember could not be deleted :" + err)
+      );
   }
 
 }

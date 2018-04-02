@@ -13,7 +13,7 @@
             <mat-card class="tos-cust-cards-style" >
                <mat-card-header>
                   <mat-card-title><span (click)="navigateViewCustomer(cust.id)" class="tos-cust-heading"> {{cust.id}} {{cust.name}} </span></mat-card-title>
-                  <mat-card-subtitle>{{cust.name}}</mat-card-subtitle>
+                  <mat-card-subtitle><span (click)="navigateViewCustomer(cust.id)" class="tos-cust-heading"> Customer </span></mat-card-subtitle>
                </mat-card-header>
                <mat-card-content>
                   <table style="width: 100%;">

@@ -4,6 +4,7 @@ export interface Address {
     houseNo;
     street;
     landMark;
+    city;
     zip;
     state;
     country;

@@ -1,9 +1,13 @@
-export interface Skill {
-    id;
-    name;
-    employeeId;
-    duration;
-    rating;
-    lastUsed;
-    createdAt;
+export class Skill {
+  name = '';
+  employeeId = '';
+  duration = '';
+  rating = '';
+  lastUsed = '';
+  createdAt = '';
+
+  constructor(values: Object = {}) {
+    Object.assign(this, values);
+  }
+
 }

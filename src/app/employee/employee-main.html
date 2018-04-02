@@ -9,7 +9,7 @@
          <mat-card class="example-card" >
             <mat-card-header>
                <mat-card-title><span (click)="navigateViewEmployee(emp.id)" class="tos-cust-heading"> {{emp.name}}</span></mat-card-title>
-               <mat-card-subtitle>Employee</mat-card-subtitle>
+               <mat-card-subtitle>Employee Id : {{emp.id}} </mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
                {{emp.joiningDate}} <br>  {{emp.responsibilities}}<br>  {{emp.yearsOfExperience}}<br>  {{ emp.createdAt | date : 'd-M-yy, h:mm a'}}<br>

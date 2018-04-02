@@ -1,36 +1,20 @@
-<div *ngIf="data!==undefined && data.id === 0" >
-   <h2 mat-dialog-title>Add Feedback</h2>
-   <mat-dialog-content>
-     <form  id="formNewFeedback" name="formNewFeedback"  #customerFeedbackData="ngForm">
-        <mat-form-field>  <input matInput placeholder="feedback" name="feedback"ngModel><br>   </mat-form-field>
-        <mat-form-field> <input matInput placeholder="receivedFrom" name="receivedFrom"ngModel> </mat-form-field>
-        <mat-form-field> <input matInput placeholder="actionsTaken" name="actionsTaken"ngModel> </mat-form-field>
-     </form>
-   </mat-dialog-content>
-   <mat-dialog-actions>
-      <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
-      <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-      <button mat-button [mat-dialog-close]=customerFeedbackData.value>Save</button>
-   </mat-dialog-actions>
-</div>
-<div *ngIf="  data!==undefined && data.id !== 0" >
+<div *ngIf="  data!==undefined " >
    <h2 mat-dialog-title>Update Feedback</h2>
    <mat-dialog-content>
       <form id="formNewFeedbackUpdate" name="formNewFeedbackUpdate"  #feedbackDataUpdate="ngForm">
          <mat-form-field >
-            <input matInput placeholder="feedback" name="feedback" value="{{data.feedback}}" [ngModel]="data.feedback" ngModel><br>
+            <input matInput placeholder="feedback" name="feedback" [value]="data.feedback" [(ngModel)]="data.feedback" ngModel><br>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="receivedFrom" name="receivedFrom" value="{{data.receivedFrom}}" [ngModel]="data.receivedFrom" ngModel>
+            <input matInput placeholder="receivedFrom" name="receivedFrom" [value]="data.receivedFrom" [(ngModel)]="data.receivedFrom" ngModel>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="actionsTaken" name="actionsTaken" value="{{data.actionsTaken}}" [ngModel]="data.actionsTaken" ngModel><br>
+            <input matInput placeholder="actionsTaken" name="actionsTaken" [value]="data.actionsTaken" [(ngModel)]="data.actionsTaken" ngModel><br>
          </mat-form-field>
       </form>
    </mat-dialog-content>
    <mat-dialog-actions>
       <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
-      <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-      <button mat-button [mat-dialog-close]=feedbackDataUpdate.value>Update</button>
+      <button mat-button [mat-dialog-close]=data>Update</button>
    </mat-dialog-actions>
 </div>

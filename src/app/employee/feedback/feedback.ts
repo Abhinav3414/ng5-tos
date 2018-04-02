@@ -1,8 +1,12 @@
-export interface Feedback {
-    id;
-    feedback;
-    employeeId;
-    receivedFrom;
-    actionsTaken;
-    createdAt;
+export class Feedback {
+  feedback = '';
+  employeeId = '';
+  receivedFrom = '';
+  actionsTaken = '';
+  createdAt = '';
+
+  constructor(values: Object = {}) {
+    Object.assign(this, values);
+  }
+
 }

@@ -1,40 +1,23 @@
-<div *ngIf="data!==undefined && data.id === 0" >
-   <h2 mat-dialog-title>Add New Training</h2>
-   <mat-dialog-content>
-     <form  id="formNewCustomerTraining" name="formNewCustomerTraining"  #customerCertificationData="ngForm">
-        <mat-form-field>  <input matInput placeholder="name" name="name"ngModel><br>   </mat-form-field>
-        <mat-form-field> <input matInput placeholder="mode" name="mode"ngModel> </mat-form-field>
-        <mat-form-field>  <input matInput placeholder="proposedDate" name="proposedDate"ngModel><br>   </mat-form-field>
-        <mat-form-field> <input matInput placeholder="reason" name="reason"ngModel> </mat-form-field>
-     </form>
-   </mat-dialog-content>
-   <mat-dialog-actions>
-      <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
-      <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-      <button mat-button [mat-dialog-close]=customerCertificationData.value>Save</button>
-   </mat-dialog-actions>
-</div>
-<div *ngIf="  data!==undefined && data.id !== 0" >
+<div *ngIf="  data!==undefined" >
    <h2 mat-dialog-title>Update Training</h2>
    <mat-dialog-content>
       <form id="formNewTrainingUpdate" name="formNewTrainingUpdate"  #trainingDataUpdate="ngForm">
          <mat-form-field >
-            <input matInput placeholder="name" name="name" value="{{data.name}}" [ngModel]="data.name" ngModel><br>
+            <input matInput placeholder="name" name="name" [value]="data.name" [(ngModel)]="data.name" ngModel><br>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="mode" name="mode" value="{{data.mode}}" [ngModel]="data.mode" ngModel>
+            <input matInput placeholder="mode" name="mode" [value]="data.mode" [(ngModel)]="data.mode" ngModel>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="proposedDate" name="proposedDate" value="{{data.proposedDate}}" [ngModel]="data.proposedDate" ngModel><br>
+            <input matInput placeholder="proposedDate" name="proposedDate" [value]="data.proposedDate" [(ngModel)]="data.proposedDate" ngModel><br>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="reason" name="reason" value="{{data.reason}}" [ngModel]="data.reason" ngModel>
+            <input matInput placeholder="reason" name="reason" [value]="data.reason" [(ngModel)]="data.reason" ngModel>
          </mat-form-field>
       </form>
    </mat-dialog-content>
    <mat-dialog-actions>
       <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
-      <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-      <button mat-button [mat-dialog-close]=trainingDataUpdate.value>Update</button>
+      <button mat-button [mat-dialog-close]=data>Update</button>
    </mat-dialog-actions>
 </div>

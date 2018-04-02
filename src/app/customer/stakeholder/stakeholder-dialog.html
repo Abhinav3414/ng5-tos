@@ -20,19 +20,19 @@
    <mat-dialog-content>
       <form id="formNewStakeholderUpdate" name="formNewStakeholderUpdate"  #stakeholderDataUpdate="ngForm">
          <mat-form-field >
-            <input matInput placeholder="name" name="name" value="{{data.name}}" [ngModel]="data.name" ngModel><br>
+            <input matInput placeholder="name" name="name" [value]="data.name" [(ngModel)]="data.name" ngModel><br>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="role" name="role" value="{{data.role}}" [ngModel]="data.role" ngModel>
+            <input matInput placeholder="role" name="role" [value]="data.role" [(ngModel)]="data.role" ngModel>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="email" name="email" value="{{data.email}}" [ngModel]="data.email" ngModel>
+            <input matInput placeholder="email" name="email" [value]="data.email" [(ngModel)]="data.email" ngModel>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="phoneNo" name="phoneNo" value="{{data.phoneNo}}" [ngModel]="data.phoneNo" ngModel>
+            <input matInput placeholder="phoneNo" name="phoneNo" [value]="data.phoneNo" [(ngModel)]="data.phoneNo" ngModel>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="raci" name="raci" value="{{data.raci}}" [ngModel]="data.raci" ngModel>
+            <input matInput placeholder="raci" name="raci" [value]="data.raci" [(ngModel)]="data.raci" ngModel>
          </mat-form-field>
       </form>
    </mat-dialog-content>
