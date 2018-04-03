@@ -1,11 +1,11 @@
-export class Stakeholder {
+export class Goal {
   id = '';
-  name = '';
+  description = '';
   customerId = '';
-  role = '';
-  email = '';
-  phoneNo = '';
-  raci = '';
+  tenure = '';
+  status = '';
+  details = '';
+  signedBy = '';
   createdAt = '';
 
   constructor(values: Object = {}) {

@@ -1,22 +1,4 @@
-<div *ngIf="data!==undefined && data.id === 0" >
-   <h2 mat-dialog-title>Plan New Travel</h2>
-   <mat-dialog-content>
-     <form  id="formNewCustomerTravel" name="formNewCustomerTravel"  #customerTravelData="ngForm">
-        <mat-form-field>  <input matInput placeholder="name" name="name"ngModel><br>   </mat-form-field>
-        <mat-form-field> <input matInput placeholder="travellingFrom" name="travellingFrom"ngModel> </mat-form-field>
-        <mat-form-field>  <input matInput placeholder="travellingTo" name="travellingTo"ngModel><br>   </mat-form-field>
-        <mat-form-field> <input matInput placeholder="travellingFromDate" name="travellingFromDate"ngModel> </mat-form-field>
-        <mat-form-field>  <input matInput placeholder="travellingToDate" name="travellingToDate"ngModel><br>   </mat-form-field>
-        <mat-form-field>  <input matInput placeholder="purpose" name="purpose"ngModel><br>   </mat-form-field>
-     </form>
-   </mat-dialog-content>
-   <mat-dialog-actions>
-      <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
-      <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-      <button mat-button [mat-dialog-close]=customerTravelData.value>Save</button>
-   </mat-dialog-actions>
-</div>
-<div *ngIf="  data!==undefined && data.id !== 0" >
+<div *ngIf="  data!==undefined" >
    <h2 mat-dialog-title>Update Travel </h2>
    <mat-dialog-content>
       <form id="formNewTravelUpdate" name="formNewTravelUpdate"  #travelDataUpdate="ngForm">
@@ -42,7 +24,6 @@
    </mat-dialog-content>
    <mat-dialog-actions>
       <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
-      <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-      <button mat-button [mat-dialog-close]=travelDataUpdate.value>Update</button>
+      <button mat-button [mat-dialog-close]=data>Update</button>
    </mat-dialog-actions>
 </div>

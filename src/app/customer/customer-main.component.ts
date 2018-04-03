@@ -2,12 +2,10 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
-import { EmployeeMainComponent } from '../employee/employee-main.component'
 import { CustomerDialogComponent } from './customer-dialog.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Location } from '@angular/common';
 
-const dummyDialogEntity = { id: 0, name: "dummy" };
+import { Customer } from './customer';
 
 @Component({
   selector: 'customer-main',
@@ -18,80 +16,61 @@ export class CustomerMainComponent {
   customer: any;
 
   constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
-    private dialog: MatDialog, private location: Location) {
+    private dialog: MatDialog) {
   }
 
   ngOnInit() {
-
     this.dataService.getEntityAllData('customers')
       .then((resCustomerData) => {
-        for (var i = 0; i < resCustomerData.length; i++) {
-          this.customers.push(resCustomerData[i]);
-        }
+        resCustomerData.forEach(e => this.customers.push(e));
       });
-
   }
 
   openDialog(): void {
     let dialogRef = this.dialog.open(CustomerDialogComponent, {
-      data: dummyDialogEntity
+      data: new Customer()
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result !== 'dialogDismissed' && result !== undefined) {
-        this.addNewCustomer(result)
+        this.addNewEntity('customers', result, this.customers)
       }
     });
   }
 
+  addNewEntity(entityName, entity, entityArray) {
+    this.dataService.postEntity(entityName, entity)
+      .then((resCustomerData) => {
+        entityArray.push(resCustomerData);
+      },
+      (err) => console.log(entityName + " could not be added :" + err)
+      );
+  }
+
   openUpdateDialog(id: number): void {
-    for (let key in this.customers) {
-      if (this.customers[key].id === id) {
-        this.customer = this.customers[key];
-      }
-    }
+    const index = this.customers.findIndex(c => c.id === id);
+    this.customer = this.customers[index];
+    var customerCopy = Object.assign({}, this.customer);
 
     let dialogRef = this.dialog.open(CustomerDialogComponent, {
       data: this.customer
     });
-
     dialogRef.afterClosed().subscribe(result => {
       if (result !== 'dialogDismissed' && result !== undefined) {
-        this.updateCustomer(id, result);
+        this.updateEntity('customers', id, result, this.customers);
+      } else {
+        this.customers[index] = customerCopy;
       }
     });
-
   }
 
-  updateCustomer(id, customer) {
-    this.dataService.getEntityData('customers', id)
+  updateEntity(entityName, id, entity, entityArray) {
+    this.dataService.updateEntity(entityName, id, entity)
       .then((resCustomerData) => {
-        this.customer = resCustomerData;
-        this.customer.name = customer.name;
-        this.customer.contact = customer.contact;
-        this.customer.contactPerson = customer.contactPerson;
-        this.customer.domain = customer.domain;
-        let tempCust = this.customer;
-        this.dataService.updateEntity('customers', this.customer.id, this.customer)
-          .then((resCustomerData) => {
-            let index;
-            this.customers.forEach(function(cust, i) {
-              if (cust.id === tempCust.id)
-                index = i;
-            });
-            this.customers[index] = tempCust;
-          },
-          (err) => console.log("Customer " + customer.name + " could not be updated :" + err)
-          );
-      });
-  }
-
-  addNewCustomer(customer) {
-    this.dataService.postEntity('customers', customer)
-      .then((resCustomerData) => {
-        this.customers.push(resCustomerData);
+        let index = entityArray.findIndex(e => e.id === entity.id);
+        entityArray[index] = entity;
       },
-      (err) => console.log("Customer " + customer.name + " could not be added :" + err)
+      (err) => console.log(entityName + " could not be updated :" + err)
       );
   }
 

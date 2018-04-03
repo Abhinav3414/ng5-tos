@@ -22,16 +22,16 @@ import { CustomerMainComponent } from './customer/customer-main.component';
 import { CustomerViewComponent } from './customer/customer-view.component';
 import { CustomerDialogComponent } from './customer/customer-dialog.component';
 
-import { GoalDialogComponent } from './customer/goals/goal-dialog.component';
-import { TeamDialogComponent } from './customer/teams/team-dialog.component';
+import { GoalDialogComponent } from './customer/goal/goal-dialog.component';
+import { TeamDialogComponent } from './customer/team/team-dialog.component';
 
 import { AddressDialogComponent } from './customer/addresses/address-dialog.component';
 
 import { StakeholderDialogComponent } from './customer/stakeholder/stakeholder-dialog.component';
 
-import { TeamViewComponent } from './customer/teams/team-view.component';
-import { ProjectRythmDialogComponent } from './customer/teams/projectrythm/projectrythm-dialog.component';
-import { TeamMemberDialogComponent } from './customer/teams/teammember/teammember-dialog.component';
+import { TeamViewComponent } from './customer/team/team-view.component';
+import { ProjectRythmDialogComponent } from './customer/team/projectrythm/projectrythm-dialog.component';
+import { TeamMemberDialogComponent } from './customer/team/teammember/teammember-dialog.component';
 import { TravelDialogComponent } from './customer/travel/travel-dialog.component';
 import { SkillDialogComponent } from './employee/skill/skill-dialog.component';
 import { CertificationDialogComponent } from './employee/certification/certification-dialog.component';
@@ -40,7 +40,7 @@ import { ImprovementAreaDialogComponent } from './employee/improvementarea/impro
 import { FeedbackDialogComponent } from './employee/feedback/feedback-dialog.component';
 import { TrainingDialogComponent } from './employee/training/training-dialog.component';
 
-import { ActionDialogComponent } from './customer/teams/action/action-dialog.component';
+import { ActionDialogComponent } from './customer/team/action/action-dialog.component';
 
 import { DataService } from './services/data.service';
 import { RouterModule, Routes } from '@angular/router';

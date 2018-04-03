@@ -1,15 +1,15 @@
-import { Goals } from './goals/goals';
-
-export interface Customer {
-    id: number;
-    name: string;
-    contact: string;
-    goals: any;
-    teams: any;
-    addresses: any;
-    stakeHolders: any;
-    travels: any;
-    contactPerson: string;
-    domain: string;
-    createdAt: any;
+export class Customer {
+  name= '';
+  contact= '';
+  contactPerson= '';
+  domain= '';
+  createdAt= '';
+  goals= [];
+  teams= [];
+  addresses= [];
+  stakeHolders= [];
+  travels= [];
+  constructor(values: Object = {}) {
+    Object.assign(this, values);
+  }
 }

@@ -27,12 +27,6 @@ const dummyDialogEntity = { id: 0, name: "dummy" };
 export class EmployeeViewComponent {
   id: number;
 
-  skill: any;
-  certification: any;
-  training: any;
-  feedback: any;
-  improvementArea: any;
-
   employee: Employee;
   employeeSkills = [];
   employeeCertifications = [];
@@ -41,7 +35,6 @@ export class EmployeeViewComponent {
   employeeImprovementAreas = [];
   employeeTeamMembers = [];
   teams = [];
-  isUpdate: boolean = true;
 
   constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
     private dialog: MatDialog) {
@@ -51,7 +44,6 @@ export class EmployeeViewComponent {
     this.route.params.subscribe(params => {
       this.id = +params['id']; // (+) converts string 'id' to a number
       if (!isNaN(this.id)) {
-        this.isUpdate = false;
         this.dataService.getEntityData('employees', this.id)
           .then((resemployeeData) => {
             this.employee = resemployeeData;
@@ -175,7 +167,7 @@ export class EmployeeViewComponent {
           return i.id === id;
         }), 1);
       },
-      (err) => console.log("array could not be deleted :" + err)
+      (err) => console.log(entityName + " could not be deleted :" + err)
       );
   }
 

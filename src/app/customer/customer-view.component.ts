@@ -7,13 +7,15 @@ import { DataService } from '../services/data.service';
 import { Customer } from './customer';
 import { AddressDialogComponent } from './addresses/address-dialog.component';
 import { StakeholderDialogComponent } from './stakeholder/stakeholder-dialog.component';
-import { GoalDialogComponent } from './goals/goal-dialog.component';
-import { TeamDialogComponent } from './teams/team-dialog.component';
+import { GoalDialogComponent } from './goal/goal-dialog.component';
+import { TeamDialogComponent } from './team/team-dialog.component';
 import { TravelDialogComponent } from './travel/travel-dialog.component';
 
-import { slideInDownAnimation } from '../animations';
-
-const dummyDialogEntity = { id: 0, name: "dummy" };
+import { Address } from './addresses/address';
+import { Team } from './team/team';
+import { Goal } from './goal/goal';
+import { Stakeholder } from './stakeholder/stakeholder';
+import { Travel } from './travel/travel';
 
 @Component({
   selector: 'customer-view',
@@ -23,18 +25,12 @@ export class CustomerViewComponent {
   id: number;
 
   customer: Customer;
-  address: any;
-  stakeholder: any;
-  goal: any;
   team: any;
-  travel: any;
-  customerGoals = [];
-  customerTeams = [];
   customerAddresses = [];
+  customerTeams = [];
+  customerGoals = [];
   customerStakeholders = [];
   customerTravels = [];
-  isUpdate: boolean = true;
-
 
   constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
     private dialog: MatDialog) {
@@ -44,7 +40,6 @@ export class CustomerViewComponent {
     this.route.params.subscribe(params => {
       this.id = +params['id']; // (+) converts string 'id' to a number
       if (!isNaN(this.id)) {
-        this.isUpdate = false;
 
         this.dataService.getEntityData('customers', this.id)
           .then((resCustomerData) => {
@@ -61,35 +56,34 @@ export class CustomerViewComponent {
   }
 
   openAddressDialog(): void {
-    this.openDialog(AddressDialogComponent, 'teams', this.customerAddresses);
+    this.openDialog(AddressDialogComponent, 'addresses', new Address(), this.customerAddresses);
   }
 
   openTeamDialog(): void {
-    this.openDialog(TeamDialogComponent, 'teams', this.customerTeams);
+    this.openDialog(TeamDialogComponent, 'teams', new Team(), this.customerTeams);
   }
 
   openGoalDialog(): void {
-    this.openDialog(GoalDialogComponent, 'goals', this.customerGoals);
+    this.openDialog(GoalDialogComponent, 'goals', new Goal(), this.customerGoals);
   }
 
   openStakeholderDialog(): void {
-    this.openDialog(StakeholderDialogComponent, 'stakeholders', this.customerStakeholders);
+    this.openDialog(StakeholderDialogComponent, 'stakeholders', new Stakeholder(), this.customerStakeholders);
   }
 
   openTravelDialog(): void {
-    this.openDialog(TravelDialogComponent, 'travels', this.customerTravels);
+    this.openDialog(TravelDialogComponent, 'travels', new Travel(), this.customerTravels);
   }
 
-  openDialog(dialogComponent, entityName, entityArray) {
+  openDialog(dialogComponent, entityName, entity, entityArray) {
     let dialogRef = this.dialog.open(dialogComponent, {
-      data: dummyDialogEntity
+      data: entity
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== 'dialogDismissed' && result !== undefined) {
-        this.addNewEntity(entityName, result, entityArray)
+        this.addNewEntity(entityName, result, entityArray);
       }
     });
-
   }
 
   addNewEntity(entityName, entity, entityArray) {
@@ -103,215 +97,51 @@ export class CustomerViewComponent {
   }
 
   openAddressUpdateDialog(id: number): void {
-    for (let key in this.customerAddresses) {
-      if (this.customerAddresses[key].id === id) {
-        this.address = this.customerAddresses[key];
-      }
-    }
-
-    let dialogRef = this.dialog.open(AddressDialogComponent, {
-      data: this.address
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result !== 'dialogDismissed' && result !== undefined) {
-        this.updateAddress(id, result);
-      }
-    });
+    this.openUpdateDialog('addresses', AddressDialogComponent, id, this.customerAddresses);
   }
-
-
-  openTeamUpdateDialog(id: number): void {
-    for (let key in this.customerTeams) {
-      if (this.customerTeams[key].id === id) {
-        this.team = this.customerTeams[key];
-      }
-    }
-
-    let dialogRef = this.dialog.open(TeamDialogComponent, {
-      data: this.team
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result !== 'dialogDismissed' && result !== undefined) {
-        this.updateTeam(id, result);
-      }
-    });
-  }
-
 
   openGoalUpdateDialog(id: number): void {
-    for (let key in this.customerGoals) {
-      if (this.customerGoals[key].id === id) {
-        this.goal = this.customerGoals[key];
-      }
-    }
-
-    let dialogRef = this.dialog.open(GoalDialogComponent, {
-      data: this.goal
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result !== 'dialogDismissed' && result !== undefined) {
-        this.updateGoal(id, result);
-      }
-    });
+    this.openUpdateDialog('goals', GoalDialogComponent, id, this.customerGoals);
   }
-
 
   openStakeholderUpdateDialog(id: number): void {
-    for (let key in this.customerStakeholders) {
-      if (this.customerStakeholders[key].id === id) {
-        this.stakeholder = this.customerStakeholders[key];
-      }
-    }
-
-    let dialogRef = this.dialog.open(StakeholderDialogComponent, {
-      data: this.stakeholder
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result !== 'dialogDismissed' && result !== undefined) {
-        this.updateStakeholder(id, result);
-      }
-    });
+    this.openUpdateDialog('stakeholders', StakeholderDialogComponent, id, this.customerStakeholders);
   }
-
-
 
   openTravelUpdateDialog(id: number): void {
-    for (let key in this.customerTravels) {
-      if (this.customerTravels[key].id === id) {
-        this.travel = this.customerTravels[key];
-      }
-    }
+    this.openUpdateDialog('travels', TravelDialogComponent, id, this.customerTravels);
+  }
 
-    let dialogRef = this.dialog.open(TravelDialogComponent, {
-      data: this.travel
+  openTeamUpdateDialog(id: number): void {
+    this.openUpdateDialog('travels', TeamDialogComponent, id, this.customerTeams);
+  }
+
+
+  openUpdateDialog(entityName, dialogComponent, id, entityArray): void {
+    const index = entityArray.findIndex(e => e.id === id);
+    let entity = entityArray[index];
+    var entityCopy = Object.assign({}, entity);
+
+    let dialogRef = this.dialog.open(dialogComponent, {
+      data: entity
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result !== 'dialogDismissed' && result !== undefined) {
-        this.updateTravel(id, result);
+        this.updateEntity(entityName, id, result, entityArray);
+      } else {
+        entityArray[index] = entityCopy;
       }
     });
   }
 
-
-  updateAddress(id, address) {
-    this.dataService.getEntityData('addresses', id)
+  updateEntity(entityName, id, entity, entityArray) {
+    this.dataService.updateEntity(entityName, id, entity)
       .then((resCustomerData) => {
-        this.address = resCustomerData;
-        this.address.addressType = address.addressType;
-        this.address.houseNo = address.houseNo;
-        this.address.street = address.street;
-        this.address.landMark = address.landMark;
-        this.address.city = address.city;
-        this.address.zip = address.zip;
-        this.address.state = address.state;
-        this.address.country = address.country;
-        let tempAdd = this.address;
-        this.dataService.updateEntity('addresses', this.address.id, this.address)
-          .then((resCustomerData) => {
-            let index;
-            this.customerAddresses.forEach(function(add, i) {
-              if (add.id === tempAdd.id)
-                index = i;
-            });
-            this.customerAddresses[index] = tempAdd;
-          },
-          (err) => console.log("Address " + tempAdd.name + " could not be updated :" + err)
-          );
-      });
-  }
-
-  updateStakeholder(id, stakeholder) {
-    this.dataService.getEntityData('stakeholders', id)
-      .then((resCustomerData) => {
-        this.stakeholder = resCustomerData;
-        this.stakeholder.name = stakeholder.name;
-        this.stakeholder.role = stakeholder.role;
-        this.stakeholder.email = stakeholder.email;
-        this.stakeholder.phoneNo = stakeholder.phoneNo;
-        this.stakeholder.raci = stakeholder.raci;
-
-        let tempStakeHolder = this.stakeholder;
-        this.dataService.updateEntity('stakeholders', this.stakeholder.id, this.stakeholder)
-          .then((resCustomerData) => {
-            let index;
-            this.customerStakeholders.forEach(function(add, i) {
-              if (add.id === tempStakeHolder.id)
-                index = i;
-            });
-            this.customerStakeholders[index] = tempStakeHolder;
-          },
-          (err) => console.log("StakeHolder could not be updated :" + err)
-          );
-      });
-  }
-
-  updateTeam(id, team) {
-    this.dataService.getEntityData('teams', id)
-      .then((resCustomerData) => {
-        this.team = resCustomerData;
-        this.team.name = team.name;
-        this.team.specialization = team.specialization;
-
-        let tempTeam = this.team;
-        this.dataService.updateEntity('teams', this.team.id, this.team)
-          .then((resCustomerData) => {
-            let index;
-            this.customerTeams.forEach(function(add, i) {
-              if (add.id === tempTeam.id)
-                index = i;
-            });
-            this.customerTeams[index] = tempTeam;
-          },
-          (err) => console.log("Team could not be updated :" + err)
-          );
-      });
-  }
-
-  updateGoal(id, goal) {
-    this.dataService.getEntityData('goals', id)
-      .then((resCustomerData) => {
-        this.goal = resCustomerData;
-        this.goal.description = goal.description;
-        this.goal.status = goal.status;
-        this.goal.details = goal.details;
-        this.goal.signedBy = goal.signedBy;
-        let tempGoal = this.goal;
-
-        console.log(this.goal)
-        this.dataService.updateEntity('goals', this.goal.id, this.goal)
-          .then((resCustomerData) => {
-            let index;
-            this.customerGoals.forEach(function(add, i) {
-              if (add.id === tempGoal.id)
-                index = i;
-            });
-            this.customerGoals[index] = tempGoal;
-          },
-          (err) => console.log("Goal could not be updated :" + err)
-          );
-      });
-  }
-
-  updateTravel(id, travel) {
-    travel.id = id;
-    travel.customerId = this.travel.customerId;
-    console.log(this.customerTravels)
-
-    this.dataService.updateEntity('travels', this.travel.id, travel)
-      .then((resCustomerData) => {
-        let index;
-        this.customerTravels.forEach(function(add, i) {
-          if (add.id === id)
-            index = i;
-        });
-        this.customerTravels[index] = travel;
+        let index = entityArray.findIndex(e => e.id === entity.id);
+        entityArray[index] = entity;
       },
-      (err) => console.log("Travel could not be updated :" + err)
+      (err) => console.log(entityName + " could not be updated :" + err)
       );
   }
 
@@ -326,7 +156,7 @@ export class CustomerViewComponent {
           return i.id === id;
         }), 1);
       },
-      (err) => console.log("array could not be deleted :" + err)
+      (err) => console.log(entityName + " could not be deleted :" + err)
       );
   }
 

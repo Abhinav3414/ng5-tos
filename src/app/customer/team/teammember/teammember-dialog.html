@@ -1,0 +1,21 @@
+<div *ngIf="  data!==undefined" >
+   <h2 mat-dialog-title>Update TeamMember </h2>
+   <mat-dialog-content>
+      <form id="formNewTeamMemberUpdate" name="formNewTeamMemberUpdate"  #teamMemberUpdate="ngForm">
+         <mat-form-field >
+            <input matInput placeholder="role" name="role" [value]="data.role" [(ngModel)]="data.role" ngModel><br>
+         </mat-form-field>
+         <mat-form-field >
+            <input matInput placeholder="productivity" name="productivity" [value]="data.productivity" [(ngModel)]="data.productivity" ngModel>
+         </mat-form-field>
+         <mat-form-field >
+            <input matInput placeholder="employeeId" name="employeeId" [value]="data.employeeId" [(ngModel)]="data.employeeId" ngModel><br>
+         </mat-form-field>
+      </form>
+   </mat-dialog-content>
+   <mat-dialog-actions>
+      <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
+      <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+      <button mat-button [mat-dialog-close]=data>Update</button>
+   </mat-dialog-actions>
+</div>

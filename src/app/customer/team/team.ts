@@ -1,12 +1,12 @@
-export class Stakeholder {
+export class Team {
   id = '';
-  name = '';
+  specialization = '';
   customerId = '';
-  role = '';
-  email = '';
-  phoneNo = '';
-  raci = '';
+  name = '';
   createdAt = '';
+  teamMembers = [];
+  actions = [];
+  projectRythms = [];
 
   constructor(values: Object = {}) {
     Object.assign(this, values);

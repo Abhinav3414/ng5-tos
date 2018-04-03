@@ -15,11 +15,8 @@ const dummyDialogEntity = { id: 0, name: "dummy" };
   templateUrl: './employee-main.html'
 })
 export class EmployeeMainComponent {
-  employeesData = undefined;
   employees = [];
-  isUpdate: boolean = true;
   employee: any;
-  employeeClass: any;
 
   constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
     private dialog: MatDialog) {
@@ -28,24 +25,28 @@ export class EmployeeMainComponent {
   ngOnInit() {
     this.dataService.getEntityAllData('employees')
       .then((resEmployeeData) => {
-        this.employeesData = resEmployeeData;
-
-        this.employeesData.forEach(e => this.employees.push(e));
+        resEmployeeData.forEach(e => this.employees.push(e));
       });
   }
 
   openDialog(): void {
-    this.employeeClass = new Employee();
-
     let dialogRef = this.dialog.open(EmployeeDialogComponent, {
-      data: this.employeeClass
+      data: new Employee()
     });
-
     dialogRef.afterClosed().subscribe(result => {
       if (result !== 'dialogDismissed' && result !== undefined) {
-        this.addNewEmployee(result)
+        this.addNewEntity('employees', result, this.employees)
       }
     });
+  }
+
+  addNewEntity(entityName, entity, entityArray) {
+    this.dataService.postEntity(entityName, entity)
+      .then((resCustomerData) => {
+        entityArray.push(resCustomerData);
+      },
+      (err) => console.log(entityName + " could not be added :" + err)
+      );
   }
 
   openUpdateDialog(id: number): void {
@@ -56,33 +57,22 @@ export class EmployeeMainComponent {
     let dialogRef = this.dialog.open(EmployeeDialogComponent, {
       data: this.employee
     });
-
     dialogRef.afterClosed().subscribe(result => {
       if (result !== 'dialogDismissed' && result !== undefined) {
-        this.updateEmployee(id, result);
+        this.updateEntity('employees', id, result, this.employees);
       } else {
         this.employees[index] = employeeCopy;
       }
     });
   }
 
-  addNewEmployee(employee) {
-    console.log(employee)
-    this.dataService.postEntity('employees', employee)
+  updateEntity(entityName, id, entity, entityArray) {
+    this.dataService.updateEntity(entityName, id, entity)
       .then((resCustomerData) => {
-        this.employees.push(resCustomerData);
+        let index = entityArray.findIndex(e => e.id === entity.id);
+        entityArray[index] = entity;
       },
-      (err) => console.log("Employee could not be added :" + err)
-      );
-  }
-
-  updateEmployee(id, employee) {
-    this.dataService.updateEntity('employees', employee.id, employee)
-      .then((resCustomerData) => {
-        let index = this.employees.findIndex(e => e.id === employee.id);
-        this.employees[index] = employee;
-      },
-      (err) => console.log("Employee could not be updated :" + err)
+      (err) => console.log(entityName + " could not be updated :" + err)
       );
   }
 
@@ -93,7 +83,7 @@ export class EmployeeMainComponent {
           return i.id === id;
         }), 1);
       },
-      (err) => console.log("Customer could not be deleted :" + err)
+      (err) => console.log("Employee could not be deleted :" + err)
       );
   }
 

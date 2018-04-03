@@ -32,7 +32,7 @@
               </mat-card-content>
               <mat-card-actions>
                  <span (click)="openTeamMemberUpdateDialog(member.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
-                 <span (click)="delelteTeamMember(member.id)" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
+                 <span (click)="delelteEntity('teammembers',member.id,customerTeamMembers )" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
               </mat-card-actions>
            </mat-card>
         </div>
@@ -65,7 +65,7 @@
               </mat-card-content>
               <mat-card-actions>
                 <span (click)="openActionUpdateDialog(action.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
-                <span (click)="delelteTeamAction(action.id)" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
+                <span (click)="delelteEntity('actions',action.id,customerActions)" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
               </mat-card-actions>
            </mat-card>
         </div>
@@ -98,7 +98,7 @@
                  </mat-card-content>
                  <mat-card-actions>
                    <span (click)="openProjectRythmUpdateDialog(projectRythm.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
-                   <span (click)="delelteProjectRythm(projectRythm.id)" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
+                   <span (click)="delelteEntity('projectrythms',projectRythm.id,customerProjectRythms)" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
                  </mat-card-actions>
               </mat-card>
            </div>

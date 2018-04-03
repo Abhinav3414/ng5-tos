@@ -5,7 +5,7 @@ import { EmployeeMainComponent } from './employee/employee-main.component';
 import { AboutComponent } from './about/about.component';
 import { CustomerMainComponent } from './customer/customer-main.component';
 import { CustomerViewComponent } from './customer/customer-view.component';
-import { TeamViewComponent } from './customer/teams/team-view.component';
+import { TeamViewComponent } from './customer/team/team-view.component';
 import { EmployeeViewComponent } from './employee/employee-view.component';
 
 const routes: Routes = [

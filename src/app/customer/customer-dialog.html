@@ -1,28 +1,4 @@
-<div *ngIf="data!==undefined && data.id === 0" >
-      <h2 mat-dialog-title>Create New Customer</h2>
-      <mat-dialog-content>
-        <form  id="formNewCustomer" name="formNewCustomer"  #customerData="ngForm">
-           <mat-form-field >
-              <input matInput placeholder="name" name="name"ngModel><br>
-           </mat-form-field>
-           <mat-form-field >
-              <input matInput placeholder="contact" name="contact"ngModel><br>
-           </mat-form-field>
-           <mat-form-field >
-              <input matInput placeholder="contactPerson" name="contactPerson"ngModel><br>
-           </mat-form-field>
-           <mat-form-field >
-              <input matInput placeholder="domain" name="domain"ngModel><br>
-           </mat-form-field>
-        </form>
-      </mat-dialog-content>
-      <mat-dialog-actions>
-         <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
-         <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-         <button mat-button [mat-dialog-close]=customerData.value>Save</button>
-      </mat-dialog-actions>
-</div>
-<div *ngIf="  data!==undefined && data.id !== 0" >
+<div *ngIf="  data!==undefined" >
    <h2 mat-dialog-title>Update Customer : {{data.name}} </h2>
    <mat-dialog-content>
       <form id="formNewEmployee2" name="formNewEmployeeUpdate"  #customerDataUpdate="ngForm">
@@ -43,6 +19,6 @@
    <mat-dialog-actions>
       <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
       <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-      <button mat-button [mat-dialog-close]=customerDataUpdate.value>Update</button>
+      <button mat-button [mat-dialog-close]=data>Update</button>
    </mat-dialog-actions>
 </div>

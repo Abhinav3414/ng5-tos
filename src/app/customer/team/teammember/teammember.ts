@@ -1,11 +1,9 @@
-export class Stakeholder {
+export class TeamMember {
   id = '';
-  name = '';
-  customerId = '';
+  teamId = '';
   role = '';
-  email = '';
-  phoneNo = '';
-  raci = '';
+  productivity = '';
+  employeeId = '';
   createdAt = '';
 
   constructor(values: Object = {}) {
