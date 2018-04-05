@@ -1,27 +1,32 @@
-<div *ngIf="  data!==undefined ">
-   <h2 mat-dialog-title>Update Employee Details </h2>
+<div *ngIf="  data.employee!==undefined " style="width: 500px" >
+   <h2 *ngIf="data.employee.id === ''" mat-dialog-title>Add Employee</h2>
+   <h2   *ngIf="data.employee.id !== ''" mat-dialog-title>Update Employee</h2>
    <mat-dialog-content>
       <form id="formNewEmployee2" name="formNewEmployeeUpdate"  #employeeDataUpdate="ngForm">
          <mat-form-field >
-            <input matInput placeholder="name" name="name" [value]="data.name" [(ngModel)]="data.name" ngModel><br>
+            <input matInput placeholder="Name" name="name" [value]="data.employee.name" [(ngModel)]="data.employee.name" ngModel><br>
          </mat-form-field>
+         <br>
          <mat-form-field>
             <input matInput name="joiningDate" [matDatepicker]="picker" placeholder="Joining Date"
-            [value]="data.joiningDate"
-            [(ngModel)]="data.joiningDate" ngModel>
+            [value]="data.employee.joiningDate"
+            [(ngModel)]="data.employee.joiningDate" ngModel>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker  #picker></mat-datepicker>
          </mat-form-field>
+          <br>
          <mat-form-field >
-            <input matInput placeholder="yearsOfExperience" name="yearsOfExperience" [value]="data.yearsOfExperience" [(ngModel)]="data.yearsOfExperience" ngModel>
-         </mat-form-field>
-         <mat-form-field >
-            <input matInput placeholder="responsibilities" name="responsibilities" [value]="data.responsibilities" [(ngModel)]="data.responsibilities" ngModel>
+            <input matInput placeholder="Experience (in years)" name="yearsOfExperience" [value]="data.employee.yearsOfExperience" [(ngModel)]="data.employee.yearsOfExperience" ngModel>
+         </mat-form-field> <br>
+         <mat-form-field  style="width: 500px">
+            <textarea matInput placeholder="Responsibilities (Current Project)" name="responsibilities" [value]="data.employee.responsibilities"
+            [(ngModel)]="data.employee.responsibilities" ngModel></textarea>
          </mat-form-field>
       </form>
    </mat-dialog-content>
    <mat-dialog-actions>
+           <button mat-button [mat-dialog-close]=data.employee>Update</button>
       <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
-      <button mat-button [mat-dialog-close]=data>Update</button>
+
    </mat-dialog-actions>
 </div>

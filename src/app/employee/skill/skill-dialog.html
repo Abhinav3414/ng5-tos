@@ -1,23 +1,28 @@
-<div *ngIf="  data!==undefined " >
-   <h2 mat-dialog-title>Update Skill  </h2>
+<div *ngIf="  data.employeeSkill!==undefined " >
+   <h2 *ngIf="data.employeeSkill.id === ''" mat-dialog-title>Add Skill</h2>
+   <h2   *ngIf="data.employeeSkill.id !== ''" mat-dialog-title>Update Skill</h2>
    <mat-dialog-content>
       <form id="formNewSkillUpdate" name="formNewSkillUpdate"  #skillDataUpdate="ngForm">
          <mat-form-field >
-            <input matInput placeholder="name" name="name" [value]="data.name" [(ngModel)]="data.name" ngModel><br>
+            <input matInput placeholder="Name" name="name" [value]="data.employeeSkill.name" [(ngModel)]="data.employeeSkill.name" ngModel><br>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="duration" name="duration" [value]="data.duration" [(ngModel)]="data.duration" ngModel>
+            <input matInput placeholder="Duration" name="duration" [value]="data.employeeSkill.duration" [(ngModel)]="data.employeeSkill.duration" ngModel>
          </mat-form-field>
+          <mat-form-field>
+            <mat-select [(value)]="selected" [(ngModel)]="data.employeeSkill.rating" placeholder="Rating" name="rating">
+              <mat-option *ngFor="let rating of data.skillRatings" [value]="rating">
+                {{ rating }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="rating" name="rating" [value]="data.rating" [(ngModel)]="data.rating" ngModel>
-         </mat-form-field>
-         <mat-form-field >
-            <input matInput placeholder="lastUsed" name="lastUsed" [value]="data.lastUsed" [(ngModel)]="data.lastUsed" ngModel>
+            <input matInput placeholder="Last Used" name="lastUsed" [value]="data.employeeSkill.lastUsed" [(ngModel)]="data.employeeSkill.lastUsed" ngModel>
          </mat-form-field>
       </form>
    </mat-dialog-content>
    <mat-dialog-actions>
+      <button mat-button [mat-dialog-close]=data.employeeSkill>Update</button>
       <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
-      <button mat-button [mat-dialog-close]=data>Update</button>
    </mat-dialog-actions>
 </div>

@@ -25,12 +25,12 @@ export class CustomerViewComponent {
   id: number;
 
   customer: Customer;
-  team: any;
   customerAddresses = [];
   customerTeams = [];
   customerGoals = [];
   customerStakeholders = [];
   customerTravels = [];
+
   customerStakeholder = new Stakeholder();
   customerGoal = new Goal();
   customerTravel = new Travel();
@@ -63,32 +63,33 @@ export class CustomerViewComponent {
     });
   }
 
-  openAddressDialog(): void {
-    this.customerAddress = new Address();
-    this.openDialog(AddressDialogComponent, 'addresses', this.customerAddress, this.customerAddresses);
+  openDialog(entityName): void {
+    if (entityName === 'addresses') {
+      this.customerAddress = new Address();
+      this.openEntityDialog(AddressDialogComponent, entityName, this.customerAddresses);
+    }
+    else if (entityName === 'teams') {
+      this.customerTeam = new Team();
+      this.openEntityDialog(TeamDialogComponent, entityName, this.customerTeams);
+    }
+    else if (entityName === 'goals') {
+      this.customerGoal = new Goal();
+      this.openEntityDialog(GoalDialogComponent, entityName, this.customerGoals);
+    }
+    else if (entityName === 'stakeholders') {
+      this.customerStakeholder = new Stakeholder();
+      this.openEntityDialog(StakeholderDialogComponent, entityName, this.customerStakeholders);
+    }
+    else if (entityName === 'travels') {
+      this.customerTravel = new Travel();
+      this.openEntityDialog(TravelDialogComponent, entityName, this.customerTravels);
+    }
+    else {
+      console.log(entityName + " not found");
+    }
   }
 
-  openTeamDialog(): void {
-    this.customerTeam = new Team();
-    this.openDialog(TeamDialogComponent, 'teams', this.customerTeam, this.customerTeams);
-  }
-
-  openGoalDialog(): void {
-    this.customerGoal = new Goal();
-    this.openDialog(GoalDialogComponent, 'goals', this.customerGoal, this.customerGoals);
-  }
-
-  openStakeholderDialog(): void {
-    this.customerStakeholder = new Stakeholder();
-    this.openDialog(StakeholderDialogComponent, 'stakeholders', this.customerStakeholder, this.customerStakeholders);
-  }
-
-  openTravelDialog(): void {
-    this.customerTravel = new Travel();
-    this.openDialog(TravelDialogComponent, 'travels', this.customerTravel, this.customerTravels);
-  }
-
-  openDialog(dialogComponent, entityName, entity, entityArray) {
+  openEntityDialog(dialogComponent, entityName, entityArray) {
     let dialogRef = this.dialog.open(dialogComponent, {
       data: this
     });
@@ -109,42 +110,37 @@ export class CustomerViewComponent {
       );
   }
 
-  openAddressUpdateDialog(id: number): void {
-    const index = this.customerAddresses.findIndex(e => e.id === id);
-    this.customerAddress = this.customerAddresses[index];
-    this.openUpdateDialog('addresses', AddressDialogComponent, id, this.customerAddresses);
+  openUpdateDialog(entityName: String, id: number): void {
+    if (entityName === 'addresses') {
+      this.customerAddress = this.customerAddresses[this.customerAddresses.findIndex(e => e.id === id)];
+      this.openEntityUpdateDialog(entityName, AddressDialogComponent, id, this.customerAddresses);
+    }
+    else if (entityName === 'teams') {
+      this.customerTeam = this.customerTeams[this.customerTeams.findIndex(e => e.id === id)];
+      this.openEntityUpdateDialog(entityName, TeamDialogComponent, id, this.customerTeams);
+    }
+    else if (entityName === 'goals') {
+      this.customerGoal = this.customerGoals[this.customerGoals.findIndex(e => e.id === id)];
+      this.openEntityUpdateDialog(entityName, GoalDialogComponent, id, this.customerGoals);
+    }
+    else if (entityName === 'stakeholders') {
+      this.customerStakeholder = this.customerStakeholders[this.customerStakeholders.findIndex(e => e.id === id)];
+      this.openEntityUpdateDialog(entityName, StakeholderDialogComponent, id, this.customerStakeholders);
+    }
+    else if (entityName === 'travels') {
+      this.customerTeam = this.customerTeams[this.customerTeams.findIndex(e => e.id === id)];
+      this.openEntityUpdateDialog(entityName, TeamDialogComponent, id, this.customerTeams);
+    }
+    else {
+      console.log(entityName + " not found");
+    }
   }
 
-  openGoalUpdateDialog(id: number): void {
-    const index = this.customerGoals.findIndex(e => e.id === id);
-    this.customerGoal = this.customerGoals[index];
-    this.openUpdateDialog('goals', GoalDialogComponent, id, this.customerGoals);
-  }
-
-  openStakeholderUpdateDialog(id: number): void {
-    const index = this.customerStakeholders.findIndex(e => e.id === id);
-    this.customerStakeholder = this.customerStakeholders[index];
-    this.openUpdateDialog('stakeholders', StakeholderDialogComponent, id, this.customerStakeholders);
-  }
-
-  openTravelUpdateDialog(id: number): void {
-    const index = this.customerTravels.findIndex(e => e.id === id);
-    this.customerTravel = this.customerTravels[index];
-    this.openUpdateDialog('travels', TravelDialogComponent, id, this.customerTravels);
-  }
-
-  openTeamUpdateDialog(id: number): void {
-    const index = this.customerTeams.findIndex(e => e.id === id);
-    this.customerTeam = this.customerTeams[index];
-    this.openUpdateDialog('travels', TeamDialogComponent, id, this.customerTeams);
-  }
-
-
-  openUpdateDialog(entityName, dialogComponent, id, entityArray): void {
+  openEntityUpdateDialog(entityName, dialogComponent, id, entityArray): void {
     const index = entityArray.findIndex(e => e.id === id);
     let entity = entityArray[index];
-
     var entityCopy = Object.assign({}, entity);
+
     let dialogRef = this.dialog.open(dialogComponent, {
       data: this
     });

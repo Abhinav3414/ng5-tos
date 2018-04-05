@@ -2,7 +2,7 @@ export class TeamMember {
   id = '';
   teamId = '';
   role = '';
-  productivity = '';
+  velocity = '';
   employeeId = '';
   createdAt = '';
 

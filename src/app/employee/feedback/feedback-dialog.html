@@ -1,20 +1,21 @@
-<div *ngIf="  data!==undefined " >
-   <h2 mat-dialog-title>Update Feedback</h2>
+<div *ngIf="  data.employeeFeedback!==undefined " >
+   <h2 *ngIf="data.employeeFeedback.id === ''" mat-dialog-title>Add Feedback</h2>
+   <h2   *ngIf="data.employeeFeedback.id !== ''" mat-dialog-title>Update Feedback</h2>
    <mat-dialog-content>
       <form id="formNewFeedbackUpdate" name="formNewFeedbackUpdate"  #feedbackDataUpdate="ngForm">
          <mat-form-field >
-            <input matInput placeholder="feedback" name="feedback" [value]="data.feedback" [(ngModel)]="data.feedback" ngModel><br>
+            <input matInput placeholder="Feedback" name="feedback" [value]="data.employeeFeedback.feedback" [(ngModel)]="data.employeeFeedback.feedback" ngModel><br>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="receivedFrom" name="receivedFrom" [value]="data.receivedFrom" [(ngModel)]="data.receivedFrom" ngModel>
+            <input matInput placeholder="Received From" name="receivedFrom" [value]="data.employeeFeedback.receivedFrom" [(ngModel)]="data.employeeFeedback.receivedFrom" ngModel>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="actionsTaken" name="actionsTaken" [value]="data.actionsTaken" [(ngModel)]="data.actionsTaken" ngModel><br>
+            <input matInput placeholder="Actions Taken" name="actionsTaken" [value]="data.employeeFeedback.actionsTaken" [(ngModel)]="data.employeeFeedback.actionsTaken" ngModel><br>
          </mat-form-field>
       </form>
    </mat-dialog-content>
    <mat-dialog-actions>
+      <button mat-button [mat-dialog-close]=data.employeeFeedback>Update</button>
       <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
-      <button mat-button [mat-dialog-close]=data>Update</button>
    </mat-dialog-actions>
 </div>

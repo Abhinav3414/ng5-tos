@@ -16,7 +16,7 @@ const dummyDialogEntity = { id: 0, name: "dummy" };
 })
 export class EmployeeMainComponent {
   employees = [];
-  employee: any;
+  employee = new Employee();
 
   constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
     private dialog: MatDialog) {
@@ -30,8 +30,9 @@ export class EmployeeMainComponent {
   }
 
   openDialog(): void {
+    this.employee = new Employee();
     let dialogRef = this.dialog.open(EmployeeDialogComponent, {
-      data: new Employee()
+      data: this
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== 'dialogDismissed' && result !== undefined) {
@@ -42,8 +43,8 @@ export class EmployeeMainComponent {
 
   addNewEntity(entityName, entity, entityArray) {
     this.dataService.postEntity(entityName, entity)
-      .then((resCustomerData) => {
-        entityArray.push(resCustomerData);
+      .then((resEmployeeData) => {
+        entityArray.push(resEmployeeData);
       },
       (err) => console.log(entityName + " could not be added :" + err)
       );
@@ -55,7 +56,7 @@ export class EmployeeMainComponent {
     var employeeCopy = Object.assign({}, this.employee);
 
     let dialogRef = this.dialog.open(EmployeeDialogComponent, {
-      data: this.employee
+      data: this
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== 'dialogDismissed' && result !== undefined) {
@@ -68,7 +69,7 @@ export class EmployeeMainComponent {
 
   updateEntity(entityName, id, entity, entityArray) {
     this.dataService.updateEntity(entityName, id, entity)
-      .then((resCustomerData) => {
+      .then((resEmployeeData) => {
         let index = entityArray.findIndex(e => e.id === entity.id);
         entityArray[index] = entity;
       },
@@ -78,7 +79,7 @@ export class EmployeeMainComponent {
 
   delelteEmployee(id) {
     this.dataService.delelteEntity('employees', id)
-      .then((resCustomerData) => {
+      .then((resEmployeeData) => {
         this.employees.splice(this.employees.findIndex(function(i) {
           return i.id === id;
         }), 1);

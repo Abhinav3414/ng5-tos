@@ -34,6 +34,17 @@ export class EmployeeViewComponent {
   employeeFeedbacks = [];
   employeeImprovementAreas = [];
   employeeTeamMembers = [];
+
+  employeeSkill = new Skill();
+  employeeCertification = new Certification();
+  employeeTraining = new Training();
+  employeeFeedback = new Feedback();
+  employeeImprovementArea = new ImprovementArea();
+
+  skillRatings: Array<String>;
+  certificationYearOfCertification  = [];
+  certificationCurrentYear: number;
+
   teams = [];
   Arr = Array; //Array type captured in a variable
 
@@ -42,6 +53,17 @@ export class EmployeeViewComponent {
   }
 
   ngOnInit() {
+
+    this.skillRatings = ['1', '2', '3', '4', '5'];
+
+    var date = new Date();
+    this.certificationCurrentYear = date.getFullYear();
+    var startYear = this.certificationCurrentYear - 25;
+
+    for (let i = this.certificationCurrentYear ; i >= startYear; i--) {
+      this.certificationYearOfCertification.push(i.toString());
+    }
+
     this.route.params.subscribe(params => {
       this.id = +params['id']; // (+) converts string 'id' to a number
       if (!isNaN(this.id)) {
@@ -68,29 +90,35 @@ export class EmployeeViewComponent {
     });
   }
 
-  openSkillDialog(): void {
-    this.openDialog(SkillDialogComponent, 'skills', new Skill(), this.employeeSkills);
+  openDialog(entityName): void {
+    if (entityName === 'skills') {
+      this.employeeSkill = new Skill();
+      this.openEntityDialog(SkillDialogComponent, entityName, this.employeeSkills);
+    }
+    else if (entityName === 'certifications') {
+      this.employeeCertification = new Certification();
+      this.openEntityDialog(CertificationDialogComponent, entityName, this.employeeCertifications);
+    }
+    else if (entityName === 'trainings') {
+      this.employeeTraining = new Training();
+      this.openEntityDialog(TrainingDialogComponent, entityName, this.employeeTrainings);
+    }
+    else if (entityName === 'feedbacks') {
+      this.employeeFeedback = new Feedback();
+      this.openEntityDialog(FeedbackDialogComponent, entityName, this.employeeFeedbacks);
+    }
+    else if (entityName === 'improvementareas') {
+      this.employeeImprovementArea = new ImprovementArea();
+      this.openEntityDialog(ImprovementAreaDialogComponent, entityName, this.employeeImprovementAreas);
+    }
+    else {
+      console.log(entityName + " not found");
+    }
   }
 
-  openCertificationDialog(): void {
-    this.openDialog(CertificationDialogComponent, 'certifications', new Certification(), this.employeeCertifications);
-  }
-
-  openTrainingDialog(): void {
-    this.openDialog(TrainingDialogComponent, 'trainings', new Training(), this.employeeTrainings);
-  }
-
-  openFeedbackDialog(): void {
-    this.openDialog(FeedbackDialogComponent, 'feedbacks', new Feedback(), this.employeeFeedbacks);
-  }
-
-  openImprovementAreaDialog(): void {
-    this.openDialog(ImprovementAreaDialogComponent, 'improvementareas', new ImprovementArea(), this.employeeImprovementAreas);
-  }
-
-  openDialog(dialogComponent, entityName, entity, entityArray) {
+  openEntityDialog(dialogComponent, entityName, entityArray) {
     let dialogRef = this.dialog.open(dialogComponent, {
-      data: entity
+      data: this
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== 'dialogDismissed' && result !== undefined) {
@@ -109,33 +137,39 @@ export class EmployeeViewComponent {
       );
   }
 
-  openSkillUpdateDialog(id: number): void {
-    this.openUpdateDialog('skills', SkillDialogComponent, id, this.employeeSkills);
+  openUpdateDialog(entityName: String, id: number): void {
+    if (entityName === 'skills') {
+      this.employeeSkill = this.employeeSkills[this.employeeSkills.findIndex(e => e.id === id)];
+      this.openEntityUpdateDialog(entityName, SkillDialogComponent, id, this.employeeSkills);
+    }
+    else if (entityName === 'certifications') {
+      this.employeeCertification = this.employeeCertifications[this.employeeCertifications.findIndex(e => e.id === id)];
+      this.openEntityUpdateDialog(entityName, CertificationDialogComponent, id, this.employeeCertifications);
+    }
+    else if (entityName === 'trainings') {
+      this.employeeTraining = this.employeeTrainings[this.employeeTrainings.findIndex(e => e.id === id)];
+      this.openEntityUpdateDialog(entityName, TrainingDialogComponent, id, this.employeeTrainings);
+    }
+    else if (entityName === 'feedbacks') {
+      this.employeeFeedback = this.employeeFeedbacks[this.employeeFeedbacks.findIndex(e => e.id === id)];
+      this.openEntityUpdateDialog(entityName, FeedbackDialogComponent, id, this.employeeFeedbacks);
+    }
+    else if (entityName === 'improvementareas') {
+      this.employeeImprovementArea = this.employeeImprovementAreas[this.employeeImprovementAreas.findIndex(e => e.id === id)];
+      this.openEntityUpdateDialog(entityName, ImprovementAreaDialogComponent, id, this.employeeImprovementAreas);
+    }
+    else {
+      console.log(entityName + " not found");
+    }
   }
 
-  openCertificationUpdateDialog(id: number): void {
-    this.openUpdateDialog('certifications', CertificationDialogComponent, id, this.employeeCertifications);
-  }
-
-  openTrainingUpdateDialog(id: number): void {
-    this.openUpdateDialog('trainings', TrainingDialogComponent, id, this.employeeTrainings);
-  }
-
-  openFeedbackUpdateDialog(id: number): void {
-    this.openUpdateDialog('feedbacks', FeedbackDialogComponent, id, this.employeeFeedbacks);
-  }
-
-  openImprovementAreaUpdateDialog(id: number): void {
-    this.openUpdateDialog('improvementareas', ImprovementAreaDialogComponent, id, this.employeeImprovementAreas);
-  }
-
-  openUpdateDialog(entityName, dialogComponent, id, entityArray): void {
+  openEntityUpdateDialog(entityName, dialogComponent, id, entityArray): void {
     const index = entityArray.findIndex(e => e.id === id);
     let entity = entityArray[index];
     var entityCopy = Object.assign({}, entity);
 
     let dialogRef = this.dialog.open(dialogComponent, {
-      data: entity
+      data: this
     });
 
     dialogRef.afterClosed().subscribe(result => {

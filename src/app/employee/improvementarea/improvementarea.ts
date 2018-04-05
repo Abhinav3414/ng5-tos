@@ -1,4 +1,5 @@
 export class ImprovementArea {
+  id = '';
   areasOfImprovement = '';
   employeeId = '';
   improvementPlan = '';

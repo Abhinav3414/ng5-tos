@@ -1,4 +1,5 @@
 export class Certification {
+  id = '';
   name = '';
   employeeId = '';
   yearOfCertification = '';

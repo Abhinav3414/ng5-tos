@@ -1,200 +1,231 @@
-  <div *ngIf="employee != undefined" style="color: #818080;">
-     <h2 style="color: #000000;">{{employee.name}} </h2>
-     <b> Joining Date : </b> {{employee.joiningDate | date : 'd-M-yy'}} &emsp;&emsp;
-     <b> Responsibilities : </b> {{employee.responsibilities}} &emsp;&emsp; <b> Total years of Experience : </b> {{employee.yearsOfExperience}} <br><br>
-  </div>
-
-  <mat-accordion [multi]="true">
-  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
-    <mat-expansion-panel-header>
+<div *ngIf="employee != undefined" style="color: #818080;">
+   <h2 style="color: #000000;">{{employee.name}} </h2>
+   <mat-icon>date</mat-icon>
+   <b> Joining Date : </b> {{employee.joiningDate | date : 'd-M-yy'}} &emsp;&emsp;
+   <b> Responsibilities : </b> {{employee.responsibilities}} &emsp;&emsp; <b> Total years of Experience : </b> {{employee.yearsOfExperience}} <br><br>
+</div>
+<mat-accordion [multi]="true">
+   <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
+   <mat-expansion-panel-header>
       <mat-panel-title>
-        <h3>Skills</h3>
+         <h3>Skills</h3>
       </mat-panel-title>
       <mat-panel-description>
-          <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
+         <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
       </mat-panel-description>
-    </mat-expansion-panel-header>
-
-    <div class=" tos-button-right">
-   <button mat-button color="primary" mat-mini-fab (click)="openSkillDialog()"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
-</div>
-    <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
-       <div fxFlex="30%" *ngFor = "let skill of employeeSkills" >
-          <mat-card class="example-card" >
-             <mat-card-header>
-                <mat-card-title class="tos-card-title">{{skill.name}}
-                  <span>
-                  <a class="tos-rating" *ngFor="let i of Arr(+skill.rating).fill(1)"><mat-icon >star rate</mat-icon></a>
-                </span>
-                </mat-card-title>
-                <mat-card-subtitle>Skill</mat-card-subtitle>
-             </mat-card-header>
-             <mat-card-content>
-                {{skill.duration}} <br> {{skill.lastUsed}}<br>
-              </mat-card-content>
-             <mat-card-actions>
-               <span (click)="openSkillUpdateDialog(skill.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
-               <span (click)="delelteEntity('skills', skill.id, employeeSkills )" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
-             </mat-card-actions>
-          </mat-card>
-       </div>
-       <div *ngIf="employeeSkills === undefined">No Skills Updated </div>
-    </div>
-  </mat-expansion-panel>
-
-<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
-  <mat-expansion-panel-header>
-    <mat-panel-title>
-        <h3>Certifications</h3>
-    </mat-panel-title>
-    <mat-panel-description>
-        <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
-    </mat-panel-description>
-  </mat-expansion-panel-header>
-<div class=" tos-button-right">
-   <button mat-button color="primary" mat-mini-fab (click)="openCertificationDialog()"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
-</div>
-  <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
-     <div fxFlex="30%" *ngFor = "let certification of employeeCertifications">
-        <mat-card class="example-card" >
-           <mat-card-header>
-              <mat-card-title>Certification</mat-card-title>
-              <mat-card-subtitle>{{certification.name}}</mat-card-subtitle>
-           </mat-card-header>
-           <mat-card-content>
-              {{certification.yearOfCertification}}
-           </mat-card-content>
-           <mat-card-actions>
-             <span (click)="openCertificationUpdateDialog(certification.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
-             <span (click)="delelteEntity('certifications', certification.id, employeeCertifications)" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
-           </mat-card-actions>
-        </mat-card>
-     </div>
-     <div *ngIf="employeeCertifications === undefined">No Certifications </div>
-  </div>
-</mat-expansion-panel>
-
-<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
-  <mat-expansion-panel-header>
-    <mat-panel-title>
-          <h3>Trainings</h3>
-    </mat-panel-title>
-    <mat-panel-description>
-        <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
-    </mat-panel-description>
-  </mat-expansion-panel-header>
-<div class=" tos-button-right">
-   <button mat-button color="primary" mat-mini-fab (click)="openTrainingDialog()"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
-</div>
-  <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
-     <div fxFlex="30%" *ngFor = "let training of employeeTrainings">
-        <mat-card class="example-card" >
-           <mat-card-header>
-              <mat-card-title>{{training.name}}</mat-card-title>
-              <mat-card-subtitle>Trainings</mat-card-subtitle>
-           </mat-card-header>
-           <mat-card-content>
-              {{ training.mode}}<br> {{ training.proposedDate}}<br>  {{ training.reason}}
-           </mat-card-content>
-           <mat-card-actions>
-             <span (click)="openTrainingUpdateDialog(training.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
-             <span (click)="delelteEntity('trainings', training.id, employeeTrainings )" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
-           </mat-card-actions>
-        </mat-card>
-     </div>
-     <div *ngIf="employeeTrainings === undefined">No Trainings scheduled </div>
-  </div>
-</mat-expansion-panel>
-
-<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
-  <mat-expansion-panel-header>
-    <mat-panel-title>
-          <h3>Feedbacks</h3>
-    </mat-panel-title>
-    <mat-panel-description>
-        <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
-    </mat-panel-description>
-  </mat-expansion-panel-header>
-<div class=" tos-button-right">
-   <button mat-button color="primary" mat-mini-fab (click)="openFeedbackDialog()"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
-</div>
-  <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
-     <div fxFlex="30%" *ngFor = "let feedback of employeeFeedbacks">
-        <mat-card class="example-card" >
-           <mat-card-header>
-              <mat-card-title>Feedback</mat-card-title>
-              <mat-card-subtitle>{{feedback.feedback}}</mat-card-subtitle>
-           </mat-card-header>
-           <mat-card-content>
-             {{feedback.receivedFrom}} <br> {{feedback.actionsTaken}}<br>
-           </mat-card-content>
-           <mat-card-actions>
-             <span (click)="openFeedbackUpdateDialog(feedback.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
-             <span (click)="delelteEntity('feedbacks', feedback.id, employeeFeedbacks)" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
-           </mat-card-actions>
-        </mat-card>
-     </div>
-     <div *ngIf="employeeFeedbacks.length===0">No Feedbacks</div>
-  </div>
-</mat-expansion-panel>
-
-<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
-  <mat-expansion-panel-header>
-    <mat-panel-title>
-            <h3>Improvement Areas</h3>
-    </mat-panel-title>
-    <mat-panel-description>
-        <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
-    </mat-panel-description>
-  </mat-expansion-panel-header>
-  <div class=" tos-button-right">
-   <button mat-button color="primary" mat-mini-fab (click)="openImprovementAreaDialog()"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
-</div>
-  <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
-     <div fxFlex="30%" *ngFor = "let improvementArea of employeeImprovementAreas">
-        <mat-card class="example-card" >
-           <mat-card-header>
-              <mat-card-title>improvementArea</mat-card-title>
-              <mat-card-subtitle>{{improvementArea.areasOfImprovement}}</mat-card-subtitle>
-           </mat-card-header>
-           <mat-card-content>
-             {{improvementArea.improvementPlan}} <br> {{improvementArea.proposedDate}}<br>
-           </mat-card-content>
-           <mat-card-actions>
-             <span (click)="openImprovementAreaUpdateDialog(improvementArea.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
-             <span (click)="delelteEntity('improvementareas', improvementArea.id, employeeImprovementAreas )" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
-           </mat-card-actions>
-        </mat-card>
-     </div>
-     <div *ngIf="employeeImprovementAreas.length===0">No Goals Defined </div>
-  </div>
-</mat-expansion-panel>
-
-<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
-  <mat-expansion-panel-header>
-    <mat-panel-title>
-            <h3>Teams</h3>
-    </mat-panel-title>
-    <mat-panel-description>
-        <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
-    </mat-panel-description>
-  </mat-expansion-panel-header>
-  <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
-     <div fxFlex="30%" *ngFor = "let team of teams">
-        <mat-card class="example-card" >
-           <mat-card-header>
-              <mat-card-title><span (click)="navigateViewTeam(team.id)" class="tos-cust-heading"> Team</span></mat-card-title>
-              <mat-card-subtitle><span (click)="navigateViewTeam(team.id)" class="tos-cust-heading"> {{team.name}}</span></mat-card-subtitle>
-           </mat-card-header>
-           <mat-card-content><span (click)="navigateViewTeam(team.id)" class="tos-cust-heading"> {{team.specialization}} <br></span>
-
-           </mat-card-content>
-           <mat-card-actions>
-
-           </mat-card-actions>
-        </mat-card>
-     </div>
-     <div *ngIf="teams.length===0">No Teams Present </div>
-  </div>
-</mat-expansion-panel>
+   </mat-expansion-panel-header>
+   <div class=" tos-button-right">
+      <button mat-button color="primary" mat-mini-fab (click)="openDialog('skills')">
+         <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon>
+      </button>
+   </div>
+   <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
+      <div fxFlex="30%" *ngFor = "let skill of employeeSkills" >
+         <mat-card class="example-card" >
+            <mat-card-header>
+               <mat-card-title class="tos-card-title">
+                  {{skill.name}}
+                  <span *ngIf="skill.rating !== ''">
+                     <a class="tos-rating" *ngFor="let i of Arr(+skill.rating).fill(1)">
+                        <mat-icon >star rate</mat-icon>
+                     </a>
+                  </span>
+               </mat-card-title>
+               <mat-card-subtitle>Skill</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+               {{skill.duration}} <br> {{skill.lastUsed}}<br>
+            </mat-card-content>
+            <mat-card-actions>
+               <span (click)="openUpdateDialog('skills',skill.id)" style="cursor:pointer;color:grey">
+                  <mat-icon>create</mat-icon>
+               </span>
+               &emsp;
+               <span (click)="delelteEntity('skills', skill.id, employeeSkills )" style="cursor:pointer; color:grey">
+                  <mat-icon>delete</mat-icon>
+               </span>
+            </mat-card-actions>
+         </mat-card>
+      </div>
+      <div *ngIf="employeeSkills === undefined">No Skills Updated </div>
+   </div>
+   </mat-expansion-panel>
+   <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
+   <mat-expansion-panel-header>
+      <mat-panel-title>
+         <h3>Certifications</h3>
+      </mat-panel-title>
+      <mat-panel-description>
+         <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
+      </mat-panel-description>
+   </mat-expansion-panel-header>
+   <div class=" tos-button-right">
+      <button mat-button color="primary" mat-mini-fab (click)="openDialog('certifications')">
+         <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon>
+      </button>
+   </div>
+   <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
+      <div fxFlex="30%" *ngFor = "let certification of employeeCertifications">
+         <mat-card class="example-card" >
+            <mat-card-header>
+               <mat-card-title>Certification</mat-card-title>
+               <mat-card-subtitle>{{certification.name}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+               {{certification.yearOfCertification}}
+            </mat-card-content>
+            <mat-card-actions>
+               <span (click)="openUpdateDialog('certifications',certification.id)" style="cursor:pointer;color:grey">
+                  <mat-icon  >create</mat-icon>
+               </span>
+               &emsp;
+               <span (click)="delelteEntity('certifications', certification.id, employeeCertifications)" style="cursor:pointer; color:grey">
+                  <mat-icon  >delete</mat-icon>
+               </span>
+            </mat-card-actions>
+         </mat-card>
+      </div>
+      <div *ngIf="employeeCertifications === undefined">No Certifications </div>
+   </div>
+   </mat-expansion-panel>
+   <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
+   <mat-expansion-panel-header>
+      <mat-panel-title>
+         <h3>Trainings</h3>
+      </mat-panel-title>
+      <mat-panel-description>
+         <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
+      </mat-panel-description>
+   </mat-expansion-panel-header>
+   <div class=" tos-button-right">
+      <button mat-button color="primary" mat-mini-fab (click)="openDialog('trainings')">
+         <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon>
+      </button>
+   </div>
+   <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
+      <div fxFlex="30%" *ngFor = "let training of employeeTrainings">
+         <mat-card class="example-card" >
+            <mat-card-header>
+               <mat-card-title>{{training.name}}</mat-card-title>
+          <!--     <mat-card-subtitle>Trainings</mat-card-subtitle> -->
+            </mat-card-header>
+            <mat-card-content>
+               Mode : {{ training.mode}}<br>Training proposed Date : {{ training.proposedDate | date : 'd-M-yy'}}
+               <br>Reason: {{ training.reason}}
+            </mat-card-content>
+            <mat-card-actions>
+               <span (click)="openUpdateDialog('trainings',training.id)" style="cursor:pointer;color:grey">
+                  <mat-icon  >create</mat-icon>
+               </span>
+               &emsp;
+               <span (click)="delelteEntity('trainings', training.id, employeeTrainings )" style="cursor:pointer; color:grey">
+                  <mat-icon  >delete</mat-icon>
+               </span>
+            </mat-card-actions>
+         </mat-card>
+      </div>
+      <div *ngIf="employeeTrainings === undefined">No Trainings scheduled </div>
+   </div>
+   </mat-expansion-panel>
+   <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
+   <mat-expansion-panel-header>
+      <mat-panel-title>
+         <h3>Feedbacks</h3>
+      </mat-panel-title>
+      <mat-panel-description>
+         <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
+      </mat-panel-description>
+   </mat-expansion-panel-header>
+   <div class=" tos-button-right">
+      <button mat-button color="primary" mat-mini-fab (click)="openDialog('feedbacks')">
+         <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon>
+      </button>
+   </div>
+   <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
+      <div fxFlex="30%" *ngFor = "let feedback of employeeFeedbacks">
+         <mat-card class="example-card" >
+            <mat-card-header>
+               <mat-card-title>Feedback</mat-card-title>
+               <mat-card-subtitle>{{feedback.feedback}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+               {{feedback.receivedFrom}} <br> {{feedback.actionsTaken}}<br>
+            </mat-card-content>
+            <mat-card-actions>
+               <span (click)="openUpdateDialog('feedbacks',feedback.id)" style="cursor:pointer;color:grey">
+                  <mat-icon  >create</mat-icon>
+               </span>
+               &emsp;
+               <span (click)="delelteEntity('feedbacks', feedback.id, employeeFeedbacks)" style="cursor:pointer; color:grey">
+                  <mat-icon  >delete</mat-icon>
+               </span>
+            </mat-card-actions>
+         </mat-card>
+      </div>
+      <div *ngIf="employeeFeedbacks.length===0">No Feedbacks</div>
+   </div>
+   </mat-expansion-panel>
+   <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
+   <mat-expansion-panel-header>
+      <mat-panel-title>
+         <h3>Improvement Areas</h3>
+      </mat-panel-title>
+      <mat-panel-description>
+         <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
+      </mat-panel-description>
+   </mat-expansion-panel-header>
+   <div class=" tos-button-right">
+      <button mat-button color="primary" mat-mini-fab (click)="openDialog('improvementareas')">
+         <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon>
+      </button>
+   </div>
+   <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
+      <div fxFlex="30%" *ngFor = "let improvementArea of employeeImprovementAreas">
+         <mat-card class="example-card" >
+            <mat-card-header>
+               <mat-card-title>improvementArea</mat-card-title>
+               <mat-card-subtitle>{{improvementArea.areasOfImprovement}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+               {{improvementArea.improvementPlan}} <br> {{improvementArea.proposedDate}}<br>
+            </mat-card-content>
+            <mat-card-actions>
+               <span (click)="openUpdateDialog('improvementareas', improvementArea.id)" style="cursor:pointer;color:grey">
+                  <mat-icon  >create</mat-icon>
+               </span>
+               &emsp;
+               <span (click)="delelteEntity('improvementareas', improvementArea.id, employeeImprovementAreas )" style="cursor:pointer; color:grey">
+                  <mat-icon  >delete</mat-icon>
+               </span>
+            </mat-card-actions>
+         </mat-card>
+      </div>
+      <div *ngIf="employeeImprovementAreas.length===0">No Goals Defined </div>
+   </div>
+   </mat-expansion-panel>
+   <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
+   <mat-expansion-panel-header>
+      <mat-panel-title>
+         <h3>Teams</h3>
+      </mat-panel-title>
+      <mat-panel-description>
+         <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
+      </mat-panel-description>
+   </mat-expansion-panel-header>
+   <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
+      <div fxFlex="30%" *ngFor = "let team of teams">
+         <mat-card class="example-card" >
+            <mat-card-header>
+               <mat-card-title><span (click)="navigateViewTeam(team.id)" class="tos-cust-heading"> Team</span></mat-card-title>
+               <mat-card-subtitle><span (click)="navigateViewTeam(team.id)" class="tos-cust-heading"> {{team.name}}</span></mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content><span (click)="navigateViewTeam(team.id)" class="tos-cust-heading"> {{team.specialization}} <br></span>
+            </mat-card-content>
+            <mat-card-actions>
+            </mat-card-actions>
+         </mat-card>
+      </div>
+      <div *ngIf="teams.length===0">No Teams Present </div>
+   </div>
+   </mat-expansion-panel>
 </mat-accordion>

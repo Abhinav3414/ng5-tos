@@ -1,4 +1,5 @@
 export class Skill {
+  id = '';
   name = '';
   employeeId = '';
   duration = '';

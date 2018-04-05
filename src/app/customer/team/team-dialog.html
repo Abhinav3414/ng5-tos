@@ -1,18 +1,18 @@
-
 <div *ngIf="  data.customerTeam!==undefined" >
-   <h2 mat-dialog-title>Update Team </h2>
+   <h2 *ngIf="data.customerTeam.id === ''" mat-dialog-title>Create Team</h2>
+   <h2   *ngIf="data.customerTeam.id !== ''" mat-dialog-title>Update Team</h2>
    <mat-dialog-content>
       <form id="formNewteamrUpdate" name="formNewteamrUpdate"  #teamDataUpdate="ngForm">
          <mat-form-field >
-            <input matInput placeholder="name" name="name" [value]="data.customerTeam.name" [(ngModel)]="data.customerTeam.name" ngModel><br>
+            <input matInput placeholder="Name" name="name" [value]="data.customerTeam.name" [(ngModel)]="data.customerTeam.name" ngModel><br>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="specialization" name="specialization" [value]="data.customerTeam.specialization" [(ngModel)]="data.customerTeam.specialization" ngModel>
+            <input matInput placeholder="Specialization" name="specialization" [value]="data.customerTeam.specialization" [(ngModel)]="data.customerTeam.specialization" ngModel>
          </mat-form-field>
       </form>
    </mat-dialog-content>
    <mat-dialog-actions>
-      <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
       <button mat-button [mat-dialog-close]=data.customerTeam>Update</button>
+      <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
    </mat-dialog-actions>
 </div>

@@ -1,4 +1,4 @@
-export class Projectrythm {
+export class ProjectRythm {
   id = '';
   event = '';
   teamId = '';

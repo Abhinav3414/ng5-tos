@@ -15,7 +15,7 @@
        </mat-panel-description>
      </mat-expansion-panel-header>
      <div class=" tos-button-right">
-        <button mat-button color="primary" mat-mini-fab (click)="openTeamMemberDialog()"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
+        <button mat-button color="primary" mat-mini-fab (click)="openDialog('teammembers')"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
      </div>
      <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
         <div fxFlex="30%" *ngFor = "let member of customerTeamMembers">
@@ -26,10 +26,10 @@
               </mat-card-header>
               <mat-card-content>
                  {{member.role}} <br>
-                 {{ member.productivity}}
+                 {{ member.velocity}}
               </mat-card-content>
               <mat-card-actions>
-                 <span (click)="openTeamMemberUpdateDialog(member.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
+                 <span (click)="openUpdateDialog('teammembers',member.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
                  <span (click)="delelteEntity('teammembers',member.id,customerTeamMembers )" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
               </mat-card-actions>
            </mat-card>
@@ -48,7 +48,7 @@
        </mat-panel-description>
      </mat-expansion-panel-header>
      <div class=" tos-button-right">
-        <button mat-button color="primary" mat-mini-fab (click)="openActionDialog()"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
+        <button mat-button color="primary" mat-mini-fab (click)="openDialog('actions')"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
      </div>
      <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
         <div fxFlex="30%" *ngFor = "let action of customerActions">
@@ -62,7 +62,7 @@
                  {{ action.createdAt | date : 'd-M-yy, h:mm a'}}
               </mat-card-content>
               <mat-card-actions>
-                <span (click)="openActionUpdateDialog(action.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
+                <span (click)="openUpdateDialog('actions',action.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
                 <span (click)="delelteEntity('actions',action.id,customerActions)" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
               </mat-card-actions>
            </mat-card>
@@ -81,7 +81,7 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div class=" tos-button-right">
-           <button mat-button color="primary" mat-mini-fab (click)="openProjectRythmDialog()"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
+           <button mat-button color="primary" mat-mini-fab (click)="openDialog('projectrythms')"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
         </div>
         <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
            <div fxFlex="30%" *ngFor = "let projectRythm of customerProjectRythms">
@@ -95,7 +95,7 @@
                     {{projectRythm.frequency}} <br>{{projectRythm.whoRythm}} <br>{{projectRythm.whereRythm}} <br>
                  </mat-card-content>
                  <mat-card-actions>
-                   <span (click)="openProjectRythmUpdateDialog(projectRythm.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
+                   <span (click)="openUpdateDialog('projectrythms',projectRythm.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
                    <span (click)="delelteEntity('projectrythms',projectRythm.id,customerProjectRythms)" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
                  </mat-card-actions>
               </mat-card>

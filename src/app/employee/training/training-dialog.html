@@ -1,23 +1,28 @@
-<div *ngIf="  data!==undefined" >
-   <h2 mat-dialog-title>Update Training</h2>
+<div *ngIf="  data.employeeTraining!==undefined" >
+   <h2 *ngIf="data.employeeTraining.id === ''" mat-dialog-title>Add Training</h2>
+   <h2   *ngIf="data.employeeTraining.id !== ''" mat-dialog-title>Update Training</h2>
    <mat-dialog-content>
       <form id="formNewTrainingUpdate" name="formNewTrainingUpdate"  #trainingDataUpdate="ngForm">
          <mat-form-field >
-            <input matInput placeholder="name" name="name" [value]="data.name" [(ngModel)]="data.name" ngModel><br>
+            <input matInput placeholder="Name" name="name" [value]="data.employeeTraining.name" [(ngModel)]="data.employeeTraining.name" ngModel><br>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="mode" name="mode" [value]="data.mode" [(ngModel)]="data.mode" ngModel>
+            <input matInput placeholder="Mode" name="mode" [value]="data.employeeTraining.mode" [(ngModel)]="data.employeeTraining.mode" ngModel>
+         </mat-form-field>
+         <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Proposed Date" name="proposedDate"
+            [value]="data.employeeTraining.proposedDate"
+            [(ngModel)]="data.employeeTraining.proposedDate" ngModel>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker  #picker></mat-datepicker>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="proposedDate" name="proposedDate" [value]="data.proposedDate" [(ngModel)]="data.proposedDate" ngModel><br>
-         </mat-form-field>
-         <mat-form-field >
-            <input matInput placeholder="reason" name="reason" [value]="data.reason" [(ngModel)]="data.reason" ngModel>
+            <input matInput placeholder="Reason" name="reason" [value]="data.employeeTraining.reason" [(ngModel)]="data.employeeTraining.reason" ngModel>
          </mat-form-field>
       </form>
    </mat-dialog-content>
    <mat-dialog-actions>
+      <button mat-button [mat-dialog-close]=data.employeeTraining>Update</button>
       <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
-      <button mat-button [mat-dialog-close]=data>Update</button>
    </mat-dialog-actions>
 </div>

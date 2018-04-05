@@ -1,4 +1,5 @@
 export class Training {
+  id = '';
   name = '';
   employeeId = '';
   mode = '';

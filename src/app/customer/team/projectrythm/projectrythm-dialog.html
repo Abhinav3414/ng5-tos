@@ -1,23 +1,24 @@
-<div *ngIf="  data!==undefined" >
-   <h2 mat-dialog-title>Update Project Rythm </h2>
+<div *ngIf="  data.customerProjectRythm!==undefined" >
+   <h2 *ngIf="data.customerProjectRythm.id === ''" mat-dialog-title>Create Project Rythm</h2>
+   <h2   *ngIf="data.customerProjectRythm.id !== ''" mat-dialog-title>Update Project Rythm</h2>
    <mat-dialog-content>
       <form id="formNewProjectRythmUpdate" name="formNewProjectRythmUpdate"  #projectRythmUpdate="ngForm">
          <mat-form-field >
-            <input matInput placeholder="event" name="event" [value]="data.event" [(ngModel)]="data.event" ngModel><br>
+            <input matInput placeholder="Event" name="event" [value]="data.customerProjectRythm.event" [(ngModel)]="data.customerProjectRythm.event" ngModel><br>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="frequency" name="frequency" [value]="data.frequency" [(ngModel)]="data.frequency" ngModel>
+            <input matInput placeholder="Frequency" name="frequency" [value]="data.customerProjectRythm.frequency" [(ngModel)]="data.customerProjectRythm.frequency" ngModel>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="whoRythm" name="whoRythm" [value]="data.whoRythm" [(ngModel)]="data.whoRythm" ngModel><br>
+            <input matInput placeholder="Who" name="whoRythm" [value]="data.customerProjectRythm.whoRythm" [(ngModel)]="data.customerProjectRythm.whoRythm" ngModel><br>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="whereRythm" name="whereRythm" [value]="data.whereRythm" [(ngModel)]="data.whereRythm" ngModel>
+            <input matInput placeholder="Where" name="whereRythm" [value]="data.customerProjectRythm.whereRythm" [(ngModel)]="data.customerProjectRythm.whereRythm" ngModel>
          </mat-form-field>
       </form>
    </mat-dialog-content>
    <mat-dialog-actions>
+      <button mat-button [mat-dialog-close]=data.customerProjectRythm>Update</button>
       <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
-      <button mat-button [mat-dialog-close]=data>Update</button>
    </mat-dialog-actions>
 </div>

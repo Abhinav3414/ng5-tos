@@ -15,6 +15,43 @@
 
 <mat-accordion [multi]="true">
 
+
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h3>Customer Goals</h3>
+      </mat-panel-title>
+      <mat-panel-description>
+          <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class=" tos-button-right">
+       <button mat-button color="primary" mat-mini-fab (click)="openDialog('goals')"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
+    </div>
+    <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
+       <div fxFlex="30%" *ngFor = "let goal of customerGoals">
+          <mat-card class="example-card" >
+             <mat-card-header>
+                <mat-card-title>Goal</mat-card-title>
+                <mat-card-subtitle>{{goal.description}}</mat-card-subtitle>
+             </mat-card-header>
+             <mat-card-content>
+               {{goal.tenure}} <br>
+               {{goal.status}}<br>
+               {{goal.notes}}<br>
+               {{goal.signedBy}}
+             </mat-card-content>
+             <mat-card-actions>
+                <span (click)="openUpdateDialog('goals',goal.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
+                <span (click)="delelteEntity('goals',goal.id,customerGoals)" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
+             </mat-card-actions>
+          </mat-card>
+       </div>
+       <div *ngIf="customerGoals.length===0">No Goals Defined </div>
+    </div>
+  </mat-expansion-panel>
+
+
 <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
   <mat-expansion-panel-header>
     <mat-panel-title>
@@ -25,7 +62,7 @@
     </mat-panel-description>
   </mat-expansion-panel-header>
   <div class=" tos-button-right">
-     <button mat-button color="primary" mat-mini-fab (click)="openAddressDialog()"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
+     <button mat-button color="primary" mat-mini-fab (click)="openDialog('addresses')"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
   </div>
   <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
      <div fxFlex="30%" *ngFor = "let address of customerAddresses">
@@ -41,7 +78,7 @@
               {{address.country}} <br>
            </mat-card-content>
            <mat-card-actions>
-              <span (click)="openAddressUpdateDialog(address.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
+              <span (click)="openUpdateDialog('addresses',address.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
               <span (click)="delelteEntity('addresses',address.id,customerAddresses)" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
            </mat-card-actions>
         </mat-card>
@@ -61,7 +98,7 @@
   </mat-expansion-panel-header>
 
   <div class=" tos-button-right">
-     <button mat-button color="primary" mat-mini-fab (click)="openTeamDialog()"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
+     <button mat-button color="primary" mat-mini-fab (click)="openDialog('teams')"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
   </div>
   <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
      <div fxFlex="30%" *ngFor = "let team of customerTeams">
@@ -74,48 +111,12 @@
               <span (click)="navigateViewTeam(team.id)" class="tos-cust-heading"> {{team.specialization}} </span>
            </mat-card-content>
            <mat-card-actions>
-              <span (click)="openTeamUpdateDialog(team.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
+              <span (click)="openUpdateDialog('teams',team.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
               <span (click)="delelteEntity('teams',team.id,customerTeams)" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
            </mat-card-actions>
         </mat-card>
      </div>
      <div *ngIf="customerTeams.length===0">No Teams Assigned </div>
-  </div>
-</mat-expansion-panel>
-
-
-<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
-  <mat-expansion-panel-header>
-    <mat-panel-title>
-      <h3>Customer Goals</h3>
-    </mat-panel-title>
-    <mat-panel-description>
-        <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
-    </mat-panel-description>
-  </mat-expansion-panel-header>
-  <div class=" tos-button-right">
-     <button mat-button color="primary" mat-mini-fab (click)="openGoalDialog()"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
-  </div>
-  <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
-     <div fxFlex="30%" *ngFor = "let goal of customerGoals">
-        <mat-card class="example-card" >
-           <mat-card-header>
-              <mat-card-title>Goal</mat-card-title>
-              <mat-card-subtitle>{{goal.description}}</mat-card-subtitle>
-           </mat-card-header>
-           <mat-card-content>
-             {{goal.tenure}} <br>
-             {{goal.status}}<br>
-             {{goal.details}}<br>
-             {{goal.signedBy}}
-           </mat-card-content>
-           <mat-card-actions>
-              <span (click)="openGoalUpdateDialog(goal.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
-              <span (click)="delelteEntity('goals',goal.id,customerGoals)" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
-           </mat-card-actions>
-        </mat-card>
-     </div>
-     <div *ngIf="customerGoals.length===0">No Goals Defined </div>
   </div>
 </mat-expansion-panel>
 
@@ -129,7 +130,7 @@
     </mat-panel-description>
   </mat-expansion-panel-header>
   <div class=" tos-button-right">
-     <button mat-button color="primary" mat-mini-fab (click)="openStakeholderDialog()"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
+     <button mat-button color="primary" mat-mini-fab (click)="openDialog('stakeholders')"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
   </div>
   <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
      <div fxFlex="30%" *ngFor = "let sholder of customerStakeholders">
@@ -145,7 +146,7 @@
              {{sholder.raci}}
            </mat-card-content>
            <mat-card-actions>
-              <span (click)="openStakeholderUpdateDialog(sholder.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
+              <span (click)="openUpdateDialog('stakeholders',sholder.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
               <span (click)="delelteEntity('stakeholders',sholder.id,customerStakeholders)" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
            </mat-card-actions>
         </mat-card>
@@ -164,7 +165,7 @@
     </mat-panel-description>
   </mat-expansion-panel-header>
   <div class=" tos-button-right">
-     <button mat-button color="primary" mat-mini-fab (click)="openTravelDialog()"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
+     <button mat-button color="primary" mat-mini-fab (click)="openDialog('travels')"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
   </div>
   <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
      <div fxFlex="30%" *ngFor = "let travel of customerTravels">
@@ -179,7 +180,7 @@
               {{travel.purpose}}
            </mat-card-content>
            <mat-card-actions>
-              <span (click)="openTravelUpdateDialog(travel.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
+              <span (click)="openUpdateDialog('travels',travel.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
               <span (click)="delelteEntity('travels',travel.id,customerTravels)" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
 
            </mat-card-actions>

@@ -4,7 +4,7 @@ export class Goal {
   customerId = '';
   tenure = '';
   status = '';
-  details = '';
+  notes = '';
   signedBy = '';
   createdAt = '';
 

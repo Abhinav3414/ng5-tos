@@ -1,4 +1,5 @@
 export class Feedback {
+  id = '';
   feedback = '';
   employeeId = '';
   receivedFrom = '';

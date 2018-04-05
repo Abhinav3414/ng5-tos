@@ -13,7 +13,7 @@ import { Customer } from './customer';
 })
 export class CustomerMainComponent {
   customers = [];
-  customer: any;
+  customer = new Customer();
 
   constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
     private dialog: MatDialog) {
@@ -27,8 +27,9 @@ export class CustomerMainComponent {
   }
 
   openDialog(): void {
+    this.customer = new Customer();
     let dialogRef = this.dialog.open(CustomerDialogComponent, {
-      data: new Customer()
+      data: this
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -53,7 +54,7 @@ export class CustomerMainComponent {
     var customerCopy = Object.assign({}, this.customer);
 
     let dialogRef = this.dialog.open(CustomerDialogComponent, {
-      data: this.customer
+      data: this
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== 'dialogDismissed' && result !== undefined) {

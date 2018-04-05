@@ -12,7 +12,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Team } from './team';
 import { TeamMember } from './teammember/teammember';
 import { Action } from './action/action';
-import { Projectrythm } from './projectrythm/projectrythm';
+import { ProjectRythm } from './projectrythm/projectrythm';
 
 @Component({
   selector: 'team-view',
@@ -23,9 +23,15 @@ export class TeamViewComponent {
   id: number;
   team: Team;
   employee = [];
+  employees = [];
+
   customerTeamMembers = [];
   customerActions = [];
   customerProjectRythms = [];
+
+  customerAction = new Action();
+  customerProjectRythm = new ProjectRythm();
+  customerTeamMember = new TeamMember();
 
   constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
     private dialog: MatDialog) {
@@ -51,25 +57,39 @@ export class TeamViewComponent {
                 });
             }
           });
+
+
+        this.dataService.getEntityAllData('employees')
+          .then((resEmployeeData) => {
+            resEmployeeData.forEach(e => this.employees.push(e));
+          });
+
+        console.log(this.employees)
       }
     });
   }
 
-  openTeamMemberDialog(): void {
-    this.openDialog(TeamMemberDialogComponent, 'teammembers', new TeamMember(), this.customerTeamMembers);
+  openDialog(entityName) {
+    if (entityName === 'teammembers') {
+      this.customerTeamMember = new TeamMember();
+      this.openEntityDialog(TeamMemberDialogComponent, entityName, this.customerTeamMembers);
+    }
+    else if (entityName === 'actions') {
+      this.customerAction = new Action();
+      this.openEntityDialog(ActionDialogComponent, entityName, this.customerActions);
+    }
+    else if (entityName === 'projectrythms') {
+      this.customerProjectRythm = new ProjectRythm();
+      this.openEntityDialog(ProjectRythmDialogComponent, entityName, this.customerProjectRythms);
+    }
+    else {
+      console.log(entityName + " not found");
+    }
   }
 
-  openActionDialog(): void {
-    this.openDialog(ActionDialogComponent, 'actions', new Action(), this.customerActions);
-  }
-
-  openProjectRythmDialog(): void {
-    this.openDialog(ProjectRythmDialogComponent, 'projectrythms', new Action(), this.customerProjectRythms);
-  }
-
-  openDialog(dialogComponent, entityName, entity, entityArray) {
+  openEntityDialog(dialogComponent, entityName, entityArray) {
     let dialogRef = this.dialog.open(dialogComponent, {
-      data: entity
+      data: this
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== 'dialogDismissed' && result !== undefined) {
@@ -110,25 +130,31 @@ export class TeamViewComponent {
       );
   }
 
-  openTeamMemberUpdateDialog(id: number): void {
-    this.openUpdateDialog('teammembers', TeamMemberDialogComponent, id, this.customerTeamMembers);
+  openUpdateDialog(entityName: String, id: number) {
+    if (entityName === 'teammembers') {
+      this.customerTeamMember = this.customerTeamMembers[this.customerTeamMembers.findIndex(e => e.id === id)];
+      this.openEntityUpdateDialog(entityName, TeamMemberDialogComponent, id, this.customerTeamMembers);
+    }
+    else if (entityName === 'actions') {
+      this.customerAction = this.customerActions[this.customerActions.findIndex(e => e.id === id)];
+      this.openEntityUpdateDialog(entityName, ActionDialogComponent, id, this.customerActions);
+    }
+    else if (entityName === 'projectrythms') {
+      this.customerProjectRythm = this.customerProjectRythms[this.customerProjectRythms.findIndex(e => e.id === id)];
+      this.openEntityUpdateDialog(entityName, ProjectRythmDialogComponent, id, this.customerProjectRythms);
+    }
+    else {
+      console.log(entityName + " not found");
+    }
   }
 
-  openProjectRythmUpdateDialog(id: number): void {
-    this.openUpdateDialog('projectrythms', ProjectRythmDialogComponent, id, this.customerProjectRythms);
-  }
-
-  openActionUpdateDialog(id: number): void {
-    this.openUpdateDialog('actions', ActionDialogComponent, id, this.customerActions);
-  }
-
-  openUpdateDialog(entityName, dialogComponent, id, entityArray): void {
+  openEntityUpdateDialog(entityName, dialogComponent, id, entityArray): void {
     const index = entityArray.findIndex(e => e.id === id);
     let entity = entityArray[index];
     var entityCopy = Object.assign({}, entity);
 
     let dialogRef = this.dialog.open(dialogComponent, {
-      data: entity
+      data: this
     });
 
     dialogRef.afterClosed().subscribe(result => {

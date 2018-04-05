@@ -1,21 +1,26 @@
-<div *ngIf="  data!==undefined" >
-   <h2 mat-dialog-title>Update TeamMember </h2>
+<div *ngIf="  data.customerTeamMember!==undefined" >
+   <h2 *ngIf="data.customerTeamMember.id === ''" mat-dialog-title>Create TeamMember</h2>
+   <h2   *ngIf="data.customerTeamMember.id !== ''" mat-dialog-title>Update TeamMember</h2>
    <mat-dialog-content>
       <form id="formNewTeamMemberUpdate" name="formNewTeamMemberUpdate"  #teamMemberUpdate="ngForm">
          <mat-form-field >
-            <input matInput placeholder="role" name="role" [value]="data.role" [(ngModel)]="data.role" ngModel><br>
+            <input matInput placeholder="Role" name="role" [value]="data.customerTeamMember.role" [(ngModel)]="data.customerTeamMember.role" ngModel><br>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="productivity" name="productivity" [value]="data.productivity" [(ngModel)]="data.productivity" ngModel>
+            <input matInput placeholder="Velocity" name="velocity" [value]="data.customerTeamMember.velocity" [(ngModel)]="data.customerTeamMember.velocity" ngModel>
          </mat-form-field>
-         <mat-form-field >
-            <input matInput placeholder="employeeId" name="employeeId" [value]="data.employeeId" [(ngModel)]="data.employeeId" ngModel><br>
+         <mat-form-field>
+           <mat-select [(value)]="selected" [(ngModel)]="data.customerTeamMember.employeeId" placeholder="Employee" name="employeeId" >
+             <mat-option *ngFor="let employee of data.employees" [value]="employee.id">
+               {{ employee.name }}
+             </mat-option>
+           </mat-select>
          </mat-form-field>
       </form>
    </mat-dialog-content>
    <mat-dialog-actions>
-      <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
       <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-      <button mat-button [mat-dialog-close]=data>Update</button>
+      <button mat-button [mat-dialog-close]=data.customerTeamMember>Update</button>
+      <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
    </mat-dialog-actions>
 </div>

@@ -1,17 +1,22 @@
-<div *ngIf="  data!==undefined" >
-   <h2 mat-dialog-title>Update Certification</h2>
+<div *ngIf="  data.employeeCertification!==undefined" >
+   <h2 *ngIf="data.employeeCertification.id === ''" mat-dialog-title>Add Certification</h2>
+   <h2   *ngIf="data.employeeCertification.id !== ''" mat-dialog-title>Update Certification</h2>
    <mat-dialog-content>
       <form id="formNewCertificationUpdate" name="formNewCertificationUpdate"  #certificationDataUpdate="ngForm">
          <mat-form-field >
-            <input matInput placeholder="name" name="name" [value]="data.name" [(ngModel)]="data.name" ngModel><br>
+            <input matInput placeholder="Name" name="name" [value]="data.employeeCertification.name" [(ngModel)]="data.employeeCertification.name" ngModel><br>
          </mat-form-field>
-         <mat-form-field >
-            <input matInput placeholder="yearOfCertification" name="yearOfCertification" [value]="data.yearOfCertification" [(ngModel)]="data.yearOfCertification" ngModel>
+         <mat-form-field>
+           <mat-select [(value)]="selected" [(ngModel)]="data.employeeCertification.yearOfCertification" placeholder="Year of Certification" name="yearOfCertification" >
+             <mat-option *ngFor="let yearCerti of data.certificationYearOfCertification" [value]="yearCerti">
+               {{ yearCerti }}
+             </mat-option>
+           </mat-select>
          </mat-form-field>
       </form>
    </mat-dialog-content>
    <mat-dialog-actions>
+      <button mat-button [mat-dialog-close]=data.employeeCertification>Update</button>
       <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
-      <button mat-button [mat-dialog-close]=data>Update</button>
    </mat-dialog-actions>
 </div>

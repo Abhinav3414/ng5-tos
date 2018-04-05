@@ -1,20 +1,21 @@
-<div *ngIf="  data!==undefined" >
-   <h2 mat-dialog-title>Update ImprovementArea</h2>
+<div *ngIf="  data.employeeImprovementArea!==undefined" >
+   <h2 *ngIf="data.employeeImprovementArea.id === ''" mat-dialog-title>Add ImprovementArea</h2>
+   <h2   *ngIf="data.employeeImprovementArea.id !== ''" mat-dialog-title>Update ImprovementArea</h2>
    <mat-dialog-content>
       <form id="formNewImprovementAreaUpdate" name="formNewImprovementAreaUpdate"  #improvementAreaDataUpdate="ngForm">
          <mat-form-field >
-            <input matInput placeholder="areasOfImprovement" name="areasOfImprovement" [value]="data.areasOfImprovement" [(ngModel)]="data.areasOfImprovement" ngModel><br>
+            <input matInput placeholder="Areas of Improvement" name="areasOfImprovement" [value]="data.employeeImprovementArea.areasOfImprovement" [(ngModel)]="data.employeeImprovementArea.areasOfImprovement" ngModel><br>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="improvementPlan" name="improvementPlan" [value]="data.improvementPlan" [(ngModel)]="data.improvementPlan" ngModel>
+            <input matInput placeholder="Improvement Plan" name="improvementPlan" [value]="data.employeeImprovementArea.improvementPlan" [(ngModel)]="data.employeeImprovementArea.improvementPlan" ngModel>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="proposedDate" name="proposedDate" [value]="data.proposedDate" [(ngModel)]="data.proposedDate" ngModel><br>
+            <input matInput placeholder="Proposed Date" name="proposedDate" [value]="data.employeeImprovementArea.proposedDate" [(ngModel)]="data.employeeImprovementArea.proposedDate" ngModel><br>
          </mat-form-field>
       </form>
    </mat-dialog-content>
    <mat-dialog-actions>
+      <button mat-button [mat-dialog-close]=data.employeeImprovementArea>Update</button>
       <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
-      <button mat-button [mat-dialog-close]=data>Update</button>
    </mat-dialog-actions>
 </div>

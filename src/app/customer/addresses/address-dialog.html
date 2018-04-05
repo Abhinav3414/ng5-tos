@@ -1,35 +1,36 @@
 <div *ngIf="  data.customerAddress!==undefined" >
-   <h2 mat-dialog-title>Update Address Details </h2>
+   <h2 *ngIf="data.customerAddress.id === ''" mat-dialog-title>Create Address</h2>
+   <h2   *ngIf="data.customerAddress.id !== ''" mat-dialog-title>Update Address</h2>
    <mat-dialog-content>
       <form id="formNewAddressUpdate" name="formNewAddressUpdate"  #addressDataUpdate="ngForm">
          <mat-form-field >
-            <input matInput placeholder="addressType" name="addressType" [value]="data.customerAddress.addressType" [(ngModel)]="data.customerAddress.addressType" ngModel><br>
+            <input matInput placeholder="Address Type" name="addressType" [value]="data.customerAddress.addressType" [(ngModel)]="data.customerAddress.addressType" ngModel><br>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="houseNo" name="houseNo" [value]="data.customerAddress.houseNo" [(ngModel)]="data.customerAddress.houseNo" ngModel>
+            <input matInput placeholder="House No" name="houseNo" [value]="data.customerAddress.houseNo" [(ngModel)]="data.customerAddress.houseNo" ngModel>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="street" name="street" [value]="data.customerAddress.street" [(ngModel)]="data.customerAddress.street" ngModel>
+            <input matInput placeholder="Street" name="street" [value]="data.customerAddress.street" [(ngModel)]="data.customerAddress.street" ngModel>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="landMark" name="landMark" [value]="data.customerAddress.landMark" [(ngModel)]="data.customerAddress.landMark" ngModel>
+            <input matInput placeholder="Landmark" name="landMark" [value]="data.customerAddress.landMark" [(ngModel)]="data.customerAddress.landMark" ngModel>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="city" name="city" [value]="data.customerAddress.city" [(ngModel)]="data.customerAddress.city" ngModel>
+            <input matInput placeholder="City" name="city" [value]="data.customerAddress.city" [(ngModel)]="data.customerAddress.city" ngModel>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="zip" name="zip" [value]="data.customerAddress.zip" [(ngModel)]="data.customerAddress.zip" ngModel>
+            <input matInput placeholder="Zip" name="zip" [value]="data.customerAddress.zip" [(ngModel)]="data.customerAddress.zip" ngModel>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="state" name="state" [value]="data.customerAddress.state" [(ngModel)]="data.customerAddress.state" ngModel>
+            <input matInput placeholder="State" name="state" [value]="data.customerAddress.state" [(ngModel)]="data.customerAddress.state" ngModel>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="country" name="country" [value]="data.customerAddress.country" [(ngModel)]="data.customerAddress.country" ngModel>
+            <input matInput placeholder="Country" name="country" [value]="data.customerAddress.country" [(ngModel)]="data.customerAddress.country" ngModel>
          </mat-form-field>
       </form>
    </mat-dialog-content>
    <mat-dialog-actions>
-      <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
       <button mat-button [mat-dialog-close]=data.customerAddress>Update</button>
+      <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
    </mat-dialog-actions>
 </div>

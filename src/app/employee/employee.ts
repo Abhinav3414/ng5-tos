@@ -1,4 +1,5 @@
 export class Employee {
+  id = '';
   name = '';
   joiningDate = '';
   yearsOfExperience = '';
