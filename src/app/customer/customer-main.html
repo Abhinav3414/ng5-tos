@@ -1,16 +1,11 @@
-<div class="container">
-   <div fxFlex="20%" fxHide.lt-md="true">
-   </div>
-   <div fxFlex="60%">
       <h3>Customer Operations</h3>
       <div class=" tos-button-right">
          <button mat-button color="primary" mat-mini-fab (click)="openDialog()"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
       </div>
       <div *ngIf="customers.length===0">No Customers Present</div>
-      <div class="container tos-cust-cards" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutWrap>
-        <br>
-         <div *ngFor = "let cust of customers">
-            <mat-card class="tos-cust-cards-style" >
+        <div class="container " fxlayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
+         <div fxFlex="100%" *ngFor = "let cust of customers">
+            <mat-card>
                <mat-card-header>
                   <mat-card-title><span (click)="navigateViewCustomer(cust.id)" class="tos-cust-heading"> {{cust.id}} {{cust.name}} </span></mat-card-title>
                   <mat-card-subtitle><span (click)="navigateViewCustomer(cust.id)" class="tos-cust-heading"> Customer </span></mat-card-subtitle>
@@ -40,8 +35,4 @@
                </mat-card-actions>
             </mat-card>
          </div>
-      </div>
-   </div>
-   <div fxFlex="10%" fxHide.lt-md="true">
-   </div>
-</div>
+       </div>

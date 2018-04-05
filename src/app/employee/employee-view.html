@@ -1,8 +1,6 @@
-<div fxFlex="20%" fxHide.lt-md="true"></div>
-<div fxFlex="100%" >
   <div *ngIf="employee != undefined" style="color: #818080;">
      <h2 style="color: #000000;">{{employee.name}} </h2>
-     <b> Joining Date : </b> {{employee.joiningDate}} &emsp;&emsp;
+     <b> Joining Date : </b> {{employee.joiningDate | date : 'd-M-yy'}} &emsp;&emsp;
      <b> Responsibilities : </b> {{employee.responsibilities}} &emsp;&emsp; <b> Total years of Experience : </b> {{employee.yearsOfExperience}} <br><br>
   </div>
 
@@ -24,11 +22,15 @@
        <div fxFlex="30%" *ngFor = "let skill of employeeSkills" >
           <mat-card class="example-card" >
              <mat-card-header>
-                <mat-card-title>skill</mat-card-title>
-                <mat-card-subtitle>{{skill.name}}</mat-card-subtitle>
+                <mat-card-title class="tos-card-title">{{skill.name}}
+                  <span>
+                  <a class="tos-rating" *ngFor="let i of Arr(+skill.rating).fill(1)"><mat-icon >star rate</mat-icon></a>
+                </span>
+                </mat-card-title>
+                <mat-card-subtitle>Skill</mat-card-subtitle>
              </mat-card-header>
              <mat-card-content>
-                {{skill.duration}} <br> {{skill.rating}} <br> {{skill.lastUsed}}<br>
+                {{skill.duration}} <br> {{skill.lastUsed}}<br>
               </mat-card-content>
              <mat-card-actions>
                <span (click)="openSkillUpdateDialog(skill.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
@@ -196,6 +198,3 @@
   </div>
 </mat-expansion-panel>
 </mat-accordion>
-
-</div>
-<div fxFlex="20%" fxHide.lt-md="true"></div>

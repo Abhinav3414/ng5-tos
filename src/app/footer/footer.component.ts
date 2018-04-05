@@ -3,10 +3,10 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'menu',
-  templateUrl: './menu.html'
+  selector: 'footer',
+  templateUrl: './footer.html'
 })
-export class MenuComponent {
+export class FooterComponent {
   items: any[];
   title = 'Team Operations System';
 

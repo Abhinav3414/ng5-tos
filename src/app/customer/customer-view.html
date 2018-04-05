@@ -1,5 +1,3 @@
-<div fxFlex="20%" fxHide.lt-md="true"></div>
-<div fxFlex="100%" >
 <div *ngIf="customer != undefined" >
    <h2 >{{customer.name}}</h2>
 
@@ -177,7 +175,7 @@
            </mat-card-header>
            <mat-card-content>
              {{travel.travellingFrom}} To {{travel.travellingTo}}<br>
-              {{travel.travellingFromDate}} To {{travel.travellingToDate}}<br>
+              {{travel.travellingFromDate | date : 'd-M-yy'}} To {{travel.travellingToDate | date : 'd-M-yy'}}<br>
               {{travel.purpose}}
            </mat-card-content>
            <mat-card-actions>
@@ -191,6 +189,3 @@
   </div>
 </mat-expansion-panel>
 </mat-accordion>
-
-</div>
-<div fxFlex="20%" fxHide.lt-md="true"></div>

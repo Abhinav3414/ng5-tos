@@ -35,6 +35,7 @@ export class EmployeeViewComponent {
   employeeImprovementAreas = [];
   employeeTeamMembers = [];
   teams = [];
+  Arr = Array; //Array type captured in a variable
 
   constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
     private dialog: MatDialog) {

@@ -12,11 +12,15 @@ import { MatDialogModule } from '@angular/material';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material';
 
 @NgModule({
   imports: [MatButtonModule, MatToolbarModule, MatCardModule, MatInputModule, MatIconModule,
-    MatMenuModule, MatFormFieldModule, MatDialogModule, MatExpansionModule, MatAutocompleteModule, MatSelectModule],
+    MatMenuModule, MatFormFieldModule, MatDialogModule, MatExpansionModule, MatAutocompleteModule, MatSelectModule,
+    MatDatepickerModule, MatNativeDateModule],
   exports: [MatButtonModule, MatToolbarModule, MatCardModule, MatInputModule, MatIconModule,
-    MatMenuModule, MatFormFieldModule, MatDialogModule, MatExpansionModule, MatAutocompleteModule, MatSelectModule]
+    MatMenuModule, MatFormFieldModule, MatDialogModule, MatExpansionModule, MatAutocompleteModule, MatSelectModule,
+    MatDatepickerModule, MatNativeDateModule]
 })
 export class CustomMaterialModule { }

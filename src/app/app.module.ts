@@ -4,7 +4,7 @@ import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/c
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { FlexLayoutModule } from '@angular/flex-layout'
 
@@ -18,6 +18,10 @@ import { EmployeeDialogComponent } from './employee/employee-dialog.component';
 
 import { AboutComponent } from './about/about.component';
 import { MenuComponent } from './menu/menu.component';
+import {FooterComponent } from './footer/footer.component';
+import {ContentComponent } from './content/content.component';
+
+
 import { CustomerMainComponent } from './customer/customer-main.component';
 import { CustomerViewComponent } from './customer/customer-view.component';
 import { CustomerDialogComponent } from './customer/customer-dialog.component';
@@ -39,14 +43,12 @@ import { CertificationDialogComponent } from './employee/certification/certifica
 import { ImprovementAreaDialogComponent } from './employee/improvementarea/improvementarea-dialog.component';
 import { FeedbackDialogComponent } from './employee/feedback/feedback-dialog.component';
 import { TrainingDialogComponent } from './employee/training/training-dialog.component';
+import {ProfileComponent} from './profile/profile.component';
 
 import { ActionDialogComponent } from './customer/team/action/action-dialog.component';
 
 import { DataService } from './services/data.service';
 import { RouterModule, Routes } from '@angular/router';
-
-
-import {DomSanitizer} from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -72,7 +74,10 @@ import {DomSanitizer} from '@angular/platform-browser';
     CertificationDialogComponent,
     TrainingDialogComponent,
     ImprovementAreaDialogComponent,
-    FeedbackDialogComponent
+    FeedbackDialogComponent,
+    ProfileComponent,
+    FooterComponent,
+    ContentComponent
   ],
   imports: [
     BrowserModule,
@@ -82,10 +87,11 @@ import {DomSanitizer} from '@angular/platform-browser';
     CustomMaterialModule,
     FlexLayoutModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    ReactiveFormsModule
   ],
-  exports: [  ],
-  providers: [ DataService
+  exports: [],
+  providers: [DataService
     /*{ provide: LocationStrategy, useClass: HashLocationStrategy },*/
   ],
   entryComponents: [
@@ -98,7 +104,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 })
 export class AppModule {
 
-  constructor(){
+  constructor() {
   }
 
- }
+}

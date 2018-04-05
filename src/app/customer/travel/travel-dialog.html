@@ -1,29 +1,37 @@
-<div *ngIf="  data!==undefined" >
+<div *ngIf="  data.customerTravel!==undefined" >
    <h2 mat-dialog-title>Update Travel </h2>
    <mat-dialog-content>
       <form id="formNewTravelUpdate" name="formNewTravelUpdate"  #travelDataUpdate="ngForm">
          <mat-form-field >
-            <input matInput placeholder="name" name="name" [value]="data.name" [(ngModel)]="data.name" ngModel><br>
+            <input matInput placeholder="name" name="name" [value]="data.customerTravel.name" [(ngModel)]="data.customerTravel.name" ngModel><br>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="travellingFrom" name="travellingFrom" [value]="data.travellingFrom" [(ngModel)]="data.travellingFrom" ngModel>
+            <input matInput placeholder="travellingFrom" name="travellingFrom" [value]="data.customerTravel.travellingFrom" [(ngModel)]="data.customerTravel.travellingFrom" ngModel>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="travellingTo" name="travellingTo" [value]="data.travellingTo" [(ngModel)]="data.travellingTo" ngModel>
+            <input matInput placeholder="travellingTo" name="travellingTo" [value]="data.customerTravel.travellingTo" [(ngModel)]="data.customerTravel.travellingTo" ngModel>
+         </mat-form-field>
+         <mat-form-field>
+            <input matInput name="travellingFromDate" [matDatepicker]="picker" placeholder="Travelling From Date"
+            [value]="data.customerTravel.travellingFromDate"
+            [(ngModel)]="data.customerTravel.travellingFromDate" ngModel>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker  #picker></mat-datepicker>
+         </mat-form-field>
+         <mat-form-field>
+            <input matInput name="travellingToDate" [matDatepicker]="pickers" placeholder="Travelling to Date"
+            [value]="data.customerTravel.travellingToDate"
+            [(ngModel)]="data.customerTravel.travellingToDate" ngModel>
+            <mat-datepicker-toggle matSuffix [for]="pickers"></mat-datepicker-toggle>
+            <mat-datepicker #pickers></mat-datepicker>
          </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="travellingFromDate" name="travellingFromDate" [value]="data.travellingFromDate" [(ngModel)]="data.travellingFromDate" ngModel>
-         </mat-form-field>
-         <mat-form-field >
-            <input matInput placeholder="travellingToDate" name="travellingToDate" [value]="data.travellingToDate" [(ngModel)]="data.travellingToDate" ngModel>
-         </mat-form-field>
-         <mat-form-field >
-            <input matInput placeholder="purpose" name="purpose" [value]="data.purpose" [(ngModel)]="data.purpose" ngModel>
+            <input matInput placeholder="purpose" name="purpose" [value]="data.customerTravel.purpose" [(ngModel)]="data.customerTravel.purpose" ngModel>
          </mat-form-field>
       </form>
    </mat-dialog-content>
    <mat-dialog-actions>
       <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
-      <button mat-button [mat-dialog-close]=data>Update</button>
+      <button mat-button [mat-dialog-close]=data.customerTravel>Update</button>
    </mat-dialog-actions>
 </div>
