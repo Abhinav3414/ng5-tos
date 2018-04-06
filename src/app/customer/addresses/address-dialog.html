@@ -1,28 +1,11 @@
+<!--
 <div *ngIf="  data.customerAddress!==undefined" >
    <h2 *ngIf="data.customerAddress.id === ''" mat-dialog-title>Create Address</h2>
    <h2   *ngIf="data.customerAddress.id !== ''" mat-dialog-title>Update Address</h2>
    <mat-dialog-content>
       <form id="formNewAddressUpdate" name="formNewAddressUpdate"  #addressDataUpdate="ngForm">
          <mat-form-field >
-            <input matInput placeholder="Address Type" name="addressType" [value]="data.customerAddress.addressType" [(ngModel)]="data.customerAddress.addressType" ngModel><br>
-         </mat-form-field>
-         <mat-form-field >
-            <input matInput placeholder="House No" name="houseNo" [value]="data.customerAddress.houseNo" [(ngModel)]="data.customerAddress.houseNo" ngModel>
-         </mat-form-field>
-         <mat-form-field >
-            <input matInput placeholder="Street" name="street" [value]="data.customerAddress.street" [(ngModel)]="data.customerAddress.street" ngModel>
-         </mat-form-field>
-         <mat-form-field >
-            <input matInput placeholder="Landmark" name="landMark" [value]="data.customerAddress.landMark" [(ngModel)]="data.customerAddress.landMark" ngModel>
-         </mat-form-field>
-         <mat-form-field >
-            <input matInput placeholder="City" name="city" [value]="data.customerAddress.city" [(ngModel)]="data.customerAddress.city" ngModel>
-         </mat-form-field>
-         <mat-form-field >
-            <input matInput placeholder="Zip" name="zip" [value]="data.customerAddress.zip" [(ngModel)]="data.customerAddress.zip" ngModel>
-         </mat-form-field>
-         <mat-form-field >
-            <input matInput placeholder="State" name="state" [value]="data.customerAddress.state" [(ngModel)]="data.customerAddress.state" ngModel>
+            <input matInput placeholder="Address" name="address" [value]="data.customerAddress.address" [(ngModel)]="data.customerAddress.address" ngModel><br>
          </mat-form-field>
          <mat-form-field >
             <input matInput placeholder="Country" name="country" [value]="data.customerAddress.country" [(ngModel)]="data.customerAddress.country" ngModel>
@@ -34,3 +17,4 @@
       <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
    </mat-dialog-actions>
 </div>
+-->

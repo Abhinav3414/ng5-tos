@@ -26,8 +26,9 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
     <div class=" tos-button-right">
-       <button mat-button color="primary" mat-mini-fab (click)="openDialog('goals')"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
-    </div>
+      <span  (click)="openDialog('goals')" style="cursor:pointer;color:grey; font-size: 2.5em;">+</span>
+     </div>
+
     <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
        <div fxFlex="30%" *ngFor = "let goal of customerGoals">
           <mat-card class="example-card" >
@@ -51,6 +52,7 @@
     </div>
   </mat-expansion-panel>
 
+<!--
 
 <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
   <mat-expansion-panel-header>
@@ -58,7 +60,6 @@
       <h3>Addresses</h3>
     </mat-panel-title>
     <mat-panel-description>
-        <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
     </mat-panel-description>
   </mat-expansion-panel-header>
   <div class=" tos-button-right">
@@ -69,12 +70,9 @@
         <mat-card class="example-card" >
            <mat-card-header>
               <mat-card-title>Address</mat-card-title>
-              <mat-card-subtitle>{{address.addressType}}</mat-card-subtitle>
+              <mat-card-subtitle>{{address.address}}</mat-card-subtitle>
            </mat-card-header>
            <mat-card-content>
-              {{address.houseNo}}, {{address.street}} <br>
-              {{address.landMark}}, {{address.city}}<br>
-              {{address.state}}, {{address.zip}}<br>
               {{address.country}} <br>
            </mat-card-content>
            <mat-card-actions>
@@ -87,6 +85,8 @@
   </div>
 </mat-expansion-panel>
 
+-->
+
 <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
   <mat-expansion-panel-header>
     <mat-panel-title>
@@ -98,7 +98,7 @@
   </mat-expansion-panel-header>
 
   <div class=" tos-button-right">
-     <button mat-button color="primary" mat-mini-fab (click)="openDialog('teams')"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
+    <span  (click)="openDialog('teams')" style="cursor:pointer;color:grey; font-size: 2.5em;">+</span>
   </div>
   <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
      <div fxFlex="30%" *ngFor = "let team of customerTeams">
@@ -130,7 +130,7 @@
     </mat-panel-description>
   </mat-expansion-panel-header>
   <div class=" tos-button-right">
-     <button mat-button color="primary" mat-mini-fab (click)="openDialog('stakeholders')"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
+     <span  (click)="openDialog('stakeholders')" style="cursor:pointer;color:grey; font-size: 2.5em;">+</span>
   </div>
   <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
      <div fxFlex="30%" *ngFor = "let sholder of customerStakeholders">
@@ -143,7 +143,6 @@
              {{sholder.role}} <br>
              {{sholder.email}}<br>
              {{sholder.phoneNo}}<br>
-             {{sholder.raci}}
            </mat-card-content>
            <mat-card-actions>
               <span (click)="openUpdateDialog('stakeholders',sholder.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
@@ -165,7 +164,7 @@
     </mat-panel-description>
   </mat-expansion-panel-header>
   <div class=" tos-button-right">
-     <button mat-button color="primary" mat-mini-fab (click)="openDialog('travels')"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
+    <span  (click)="openDialog('travels')" style="cursor:pointer;color:grey; font-size: 2.5em;">+</span>
   </div>
   <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
      <div fxFlex="30%" *ngFor = "let travel of customerTravels">

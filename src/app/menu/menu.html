@@ -35,22 +35,28 @@
    <button mat-button (click)="navigateHome()">Home</button>
    <button mat-button (click)="navigateEmployeeHome()">Employee</button>
    <button mat-button (click)="navigateCustomers()">Customer</button>
-    <button mat-button (click)="navigateProfile()">Profile</button>
+  <!--  <button mat-button (click)="navigateProfile()">DashBoard</button> -->
    <button mat-button (click)="navigateAbout()">About</button>
-   <button mat-button>Logout</button>
+   <button mat-button (click)="navigateHome()">Logout</button>
 </div>
 <div fxShow="false" fxShow.lt-md="true" fxLayout="column">
    <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
    <button mat-button (click)="navigateHome()">Home</button>
    <button mat-button (click)="navigateEmployeeHome()">Employee</button>
    <button mat-button (click)="navigateCustomers()">Customer</button>
-     <button mat-button (click)="navigateProfile()">Profile</button>
+  <!--   <button mat-button (click)="navigateProfile()">DashBoard</button> -->
    <button mat-button (click)="navigateAbout()">About</button>
-   <button mat-button>Logout</button>
+   <button mat-button (click)="navigateHome()">Logout</button>
    </mat-menu>
    <button mat-icon-button [matMenuTriggerFor]="appMenu">
       <mat-icon>more_vert</mat-icon>
    </button>
 </div>
-</mat-toolbar><!--
+</mat-toolbar>
+
+
+<breadcrumb [val]="val"> </breadcrumb>
+
+
+<!--
 -->

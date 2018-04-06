@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
@@ -7,6 +7,8 @@ import { DataService } from '../services/data.service';
 import { EmployeeDialogComponent } from './employee-dialog.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Employee } from './employee';
+import { BreadCrumb } from '../menu/breadCrumb';
+
 
 const dummyDialogEntity = { id: 0, name: "dummy" };
 
@@ -15,14 +17,19 @@ const dummyDialogEntity = { id: 0, name: "dummy" };
   templateUrl: './employee-main.html'
 })
 export class EmployeeMainComponent {
+  @Output() notify: EventEmitter<string> = new EventEmitter<string>();
+
   employees = [];
   employee = new Employee();
+  bread: BreadCrumb;
+
 
   constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
     private dialog: MatDialog) {
   }
 
   ngOnInit() {
+    this.dataService.currentBreadCrumb.subscribe(bread => this.bread = bread);
     this.dataService.getEntityAllData('employees')
       .then((resEmployeeData) => {
         resEmployeeData.forEach(e => this.employees.push(e));
@@ -88,7 +95,19 @@ export class EmployeeMainComponent {
       );
   }
 
+
+  addBreadCrumb(label, url, entityId) {
+    let bread = new BreadCrumb();
+    bread.id = "id";
+    bread.label = label;
+    bread.url = url;
+    bread.entityId = entityId;
+    console.log(bread)
+    this.dataService.changeMessage(bread)
+  }
+
   navigateViewEmployee(id) {
+    this.addBreadCrumb('Employee', '/employee-view', id);
     this.router.navigate(['/employee-view', id], { skipLocationChange: true });
   }
 

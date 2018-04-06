@@ -1,38 +1,45 @@
-      <h3>Customer Operations</h3>
-      <div class=" tos-button-right">
-         <button mat-button color="primary" mat-mini-fab (click)="openDialog()"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
-      </div>
-      <div *ngIf="customers.length===0">No Customers Present</div>
-        <div class="container " fxlayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
-         <div fxFlex="100%" *ngFor = "let cust of customers">
-            <mat-card>
-               <mat-card-header>
-                  <mat-card-title><span (click)="navigateViewCustomer(cust.id)" class="tos-cust-heading"> {{cust.id}} {{cust.name}} </span></mat-card-title>
-                  <mat-card-subtitle><span (click)="navigateViewCustomer(cust.id)" class="tos-cust-heading"> Customer </span></mat-card-subtitle>
-               </mat-card-header>
-               <mat-card-content>
-                  <table style="width: 100%;">
-                     <th > <a *ngIf="cust.domain != null">Domain </a></th>
-                     <th > <a *ngIf="cust.contactPerson != null">Contact Person </a></th>
-                     <th > <a  *ngIf="cust.addresses !==null">Contact Address </a> </th>
-                     <th >Contact Number</th>
-                     <tr class="tos-table">
-                        <td> <a *ngIf="cust.domain != null" >{{cust.domain}} </a> </td>
-                        <td> <a *ngIf="cust.contactPerson != null" >{{cust.contactPerson}} </a> </td>
-                        <td ><a *ngIf="cust.addresses !== null && cust.addresses[0] !== undefined" >{{cust.addresses[0].state}},{{cust.addresses[0].country}} </a>
-                            <a  > </a>
-                        </td>
-                        <td >{{cust.contact}}</td>
-                     </tr>
-                  </table>
-               </mat-card-content>
-               <mat-card-actions>
+<h3>All Customers</h3>
+<div class=" tos-button-right">
+   <!--   <button mat-button color="primary" mat-mini-fab (click)="openDialog()"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
+      -->
+   <span  (click)="openDialog()" style="cursor:pointer;color:grey; font-size: 2.5em;">+</span>
+</div>
+<div *ngIf="customers.length===0">No Customers Present</div>
+<div class="container " fxlayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutAlign="flex-start">
+   <div fxFlex="100%" *ngFor = "let cust of customers">
+      <mat-card>
+         <mat-card-header>
+            <mat-card-title><span (click)="navigateViewCustomer(cust.id)" class="tos-cust-heading"> {{cust.id}} {{cust.name}} </span></mat-card-title>
+            <mat-card-subtitle><span (click)="navigateViewCustomer(cust.id)" class="tos-cust-heading"> Customer </span></mat-card-subtitle>
+         </mat-card-header>
+         <mat-card-content>
+            <table style="width: 100%;">
+               <th > <a *ngIf="cust.domain != null">Domain </a></th>
+               <th > <a *ngIf="cust.contactPerson != null">Contact Person </a></th>
+               <th > <a  *ngIf="cust.addresses !==null">Contact Address </a> </th>
+               <th >Contact Number</th>
+               <tr class="tos-table">
+                  <td> <a *ngIf="cust.domain != null" >{{cust.domain}} </a> </td>
+                  <td> <a *ngIf="cust.contactPerson != null" >{{cust.contactPerson}} </a> </td>
+                  <td ><a *ngIf="cust.addresses !== null && cust.addresses[0] !== undefined" >{{cust.addresses[0].address}},{{cust.addresses[0].country}} </a>
+                     <a  > </a>
+                  </td>
+                  <td >{{cust.contact}}</td>
+               </tr>
+            </table>
+         </mat-card-content>
+         <mat-card-actions>
             <!--    <button mat-mini-fab (click)="openUpdateDialog(cust.id)" > <mat-icon >create</mat-icon> </button>
-                  <button mat-mini-fab (click)="deleteCustomer(cust.id)"> <mat-icon >delete</mat-icon> </button> -->
-                  <br>
-                  <span (click)="openUpdateDialog(cust.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
-                  <span (click)="deleteCustomer(cust.id)" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
-               </mat-card-actions>
-            </mat-card>
-         </div>
-       </div>
+               <button mat-mini-fab (click)="deleteCustomer(cust.id)"> <mat-icon >delete</mat-icon> </button> -->
+            <br>
+            <span (click)="openUpdateDialog(cust.id)" style="cursor:pointer;color:grey">
+               <mat-icon  >create</mat-icon>
+            </span>
+            &emsp;
+            <span (click)="deleteCustomer(cust.id)" style="cursor:pointer; color:grey">
+               <mat-icon  >delete</mat-icon>
+            </span>
+         </mat-card-actions>
+      </mat-card>
+   </div>
+</div>

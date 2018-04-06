@@ -15,7 +15,7 @@
        </mat-panel-description>
      </mat-expansion-panel-header>
      <div class=" tos-button-right">
-        <button mat-button color="primary" mat-mini-fab (click)="openDialog('teammembers')"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
+       <span  (click)="openDialog('teammembers')" style="cursor:pointer;color:grey; font-size: 2.5em;">+</span>
      </div>
      <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
         <div fxFlex="30%" *ngFor = "let member of customerTeamMembers">
@@ -48,7 +48,7 @@
        </mat-panel-description>
      </mat-expansion-panel-header>
      <div class=" tos-button-right">
-        <button mat-button color="primary" mat-mini-fab (click)="openDialog('actions')"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
+       <span  (click)="openDialog('actions')" style="cursor:pointer;color:grey; font-size: 2.5em;">+</span>
      </div>
      <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
         <div fxFlex="30%" *ngFor = "let action of customerActions">
@@ -81,7 +81,7 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div class=" tos-button-right">
-           <button mat-button color="primary" mat-mini-fab (click)="openDialog('projectrythms')"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
+          <span  (click)="openDialog('projectrythms')" style="cursor:pointer;color:grey; font-size: 2.5em;">+</span>
         </div>
         <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
            <div fxFlex="30%" *ngFor = "let projectRythm of customerProjectRythms">

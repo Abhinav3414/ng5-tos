@@ -16,7 +16,12 @@ body {
 
 body {
   //background: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
+
+
     background: linear-gradient(96deg, #f4f4f4, #f1f1f1);
+//background: linear-gradient(56deg, #dbdbdb, #f1f1f1);
+
+
  //   background-image: url(./background.png);
   //  background-size: cover;
   //  background-repeat: no-repeat;
@@ -206,9 +211,35 @@ body > app-root > div:nth-child(2) > menu > mat-toolbar:nth-child(2) > div:nth-c
   transition: background-color 0.5s ease;
 }
 
+employee-view .mat-card-header-text,
 employee-main .mat-card-header-text {
   margin : 0;
 }
 employee-main > div.container > div > mat-card > mat-card-content > div > span {
   margin : 0;
+}
+
+.tos-breads {
+  padding: .5em;
+color: #8e8080;
+cursor: pointer;
+}
+
+/*settings for rating stars */
+
+employee-view .mat-card-title {
+  display: flex;
+}
+
+employee-view .mat-card-title mat-icon {
+  font-size: 1.5em;
+}
+
+.mat-card-title h3 {
+  margin: 0;
+  display: flex;
+}
+
+employee-view .mat-card-content {
+  margin: 0;
 }

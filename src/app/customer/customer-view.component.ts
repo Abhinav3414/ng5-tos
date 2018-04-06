@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { DataService } from '../services/data.service';
@@ -11,6 +10,7 @@ import { GoalDialogComponent } from './goal/goal-dialog.component';
 import { TeamDialogComponent } from './team/team-dialog.component';
 import { TravelDialogComponent } from './travel/travel-dialog.component';
 
+import { BreadCrumb } from '../menu/breadCrumb';
 import { Address } from './addresses/address';
 import { Team } from './team/team';
 import { Goal } from './goal/goal';
@@ -38,11 +38,15 @@ export class CustomerViewComponent {
   customerTeam = new Team();
   goalTenures: Array<String>;
 
+  bread: BreadCrumb;
+
   constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
     private dialog: MatDialog) {
   }
 
   ngOnInit() {
+    this.dataService.currentBreadCrumb.subscribe(bread => this.bread = bread);
+
     this.goalTenures = ['Daily', 'Weekly', 'Monthly', 'Yearly'];
 
     this.route.params.subscribe(params => {
@@ -164,7 +168,18 @@ export class CustomerViewComponent {
       );
   }
 
+  addBreadCrumb(label, url, entityId) {
+    let bread = new BreadCrumb();
+    bread.id = "id";
+    bread.label = label;
+    bread.url = url;
+    bread.entityId = entityId;
+    console.log(bread)
+    this.dataService.changeMessage(bread)
+  }
+
   navigateViewTeam(teamId) {
+    this.addBreadCrumb('Team', '/team-view', teamId);
     this.router.navigate(['/team-view', teamId], { skipLocationChange: true });
   }
 

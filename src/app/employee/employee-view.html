@@ -15,26 +15,24 @@
       </mat-panel-description>
    </mat-expansion-panel-header>
    <div class=" tos-button-right">
-      <button mat-button color="primary" mat-mini-fab (click)="openDialog('skills')">
-         <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon>
-      </button>
+      <span  (click)="openDialog('skills')" style="cursor:pointer;color:grey; font-size: 2.5em;">+</span>
    </div>
    <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
       <div fxFlex="30%" *ngFor = "let skill of employeeSkills" >
          <mat-card class="example-card" >
             <mat-card-header>
-               <mat-card-title class="tos-card-title">
-                  {{skill.name}}
+               <mat-card-title>
+                 <h3><span class="tos-cust-heading"> {{skill.name}}</span></h3>
+
                   <span *ngIf="skill.rating !== ''">
                      <a class="tos-rating" *ngFor="let i of Arr(+skill.rating).fill(1)">
                         <mat-icon >star rate</mat-icon>
                      </a>
                   </span>
                </mat-card-title>
-               <mat-card-subtitle>Skill</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
-               {{skill.duration}} <br> {{skill.lastUsed}}<br>
+               Duration: {{skill.duration}} <br>Last Used: {{skill.lastUsed}}<br>
             </mat-card-content>
             <mat-card-actions>
                <span (click)="openUpdateDialog('skills',skill.id)" style="cursor:pointer;color:grey">
@@ -60,9 +58,7 @@
       </mat-panel-description>
    </mat-expansion-panel-header>
    <div class=" tos-button-right">
-      <button mat-button color="primary" mat-mini-fab (click)="openDialog('certifications')">
-         <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon>
-      </button>
+     <span  (click)="openDialog('certifications')" style="cursor:pointer;color:grey; font-size: 2.5em;">+</span>
    </div>
    <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
       <div fxFlex="30%" *ngFor = "let certification of employeeCertifications">
@@ -98,9 +94,7 @@
       </mat-panel-description>
    </mat-expansion-panel-header>
    <div class=" tos-button-right">
-      <button mat-button color="primary" mat-mini-fab (click)="openDialog('trainings')">
-         <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon>
-      </button>
+     <span  (click)="openDialog('trainings')" style="cursor:pointer;color:grey; font-size: 2.5em;">+</span>
    </div>
    <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
       <div fxFlex="30%" *ngFor = "let training of employeeTrainings">
@@ -137,9 +131,7 @@
       </mat-panel-description>
    </mat-expansion-panel-header>
    <div class=" tos-button-right">
-      <button mat-button color="primary" mat-mini-fab (click)="openDialog('feedbacks')">
-         <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon>
-      </button>
+     <span  (click)="openDialog('feedbacks')" style="cursor:pointer;color:grey; font-size: 2.5em;">+</span>
    </div>
    <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
       <div fxFlex="30%" *ngFor = "let feedback of employeeFeedbacks">
@@ -175,9 +167,7 @@
       </mat-panel-description>
    </mat-expansion-panel-header>
    <div class=" tos-button-right">
-      <button mat-button color="primary" mat-mini-fab (click)="openDialog('improvementareas')">
-         <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon>
-      </button>
+      <span  (click)="openDialog('improvementareas')" style="cursor:pointer;color:grey; font-size: 2.5em;">+</span>
    </div>
    <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
       <div fxFlex="30%" *ngFor = "let improvementArea of employeeImprovementAreas">
@@ -200,7 +190,7 @@
             </mat-card-actions>
          </mat-card>
       </div>
-      <div *ngIf="employeeImprovementAreas.length===0">No Goals Defined </div>
+      <div *ngIf="employeeImprovementAreas.length===0">No improvement Areas Defined </div>
    </div>
    </mat-expansion-panel>
    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">

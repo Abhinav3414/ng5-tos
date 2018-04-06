@@ -3,23 +3,37 @@
    <h2   *ngIf="data.customer.id !== ''" mat-dialog-title>Update Customer</h2>
    <mat-dialog-content>
       <form id="formNewEmployee2" name="formNewEmployeeUpdate"  #customerDataUpdate="ngForm">
-         <mat-form-field >
-            <input matInput placeholder="Name" name="name" [value]="data.customer.name" [(ngModel)]="data.customer.name" ngModel><br>
-         </mat-form-field>
-         <mat-form-field >
-            <input matInput placeholder="Contact No." name="contact" [value]="data.customer.contact" [(ngModel)]="data.customer.contact" ngModel>
-         </mat-form-field>
-         <mat-form-field >
-            <input matInput placeholder="Contact Person" name="contactPerson" [value]="data.customer.contactPerson" [(ngModel)]="data.customer.contactPerson" ngModel>
-         </mat-form-field>
-         <mat-form-field >
-            <input matInput placeholder="Domain" name="domain" [value]="data.customer.domain" [(ngModel)]="data.customer.domain" ngModel>
-         </mat-form-field>
+         <div fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
+            <div>
+               <mat-form-field >
+                  <input matInput placeholder="Name" name="name" [value]="data.customer.name" [(ngModel)]="data.customer.name" ngModel><br>
+               </mat-form-field>
+               <br>
+               <mat-form-field >
+                  <input matInput placeholder="Contact No." name="contact" [value]="data.customer.contact" [(ngModel)]="data.customer.contact" ngModel>
+               </mat-form-field>
+               <br>
+               <mat-form-field >
+                  <input matInput placeholder="Domain" name="domain" [value]="data.customer.domain" [(ngModel)]="data.customer.domain" ngModel>
+               </mat-form-field>
+               <br>
+            </div>
+            <div>
+               <mat-form-field >
+                  <textarea matInput placeholder="Address" rows="5" name="address" [value]="data.customerAddress.address" [(ngModel)]="data.customerAddress.address" ngModel>
+                  </textarea>
+               </mat-form-field>
+               <br>
+               <mat-form-field >
+                  <input matInput placeholder="Country" name="country" [value]="data.customerAddress.country" [(ngModel)]="data.customerAddress.country" ngModel>
+               </mat-form-field>
+            </div>
+         </div>
       </form>
    </mat-dialog-content>
    <mat-dialog-actions>
       <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-      <button mat-button [mat-dialog-close]=data.customer>Update</button>
+      <button mat-button [mat-dialog-close]=data>Update</button>
       <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
    </mat-dialog-actions>
 </div>

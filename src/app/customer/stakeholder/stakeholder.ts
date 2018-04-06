@@ -5,7 +5,6 @@ export class Stakeholder {
   role = '';
   email = '';
   phoneNo = '';
-  raci = '';
   createdAt = '';
 
   constructor(values: Object = {}) {

@@ -10,9 +10,9 @@ import { EmployeeViewComponent } from './employee/employee-view.component';
 import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
-  { path: 'employee-home', component: EmployeeMainComponent },
+  { path: 'employee-main', component: EmployeeMainComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'customer-home', component: CustomerMainComponent },
+  { path: 'customer-main', component: CustomerMainComponent },
   { path: 'customer-view/:id', component: CustomerViewComponent },
   { path: 'team-view/:id', component: TeamViewComponent },
   { path: 'employee-view/:id', component: EmployeeViewComponent },

@@ -1,6 +1,6 @@
    <h3>All Employees</h3>
    <div class=" tos-button-right">
-      <button mat-button color="primary" mat-mini-fab (click)="openDialog()" > <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
+      <span  (click)="openDialog()" style="cursor:pointer;color:grey; font-size: 2.5em;">+</span>
    </div>
    <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
         <div fxFlex="30%"  *ngFor = "let emp of employees">

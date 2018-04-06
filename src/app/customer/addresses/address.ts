@@ -1,12 +1,6 @@
 export class Address {
   id = '';
-  addressType = '';
-  houseNo = '';
-  street = '';
-  landMark = '';
-  city = '';
-  zip = '';
-  state = '';
+  address = '';
   country = '';
   customerId = '';
   createdAt = '';
