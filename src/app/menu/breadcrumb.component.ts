@@ -11,7 +11,7 @@ import { BreadCrumb } from '../menu/breadCrumb';
 export class BreadcrumbComponent {
   @Input() val;
   breadCrumb: BreadCrumb;
-  crumbs = [];
+  crumbs = Array<BreadCrumb>();
   crumbsMap = new Map();
 
   constructor(private data: DataService, private router: Router, private route: ActivatedRoute) { }
@@ -30,10 +30,10 @@ export class BreadcrumbComponent {
         this.crumbs = [];
         this.crumbs.push(tempCrumb)
       }
-      else if(breadCrumb.label === 'None')
-  this.crumbs = [];
+      else if (breadCrumb.label === 'None')
+        this.crumbs = [];
 
-       else {
+      else {
         this.crumbs.push(breadCrumb)
       }
 

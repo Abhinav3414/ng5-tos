@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
 export class DataService {
   options: RequestOptions;
 
-
+  /* BehaviorSubject logic for breadCrumb */
   private breadCrumbSource = new BehaviorSubject<BreadCrumb>(new BreadCrumb());
   currentBreadCrumb = this.breadCrumbSource.asObservable();
 

@@ -22,8 +22,7 @@
          <mat-card class="example-card" >
             <mat-card-header>
                <mat-card-title>
-                 <h3><span class="tos-cust-heading"> {{skill.name}}</span></h3>
-
+                  <h3><span class="tos-cust-heading"> {{skill.name}}</span></h3>
                   <span *ngIf="skill.rating !== ''">
                      <a class="tos-rating" *ngFor="let i of Arr(+skill.rating).fill(1)">
                         <mat-icon >star rate</mat-icon>
@@ -58,17 +57,18 @@
       </mat-panel-description>
    </mat-expansion-panel-header>
    <div class=" tos-button-right">
-     <span  (click)="openDialog('certifications')" style="cursor:pointer;color:grey; font-size: 2.5em;">+</span>
+      <span  (click)="openDialog('certifications')" style="cursor:pointer;color:grey; font-size: 2.5em;">+</span>
    </div>
    <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
       <div fxFlex="30%" *ngFor = "let certification of employeeCertifications">
          <mat-card class="example-card" >
             <mat-card-header>
-               <mat-card-title>Certification</mat-card-title>
-               <mat-card-subtitle>{{certification.name}}</mat-card-subtitle>
+               <mat-card-title>
+                  <h3><span class="tos-cust-heading"> {{certification.name}}</span></h3>
+               </mat-card-title>
             </mat-card-header>
             <mat-card-content>
-               {{certification.yearOfCertification}}
+               Certification Year : {{certification.yearOfCertification}}
             </mat-card-content>
             <mat-card-actions>
                <span (click)="openUpdateDialog('certifications',certification.id)" style="cursor:pointer;color:grey">
@@ -94,14 +94,16 @@
       </mat-panel-description>
    </mat-expansion-panel-header>
    <div class=" tos-button-right">
-     <span  (click)="openDialog('trainings')" style="cursor:pointer;color:grey; font-size: 2.5em;">+</span>
+      <span  (click)="openDialog('trainings')" style="cursor:pointer;color:grey; font-size: 2.5em;">+</span>
    </div>
    <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
       <div fxFlex="30%" *ngFor = "let training of employeeTrainings">
          <mat-card class="example-card" >
             <mat-card-header>
-               <mat-card-title>{{training.name}}</mat-card-title>
-          <!--     <mat-card-subtitle>Trainings</mat-card-subtitle> -->
+               <mat-card-title>
+                  <h3><span class="tos-cust-heading"> {{training.name}}</span></h3>
+               </mat-card-title>
+               <!--     <mat-card-subtitle>Trainings</mat-card-subtitle> -->
             </mat-card-header>
             <mat-card-content>
                Mode : {{ training.mode}}<br>Training proposed Date : {{ training.proposedDate | date : 'd-M-yy'}}
@@ -131,17 +133,18 @@
       </mat-panel-description>
    </mat-expansion-panel-header>
    <div class=" tos-button-right">
-     <span  (click)="openDialog('feedbacks')" style="cursor:pointer;color:grey; font-size: 2.5em;">+</span>
+      <span  (click)="openDialog('feedbacks')" style="cursor:pointer;color:grey; font-size: 2.5em;">+</span>
    </div>
    <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
       <div fxFlex="30%" *ngFor = "let feedback of employeeFeedbacks">
          <mat-card class="example-card" >
             <mat-card-header>
-               <mat-card-title>Feedback</mat-card-title>
-               <mat-card-subtitle>{{feedback.feedback}}</mat-card-subtitle>
+               <mat-card-title>
+                  <h3><span class="tos-cust-heading">{{feedback.feedback}}</span></h3>
+               </mat-card-title>
             </mat-card-header>
             <mat-card-content>
-               {{feedback.receivedFrom}} <br> {{feedback.actionsTaken}}<br>
+               Recieved From: {{feedback.receivedFrom}} <br>Action Taken: {{feedback.actionsTaken}}<br>
             </mat-card-content>
             <mat-card-actions>
                <span (click)="openUpdateDialog('feedbacks',feedback.id)" style="cursor:pointer;color:grey">
@@ -173,8 +176,9 @@
       <div fxFlex="30%" *ngFor = "let improvementArea of employeeImprovementAreas">
          <mat-card class="example-card" >
             <mat-card-header>
-               <mat-card-title>improvementArea</mat-card-title>
-               <mat-card-subtitle>{{improvementArea.areasOfImprovement}}</mat-card-subtitle>
+               <mat-card-title>
+                  <h3><span class="tos-cust-heading">{{improvementArea.areasOfImprovement}}</span></h3>
+               </mat-card-title>
             </mat-card-header>
             <mat-card-content>
                {{improvementArea.improvementPlan}} <br> {{improvementArea.proposedDate}}<br>
@@ -206,8 +210,9 @@
       <div fxFlex="30%" *ngFor = "let team of teams">
          <mat-card class="example-card" >
             <mat-card-header>
-               <mat-card-title><span (click)="navigateViewTeam(team.id)" class="tos-cust-heading"> Team</span></mat-card-title>
-               <mat-card-subtitle><span (click)="navigateViewTeam(team.id)" class="tos-cust-heading"> {{team.name}}</span></mat-card-subtitle>
+               <mat-card-title>
+                  <h3><span class="tos-cust-heading" (click)="navigateViewTeam(team.id)" > {{team.name}}</span></h3>
+               </mat-card-title>
             </mat-card-header>
             <mat-card-content><span (click)="navigateViewTeam(team.id)" class="tos-cust-heading"> {{team.specialization}} <br></span>
             </mat-card-content>

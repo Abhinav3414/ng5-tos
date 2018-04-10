@@ -1,9 +1,7 @@
 <div class="tos-breads">
-
-<a *ngFor="let crumb of crumbs">
-<span (click)="navigate(crumb)"  >
-{{crumb.label}}   <a *ngIf="crumb.entityId > 0"> {{crumb.entityId}}  </a> 
-</span>
-</a>
-
+   <a *ngFor="let crumb of crumbs" class="tos-crumbs-a">
+   <span (click)="navigate(crumb)"  >
+   {{crumb.label}}   <a *ngIf="crumb.entityId > 0"> {{crumb.entityId}}  </a> <a  class="tos-arrow" *ngIf="crumbs.length > 1"> &#9658; </a>
+   </span>
+   </a>
 </div>

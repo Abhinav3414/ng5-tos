@@ -132,8 +132,8 @@ export class CustomerViewComponent {
       this.openEntityUpdateDialog(entityName, StakeholderDialogComponent, id, this.customerStakeholders);
     }
     else if (entityName === 'travels') {
-      this.customerTeam = this.customerTeams[this.customerTeams.findIndex(e => e.id === id)];
-      this.openEntityUpdateDialog(entityName, TeamDialogComponent, id, this.customerTeams);
+      this.customerTravel = this.customerTravels[this.customerTravels.findIndex(e => e.id === id)];
+      this.openEntityUpdateDialog(entityName, TravelDialogComponent, id, this.customerTravels);
     }
     else {
       console.log(entityName + " not found");

@@ -211,9 +211,12 @@ body > app-root > div:nth-child(2) > menu > mat-toolbar:nth-child(2) > div:nth-c
   transition: background-color 0.5s ease;
 }
 
+customer-view .mat-card-header-text,
+team-view .mat-card-header-text,
 employee-view .mat-card-header-text,
 employee-main .mat-card-header-text {
   margin : 0;
+  width: 100%;
 }
 employee-main > div.container > div > mat-card > mat-card-content > div > span {
   margin : 0;
@@ -240,6 +243,16 @@ employee-view .mat-card-title mat-icon {
   display: flex;
 }
 
+team-view .mat-card-content ,
+customer-view .mat-card-content,
 employee-view .mat-card-content {
   margin: 0;
+}
+
+.tos-crumbs-a {
+  padding-right: .6em;
+}
+
+.tos-arrow {
+  font-size: .9em;
 }

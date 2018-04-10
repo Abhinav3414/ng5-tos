@@ -9,8 +9,9 @@
    <div fxFlex="100%" *ngFor = "let cust of customers">
       <mat-card>
          <mat-card-header>
-            <mat-card-title><span (click)="navigateViewCustomer(cust.id)" class="tos-cust-heading"> {{cust.id}} {{cust.name}} </span></mat-card-title>
-            <mat-card-subtitle><span (click)="navigateViewCustomer(cust.id)" class="tos-cust-heading"> Customer </span></mat-card-subtitle>
+            <mat-card-title>
+               <h3><span (click)="navigateViewCustomer(cust.id)" class="tos-cust-heading">{{cust.name}} </span></h3>
+            </mat-card-title>
          </mat-card-header>
          <mat-card-content>
             <table style="width: 100%;">
@@ -18,7 +19,7 @@
                <th > <a *ngIf="cust.contactPerson != null">Contact Person </a></th>
                <th > <a  *ngIf="cust.addresses !==null">Contact Address </a> </th>
                <th >Contact Number</th>
-               <tr class="tos-table">
+               <tr class="tos-table" style="text-align: center;">
                   <td> <a *ngIf="cust.domain != null" >{{cust.domain}} </a> </td>
                   <td> <a *ngIf="cust.contactPerson != null" >{{cust.contactPerson}} </a> </td>
                   <td ><a *ngIf="cust.addresses !== null && cust.addresses[0] !== undefined" >{{cust.addresses[0].address}},{{cust.addresses[0].country}} </a>
