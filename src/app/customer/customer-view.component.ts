@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { DataService } from '../services/data.service';
+import { UtilityService } from '../services/utility.service';
+
 import { Customer } from './customer';
 import { AddressDialogComponent } from './addresses/address-dialog.component';
 import { StakeholderDialogComponent } from './stakeholder/stakeholder-dialog.component';
@@ -16,10 +18,19 @@ import { Team } from './team/team';
 import { Goal } from './goal/goal';
 import { Stakeholder } from './stakeholder/stakeholder';
 import { Travel } from './travel/travel';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'customer-view',
-  templateUrl: './customer-view.html'
+  templateUrl: './customer-view.html',
+  animations: [
+    trigger('fade', [
+      state('void', style({ opacity: 0 })),
+      transition(':enter, :leave', [
+        animate('500ms ease-in')
+      ])
+    ])
+  ]
 })
 export class CustomerViewComponent {
   id: number;
@@ -41,11 +52,10 @@ export class CustomerViewComponent {
   bread: BreadCrumb;
 
   constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
-    private dialog: MatDialog) {
+    private dialog: MatDialog, private utilityService: UtilityService) {
   }
-
   ngOnInit() {
-    this.dataService.currentBreadCrumb.subscribe(bread => this.bread = bread);
+    this.utilityService.currentBreadCrumb.subscribe(bread => this.bread = bread);
 
     this.goalTenures = ['Daily', 'Weekly', 'Monthly', 'Yearly'];
 
@@ -168,18 +178,9 @@ export class CustomerViewComponent {
       );
   }
 
-  addBreadCrumb(label, url, entityId) {
-    let bread = new BreadCrumb();
-    bread.id = "id";
-    bread.label = label;
-    bread.url = url;
-    bread.entityId = entityId;
-    console.log(bread)
-    this.dataService.changeMessage(bread)
-  }
-
   navigateViewTeam(teamId) {
-    this.addBreadCrumb('Team', '/team-view', teamId);
+    let entity = this.customerTeams[this.customerTeams.findIndex(t => t.id === teamId)];
+    this.utilityService.addBreadCrumb(3, 'Team', '/team-view', teamId, 'entity', entity.name);
     this.router.navigate(['/team-view', teamId], { skipLocationChange: true });
   }
 

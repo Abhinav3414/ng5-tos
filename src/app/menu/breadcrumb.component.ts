@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { DataService } from '../services/data.service';
+import { UtilityService } from '../services/utility.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { BreadCrumb } from '../menu/breadCrumb';
@@ -10,68 +10,44 @@ import { BreadCrumb } from '../menu/breadCrumb';
 })
 export class BreadcrumbComponent {
   @Input() val;
-  breadCrumb: BreadCrumb;
   crumbs = Array<BreadCrumb>();
-  crumbsMap = new Map();
 
-  constructor(private data: DataService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private utilityService: UtilityService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.data.currentBreadCrumb.subscribe(breadCrumb => {
-
-      if (breadCrumb.entityId === 0) {
-        breadCrumb.label = breadCrumb.label + "s";
-      }
-
-      this.breadCrumb = breadCrumb;
-
-      if (breadCrumb.label === 'Customers' || breadCrumb.label === 'Employees') {
-        let tempCrumb = breadCrumb;
-        this.crumbs = [];
-        this.crumbs.push(tempCrumb)
-      }
-      else if (breadCrumb.label === 'None')
-        this.crumbs = [];
-
-      else {
+    this.utilityService.currentBreadCrumb.subscribe(breadCrumb => {
+      if (breadCrumb.state === 'entity') {
         this.crumbs.push(breadCrumb)
       }
-
+      else {
+        if (breadCrumb.state === 'entities') {
+          this.crumbs = [];
+          breadCrumb.label = breadCrumb.label + "s";
+        }
+        this.crumbs = [];
+        if (breadCrumb.state !== 'none') {
+          this.crumbs.push(breadCrumb)
+        }
+      }
     })
   }
 
   navigate(crumb) {
-    if (crumb.label === 'Employee') {
-      this.router.navigate(['/employee-view', crumb.entityId], { skipLocationChange: true });
-    } else if (crumb.label === 'Customer') {
-
+    if (crumb.state === 'entity') {
       let tempCrumbs = [];
       this.crumbs.forEach(c => {
-        if (c.label !== 'Team')
+        if (c.depth <= crumb.depth)
           tempCrumbs.push(c)
       })
       this.crumbs = [];
       this.crumbs = tempCrumbs;
-      this.router.navigate(['/customer-view', crumb.entityId], { skipLocationChange: true });
+      this.router.navigate([crumb.url, crumb.entityId], { skipLocationChange: true });
     }
-    else if (crumb.label === 'Customers') {
-      let tempCrumb = crumb;
+    else if (crumb.state === 'entities') {
       this.crumbs = [];
       this.crumbs.push(crumb)
-      this.router.navigate(['/customer-main'], { skipLocationChange: true });
+      this.router.navigate([crumb.url], { skipLocationChange: true });
     }
-    else if (crumb.label === 'Employees') {
-      let tempCrumb = crumb;
-      this.crumbs = [];
-      this.crumbs.push(crumb)
-      this.router.navigate(['/employee-main'], { skipLocationChange: true });
-    }
-    else if (crumb.label === 'Team') {
-      this.router.navigate(['/team-view', crumb.entityId], { skipLocationChange: true });
-    }
-    else if (crumb.label === 'None') {
-    }
-
   }
 
 }

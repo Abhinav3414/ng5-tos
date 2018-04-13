@@ -1,4 +1,4 @@
-<div *ngIf="customer != undefined" >
+<div *ngIf="customer != undefined">
    <h2 >{{customer.name}}</h2>
    <span>
       <mat-icon >phone</mat-icon>
@@ -10,8 +10,8 @@
       <br><br>
    </span>
 </div>
-<mat-accordion [multi]="true">
-   <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
+<mat-accordion [multi]="true" @fade>
+   <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true" >
    <mat-expansion-panel-header>
       <mat-panel-title>
          <h3>Customer Goals</h3>

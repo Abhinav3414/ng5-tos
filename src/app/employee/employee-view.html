@@ -4,7 +4,7 @@
    <b> Joining Date : </b> {{employee.joiningDate | date : 'd-M-yy'}} &emsp;&emsp;
    <b> Responsibilities : </b> {{employee.responsibilities}} &emsp;&emsp; <b> Total years of Experience : </b> {{employee.yearsOfExperience}} <br><br>
 </div>
-<mat-accordion [multi]="true">
+<mat-accordion [multi]="true" @fade>
    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
    <mat-expansion-panel-header>
       <mat-panel-title>

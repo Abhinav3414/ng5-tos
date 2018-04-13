@@ -4,17 +4,25 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
 import { DataService } from '../services/data.service';
+import { UtilityService } from '../services/utility.service';
+
 import { EmployeeDialogComponent } from './employee-dialog.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Employee } from './employee';
 import { BreadCrumb } from '../menu/breadCrumb';
-
-
-const dummyDialogEntity = { id: 0, name: "dummy" };
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'employee-main',
-  templateUrl: './employee-main.html'
+  templateUrl: './employee-main.html',
+  animations: [
+    trigger('fade', [
+      state('void', style({ opacity: 0})),
+      transition(':enter, :leave', [
+        animate('500ms ease-in')
+      ])
+    ])
+  ]
 })
 export class EmployeeMainComponent {
   @Output() notify: EventEmitter<string> = new EventEmitter<string>();
@@ -25,11 +33,11 @@ export class EmployeeMainComponent {
 
 
   constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
-    private dialog: MatDialog) {
+    private dialog: MatDialog, private utilityService :UtilityService) {
   }
 
   ngOnInit() {
-    this.dataService.currentBreadCrumb.subscribe(bread => this.bread = bread);
+    this.utilityService.currentBreadCrumb.subscribe(bread => this.bread = bread);
     this.dataService.getEntityAllData('employees')
       .then((resEmployeeData) => {
         resEmployeeData.forEach(e => this.employees.push(e));
@@ -95,20 +103,14 @@ export class EmployeeMainComponent {
       );
   }
 
-
-  addBreadCrumb(label, url, entityId) {
-    let bread = new BreadCrumb();
-    bread.id = "id";
-    bread.label = label;
-    bread.url = url;
-    bread.entityId = entityId;
-    console.log(bread)
-    this.dataService.changeMessage(bread)
+  navigateViewEmployee(id) {
+    let entity = this.employees[this.employees.findIndex(e => e.id === id)];
+    this.utilityService.addBreadCrumb(2,'Employee', '/employee-view', id, 'entity',entity.name);
+    this.router.navigate(['/employee-view', id], { skipLocationChange: true });
   }
 
-  navigateViewEmployee(id) {
-    this.addBreadCrumb('Employee', '/employee-view', id);
-    this.router.navigate(['/employee-view', id], { skipLocationChange: true });
+  checkEntity(entity) {
+    return this.utilityService.checkEntity(entity);
   }
 
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
-import { DataService } from '../services/data.service';
+import { UtilityService } from '../services/utility.service';
 import { BreadCrumb } from '../menu/breadCrumb';
 
 @Component({
@@ -13,65 +13,45 @@ export class MenuComponent {
   title = 'Team Operations System';
   bread: BreadCrumb;
 
-  constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private utilityService: UtilityService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
 
-    this.dataService.currentBreadCrumb.subscribe(bread => this.bread = bread);
+    this.utilityService.currentBreadCrumb.subscribe(bread => this.bread = bread);
     /*
       this.items = [
           {
               label: 'Home',
               icon: 'fa-home',
               command: (onclick)=> {this.navigateHome()}
-          },
-          {
-              label: 'Employee',
-              icon: 'fa-users',
-              command: (onclick)=> {this.navigateEmployeeHome()}
-          },
-          {
-              label: 'Customer',
-              icon: 'fa-briefcase',
-              command: (onclick)=> {this.navigateCustomers()}
           }
       ];
       */
   }
 
   navigateHome() {
-    this.addBreadCrumb('None', '', -1);
+    this.utilityService.addBreadCrumb(0, 'None', '/', -1, 'none', '');
     this.router.navigate(['/']);
   }
 
   navigateCustomers() {
-    this.addBreadCrumb('Customer', '/customer-main', 0);
+    this.utilityService.addBreadCrumb(1, 'Customer', '/customer-main', 0, 'entities', '');
     this.router.navigate(['/customer-main'], { skipLocationChange: true });
   }
 
   navigateEmployeeHome() {
-    this.addBreadCrumb('Employee', '/employee-main', 0);
+    this.utilityService.addBreadCrumb(1, 'Employee', '/employee-main', 0, 'entities', '');
     this.router.navigate(['/employee-main'], { skipLocationChange: true });
   }
 
   navigateAbout() {
-    this.addBreadCrumb('None', '', -1);
+    this.utilityService.addBreadCrumb(1, 'About', '/about', 0, 'single', '');
     this.router.navigate(['/about'], { skipLocationChange: true });
   }
 
   navigateProfile() {
-    this.addBreadCrumb('None', '', -1);
+    this.utilityService.addBreadCrumb(1, 'Profile', '/profile', 0, 'single', '');
     this.router.navigate(['/profile'], { skipLocationChange: true });
-  }
-
-  addBreadCrumb(label, url, entityId) {
-    let bread = new BreadCrumb('1');
-    bread.id = "id";
-    bread.label = label;
-    bread.url = url;
-    bread.entityId = entityId;
-    console.log(bread)
-    this.dataService.changeMessage(bread)
   }
 
 }

@@ -3,7 +3,7 @@
     <b> Team Specialization : </b> {{team.specialization}}
     <br><br>
    </div>
-   <mat-accordion [multi]="true">
+   <mat-accordion [multi]="true" @fade>
 
    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
      <mat-expansion-panel-header>

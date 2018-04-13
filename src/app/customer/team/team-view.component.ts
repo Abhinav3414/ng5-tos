@@ -7,7 +7,7 @@ import { ActionDialogComponent } from './action/action-dialog.component';
 import { TeamMemberDialogComponent } from './teammember/teammember-dialog.component';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 import { Team } from './team';
 import { TeamMember } from './teammember/teammember';
@@ -16,7 +16,15 @@ import { ProjectRythm } from './projectrythm/projectrythm';
 
 @Component({
   selector: 'team-view',
-  templateUrl: './team-view.html'
+  templateUrl: './team-view.html',
+  animations: [
+    trigger('fade', [
+      state('void', style({ opacity: 0})),
+      transition(':enter, :leave', [
+        animate('500ms ease-in')
+      ])
+    ])
+  ]
 })
 
 export class TeamViewComponent {

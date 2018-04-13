@@ -18,11 +18,19 @@ import { Feedback } from './feedback/feedback';
 import { Certification } from './certification/certification';
 import { Training } from './training/training';
 
-const dummyDialogEntity = { id: 0, name: "dummy" };
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'employee-view',
-  templateUrl: './employee-view.html'
+  templateUrl: './employee-view.html',
+  animations: [
+    trigger('fade', [
+      state('void', style({ opacity: 0})),
+      transition(':enter, :leave', [
+        animate('500ms ease-in')
+      ])
+    ])
+  ]
 })
 export class EmployeeViewComponent {
   id: number;

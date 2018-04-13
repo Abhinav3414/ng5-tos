@@ -4,8 +4,8 @@
       -->
    <span  (click)="openDialog()" style="cursor:pointer;color:grey; font-size: 2.5em;">+</span>
 </div>
-<div *ngIf="customers.length===0">No Customers Present</div>
-<div class="container " fxlayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutAlign="flex-start">
+
+<div class="container " fxlayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutAlign="flex-start" @fade>
    <div fxFlex="100%" *ngFor = "let cust of customers">
       <mat-card>
          <mat-card-header>
@@ -44,3 +44,4 @@
       </mat-card>
    </div>
 </div>
+<div *ngIf="checkEntity(customers)">No Customers Present</div>

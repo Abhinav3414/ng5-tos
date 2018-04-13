@@ -1,8 +1,9 @@
 export class BreadCrumb {
-  id = '';
+  depth = '';
   label = '';
   url = '';
   entityId = -1;
+  state = '';  /* Crumb state could be [entity, entities, single, none] */
   message = '';
 
   constructor(values: Object = {}) {

@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, RequestMethod } from '@angular/http';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { BreadCrumb } from '../menu/breadCrumb';
 
 import 'rxjs/add/operator/map';
 
@@ -9,19 +7,11 @@ import 'rxjs/add/operator/map';
 export class DataService {
   options: RequestOptions;
 
-  /* BehaviorSubject logic for breadCrumb */
-  private breadCrumbSource = new BehaviorSubject<BreadCrumb>(new BreadCrumb());
-  currentBreadCrumb = this.breadCrumbSource.asObservable();
-
   constructor(private http: Http) {
     let headers: any = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/json');
     this.options = new RequestOptions({ headers: headers });
-  }
-
-  changeMessage(breadcrumb: BreadCrumb) {
-    this.breadCrumbSource.next(breadcrumb)
   }
 
   getEntityData(entityName: string, id: number): Promise<any> {

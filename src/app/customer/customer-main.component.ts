@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../services/data.service';
+import { UtilityService } from '../services/utility.service';
 
 import { CustomerDialogComponent } from './customer-dialog.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -9,9 +10,19 @@ import { Customer } from './customer';
 import { BreadCrumb } from '../menu/breadCrumb';
 import { Address } from './addresses/address';
 
+import { trigger, state, style, animate, transition } from '@angular/animations';
+
 @Component({
   selector: 'customer-main',
-  templateUrl: './customer-main.html'
+  templateUrl: './customer-main.html',
+  animations: [
+    trigger('fade', [
+      state('void', style({ opacity: 0 })),
+      transition(':enter, :leave', [
+        animate('500ms ease-in')
+      ])
+    ])
+  ]
 })
 export class CustomerMainComponent {
   customers = [];
@@ -21,11 +32,11 @@ export class CustomerMainComponent {
   bread: BreadCrumb;
 
   constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
-    private dialog: MatDialog) {
+    private dialog: MatDialog, private utilityService: UtilityService) {
   }
 
   ngOnInit() {
-    this.dataService.currentBreadCrumb.subscribe(bread => this.bread = bread);
+    this.utilityService.currentBreadCrumb.subscribe(bread => this.bread = bread);
 
     this.dataService.getEntityAllData('customers')
       .then((resCustomerData) => {
@@ -58,7 +69,7 @@ export class CustomerMainComponent {
       .then((resCustomerData) => {
         entityArray.push(resCustomerData);
 
-          /* logic to add address for customer*/
+        /* logic to add address for customer*/
         if (addCustomer == true) {
           this.customerAddress.customerId = resCustomerData.id;
 
@@ -69,7 +80,7 @@ export class CustomerMainComponent {
               this.customers[index].addresses.push(resCustomerData)
             },
             (err) => console.log("addresses could not be updated :" + err)
-           );
+            );
         }
       },
       (err) => console.log(entityName + " could not be added :" + err)
@@ -114,19 +125,14 @@ export class CustomerMainComponent {
       );
   }
 
-  addBreadCrumb(label, url, entityId) {
-    let bread = new BreadCrumb();
-    bread.id = "id";
-    bread.label = label;
-    bread.url = url;
-    bread.entityId = entityId;
-    console.log(bread)
-    this.dataService.changeMessage(bread)
+  navigateViewCustomer(id) {
+    let entity = this.customers[this.customers.findIndex(c => c.id === id)];
+    this.utilityService.addBreadCrumb(2, 'Customer', '/customer-view', id, 'entity', entity.name);
+    this.router.navigate(['/customer-view', id], { skipLocationChange: true });
   }
 
-  navigateViewCustomer(id) {
-    this.addBreadCrumb('Customer', '/customer-view', id);
-    this.router.navigate(['/customer-view', id], { skipLocationChange: true });
+  checkEntity(entity) {
+    return this.utilityService.checkEntity(entity);
   }
 
 }
