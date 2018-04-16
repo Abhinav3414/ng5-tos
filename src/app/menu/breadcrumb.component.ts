@@ -9,7 +9,6 @@ import { BreadCrumb } from '../menu/breadCrumb';
   templateUrl: './breadcrumb.html'
 })
 export class BreadcrumbComponent {
-  @Input() val;
   crumbs = Array<BreadCrumb>();
 
   constructor(private utilityService: UtilityService, private router: Router, private route: ActivatedRoute) { }

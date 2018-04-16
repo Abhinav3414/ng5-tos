@@ -47,6 +47,7 @@ export class CustomerMainComponent {
   openDialog(): void {
     this.customer = new Customer();
     this.customerAddress = new Address();
+    this.customer.addresses[0] = this.customerAddress;
     let dialogRef = this.dialog.open(CustomerDialogComponent, {
       data: this
     });
@@ -55,7 +56,6 @@ export class CustomerMainComponent {
       var addCustomer = false;
       if (result !== 'dialogDismissed' && result !== undefined) {
         if (result.customerAddress.address.length > 0 || (result.customerAddress.country.length > 0)) {
-          console.log("changed")
           this.customerAddress = result.customerAddress;
           addCustomer = true;
         }
@@ -65,7 +65,9 @@ export class CustomerMainComponent {
   }
 
   addNewEntity(entityName, entity, entityArray, addCustomer) {
-    this.dataService.postEntity(entityName, entity)
+    var custCopy = Object.assign({}, entity);
+    custCopy.addresses = [];
+    this.dataService.postEntity(entityName, custCopy)
       .then((resCustomerData) => {
         entityArray.push(resCustomerData);
 
@@ -91,15 +93,17 @@ export class CustomerMainComponent {
     const index = this.customers.findIndex(c => c.id === id);
     this.customer = this.customers[index];
     var customerCopy = Object.assign({}, this.customer);
+    var customerAddressCopy = Object.assign({}, this.customer.addresses[0]);
 
     let dialogRef = this.dialog.open(CustomerDialogComponent, {
       data: this
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== 'dialogDismissed' && result !== undefined) {
-        this.updateEntity('customers', id, result, this.customers);
+        this.updateEntity('customers', id, result.customer, this.customers);
       } else {
         this.customers[index] = customerCopy;
+        this.customers[index].addresses[0] = customerAddressCopy;
       }
     });
   }

@@ -20,12 +20,12 @@
             </div>
             <div>
                <mat-form-field >
-                  <textarea matInput placeholder="Address" rows="5" name="address" [value]="data.customerAddress.address" [(ngModel)]="data.customerAddress.address" ngModel>
+                  <textarea matInput placeholder="Address" rows="5" name="address" [value]="data.customer.addresses[0].address" [(ngModel)]="data.customer.addresses[0].address" ngModel>
                   </textarea>
                </mat-form-field>
                <br>
                <mat-form-field >
-                  <input matInput placeholder="Country" name="country" [value]="data.customerAddress.country" [(ngModel)]="data.customerAddress.country" ngModel>
+                  <input matInput placeholder="Country" name="country" [value]="data.customer.addresses[0].country" [(ngModel)]="data.customer.addresses[0].country" ngModel>
                </mat-form-field>
             </div>
          </div>

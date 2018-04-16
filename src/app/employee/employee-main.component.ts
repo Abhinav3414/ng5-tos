@@ -17,7 +17,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   templateUrl: './employee-main.html',
   animations: [
     trigger('fade', [
-      state('void', style({ opacity: 0})),
+      state('void', style({ opacity: 0 })),
       transition(':enter, :leave', [
         animate('500ms ease-in')
       ])
@@ -26,14 +26,12 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 })
 export class EmployeeMainComponent {
   @Output() notify: EventEmitter<string> = new EventEmitter<string>();
-
   employees = [];
   employee = new Employee();
   bread: BreadCrumb;
-
-
+  
   constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
-    private dialog: MatDialog, private utilityService :UtilityService) {
+    private dialog: MatDialog, private utilityService: UtilityService) {
   }
 
   ngOnInit() {
@@ -93,19 +91,25 @@ export class EmployeeMainComponent {
   }
 
   delelteEmployee(id) {
-    this.dataService.delelteEntity('employees', id)
-      .then((resEmployeeData) => {
-        this.employees.splice(this.employees.findIndex(function(i) {
-          return i.id === id;
-        }), 1);
-      },
-      (err) => console.log("Employee could not be deleted :" + err)
-      );
+    let entity = this.employees[this.employees.findIndex(e => e.id === id)];
+    if (entity.teamMembers.length > 0) {
+      alert("Please unassign employee from all teams before deleting");
+    }
+    else {
+      this.dataService.delelteEntity('employees', id)
+        .then((resEmployeeData) => {
+          this.employees.splice(this.employees.findIndex(function(i) {
+            return i.id === id;
+          }), 1);
+        },
+        (err) => console.log("Employee could not be deleted :" + err)
+        );
+    }
   }
 
   navigateViewEmployee(id) {
     let entity = this.employees[this.employees.findIndex(e => e.id === id)];
-    this.utilityService.addBreadCrumb(2,'Employee', '/employee-view', id, 'entity',entity.name);
+    this.utilityService.addBreadCrumb(2, 'Employee', '/employee-view', id, 'entity', entity.name);
     this.router.navigate(['/employee-view', id], { skipLocationChange: true });
   }
 
