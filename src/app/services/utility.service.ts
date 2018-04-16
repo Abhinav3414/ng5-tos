@@ -29,10 +29,11 @@ export class UtilityService {
     this.breadCrumbSource.next(breadcrumb)
   }
 
-  checkEntity(entity) {
-    setTimeout(function() {
-      return (entity.length === 0);
-    }, 1000);
+  checkEntity(entity: any[]) {
+    if (entity.length === 0)
+      return true;
+    else
+      return false;
   }
 
 }

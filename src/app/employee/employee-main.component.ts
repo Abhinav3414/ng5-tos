@@ -29,7 +29,7 @@ export class EmployeeMainComponent {
   employees = [];
   employee = new Employee();
   bread: BreadCrumb;
-  
+
   constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
     private dialog: MatDialog, private utilityService: UtilityService) {
   }
