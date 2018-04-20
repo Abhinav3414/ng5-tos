@@ -25,7 +25,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   templateUrl: './employee-view.html',
   animations: [
     trigger('fade', [
-      state('void', style({ opacity: 0})),
+      state('void', style({ opacity: 0 })),
       transition(':enter, :leave', [
         animate('500ms ease-in')
       ])
@@ -51,7 +51,7 @@ export class EmployeeViewComponent {
 
   skillRatings: Array<String>;
   trainingModes: Array<String>;
-  certificationYearOfCertification  = [];
+  certificationYearOfCertification = [];
   certificationCurrentYear: number;
 
   teams = [];
@@ -70,7 +70,7 @@ export class EmployeeViewComponent {
     this.certificationCurrentYear = date.getFullYear();
     var startYear = this.certificationCurrentYear - 25;
 
-    for (let i = this.certificationCurrentYear ; i >= startYear; i--) {
+    for (let i = this.certificationCurrentYear; i >= startYear; i--) {
       this.certificationYearOfCertification.push(i.toString());
     }
 

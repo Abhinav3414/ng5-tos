@@ -11,13 +11,13 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class LocalStorageService {
 
-  public setAuthorizationData(auth: Token ):void {
+  public setAuthorizationData(auth: Token): void {
     localStorage.setItem("Authorization", JSON.stringify(auth));
   }
 
-  public getValueFromLocalStorage():Token {
+  public getValueFromLocalStorage(): Token {
     let tokendate = JSON.parse(localStorage.getItem("Authorization"));
-    return tokendate == null ? null:tokendate;
+    return tokendate == null ? null : tokendate;
   }
 
 }

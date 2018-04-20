@@ -20,7 +20,7 @@ export class LoginComponent {
   wrongCreds: string = undefined;
 
   constructor(private router: Router, private route: ActivatedRoute, private auth: AuthService,
-              private localStorageService: LocalStorageService, private utilityService: UtilityService) { }
+    private localStorageService: LocalStorageService, private utilityService: UtilityService) { }
 
   ngOnInit() {
   }
@@ -34,7 +34,7 @@ export class LoginComponent {
       },
       (err) => {
         this.wrongCreds = "Invalid Credentials"
-       }
+      }
       );
 
   }

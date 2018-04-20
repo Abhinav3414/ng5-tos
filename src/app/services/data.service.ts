@@ -5,9 +5,9 @@ import { AuthService } from './auth.service';
 @Injectable()
 export class DataService {
 
-  constructor( private authService: AuthService, private httpClient: HttpClient) {
+  constructor(private authService: AuthService, private httpClient: HttpClient) {
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
-                                  .set('Accept', 'application/json');
+      .set('Accept', 'application/json');
   }
 
   getEntityData(entityName: string, id: number): Promise<any> {

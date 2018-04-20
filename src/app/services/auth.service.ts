@@ -20,7 +20,7 @@ export class AuthService {
   }
 
   login(usercreds): Promise<Token> {
-// Basic bXktdHJ1c3RlZC1jbGllbnQ6c2VjcmV0
+    // Basic bXktdHJ1c3RlZC1jbGllbnQ6c2VjcmV0
     console.log(localStorage)
     let headersForTokenAPI = new Headers();
     headersForTokenAPI.append("Content-Type", "application/x-www-form-urlencoded");
