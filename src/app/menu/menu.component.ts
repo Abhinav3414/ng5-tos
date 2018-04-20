@@ -54,4 +54,10 @@ export class MenuComponent {
     this.router.navigate(['/profile'], { skipLocationChange: true });
   }
 
+  logout() {
+    localStorage.clear();
+    this.utilityService.addTokenSubject('');
+    this.router.navigate(['/login']);
+  }
+
 }

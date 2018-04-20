@@ -36,7 +36,7 @@
       <button mat-button (click)="navigateCustomers()">Customer</button>
       <!--  <button mat-button (click)="navigateProfile()">DashBoard</button> -->
       <button mat-button (click)="navigateAbout()">About</button>
-      <button mat-button (click)="navigateHome()">Logout</button>
+      <button mat-button (click)="logout()">Logout</button>
    </div>
    <div fxShow="false" fxShow.lt-md="true" fxLayout="column">
       <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
@@ -45,7 +45,7 @@
       <button mat-button (click)="navigateCustomers()">Customer</button>
       <!--   <button mat-button (click)="navigateProfile()">DashBoard</button> -->
       <button mat-button (click)="navigateAbout()">About</button>
-      <button mat-button (click)="navigateHome()">Logout</button>
+      <button mat-button (click)="logout()">Logout</button>
       </mat-menu>
       <button mat-icon-button [matMenuTriggerFor]="appMenu">
          <mat-icon>more_vert</mat-icon>

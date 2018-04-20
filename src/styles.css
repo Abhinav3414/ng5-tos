@@ -18,8 +18,13 @@ body {
   //background: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
 
 
-    background: linear-gradient(96deg, #f4f4f4, #f1f1f1);
+  //  background: linear-gradient(96deg, #f4f4f4, #f1f1f1);
 //background: linear-gradient(56deg, #dbdbdb, #f1f1f1);
+  background-image: url(./background4.jpg);
+  background-position: center center;
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-attachment: fixed;
 
 
  //   background-image: url(./background.png);
@@ -36,6 +41,7 @@ body {
 content {
     min-height: 80vh;
     display: flex;
+    flex-direction: column;
    /* flex-grow: 1;
     */
 }
@@ -95,6 +101,14 @@ employee-main .container {
     max-height: 100%;
     place-content: stretch flex-start;
     align-items: stretch;
+  }
+
+  login mat-card{
+    margin: auto;
+  }
+
+  login {
+    margin: 12em auto;
   }
 }
 
@@ -178,6 +192,24 @@ content > customer-view > div > span {
     max-width: 60vw;
     padding:0 5%;
   }
+
+  login mat-card{
+    float: right;
+  }
+
+  login {
+    top: 30%;
+    position: fixed;
+    left: 60%;
+  }
+}
+
+login mat-card-content button.mat-button {
+  margin-left: -10px;
+}
+
+login mat-form-field {
+  padding-left: 16px;
 }
 
 /* XS Menu Styling */
@@ -262,8 +294,4 @@ employee-view .mat-card-content {
   display: flex;
   width: 100%;
   position: relative;
-}
-
-.tos-router-container>* {
-  display:flex;
 }

@@ -181,7 +181,8 @@
                </mat-card-title>
             </mat-card-header>
             <mat-card-content>
-               {{improvementArea.improvementPlan}} <br> {{improvementArea.proposedDate}}<br>
+               Plan : {{improvementArea.improvementPlan}} <br>
+               Proposed Date: {{improvementArea.proposedDate | date : 'd-M-yy'}}<br>
             </mat-card-content>
             <mat-card-actions>
                <span (click)="openUpdateDialog('improvementareas', improvementArea.id)" style="cursor:pointer;color:grey">

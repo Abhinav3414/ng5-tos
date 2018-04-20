@@ -124,10 +124,10 @@ export class TeamViewComponent {
   addNewTeamMember(entityName, entity, entityArray) {
     entity.team_Id = this.id;
     this.dataService.postEntity(entityName, entity)
-      .then((resCustomerData) => {
+      .then((resCustomerData: any) => {
         let tempEntity = resCustomerData;
         this.dataService.getEntityData('employees', tempEntity.employeeId)
-          .then((resData) => {
+          .then((resData: any) => {
             tempEntity.name = resData.name;
           },
           (err) => console.log("Emplyee name could not be fetched :" + err)

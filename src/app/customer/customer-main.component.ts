@@ -41,7 +41,9 @@ export class CustomerMainComponent {
     this.dataService.getEntityAllData('customers')
       .then((resCustomerData) => {
         resCustomerData.forEach(e => this.customers.push(e));
-      });
+      },
+      (err) => console.log("customers could not be fetched :" + err)
+      );
   }
 
   openDialog(): void {
@@ -68,7 +70,9 @@ export class CustomerMainComponent {
     var custCopy = Object.assign({}, entity);
     custCopy.addresses = [];
     this.dataService.postEntity(entityName, custCopy)
-      .then((resCustomerData) => {
+      .then((resCustomerData: any) => {
+        console.log("abhinav")
+        console.log(resCustomerData)
         entityArray.push(resCustomerData);
 
         /* logic to add address for customer*/
@@ -76,7 +80,7 @@ export class CustomerMainComponent {
           this.customerAddress.customerId = resCustomerData.id;
 
           this.dataService.postEntity('addresses', this.customerAddress)
-            .then((resCustomerData) => {
+            .then((resCustomerData : any) => {
               this.customerAddress = resCustomerData;
               const index = this.customers.findIndex(c => c.id === resCustomerData.customerId);
               this.customers[index].addresses.push(resCustomerData)

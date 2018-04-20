@@ -39,7 +39,9 @@ export class EmployeeMainComponent {
     this.dataService.getEntityAllData('employees')
       .then((resEmployeeData) => {
         resEmployeeData.forEach(e => this.employees.push(e));
-      });
+      },
+      (err) => console.log("employees could not be fetched :" + err)
+      );
   }
 
   openDialog(): void {

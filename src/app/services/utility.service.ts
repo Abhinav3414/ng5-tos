@@ -11,6 +11,9 @@ export class UtilityService {
   private breadCrumbSource = new BehaviorSubject<BreadCrumb>(new BreadCrumb());
   currentBreadCrumb = this.breadCrumbSource.asObservable();
 
+  private tokenSubject = new BehaviorSubject<any>(new Object);
+  currenttokenSubject = this.tokenSubject.asObservable();
+
   constructor() {
   }
 
@@ -27,6 +30,14 @@ export class UtilityService {
 
   changeBreadCrumb(breadcrumb: BreadCrumb) {
     this.breadCrumbSource.next(breadcrumb)
+  }
+
+  addTokenSubject(token) {
+    this.changeTokenSubject(token)
+  }
+
+  changeTokenSubject(token) {
+    this.tokenSubject.next(token)
   }
 
   checkEntity(entity: any[]) {

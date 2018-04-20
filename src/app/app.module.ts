@@ -2,9 +2,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { RouterModule, Routes } from '@angular/router';
 
@@ -12,12 +15,14 @@ import { PrimeModule } from './prime.module';
 import { CustomMaterialModule } from './custom-material.module';
 
 import { AppComponent } from './app.component';
+import { LoginComponent } from './login/login.component';
 import { FooterComponent } from './footer/footer.component';
 import { ContentComponent } from './content/content.component';
 import { MenuComponent } from './menu/menu.component';
 import { AboutComponent } from './about/about.component';
 import { BreadcrumbComponent } from './menu/breadcrumb.component';
 import { ProfileComponent } from './profile/profile.component';
+import { HomeComponent } from './home/home.component';
 
 import { EmployeeMainComponent } from './employee/employee-main.component';
 import { EmployeeViewComponent } from './employee/employee-view.component';
@@ -44,10 +49,14 @@ import { ActionDialogComponent } from './customer/team/action/action-dialog.comp
 
 import { DataService } from './services/data.service';
 import { UtilityService } from './services/utility.service';
+import { AuthService } from './services/auth.service';
+import { LocalStorageService } from './services/localStorage.service';
+import { AuthInterceptor } from './Interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
     EmployeeMainComponent,
     AboutComponent,
     MenuComponent,
@@ -73,7 +82,8 @@ import { UtilityService } from './services/utility.service';
     ProfileComponent,
     FooterComponent,
     ContentComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -84,10 +94,16 @@ import { UtilityService } from './services/utility.service';
     FlexLayoutModule,
     FormsModule,
     HttpModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   exports: [],
-  providers: [DataService,UtilityService
+  providers: [DataService,UtilityService,AuthService,LocalStorageService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
     /*{ provide: LocationStrategy, useClass: HashLocationStrategy },*/
   ],
   entryComponents: [

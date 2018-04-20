@@ -50,6 +50,7 @@ export class EmployeeViewComponent {
   employeeImprovementArea = new ImprovementArea();
 
   skillRatings: Array<String>;
+  trainingModes: Array<String>;
   certificationYearOfCertification  = [];
   certificationCurrentYear: number;
 
@@ -63,6 +64,7 @@ export class EmployeeViewComponent {
   ngOnInit() {
 
     this.skillRatings = ['1', '2', '3', '4', '5'];
+    this.trainingModes = ['online', 'On-site', 'Live On-Line', 'On Demand', 'Classroom'];
 
     var date = new Date();
     this.certificationCurrentYear = date.getFullYear();
