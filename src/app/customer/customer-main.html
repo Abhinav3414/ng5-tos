@@ -2,28 +2,27 @@
 <div class=" tos-button-right">
    <!--   <button mat-button color="primary" mat-mini-fab (click)="openDialog()"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
       -->
-   <span  (click)="openDialog()" style="cursor:pointer;color:grey; font-size: 2.5em;">+</span>
+   <span  (click)="openDialog()" class="tos-add-button">+</span>
 </div>
 
-<div class="container " fxlayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutAlign="flex-start" @fade>
+<div class="container" fxlayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutAlign="flex-start" @fade>
    <div fxFlex="100%" *ngFor = "let cust of customers">
       <mat-card>
          <mat-card-header>
             <mat-card-title>
-               <h3><span (click)="navigateViewCustomer(cust.id)" class="tos-cust-heading">{{cust.name}} </span></h3>
+               <h3 class="shake-hover-style"><span (click)="navigateViewCustomer(cust.id)" class="tos-cust-heading">{{cust.name}} </span></h3>
             </mat-card-title>
          </mat-card-header>
          <mat-card-content>
             <table style="width: 100%;">
-               <th > <a *ngIf="cust.domain != null">Domain </a></th>
-               <th > <a *ngIf="cust.contactPerson != null">Contact Person </a></th>
-               <th > <a  *ngIf="cust.addresses !==null">Contact Address </a> </th>
+               <th > <span *ngIf="cust.domain != null">Domain </span></th>
+               <th > <span *ngIf="cust.contactPerson != null">Contact Person </span></th>
+               <th > <span  *ngIf="cust.addresses !==null">Contact Address </span> </th>
                <th >Contact Number</th>
                <tr class="tos-table" style="text-align: center;">
-                  <td> <a *ngIf="cust.domain != null" >{{cust.domain}} </a> </td>
-                  <td> <a *ngIf="cust.contactPerson != null" >{{cust.contactPerson}} </a> </td>
-                  <td ><a *ngIf="cust.addresses !== null && cust.addresses[0] !== undefined" >{{cust.addresses[0].address}},{{cust.addresses[0].country}} </a>
-                     <a  > </a>
+                  <td> <span *ngIf="cust.domain != null" >{{cust.domain}} </span> </td>
+                  <td> <span *ngIf="cust.contactPerson != null" >{{cust.contactPerson}} </span> </td>
+                  <td ><span *ngIf="cust.addresses !== null && cust.addresses[0] !== undefined" >{{cust.addresses[0].address}},{{cust.addresses[0].country}} </span>
                   </td>
                   <td >{{cust.contact}}</td>
                </tr>
@@ -43,5 +42,7 @@
          </mat-card-actions>
       </mat-card>
    </div>
-   <div *ngIf="checkEntity(customers)">No Customers Present </div>
+   <div *ngIf="checkEntity(customers)" class="tos-content-color">No Customers Present </div>
 </div>
+<br>
+<br>

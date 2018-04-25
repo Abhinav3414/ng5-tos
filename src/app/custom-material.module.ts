@@ -14,13 +14,14 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   imports: [MatButtonModule, MatToolbarModule, MatCardModule, MatInputModule, MatIconModule,
     MatMenuModule, MatFormFieldModule, MatDialogModule, MatExpansionModule, MatAutocompleteModule, MatSelectModule,
-    MatDatepickerModule, MatNativeDateModule],
+    MatDatepickerModule, MatNativeDateModule, MatTabsModule],
   exports: [MatButtonModule, MatToolbarModule, MatCardModule, MatInputModule, MatIconModule,
     MatMenuModule, MatFormFieldModule, MatDialogModule, MatExpansionModule, MatAutocompleteModule, MatSelectModule,
-    MatDatepickerModule, MatNativeDateModule]
+    MatDatepickerModule, MatNativeDateModule, MatTabsModule]
 })
 export class CustomMaterialModule { }

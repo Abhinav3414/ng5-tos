@@ -19,7 +19,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
     trigger('fade', [
       state('void', style({ opacity: 0 })),
       transition(':enter, :leave', [
-        animate('500ms ease-in')
+        animate('200ms ease-in')
       ])
     ])
   ]
@@ -71,8 +71,6 @@ export class CustomerMainComponent {
     custCopy.addresses = [];
     this.dataService.postEntity(entityName, custCopy)
       .then((resCustomerData: any) => {
-        console.log("abhinav")
-        console.log(resCustomerData)
         entityArray.push(resCustomerData);
 
         /* logic to add address for customer*/
@@ -135,8 +133,8 @@ export class CustomerMainComponent {
 
   navigateViewCustomer(id) {
     let entity = this.customers[this.customers.findIndex(c => c.id === id)];
-    this.utilityService.addBreadCrumb(2, 'Customer', '/customer-view', id, 'entity', entity.name);
-    this.router.navigate(['/customer-view', id], { skipLocationChange: true });
+    this.utilityService.addBreadCrumb(2, 'Customer', '/customer', id, 'entity', entity.name);
+    this.router.navigate(['/customer', id], { skipLocationChange: false });
   }
 
   checkEntity(entity) {

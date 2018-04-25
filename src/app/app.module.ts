@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { RouterModule, Routes } from '@angular/router';
@@ -95,7 +96,8 @@ import { AuthInterceptor } from './Interceptors/auth.interceptor';
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularSvgIconModule
   ],
   exports: [],
   providers: [DataService,UtilityService,AuthService,LocalStorageService,

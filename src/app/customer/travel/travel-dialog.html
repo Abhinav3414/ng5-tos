@@ -5,27 +5,27 @@
       <form id="formNewTravelUpdate" name="formNewTravelUpdate"  #travelDataUpdate="ngForm">
          <mat-form-field >
             <input matInput placeholder="Name" name="name" [value]="data.customerTravel.name" [(ngModel)]="data.customerTravel.name" ngModel><br>
-         </mat-form-field>
+         </mat-form-field><br>
          <mat-form-field >
             <input matInput placeholder="Travelling From" name="travellingFrom" [value]="data.customerTravel.travellingFrom" [(ngModel)]="data.customerTravel.travellingFrom" ngModel>
-         </mat-form-field>
+         </mat-form-field><br>
          <mat-form-field >
             <input matInput placeholder="Travelling To" name="travellingTo" [value]="data.customerTravel.travellingTo" [(ngModel)]="data.customerTravel.travellingTo" ngModel>
-         </mat-form-field>
+         </mat-form-field><br>
          <mat-form-field>
             <input matInput name="travellingFromDate" [matDatepicker]="picker" placeholder="Travelling from Date"
             [value]="data.customerTravel.travellingFromDate"
             [(ngModel)]="data.customerTravel.travellingFromDate" ngModel>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker  #picker></mat-datepicker>
-         </mat-form-field>
+         </mat-form-field><br>
          <mat-form-field>
             <input matInput name="travellingToDate" [matDatepicker]="pickers" placeholder="Travelling to Date"
             [value]="data.customerTravel.travellingToDate"
             [(ngModel)]="data.customerTravel.travellingToDate" ngModel>
             <mat-datepicker-toggle matSuffix [for]="pickers"></mat-datepicker-toggle>
             <mat-datepicker #pickers></mat-datepicker>
-         </mat-form-field>
+         </mat-form-field><br>
          <mat-form-field >
             <input matInput placeholder="Purpose" name="purpose" [value]="data.customerTravel.purpose" [(ngModel)]="data.customerTravel.purpose" ngModel>
          </mat-form-field>

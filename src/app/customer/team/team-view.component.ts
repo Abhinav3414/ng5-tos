@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../../services/data.service';
+import { MatIconRegistry } from "@angular/material/icon";
+import { DomSanitizer } from "@angular/platform-browser";
 
 import { ProjectRythmDialogComponent } from './projectrythm/projectrythm-dialog.component';
 import { ActionDialogComponent } from './action/action-dialog.component';
@@ -21,13 +23,15 @@ import { ProjectRythm } from './projectrythm/projectrythm';
     trigger('fade', [
       state('void', style({ opacity: 0})),
       transition(':enter, :leave', [
-        animate('500ms ease-in')
+        animate('200ms ease-in')
       ])
     ])
   ]
 })
 
 export class TeamViewComponent {
+  panelOpenState: any;
+
   id: number;
   team: Team;
   employee = [];
@@ -42,7 +46,9 @@ export class TeamViewComponent {
   customerTeamMember = new TeamMember();
 
   constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
-    private dialog: MatDialog) {
+    private dialog: MatDialog, private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer) {
+        this.matIconRegistry.addSvgIcon(`bullseye-arrow`,this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/icons/bullseye-arrow.svg"));
   }
 
   ngOnInit() {
@@ -206,7 +212,7 @@ export class TeamViewComponent {
   }
 
   navigateViewEmployee(id) {
-    this.router.navigate(['/employee-view', id], { skipLocationChange: true });
+    this.router.navigate(['/employee', id], { skipLocationChange: false });
   }
 
   delelteEntity(entityName, id, entityArray) {

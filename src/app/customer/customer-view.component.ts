@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatIconRegistry } from "@angular/material/icon";
+import { DomSanitizer } from "@angular/platform-browser";
 
 import { DataService } from '../services/data.service';
 import { UtilityService } from '../services/utility.service';
@@ -27,12 +29,14 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
     trigger('fade', [
       state('void', style({ opacity: 0 })),
       transition(':enter, :leave', [
-        animate('500ms ease-in')
+        animate('200ms ease-in')
       ])
     ])
   ]
 })
 export class CustomerViewComponent {
+  panelOpenState: any;
+
   id: number;
 
   customer: Customer;
@@ -52,7 +56,10 @@ export class CustomerViewComponent {
   bread: BreadCrumb;
 
   constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
-    private dialog: MatDialog, private utilityService: UtilityService) {
+    private dialog: MatDialog, private utilityService: UtilityService, private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer) {
+    this.matIconRegistry.addSvgIcon(`phone`,this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/icons/phone.svg"));
+    this.matIconRegistry.addSvgIcon(`human-greeting`,this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/icons/human-greeting.svg"));
   }
   ngOnInit() {
     this.utilityService.currentBreadCrumb.subscribe(bread => this.bread = bread);
@@ -180,8 +187,8 @@ export class CustomerViewComponent {
 
   navigateViewTeam(teamId) {
     let entity = this.customerTeams[this.customerTeams.findIndex(t => t.id === teamId)];
-    this.utilityService.addBreadCrumb(3, 'Team', '/team-view', teamId, 'entity', entity.name);
-    this.router.navigate(['/team-view', teamId], { skipLocationChange: true });
+    this.utilityService.addBreadCrumb(3, 'Team', '/team', teamId, 'entity', entity.name);
+    this.router.navigate(['/team', teamId], { skipLocationChange: false });
   }
 
   delelteEntity(entityName, id, entityArray) {

@@ -40,12 +40,12 @@ export class BreadcrumbComponent {
       })
       this.crumbs = [];
       this.crumbs = tempCrumbs;
-      this.router.navigate([crumb.url, crumb.entityId], { skipLocationChange: true });
+      this.router.navigate([crumb.url, crumb.entityId], { skipLocationChange: false });
     }
     else if (crumb.state === 'entities') {
       this.crumbs = [];
       this.crumbs.push(crumb)
-      this.router.navigate([crumb.url], { skipLocationChange: true });
+      this.router.navigate([crumb.url], { skipLocationChange: false });
     }
   }
 

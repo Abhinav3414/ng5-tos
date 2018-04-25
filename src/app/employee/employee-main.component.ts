@@ -19,7 +19,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
     trigger('fade', [
       state('void', style({ opacity: 0 })),
       transition(':enter, :leave', [
-        animate('500ms ease-in')
+        animate('200ms ease-in')
       ])
     ])
   ]
@@ -111,8 +111,8 @@ export class EmployeeMainComponent {
 
   navigateViewEmployee(id) {
     let entity = this.employees[this.employees.findIndex(e => e.id === id)];
-    this.utilityService.addBreadCrumb(2, 'Employee', '/employee-view', id, 'entity', entity.name);
-    this.router.navigate(['/employee-view', id], { skipLocationChange: true });
+    this.utilityService.addBreadCrumb(2, 'Employee', '/employee', id, 'entity', entity.name);
+    this.router.navigate(['/employee', id], { skipLocationChange: false });
   }
 
   checkEntity(entity) {

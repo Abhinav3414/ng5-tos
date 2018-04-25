@@ -39,19 +39,19 @@ export class FooterComponent {
     }
 
     navigateCustomers() {
-      this.router.navigate(['/customer-home'], { skipLocationChange: true });
+      this.router.navigate(['/customer-home'], { skipLocationChange: false });
     }
 
     navigateEmployeeHome() {
-      this.router.navigate(['/employee-home'], { skipLocationChange: true });
+      this.router.navigate(['/employee-home'], { skipLocationChange: false });
     }
 
     navigateAbout() {
-      this.router.navigate(['/about'], { skipLocationChange: true });
+      this.router.navigate(['/about'], { skipLocationChange: false });
     }
 
     navigateProfile() {
-      this.router.navigate(['/profile'], { skipLocationChange: true });
+      this.router.navigate(['/profile'], { skipLocationChange: false });
     }
 
 }

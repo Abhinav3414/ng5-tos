@@ -27,12 +27,14 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
     trigger('fade', [
       state('void', style({ opacity: 0 })),
       transition(':enter, :leave', [
-        animate('500ms ease-in')
+        animate('200ms ease-in')
       ])
     ])
   ]
 })
 export class EmployeeViewComponent {
+
+  panelOpenState: any;
   id: number;
 
   employee: Employee;
@@ -202,7 +204,7 @@ export class EmployeeViewComponent {
   }
 
   navigateViewTeam(teamId) {
-    this.router.navigate(['/team-view', teamId], { skipLocationChange: true });
+    this.router.navigate(['/team', teamId], { skipLocationChange: false });
   }
 
   delelteEntity(entityName, id, entityArray) {

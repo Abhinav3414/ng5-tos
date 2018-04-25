@@ -35,23 +35,23 @@ export class MenuComponent {
   }
 
   navigateCustomers() {
-    this.utilityService.addBreadCrumb(1, 'Customer', '/customer-main', 0, 'entities', '');
-    this.router.navigate(['/customer-main'], { skipLocationChange: true });
+    this.utilityService.addBreadCrumb(1, 'Customer', '/customers', 0, 'entities', '');
+    this.router.navigate(['/customers'], { skipLocationChange: false });
   }
 
   navigateEmployeeHome() {
-    this.utilityService.addBreadCrumb(1, 'Employee', '/employee-main', 0, 'entities', '');
-    this.router.navigate(['/employee-main'], { skipLocationChange: true });
+    this.utilityService.addBreadCrumb(1, 'Employee', '/employees', 0, 'entities', '');
+    this.router.navigate(['/employees'], { skipLocationChange: false });
   }
 
   navigateAbout() {
     this.utilityService.addBreadCrumb(1, 'About', '/about', 0, 'single', '');
-    this.router.navigate(['/about'], { skipLocationChange: true });
+    this.router.navigate(['/about'], { skipLocationChange: false });
   }
 
   navigateProfile() {
     this.utilityService.addBreadCrumb(1, 'Profile', '/profile', 0, 'single', '');
-    this.router.navigate(['/profile'], { skipLocationChange: true });
+    this.router.navigate(['/profile'], { skipLocationChange: false });
   }
 
   logout() {

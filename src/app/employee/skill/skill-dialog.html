@@ -17,12 +17,13 @@
             </mat-select>
           </mat-form-field>
          <mat-form-field >
-            <input matInput placeholder="Last Used" name="lastUsed" [value]="data.employeeSkill.lastUsed" [(ngModel)]="data.employeeSkill.lastUsed" ngModel>
+            <input matInput placeholder="Last Worked on" name="lastUsed" [value]="data.employeeSkill.lastUsed" [(ngModel)]="data.employeeSkill.lastUsed" ngModel>
          </mat-form-field>
       </form>
    </mat-dialog-content>
    <mat-dialog-actions>
-      <button mat-button [mat-dialog-close]=data.employeeSkill>Update</button>
+      <button mat-button [mat-dialog-close]=data.employeeSkill *ngIf="data.employeeSkill.id !== ''">Update</button>
+      <button mat-button [mat-dialog-close]=data.employeeSkill  *ngIf="data.employeeSkill.id === ''">Add</button>
       <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
    </mat-dialog-actions>
 </div>

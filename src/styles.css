@@ -2,6 +2,7 @@
  @import url('https://fonts.googleapis.com/css?family=Ubuntu');
  @import '~@angular/material/prebuilt-themes/indigo-pink.css';
  @import url('https://fonts.googleapis.com/css?family=Montserrat');
+ @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 /* Available pre-built themes: deeppurple-amber.css indigo-pink.css pink-bluegrey.css purple-green.css */
 
 html {
@@ -14,18 +15,26 @@ body {
     margin: 0;
 }
 
+h3 {
+  color: #505050;
+}
+
+.tos-content-color {
+  color: #707070;
+}
+
 body {
   //background: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
-
+background: #f5f5f5;
 
   //  background: linear-gradient(96deg, #f4f4f4, #f1f1f1);
 //background: linear-gradient(56deg, #dbdbdb, #f1f1f1);
-  background-image: url(./background4.jpg);
+ background-image: url(./background-9.jpg);
   background-position: center center;
    background-repeat: no-repeat;
    background-size: cover;
    background-attachment: fixed;
-
+/*  */
 
  //   background-image: url(./background.png);
   //  background-size: cover;
@@ -38,12 +47,18 @@ body {
 /* background: linear-gradient(110deg, #000428 60%, #004e92 ); */
 }
 
+.tos-router-container .mat-expansion-panel {
+  background: #efede5db;
+}
+
 content {
     min-height: 80vh;
     display: flex;
     flex-direction: column;
-   /* flex-grow: 1;
-    */
+}
+
+mat-accordion {
+  margin-bottom: 2em;
 }
 
 footer {
@@ -89,6 +104,13 @@ employee-main .container {
   flex-wrap: wrap;
 }
 
+.container > div {
+  min-width: 200px;
+}
+
+menu .mat-toolbar-single-row {
+  padding: 0;
+}
 
 @media only screen and (max-width: 600px) {
   customer-view .container,
@@ -110,8 +132,16 @@ employee-main .container {
   login {
     margin: 12em auto;
   }
-}
 
+  .tos-router-container .mat-expansion-panel-body {
+    flex-direction: column !important;
+  }
+
+  .tos-button-right {
+    padding-bottom: 10px;
+  }
+
+}
 
 .tos-cust-heading {
     cursor: pointer;
@@ -183,8 +213,22 @@ content > customer-view > div > span {
     flex-wrap: wrap;
 }
 
+.tos-entity-top-content {
+  align-items: center;
+  display: flex;
+  padding: 0 10px 10px 10px;
+}
+
 .mat-card {
   margin-bottom: 1%;
+}
+
+.mat-icon {
+    color: #818080;
+}
+
+.tos-entity-top-content .mat-icon {
+  cursor: default;
 }
 
 @media only screen and (min-width: 601px) {
@@ -198,7 +242,7 @@ content > customer-view > div > span {
   }
 
   login {
-    top: 30%;
+    top: 25%;
     position: fixed;
     left: 60%;
   }
@@ -250,6 +294,15 @@ employee-main .mat-card-header-text {
   margin : 0;
   width: 100%;
 }
+
+.tos-router-container .mat-card-header-text {
+  margin : 0;
+}
+
+about .mat-card {
+  display: grid;
+}
+
 employee-main > div.container > div > mat-card > mat-card-content > div > span {
   margin : 0;
 }
@@ -275,7 +328,11 @@ employee-view .mat-card-title mat-icon {
   display: flex;
 }
 
-team-view .mat-card-content ,
+h3 span {
+  color: #505050;
+}
+
+.tos-router-container .mat-card-content ,
 customer-view .mat-card-content,
 employee-view .mat-card-content {
   margin: 0;
@@ -295,3 +352,98 @@ employee-view .mat-card-content {
   width: 100%;
   position: relative;
 }
+
+login .mat-tab-label {
+  min-width: 72px;
+}
+
+login mat-form-field {
+  width: 220px;
+}
+
+/*Card Style */
+.tos-router-container .mat-card-title {
+  margin-bottom: 7px;
+}
+
+.tos-router-container .mat-card {
+    color: #8d8d8d;
+}
+
+.tos-router-container .mat-card th {
+    color: #6d6d6d;
+}
+
+.tos-stars {
+  display: flex;
+  margin: auto;
+}
+
+.tos-add-button {
+  cursor:pointer;
+  color:grey;
+  font-size: 2.5em;
+}
+
+.mat-card mat-card-content > span {
+  cursor: default;
+}
+
+.container .mat-expansion-panel-body {
+  display: flex;
+}
+
+.tos-router-container .mat-expansion-panel-body {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.mat-expansion-panel-body .container {
+  width: 100%;
+}
+.tos-button-right {
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.container .mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: 0 0px 1px -2px rgba(0,0,0,.1), 0 0px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.02), 0 0px 3px -1px rgba(0,0,0,.2);
+}
+
+.container .mat-card:not([class*=mat-elevation-z]):hover {
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12), 0 -2px 1px -2px rgba(0,0,0,.2);
+}
+
+.shake-hover-style:hover {
+  transition: all .3s ease;
+    transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+/*
+.shake-hover-style:hover {
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+*/

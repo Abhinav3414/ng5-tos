@@ -13,16 +13,21 @@ import { Token } from '../token';
   templateUrl: './login.html'
 })
 export class LoginComponent {
+  hide: boolean = true;
+  selected: any;
   user = {
     username: '',
-    password: ''
+    password: '',
+    role: ''
   };
+  userRoles: Array<String>;
   wrongCreds: string = undefined;
 
   constructor(private router: Router, private route: ActivatedRoute, private auth: AuthService,
     private localStorageService: LocalStorageService, private utilityService: UtilityService) { }
 
   ngOnInit() {
+    this.userRoles = ['admin', 'manager', 'employee'];
   }
 
   login(usercreds) {

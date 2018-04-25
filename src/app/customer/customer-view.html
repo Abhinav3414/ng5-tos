@@ -1,13 +1,12 @@
 <div *ngIf="customer != undefined">
    <h2 >{{customer.name}}</h2>
-   <span>
-      <mat-icon >phone</mat-icon>
+   <span class="tos-entity-top-content">
+      <mat-icon svgIcon="phone" title="Contact"></mat-icon>
       <a class="tos-text"> {{customer.contact}} &emsp;&emsp;&emsp;</a>
-      <mat-icon >face</mat-icon>
+      <mat-icon svgIcon="human-greeting"  title="Contact Person"></mat-icon>
       <a class="tos-text"> {{customer.contactPerson}} &emsp;&emsp;&emsp;</a>
-      <mat-icon >domain</mat-icon>
+      <mat-icon  title="Domain">domain</mat-icon>
       <a class="tos-text"> {{customer.domain}} </a>
-      <br><br>
    </span>
 </div>
 <mat-accordion [multi]="true" @fade>
@@ -21,7 +20,7 @@
       </mat-panel-description>
    </mat-expansion-panel-header>
    <div class=" tos-button-right">
-      <span  (click)="openDialog('goals')" style="cursor:pointer;color:grey; font-size: 2.5em;">+</span>
+      <span  (click)="openDialog('goals')" class="tos-add-button">+</span>
    </div>
    <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
       <div fxFlex="30%" *ngFor = "let goal of customerGoals">
@@ -95,7 +94,7 @@
       </mat-panel-description>
    </mat-expansion-panel-header>
    <div class=" tos-button-right">
-      <span  (click)="openDialog('teams')" style="cursor:pointer;color:grey; font-size: 2.5em;">+</span>
+      <span  (click)="openDialog('teams')" class="tos-add-button">+</span>
    </div>
    <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
       <div fxFlex="30%" *ngFor = "let team of customerTeams">
@@ -132,7 +131,7 @@
       </mat-panel-description>
    </mat-expansion-panel-header>
    <div class=" tos-button-right">
-      <span  (click)="openDialog('stakeholders')" style="cursor:pointer;color:grey; font-size: 2.5em;">+</span>
+      <span  (click)="openDialog('stakeholders')" class="tos-add-button">+</span>
    </div>
    <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
       <div fxFlex="30%" *ngFor = "let sholder of customerStakeholders">
@@ -171,7 +170,7 @@
       </mat-panel-description>
    </mat-expansion-panel-header>
    <div class=" tos-button-right">
-      <span  (click)="openDialog('travels')" style="cursor:pointer;color:grey; font-size: 2.5em;">+</span>
+      <span  (click)="openDialog('travels')" class="tos-add-button">+</span>
    </div>
    <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
       <div fxFlex="30%" *ngFor = "let travel of customerTravels">

@@ -19,11 +19,11 @@ const routes: Routes = [
   { path: 'contentDashboard', component: ContentComponent },
   { path: 'about', component: AboutComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'customer-main', component: CustomerMainComponent },
-  { path: 'customer-view/:id', component: CustomerViewComponent },
-  { path: 'employee-main', component: EmployeeMainComponent },
-  { path: 'employee-view/:id', component: EmployeeViewComponent },
-  { path: 'team-view/:id', component: TeamViewComponent }
+  { path: 'customers', component: CustomerMainComponent },
+  { path: 'customer/:id', component: CustomerViewComponent },
+  { path: 'employees', component: EmployeeMainComponent },
+  { path: 'employee/:id', component: EmployeeViewComponent },
+  { path: 'team/:id', component: TeamViewComponent }
 ];
 
 @NgModule({

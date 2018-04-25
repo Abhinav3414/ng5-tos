@@ -1,7 +1,9 @@
-   <div *ngIf="team != undefined" style="color: #818080;">
-      <h2 style="color: #000000;">{{team.name}}</h2>
-    <b> Team Specialization : </b> {{team.specialization}}
-    <br><br>
+   <div *ngIf="team != undefined">
+      <h2>{{team.name}}</h2>
+    <span class="tos-entity-top-content">
+       <mat-icon svgIcon="bullseye-arrow" title="Team Specialization">bullseye-arrow</mat-icon>
+       <a class="tos-text">{{team.specialization}} &emsp;&emsp;&emsp;</a>
+    </span>
    </div>
    <mat-accordion [multi]="true" @fade>
 
@@ -15,7 +17,7 @@
        </mat-panel-description>
      </mat-expansion-panel-header>
      <div class=" tos-button-right">
-       <span  (click)="openDialog('teammembers')" style="cursor:pointer;color:grey; font-size: 2.5em;">+</span>
+       <span  (click)="openDialog('teammembers')" class="tos-add-button">+</span>
      </div>
      <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
         <div fxFlex="30%" *ngFor = "let member of customerTeamMembers">
@@ -47,7 +49,7 @@
        </mat-panel-description>
      </mat-expansion-panel-header>
      <div class=" tos-button-right">
-       <span  (click)="openDialog('actions')" style="cursor:pointer;color:grey; font-size: 2.5em;">+</span>
+       <span  (click)="openDialog('actions')" class="tos-add-button">+</span>
      </div>
      <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
         <div fxFlex="30%" *ngFor = "let action of customerActions">
@@ -80,7 +82,7 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div class=" tos-button-right">
-          <span  (click)="openDialog('projectrythms')" style="cursor:pointer;color:grey; font-size: 2.5em;">+</span>
+          <span  (click)="openDialog('projectrythms')" class="tos-add-button">+</span>
         </div>
         <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
            <div fxFlex="30%" *ngFor = "let projectRythm of customerProjectRythms">
