@@ -6,6 +6,7 @@
          <mat-form-field >
             <input matInput placeholder="Description" name="description" [value]="data.customerGoal.description" [(ngModel)]="data.customerGoal.description" ><br>
          </mat-form-field>
+         <br>
          <mat-form-field >
             <input type="text" placeholder="Pick tenure" name="tenure" matInput  [(ngModel)]="data.customerGoal.tenure" [matAutocomplete]="auto " >
             <mat-autocomplete #auto="matAutocomplete">
@@ -14,19 +15,23 @@
                </mat-option>
             </mat-autocomplete>
          </mat-form-field>
+         <br>
          <mat-form-field >
             <input matInput placeholder="Status" name="status" [value]="data.customerGoal.status" [(ngModel)]="data.customerGoal.status" >
          </mat-form-field>
+         <br>
          <mat-form-field >
             <input matInput placeholder="Notes" name="notes" [value]="data.customerGoal.notes" [(ngModel)]="data.customerGoal.notes" >
          </mat-form-field>
+         <br>
          <mat-form-field >
             <input matInput placeholder="Signed By" name="signedBy" [value]="data.customerGoal.signedBy" [(ngModel)]="data.customerGoal.signedBy" >
          </mat-form-field>
       </form>
    </mat-dialog-content>
    <mat-dialog-actions>
-      <button mat-button [mat-dialog-close]=data.customerGoal>Update</button>
-      <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
+      <button mat-raised-button class="tos-primary-button" [mat-dialog-close]=data.customerGoal *ngIf="data.customerGoal.id !== ''">Update</button>
+      <button mat-raised-button class="tos-primary-button" [mat-dialog-close]=data.customerGoal *ngIf="data.customerGoal.id === ''">Add</button>
+      <button mat-button mat-dialog-close="dialogDismissed" disableRipple="true" class="tos-button">Cancel</button>
    </mat-dialog-actions>
 </div>

@@ -12,7 +12,8 @@
       </form>
    </mat-dialog-content>
    <mat-dialog-actions>
-      <button mat-button [mat-dialog-close]=data.customerTeam>Update</button>
-      <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
+      <button mat-raised-button class="tos-primary-button" [mat-dialog-close]=data.customerTeam *ngIf="data.customerTeam.id !== ''">Update</button>
+      <button mat-raised-button class="tos-primary-button" [mat-dialog-close]=data.customerTeam *ngIf="data.customerTeam.id === ''">Add</button>
+      <button mat-button mat-dialog-close="dialogDismissed" disableRipple="true" class="tos-button">Cancel</button>
    </mat-dialog-actions>
 </div>

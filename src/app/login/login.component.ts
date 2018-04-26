@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UtilityService } from '../services/utility.service';
 import { BreadCrumb } from '../menu/breadCrumb';
 import { AuthService } from '../services/auth.service';
 import { LocalStorageService } from '../services/localStorage.service';
+import { DataService } from '../services/data.service';
 
 import { Token } from '../token';
 
@@ -20,11 +21,16 @@ export class LoginComponent {
     password: '',
     role: ''
   };
+  newUser = {
+    username: '',
+    password: ''
+  };
   userRoles: Array<String>;
   wrongCreds: string = undefined;
 
-  constructor(private router: Router, private route: ActivatedRoute, private auth: AuthService,
-    private localStorageService: LocalStorageService, private utilityService: UtilityService) { }
+  constructor(private router: Router,  private auth: AuthService,
+    private localStorageService: LocalStorageService, private utilityService: UtilityService,
+    private dataService: DataService) { }
 
   ngOnInit() {
     this.userRoles = ['admin', 'manager', 'employee'];
@@ -41,7 +47,18 @@ export class LoginComponent {
         this.wrongCreds = "Invalid Credentials"
       }
       );
+  }
 
+  register(usercreds) {
+    this.dataService.postUserEntity('users', usercreds)
+      .then((resCustomerData : any) => {
+
+        location.href = "http://localhost:8080/index.html";
+        console.log(location)
+        location.reload();
+      },
+      (err) => console.log("users could not be updated :" + err)
+      );
   }
 
 }

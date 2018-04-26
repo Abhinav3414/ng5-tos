@@ -5,25 +5,25 @@
       <form id="formNewSkillUpdate" name="formNewSkillUpdate"  #skillDataUpdate="ngForm">
          <mat-form-field >
             <input matInput placeholder="Name" name="name" [value]="data.employeeSkill.name" [(ngModel)]="data.employeeSkill.name" ngModel><br>
-         </mat-form-field>
+         </mat-form-field><br>
          <mat-form-field >
             <input matInput placeholder="Duration( in months)" name="duration" [value]="data.employeeSkill.duration" [(ngModel)]="data.employeeSkill.duration" ngModel>
-         </mat-form-field>
+         </mat-form-field><br>
           <mat-form-field>
             <mat-select [(value)]="selected" [(ngModel)]="data.employeeSkill.rating" placeholder="Rating" name="rating">
               <mat-option *ngFor="let rating of data.skillRatings" [value]="rating">
                 {{ rating }}
               </mat-option>
             </mat-select>
-          </mat-form-field>
+          </mat-form-field><br>
          <mat-form-field >
             <input matInput placeholder="Last Worked on" name="lastUsed" [value]="data.employeeSkill.lastUsed" [(ngModel)]="data.employeeSkill.lastUsed" ngModel>
          </mat-form-field>
       </form>
    </mat-dialog-content>
    <mat-dialog-actions>
-      <button mat-button [mat-dialog-close]=data.employeeSkill *ngIf="data.employeeSkill.id !== ''">Update</button>
-      <button mat-button [mat-dialog-close]=data.employeeSkill  *ngIf="data.employeeSkill.id === ''">Add</button>
-      <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
+      <button mat-raised-button class="tos-primary-button" [mat-dialog-close]=data.employeeSkill *ngIf="data.employeeSkill.id !== ''">Update</button>
+      <button mat-raised-button class="tos-primary-button" [mat-dialog-close]=data.employeeSkill  *ngIf="data.employeeSkill.id === ''">Add</button>
+      <button mat-button mat-dialog-close="dialogDismissed" disableRipple="true" class="tos-button">Cancel</button>
    </mat-dialog-actions>
 </div>

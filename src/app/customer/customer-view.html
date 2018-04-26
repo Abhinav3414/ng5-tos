@@ -48,7 +48,7 @@
             </mat-card-actions>
          </mat-card>
       </div>
-      <div *ngIf="customerGoals.length===0">No Goals Defined </div>
+      <div *ngIf="customerGoals.length===0" class="tos-content-color">No Goals Defined </div>
    </div>
    </mat-expansion-panel>
    <!--
@@ -101,7 +101,7 @@
          <mat-card class="example-card" >
             <mat-card-header>
                <mat-card-title>
-                  <h3><span class="tos-cust-heading" (click)="navigateViewTeam(team.id)">{{team.name}}</span></h3>
+                  <h3 class="shake-hover-style"><span class="tos-cust-heading" (click)="navigateViewTeam(team.id)">{{team.name}}</span></h3>
                </mat-card-title>
             </mat-card-header>
             <mat-card-content>
@@ -118,7 +118,7 @@
             </mat-card-actions>
          </mat-card>
       </div>
-      <div *ngIf="customerTeams.length===0">No Teams Assigned </div>
+      <div *ngIf="customerTeams.length===0" class="tos-content-color">No Teams Assigned </div>
    </div>
    </mat-expansion-panel>
    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
@@ -157,7 +157,7 @@
             </mat-card-actions>
          </mat-card>
       </div>
-      <div *ngIf="customerStakeholders.length===0">No StakeHolders Present</div>
+      <div *ngIf="customerStakeholders.length===0" class="tos-content-color">No StakeHolders Present</div>
    </div>
    </mat-expansion-panel>
    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
@@ -177,7 +177,7 @@
          <mat-card class="example-card" >
             <mat-card-header>
                <mat-card-title>
-                  <h3><span  >Traveliing: {{travel.name}}</span></h3>
+                  <h3><span  >Travelling: {{travel.name}}</span></h3>
                </mat-card-title>
             </mat-card-header>
             <mat-card-content>
@@ -196,7 +196,7 @@
             </mat-card-actions>
          </mat-card>
       </div>
-      <div *ngIf="customerTravels.length===0">No Travels Scheduled</div>
+      <div *ngIf="customerTravels.length===0" class="tos-content-color">No Travels Scheduled</div>
    </div>
    </mat-expansion-panel>
 </mat-accordion>

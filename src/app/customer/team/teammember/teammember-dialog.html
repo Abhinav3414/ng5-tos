@@ -19,8 +19,8 @@
       </form>
    </mat-dialog-content>
    <mat-dialog-actions>
-      <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-      <button mat-button [mat-dialog-close]=data.customerTeamMember>Update</button>
-      <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
+      <button mat-raised-button class="tos-primary-button" [mat-dialog-close]=data.customerTeamMember *ngIf="data.customerTeamMember.id !== ''">Update</button>
+      <button mat-raised-button class="tos-primary-button" [mat-dialog-close]=data.customerTeamMember *ngIf="data.customerTeamMember.id === ''">Add</button>
+      <button mat-button mat-dialog-close="dialogDismissed" disableRipple="true" class="tos-button">Cancel</button>
    </mat-dialog-actions>
 </div>

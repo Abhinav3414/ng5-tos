@@ -55,26 +55,26 @@ export class CustomerMainComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      var addCustomer = false;
+      var addCustomerAddress = false;
       if (result !== 'dialogDismissed' && result !== undefined) {
         if (result.customerAddress.address.length > 0 || (result.customerAddress.country.length > 0)) {
           this.customerAddress = result.customerAddress;
-          addCustomer = true;
+          addCustomerAddress = true;
         }
-        this.addNewEntity('customers', result.customer, this.customers, addCustomer)
+        this.addNewEntity('customers', result.customer, this.customers, addCustomerAddress)
       }
     });
   }
 
-  addNewEntity(entityName, entity, entityArray, addCustomer) {
+  addNewEntity(entityName, entity, entityArray, addCustomerAddress) {
     var custCopy = Object.assign({}, entity);
     custCopy.addresses = [];
     this.dataService.postEntity(entityName, custCopy)
       .then((resCustomerData: any) => {
         entityArray.push(resCustomerData);
-
+        console.log(resCustomerData)
         /* logic to add address for customer*/
-        if (addCustomer == true) {
+        if (addCustomerAddress == true) {
           this.customerAddress.customerId = resCustomerData.id;
 
           this.dataService.postEntity('addresses', this.customerAddress)
@@ -95,14 +95,26 @@ export class CustomerMainComponent {
     const index = this.customers.findIndex(c => c.id === id);
     this.customer = this.customers[index];
     var customerCopy = Object.assign({}, this.customer);
-    var customerAddressCopy = Object.assign({}, this.customer.addresses[0]);
-
+    var customerAddressCopy ;
+    if(this.customer.addresses[0] !== undefined) {
+      customerAddressCopy = Object.assign({}, this.customer.addresses[0]);
+    }
+    else {
+      customerAddressCopy = new Address();
+      this.customer.addresses[0] = customerAddressCopy;
+    }
     let dialogRef = this.dialog.open(CustomerDialogComponent, {
       data: this
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== 'dialogDismissed' && result !== undefined) {
-        this.updateEntity('customers', id, result.customer, this.customers);
+        var isAddressUpdated = false;
+        if (result.customer.addresses[0].address.length > 0 || (result.customer.addresses[0].country.length > 0)) {
+          isAddressUpdated = true;
+          result.customer.addresses[0].customerId = result.customer.id;
+        }
+
+        this.updateEntity('customers', id, result.customer, this.customers, isAddressUpdated);
       } else {
         this.customers[index] = customerCopy;
         this.customers[index].addresses[0] = customerAddressCopy;
@@ -110,14 +122,30 @@ export class CustomerMainComponent {
     });
   }
 
-  updateEntity(entityName, id, entity, entityArray) {
+  updateEntity(entityName, id, entity, entityArray, isAddressUpdated) {
+
+    if (isAddressUpdated === false) {
+        entity.addresses = [];
+    }
+
     this.dataService.updateEntity(entityName, id, entity)
       .then((resCustomerData) => {
         let index = entityArray.findIndex(e => e.id === entity.id);
         entityArray[index] = entity;
+
+        /*logic to update added address id in viewmodel of component */
+        if(isAddressUpdated === true) {
+          this.dataService.getEntityData(entityName, id)
+            .then((resCustomerData) => {
+            entityArray[index].addresses[0].id = resCustomerData.addresses[0].id;
+            },
+            (err) => console.log("Could not get " + entityName +" data to update compoent viewmodel :" + err)
+            );
+        }
       },
       (err) => console.log(entityName + " could not be updated :" + err)
       );
+
   }
 
   deleteCustomer(id) {

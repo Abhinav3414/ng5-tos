@@ -6,13 +6,15 @@
          <mat-form-field >
             <input matInput placeholder="Name" name="name" [value]="data.employeeTraining.name" [(ngModel)]="data.employeeTraining.name" ngModel><br>
          </mat-form-field>
+         <br>
          <mat-form-field>
-           <mat-select [(value)]="selected" [(ngModel)]="data.employeeTraining.mode" placeholder="Mode" name="mode" >
-             <mat-option *ngFor="let mode of data.trainingModes" [value]="mode">
-               {{ mode }}
-             </mat-option>
-           </mat-select>
+            <mat-select [(value)]="selected" [(ngModel)]="data.employeeTraining.mode" placeholder="Mode" name="mode" >
+            <mat-option *ngFor="let mode of data.trainingModes" [value]="mode">
+            {{ mode }}
+            </mat-option>
+            </mat-select>
          </mat-form-field>
+         <br>
          <mat-form-field>
             <input matInput [matDatepicker]="picker" placeholder="Proposed Date" name="proposedDate"
             [value]="data.employeeTraining.proposedDate"
@@ -20,13 +22,15 @@
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker  #picker></mat-datepicker>
          </mat-form-field>
+         <br>
          <mat-form-field >
             <input matInput placeholder="Reason" name="reason" [value]="data.employeeTraining.reason" [(ngModel)]="data.employeeTraining.reason" ngModel>
          </mat-form-field>
       </form>
    </mat-dialog-content>
    <mat-dialog-actions>
-      <button mat-button [mat-dialog-close]=data.employeeTraining>Update</button>
-      <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
+      <button mat-raised-button class="tos-primary-button" [mat-dialog-close]=data.employeeTraining *ngIf="data.employeeTraining.id !== ''">Update</button>
+      <button mat-raised-button class="tos-primary-button" [mat-dialog-close]=data.employeeTraining  *ngIf="data.employeeTraining.id === ''">Add</button>
+      <button mat-button mat-dialog-close="dialogDismissed" disableRipple="true" class="tos-button">Cancel</button>
    </mat-dialog-actions>
 </div>

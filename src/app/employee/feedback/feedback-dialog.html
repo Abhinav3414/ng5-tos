@@ -6,16 +6,20 @@
          <mat-form-field >
             <input matInput placeholder="Feedback" name="feedback" [value]="data.employeeFeedback.feedback" [(ngModel)]="data.employeeFeedback.feedback" ngModel><br>
          </mat-form-field>
+         <br>
          <mat-form-field >
             <input matInput placeholder="Received From" name="receivedFrom" [value]="data.employeeFeedback.receivedFrom" [(ngModel)]="data.employeeFeedback.receivedFrom" ngModel>
          </mat-form-field>
+         <br>
          <mat-form-field >
             <input matInput placeholder="Actions Taken" name="actionsTaken" [value]="data.employeeFeedback.actionsTaken" [(ngModel)]="data.employeeFeedback.actionsTaken" ngModel><br>
          </mat-form-field>
+         <br>
       </form>
    </mat-dialog-content>
    <mat-dialog-actions>
-      <button mat-button [mat-dialog-close]=data.employeeFeedback>Update</button>
-      <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
+      <button mat-raised-button class="tos-primary-button" [mat-dialog-close]=data.employeeFeedback *ngIf="data.employeeFeedback.id !== ''">Update</button>
+      <button mat-raised-button class="tos-primary-button" [mat-dialog-close]=data.employeeFeedback  *ngIf="data.employeeFeedback.id === ''">Add</button>
+      <button mat-button mat-dialog-close="dialogDismissed" disableRipple="true" class="tos-button">Cancel</button>
    </mat-dialog-actions>
 </div>

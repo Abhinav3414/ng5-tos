@@ -11,6 +11,7 @@ import { BreadCrumb } from '../menu/breadCrumb';
 export class MenuComponent {
   items: any[];
   title = 'Team Operations System';
+  titleXS = 'TOS';
   bread: BreadCrumb;
 
   constructor(private utilityService: UtilityService, private router: Router, private route: ActivatedRoute) { }
@@ -35,12 +36,12 @@ export class MenuComponent {
   }
 
   navigateCustomers() {
-    this.utilityService.addBreadCrumb(1, 'Customer', '/customers', 0, 'entities', '');
+    this.utilityService.addBreadCrumb(1, 'Customers', '/customers', 0, 'entities', '');
     this.router.navigate(['/customers'], { skipLocationChange: false });
   }
 
   navigateEmployeeHome() {
-    this.utilityService.addBreadCrumb(1, 'Employee', '/employees', 0, 'entities', '');
+    this.utilityService.addBreadCrumb(1, 'Employees', '/employees', 0, 'entities', '');
     this.router.navigate(['/employees'], { skipLocationChange: false });
   }
 

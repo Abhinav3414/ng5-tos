@@ -77,8 +77,6 @@ export class TeamViewComponent {
           .then((resEmployeeData) => {
             resEmployeeData.forEach(e => this.employees.push(e));
           });
-
-        console.log(this.employees)
       }
     });
   }

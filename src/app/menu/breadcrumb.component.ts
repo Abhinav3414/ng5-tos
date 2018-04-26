@@ -19,10 +19,6 @@ export class BreadcrumbComponent {
         this.crumbs.push(breadCrumb)
       }
       else {
-        if (breadCrumb.state === 'entities') {
-          this.crumbs = [];
-          breadCrumb.label = breadCrumb.label + "s";
-        }
         this.crumbs = [];
         if (breadCrumb.state !== 'none') {
           this.crumbs.push(breadCrumb)

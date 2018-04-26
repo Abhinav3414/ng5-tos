@@ -6,17 +6,19 @@
          <mat-form-field >
             <input matInput placeholder="Name" name="name" [value]="data.employeeCertification.name" [(ngModel)]="data.employeeCertification.name" ngModel><br>
          </mat-form-field>
+         <br>
          <mat-form-field>
-           <mat-select [(value)]="selected" [(ngModel)]="data.employeeCertification.yearOfCertification" placeholder="Year of Certification" name="yearOfCertification" >
-             <mat-option *ngFor="let yearCerti of data.certificationYearOfCertification" [value]="yearCerti">
-               {{ yearCerti }}
-             </mat-option>
-           </mat-select>
+            <mat-select [(value)]="selected" [(ngModel)]="data.employeeCertification.yearOfCertification" placeholder="Year of Certification" name="yearOfCertification" >
+            <mat-option *ngFor="let yearCerti of data.certificationYearOfCertification" [value]="yearCerti">
+            {{ yearCerti }}
+            </mat-option>
+            </mat-select>
          </mat-form-field>
       </form>
    </mat-dialog-content>
    <mat-dialog-actions>
-      <button mat-button [mat-dialog-close]=data.employeeCertification>Update</button>
-      <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
+      <button mat-raised-button class="tos-primary-button" [mat-dialog-close]=data.employeeCertification *ngIf="data.employeeCertification.id !== ''">Update</button>
+      <button mat-raised-button class="tos-primary-button" [mat-dialog-close]=data.employeeCertification  *ngIf="data.employeeCertification.id === ''">Add</button>
+      <button mat-button mat-dialog-close="dialogDismissed" disableRipple="true" class="tos-button">Cancel</button>
    </mat-dialog-actions>
 </div>

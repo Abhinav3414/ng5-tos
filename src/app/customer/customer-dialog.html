@@ -3,37 +3,31 @@
    <h2   *ngIf="data.customer.id !== ''" mat-dialog-title>Update Customer</h2>
    <mat-dialog-content>
       <form id="formNewEmployee2" name="formNewEmployeeUpdate"  #customerDataUpdate="ngForm">
-         <div fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
-            <div>
-               <mat-form-field >
-                  <input matInput placeholder="Name" name="name" [value]="data.customer.name" [(ngModel)]="data.customer.name" ngModel><br>
-               </mat-form-field>
-               <br>
-               <mat-form-field >
-                  <input matInput placeholder="Contact No." name="contact" [value]="data.customer.contact" [(ngModel)]="data.customer.contact" ngModel>
-               </mat-form-field>
-               <br>
-               <mat-form-field >
-                  <input matInput placeholder="Domain" name="domain" [value]="data.customer.domain" [(ngModel)]="data.customer.domain" ngModel>
-               </mat-form-field>
-               <br>
-            </div>
-            <div>
-               <mat-form-field >
-                  <textarea matInput placeholder="Address" rows="5" name="address" [value]="data.customer.addresses[0].address" [(ngModel)]="data.customer.addresses[0].address" ngModel>
-                  </textarea>
-               </mat-form-field>
-               <br>
-               <mat-form-field >
-                  <input matInput placeholder="Country" name="country" [value]="data.customer.addresses[0].country" [(ngModel)]="data.customer.addresses[0].country" ngModel>
-               </mat-form-field>
-            </div>
-         </div>
+         <mat-form-field >
+            <input matInput placeholder="Name" name="name" [value]="data.customer.name" [(ngModel)]="data.customer.name" ngModel><br>
+         </mat-form-field>
+         <br>
+         <mat-form-field >
+            <input matInput placeholder="Contact No." name="contact" [value]="data.customer.contact" [(ngModel)]="data.customer.contact" ngModel>
+         </mat-form-field>
+         <br>
+         <mat-form-field >
+            <input matInput placeholder="Domain" name="domain" [value]="data.customer.domain" [(ngModel)]="data.customer.domain" ngModel>
+         </mat-form-field>
+         <br>
+         <mat-form-field >
+            <textarea matInput placeholder="Address" rows="3" name="address" [value]="data.customer.addresses[0].address" [(ngModel)]="data.customer.addresses[0].address" ngModel>
+            </textarea>
+         </mat-form-field>
+         <br>
+         <mat-form-field >
+            <input matInput placeholder="Country" name="country" [value]="data.customer.addresses[0].country" [(ngModel)]="data.customer.addresses[0].country" ngModel>
+         </mat-form-field>
       </form>
    </mat-dialog-content>
    <mat-dialog-actions>
-      <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-      <button mat-button [mat-dialog-close]=data>Update</button>
-      <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
+      <button mat-raised-button class="tos-primary-button" [mat-dialog-close]=data *ngIf="data.customer.id !== ''">Update</button>
+      <button mat-raised-button class="tos-primary-button" [mat-dialog-close]=data *ngIf="data.customer.id === ''">Add</button>
+      <button mat-button mat-dialog-close="dialogDismissed" disableRipple="true" class="tos-button">Cancel</button>
    </mat-dialog-actions>
 </div>

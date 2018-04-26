@@ -23,7 +23,9 @@
         <div fxFlex="30%" *ngFor = "let member of customerTeamMembers">
            <mat-card class="example-card" >
               <mat-card-header>
-                 <mat-card-title> <h3><span class="tos-cust-heading" (click)="navigateViewEmployee(member.employeeId)"> {{member.name}}</span></h3></mat-card-title>
+                 <mat-card-title>
+                    <h3 class="shake-hover-style"><span  (click)="navigateViewEmployee(member.employeeId)" class="tos-cust-heading">{{member.name}} </span></h3>
+                </mat-card-title>
               </mat-card-header>
               <mat-card-content>
                  Role :{{member.role}} <br>
@@ -35,7 +37,7 @@
               </mat-card-actions>
            </mat-card>
         </div>
-        <div *ngIf="customerTeamMembers.length===0">No Team Members</div>
+        <div *ngIf="customerTeamMembers.length===0" class="tos-content-color">No Team Members</div>
      </div>
    </mat-expansion-panel>
 
@@ -68,7 +70,7 @@
               </mat-card-actions>
            </mat-card>
         </div>
-        <div *ngIf="customerActions.length===0">No Customer Actions Defined</div>
+        <div *ngIf="customerActions.length===0" class="tos-content-color">No Customer Actions Defined</div>
      </div>
    </mat-expansion-panel>
 
@@ -99,7 +101,7 @@
                  </mat-card-actions>
               </mat-card>
            </div>
-           <div *ngIf="customerProjectRythms.length===0">No Project Rythm Available</div>
+           <div *ngIf="customerProjectRythms.length===0" class="tos-content-color">No Project Rythm Available</div>
         </div>
       </mat-expansion-panel>
 

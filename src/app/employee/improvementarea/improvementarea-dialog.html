@@ -1,14 +1,16 @@
 <div *ngIf="  data.employeeImprovementArea!==undefined" >
    <h2 *ngIf="data.employeeImprovementArea.id === ''" mat-dialog-title>Add ImprovementArea</h2>
-   <h2   *ngIf="data.employeeImprovementArea.id !== ''" mat-dialog-title>Update ImprovementArea</h2>
+   <h2   *ngIf="data.employeeImprovementArea.id !== ''" mat-dialog-title>Update Improvements</h2>
    <mat-dialog-content>
       <form id="formNewImprovementAreaUpdate" name="formNewImprovementAreaUpdate"  #improvementAreaDataUpdate="ngForm">
          <mat-form-field >
             <input matInput placeholder="Areas of Improvement" name="areasOfImprovement" [value]="data.employeeImprovementArea.areasOfImprovement" [(ngModel)]="data.employeeImprovementArea.areasOfImprovement" ngModel><br>
          </mat-form-field>
+         <br>
          <mat-form-field >
             <input matInput placeholder="Improvement Plan" name="improvementPlan" [value]="data.employeeImprovementArea.improvementPlan" [(ngModel)]="data.employeeImprovementArea.improvementPlan" ngModel>
          </mat-form-field>
+         <br>
          <mat-form-field>
             <input matInput name="proposedDate" [matDatepicker]="picker" placeholder="Proposed Date"
             [value]="data.employeeImprovementArea.proposedDate"
@@ -19,7 +21,8 @@
       </form>
    </mat-dialog-content>
    <mat-dialog-actions>
-      <button mat-button [mat-dialog-close]=data.employeeImprovementArea>Update</button>
-      <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
+      <button mat-raised-button class="tos-primary-button" [mat-dialog-close]=data.employeeImprovementArea *ngIf="data.employeeImprovementArea.id !== ''">Update</button>
+      <button mat-raised-button class="tos-primary-button" [mat-dialog-close]=data.employeeImprovementArea  *ngIf="data.employeeImprovementArea.id === ''">Add</button>
+      <button mat-button mat-dialog-close="dialogDismissed" disableRipple="true" class="tos-button">Cancel</button>
    </mat-dialog-actions>
 </div>

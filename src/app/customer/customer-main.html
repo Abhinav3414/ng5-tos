@@ -4,10 +4,9 @@
       -->
    <span  (click)="openDialog()" class="tos-add-button">+</span>
 </div>
-
 <div class="container" fxlayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutAlign="flex-start" @fade>
    <div fxFlex="100%" *ngFor = "let cust of customers">
-      <mat-card>
+      <mat-card  class="example-card">
          <mat-card-header>
             <mat-card-title>
                <h3 class="shake-hover-style"><span (click)="navigateViewCustomer(cust.id)" class="tos-cust-heading">{{cust.name}} </span></h3>
@@ -22,7 +21,7 @@
                <tr class="tos-table" style="text-align: center;">
                   <td> <span *ngIf="cust.domain != null" >{{cust.domain}} </span> </td>
                   <td> <span *ngIf="cust.contactPerson != null" >{{cust.contactPerson}} </span> </td>
-                  <td ><span *ngIf="cust.addresses !== null && cust.addresses[0] !== undefined" >{{cust.addresses[0].address}},{{cust.addresses[0].country}} </span>
+                  <td ><span *ngIf="cust.addresses !== null && cust.addresses[0] !== undefined" >{{cust.addresses[0].address}}  {{cust.addresses[0].country}} </span>
                   </td>
                   <td >{{cust.contact}}</td>
                </tr>
@@ -44,5 +43,3 @@
    </div>
    <div *ngIf="checkEntity(customers)" class="tos-content-color">No Customers Present </div>
 </div>
-<br>
-<br>

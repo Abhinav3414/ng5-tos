@@ -1,4 +1,4 @@
-<div *ngIf="  data.employee!==undefined " style="width: 500px" >
+<div *ngIf="  data.employee!==undefined " >
    <h2 *ngIf="data.employee.id === ''" mat-dialog-title>Add Employee</h2>
    <h2   *ngIf="data.employee.id !== ''" mat-dialog-title>Update Employee</h2>
    <mat-dialog-content>
@@ -14,19 +14,20 @@
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker  #picker></mat-datepicker>
          </mat-form-field>
-          <br>
+         <br>
          <mat-form-field >
             <input matInput placeholder="Experience (in years)" name="yearsOfExperience" [value]="data.employee.yearsOfExperience" [(ngModel)]="data.employee.yearsOfExperience" ngModel>
-         </mat-form-field> <br>
-         <mat-form-field  style="width: 500px">
+         </mat-form-field>
+         <br>
+         <mat-form-field >
             <textarea matInput placeholder="Responsibilities (Current Project)" name="responsibilities" [value]="data.employee.responsibilities"
             [(ngModel)]="data.employee.responsibilities" ngModel></textarea>
          </mat-form-field>
       </form>
    </mat-dialog-content>
    <mat-dialog-actions>
-           <button mat-button [mat-dialog-close]=data.employee>Update</button>
-      <button mat-button mat-dialog-close="dialogDismissed">Cancel</button>
-
+      <button mat-raised-button class="tos-primary-button" [mat-dialog-close]=data.employee *ngIf="data.employee.id !== ''">Update</button>
+      <button mat-raised-button class="tos-primary-button" [mat-dialog-close]=data.employee  *ngIf="data.employee.id === ''">Add</button>
+      <button mat-button mat-dialog-close="dialogDismissed" disableRipple="true" class="tos-button">Cancel</button>
    </mat-dialog-actions>
 </div>

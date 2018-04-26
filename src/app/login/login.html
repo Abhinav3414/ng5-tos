@@ -1,64 +1,54 @@
-<mat-card flex="flex" style="width: 300px">
-  <mat-tab-group>
-  <mat-tab label="Login">
-      <!--
-       <mat-toolbar>
-        <div class="mat-toolbar-tools">
-             <h2><span>Login</span></h2>
-          </div>
-       </mat-toolbar>  -->
-       <mat-card-content>
+<mat-card flex="flex" style="width: 260px">
+   <mat-tab-group  disableRipple="true">
+      <mat-tab label="Login">
+         <!--
+            <mat-toolbar>
+             <div class="mat-toolbar-tools">
+                  <h2><span>Login</span></h2>
+               </div>
+            </mat-toolbar>  -->
+         <mat-card-content>
+            <br>
+            <mat-form-field>
+               <input matInput placeholder="Username"  [(ngModel)]="user.username" required >
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+               <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'"  [(ngModel)]="user.password" required>
+               <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+            </mat-form-field>
+            <!--
+               <mat-form-field>
+                 <mat-select [(value)]="selected" [(ngModel)]="user.role" placeholder="Logging in As" name="role" >
+                   <mat-option *ngFor="let role of userRoles" [value]="role">
+                     {{ role }}
+                   </mat-option>
+                 </mat-select>
+               </mat-form-field>
+               -->
+            <br><br>
+            <button mat-raised-button class="tos-primary-button" (click)="login(user)">Login</button>
+            <br><br>
+            <a *ngIf = "wrongCreds !== undefined" style="padding-left: 16px; color: red; font-size: 12px"> {{wrongCreds}} </a>
+         </mat-card-content>
+      </mat-tab>
+      <mat-tab label="Register">
          <br>
-          <mat-form-field>
-             <input matInput placeholder="Username"  [(ngModel)]="user.username" required >
-          </mat-form-field>
-          <br>
-          <mat-form-field>
-             <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'"  [(ngModel)]="user.password" required>
-             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-          </mat-form-field>
-          <br>  <!--
-          <mat-form-field>
-            <mat-select [(value)]="selected" [(ngModel)]="user.role" placeholder="Logging in As" name="role" >
-              <mat-option *ngFor="let role of userRoles" [value]="role">
-                {{ role }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          -->
-          <br>
-          <button  (click)="login(user)" mat-button>Login</button>
-
-          <br><br>
-          <a *ngIf = "wrongCreds !== undefined" style="padding-left: 16px; color: red; font-size: 12px"> {{wrongCreds}} </a>
-       </mat-card-content>
-
-
-
-  </mat-tab>
-  <mat-tab label="Register">
- <br>
-       <mat-card-content>
-
-          <mat-form-field>
-             <input matInput placeholder="Username / Email"  [(ngModel)]="user.username" required >
-          </mat-form-field>
-          <br>
-          <mat-form-field>
-             <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'"  [(ngModel)]="user.password" required>
-             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-          </mat-form-field>
-          <br>
-          <button  (click)="login(user)" mat-button>Register</button>
-
-          <br><br><br>
-          <a *ngIf = "wrongCreds !== undefined" style="padding-left: 16px; color: red; font-size: 12px"> {{wrongCreds}} </a>
-       </mat-card-content>
-
-  </mat-tab>
-</mat-tab-group>
-
+         <mat-card-content>
+            <mat-form-field>
+               <input matInput placeholder="Username"  [(ngModel)]="newUser.username" required >
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+               <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'"  [(ngModel)]="newUser.password" required>
+               <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+            </mat-form-field>
+            <br><br>
+            <button mat-raised-button class="tos-primary-button" (click)="register(newUser)">Register</button>
+            <br><br>
+         </mat-card-content>
+      </mat-tab>
+   </mat-tab-group>
 </mat-card>
-
 <!--
    -->
