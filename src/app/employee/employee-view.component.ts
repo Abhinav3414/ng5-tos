@@ -51,8 +51,9 @@ export class EmployeeViewComponent {
   employeeFeedback = new Feedback();
   employeeImprovementArea = new ImprovementArea();
 
-  skillRatings: Array<String>;
-  trainingModes: Array<String>;
+  skillRatings = ['1', '2', '3', '4', '5'];
+  trainingModes = ['online', 'On-site', 'Live On-Line', 'On Demand', 'Classroom'];
+
   certificationYearOfCertification = [];
   certificationCurrentYear: number;
 
@@ -64,9 +65,6 @@ export class EmployeeViewComponent {
   }
 
   ngOnInit() {
-
-    this.skillRatings = ['1', '2', '3', '4', '5'];
-    this.trainingModes = ['online', 'On-site', 'Live On-Line', 'On Demand', 'Classroom'];
 
     var date = new Date();
     this.certificationCurrentYear = date.getFullYear();
@@ -204,7 +202,7 @@ export class EmployeeViewComponent {
   }
 
   navigateViewTeam(teamId) {
-    this.router.navigate(['/team', teamId], { skipLocationChange: false });
+    this.router.navigate(['view/team', teamId], { skipLocationChange: false });
   }
 
   delelteEntity(entityName, id, entityArray) {

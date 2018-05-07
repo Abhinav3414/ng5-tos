@@ -8,14 +8,12 @@ import { DataService } from '../services/data.service';
 import { UtilityService } from '../services/utility.service';
 
 import { Customer } from './customer';
-import { AddressDialogComponent } from './addresses/address-dialog.component';
 import { StakeholderDialogComponent } from './stakeholder/stakeholder-dialog.component';
 import { GoalDialogComponent } from './goal/goal-dialog.component';
 import { TeamDialogComponent } from './team/team-dialog.component';
 import { TravelDialogComponent } from './travel/travel-dialog.component';
 
 import { BreadCrumb } from '../menu/breadCrumb';
-import { Address } from './addresses/address';
 import { Team } from './team/team';
 import { Goal } from './goal/goal';
 import { Stakeholder } from './stakeholder/stakeholder';
@@ -49,22 +47,20 @@ export class CustomerViewComponent {
   customerStakeholder = new Stakeholder();
   customerGoal = new Goal();
   customerTravel = new Travel();
-  customerAddress = new Address();
   customerTeam = new Team();
-  goalTenures: Array<String>;
+  goalTenures = ['Weekly', 'Monthly', 'Yearly'];
 
   bread: BreadCrumb;
 
   constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
     private dialog: MatDialog, private utilityService: UtilityService, private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer) {
-    this.matIconRegistry.addSvgIcon(`phone`,this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/icons/phone.svg"));
-    this.matIconRegistry.addSvgIcon(`human-greeting`,this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/icons/human-greeting.svg"));
+    this.matIconRegistry.addSvgIcon(`phone`,this.domSanitizer.bypassSecurityTrustResourceUrl("./assets/icons/phone.svg"));
+    this.matIconRegistry.addSvgIcon(`human-greeting`,this.domSanitizer.bypassSecurityTrustResourceUrl("./assets/icons/human-greeting.svg"));
+
   }
   ngOnInit() {
     this.utilityService.currentBreadCrumb.subscribe(bread => this.bread = bread);
-
-    this.goalTenures = ['Daily', 'Weekly', 'Monthly', 'Yearly'];
 
     this.route.params.subscribe(params => {
       this.id = +params['id']; // (+) converts string 'id' to a number
@@ -76,7 +72,6 @@ export class CustomerViewComponent {
 
             this.customer.goals.forEach(e => this.customerGoals.push(e));
             this.customer.teams.forEach(e => this.customerTeams.push(e));
-            this.customer.addresses.forEach(e => this.customerAddresses.push(e));
             this.customer.stakeHolders.forEach(e => this.customerStakeholders.push(e));
             this.customer.travels.forEach(e => this.customerTravels.push(e));
           });
@@ -85,11 +80,7 @@ export class CustomerViewComponent {
   }
 
   openDialog(entityName): void {
-    if (entityName === 'addresses') {
-      this.customerAddress = new Address();
-      this.openEntityDialog(AddressDialogComponent, entityName, this.customerAddresses);
-    }
-    else if (entityName === 'teams') {
+    if (entityName === 'teams') {
       this.customerTeam = new Team();
       this.openEntityDialog(TeamDialogComponent, entityName, this.customerTeams);
     }
@@ -132,11 +123,7 @@ export class CustomerViewComponent {
   }
 
   openUpdateDialog(entityName: String, id: number): void {
-    if (entityName === 'addresses') {
-      this.customerAddress = this.customerAddresses[this.customerAddresses.findIndex(e => e.id === id)];
-      this.openEntityUpdateDialog(entityName, AddressDialogComponent, id, this.customerAddresses);
-    }
-    else if (entityName === 'teams') {
+    if (entityName === 'teams') {
       this.customerTeam = this.customerTeams[this.customerTeams.findIndex(e => e.id === id)];
       this.openEntityUpdateDialog(entityName, TeamDialogComponent, id, this.customerTeams);
     }
@@ -187,8 +174,8 @@ export class CustomerViewComponent {
 
   navigateViewTeam(teamId) {
     let entity = this.customerTeams[this.customerTeams.findIndex(t => t.id === teamId)];
-    this.utilityService.addBreadCrumb(3, 'Team', '/team', teamId, 'entity', entity.name);
-    this.router.navigate(['/team', teamId], { skipLocationChange: false });
+    this.utilityService.addBreadCrumb(3, 'Team', 'view/team', teamId, 'entity', entity.name);
+    this.router.navigate(['view/team', teamId], { skipLocationChange: false });
   }
 
   delelteEntity(entityName, id, entityArray) {

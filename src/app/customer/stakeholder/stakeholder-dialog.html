@@ -2,9 +2,12 @@
    <h2 *ngIf="data.customerStakeholder.id === ''" mat-dialog-title>Create StakeHolder</h2>
    <h2   *ngIf="data.customerStakeholder.id !== ''" mat-dialog-title>Update StakeHolder</h2>
    <mat-dialog-content>
-      <form id="formNewStakeholderUpdate" name="formNewStakeholderUpdate"  #stakeholderDataUpdate="ngForm">
+      <form id="formNewStakeholderUpdate" name="formNewStakeholderUpdate"  #stakeholderDataUpdate="ngForm" >
+          <mat-checkbox [value]="data.customerStakeholder.contactPerson" name="contactPerson"
+           [(ngModel)]="data.customerStakeholder.contactPerson" disableRipple="true">Contact Person</mat-checkbox>
+        <br><br>
          <mat-form-field >
-            <input matInput placeholder="Name" name="name" [value]="data.name" [(ngModel)]="data.customerStakeholder.name" ngModel><br>
+            <input matInput placeholder="Name" name="name" [value]="data.name" [(ngModel)]="data.customerStakeholder.name" ngModel>
          </mat-form-field><br>
          <mat-form-field >
             <input matInput placeholder="Role" name="role" [value]="data.customerStakeholder.role" [(ngModel)]="data.customerStakeholder.role" ngModel>

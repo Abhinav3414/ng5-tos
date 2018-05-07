@@ -34,7 +34,7 @@
             <mat-card-content>
                Tenure: {{goal.tenure}} <br>
                Status: {{goal.status}}<br>
-               Notes: {{goal.notes}}<br>
+               Details: {{goal.details}}<br>
                Signed By: {{goal.signedBy}}
             </mat-card-content>
             <mat-card-actions>
@@ -51,39 +51,6 @@
       <div *ngIf="customerGoals.length===0" class="tos-content-color">No Goals Defined </div>
    </div>
    </mat-expansion-panel>
-   <!--
-      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <h3>Addresses</h3>
-          </mat-panel-title>
-          <mat-panel-description>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <div class=" tos-button-right">
-           <button mat-button color="primary" mat-mini-fab (click)="openDialog('addresses')"> <mat-icon ><i class="material-icons tos-material-button">+</i></mat-icon> </button>
-        </div>
-        <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
-           <div fxFlex="30%" *ngFor = "let address of customerAddresses">
-              <mat-card class="example-card" >
-                 <mat-card-header>
-                    <mat-card-title>Address</mat-card-title>
-                    <mat-card-subtitle>{{address.address}}</mat-card-subtitle>
-                 </mat-card-header>
-                 <mat-card-content>
-                    {{address.country}} <br>
-                 </mat-card-content>
-                 <mat-card-actions>
-                    <span (click)="openUpdateDialog('addresses',address.id)" style="cursor:pointer;color:grey"><mat-icon  >create</mat-icon></span>&emsp;
-                    <span (click)="delelteEntity('addresses',address.id,customerAddresses)" style="cursor:pointer; color:grey"><mat-icon  >delete</mat-icon></span>
-                 </mat-card-actions>
-              </mat-card>
-           </div>
-           <div *ngIf="customerAddresses.length===0">No address Updated </div>
-        </div>
-      </mat-expansion-panel>
-
-      -->
    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
    <mat-expansion-panel-header>
       <mat-panel-title>
@@ -138,7 +105,8 @@
          <mat-card class="example-card" >
             <mat-card-header>
                <mat-card-title>
-                  <h3><span  >{{sholder.name}}</span></h3>
+                  <h3><span>{{sholder.name}}</span>
+                    <span class="tos-subtitle" *ngIf="sholder.contactPerson === true"> (Contact Person) </span></h3>
                </mat-card-title>
             </mat-card-header>
             <mat-card-content>

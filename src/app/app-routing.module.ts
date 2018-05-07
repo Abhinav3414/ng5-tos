@@ -15,15 +15,15 @@ import { HomeComponent } from './home/home.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'view/login', component: LoginComponent },
   { path: 'contentDashboard', component: ContentComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'customers', component: CustomerMainComponent },
-  { path: 'customer/:id', component: CustomerViewComponent },
-  { path: 'employees', component: EmployeeMainComponent },
-  { path: 'employee/:id', component: EmployeeViewComponent },
-  { path: 'team/:id', component: TeamViewComponent }
+  { path: 'view/about', component: AboutComponent },
+  { path: 'view/profile', component: ProfileComponent },
+  { path: 'view/customers', component: CustomerMainComponent },
+  { path: 'view/customer/:id', component: CustomerViewComponent },
+  { path: 'view/employees', component: EmployeeMainComponent },
+  { path: 'view/employee/:id', component: EmployeeViewComponent },
+  { path: 'view/team/:id', component: TeamViewComponent }
 ];
 
 @NgModule({

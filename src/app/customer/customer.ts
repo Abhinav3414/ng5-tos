@@ -4,10 +4,11 @@ export class Customer {
   contact = '';
   contactPerson = '';
   domain = '';
+  address = '';
+  country = '';
   createdAt = '';
   goals = [];
   teams = [];
-  addresses = [];
   stakeHolders = [];
   travels = [];
   constructor(values: Object = {}) {

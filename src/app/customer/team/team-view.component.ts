@@ -45,10 +45,12 @@ export class TeamViewComponent {
   customerProjectRythm = new ProjectRythm();
   customerTeamMember = new TeamMember();
 
+  rythmFrequency = ['Daily','Weekly', 'Monthly', 'Quaterly', 'Yearly'];
+
   constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
     private dialog: MatDialog, private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer) {
-        this.matIconRegistry.addSvgIcon(`bullseye-arrow`,this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/icons/bullseye-arrow.svg"));
+        this.matIconRegistry.addSvgIcon(`bullseye-arrow`,this.domSanitizer.bypassSecurityTrustResourceUrl("./assets/icons/bullseye-arrow.svg"));
   }
 
   ngOnInit() {
@@ -210,7 +212,7 @@ export class TeamViewComponent {
   }
 
   navigateViewEmployee(id) {
-    this.router.navigate(['/employee', id], { skipLocationChange: false });
+    this.router.navigate(['view/employee', id], { skipLocationChange: false });
   }
 
   delelteEntity(entityName, id, entityArray) {

@@ -35,7 +35,6 @@ import { CustomerDialogComponent } from './customer/customer-dialog.component';
 
 import { GoalDialogComponent } from './customer/goal/goal-dialog.component';
 import { TeamDialogComponent } from './customer/team/team-dialog.component';
-import { AddressDialogComponent } from './customer/addresses/address-dialog.component';
 import { StakeholderDialogComponent } from './customer/stakeholder/stakeholder-dialog.component';
 import { TeamViewComponent } from './customer/team/team-view.component';
 import { ProjectRythmDialogComponent } from './customer/team/projectrythm/projectrythm-dialog.component';
@@ -52,6 +51,7 @@ import { DataService } from './services/data.service';
 import { UtilityService } from './services/utility.service';
 import { AuthService } from './services/auth.service';
 import { LocalStorageService } from './services/localStorage.service';
+import { UrlService } from './services/url.service';
 import { AuthInterceptor } from './Interceptors/auth.interceptor';
 
 @NgModule({
@@ -67,7 +67,6 @@ import { AuthInterceptor } from './Interceptors/auth.interceptor';
     TeamViewComponent,
     EmployeeDialogComponent,
     CustomerDialogComponent,
-    AddressDialogComponent,
     StakeholderDialogComponent,
     GoalDialogComponent,
     TeamDialogComponent,
@@ -100,7 +99,7 @@ import { AuthInterceptor } from './Interceptors/auth.interceptor';
     AngularSvgIconModule
   ],
   exports: [],
-  providers: [DataService,UtilityService,AuthService,LocalStorageService,
+  providers: [DataService,UtilityService,AuthService,LocalStorageService,UrlService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
@@ -109,7 +108,7 @@ import { AuthInterceptor } from './Interceptors/auth.interceptor';
     /*{ provide: LocationStrategy, useClass: HashLocationStrategy },*/
   ],
   entryComponents: [
-    EmployeeDialogComponent, CustomerDialogComponent, AddressDialogComponent, StakeholderDialogComponent,
+    EmployeeDialogComponent, CustomerDialogComponent, StakeholderDialogComponent,
     GoalDialogComponent, TeamDialogComponent, ProjectRythmDialogComponent, ActionDialogComponent,
     TeamMemberDialogComponent, TravelDialogComponent, SkillDialogComponent, CertificationDialogComponent,
     TrainingDialogComponent, ImprovementAreaDialogComponent, FeedbackDialogComponent

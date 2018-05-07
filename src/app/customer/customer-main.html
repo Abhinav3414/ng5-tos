@@ -21,7 +21,7 @@
                <tr class="tos-table" style="text-align: center;">
                   <td> <span *ngIf="cust.domain != null" >{{cust.domain}} </span> </td>
                   <td> <span *ngIf="cust.contactPerson != null" >{{cust.contactPerson}} </span> </td>
-                  <td ><span *ngIf="cust.addresses !== null && cust.addresses[0] !== undefined" >{{cust.addresses[0].address}}  {{cust.addresses[0].country}} </span>
+                  <td ><span *ngIf="cust.addresses !== null" >{{cust.address}}  {{cust.country}} </span>
                   </td>
                   <td >{{cust.contact}}</td>
                </tr>

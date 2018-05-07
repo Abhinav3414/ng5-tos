@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 
 import { Router } from '@angular/router';
 import { UtilityService } from '../services/utility.service';
-import { BreadCrumb } from '../menu/breadCrumb';
 import { AuthService } from '../services/auth.service';
 import { LocalStorageService } from '../services/localStorage.service';
 import { DataService } from '../services/data.service';
@@ -28,7 +27,7 @@ export class LoginComponent {
   userRoles: Array<String>;
   wrongCreds: string = undefined;
 
-  constructor(private router: Router,  private auth: AuthService,
+  constructor(private router: Router,  private authService: AuthService,
     private localStorageService: LocalStorageService, private utilityService: UtilityService,
     private dataService: DataService) { }
 
@@ -37,7 +36,7 @@ export class LoginComponent {
   }
 
   login(usercreds) {
-    this.auth.login(usercreds)
+    this.authService.login(usercreds)
       .then((data) => {
         this.localStorageService.setAuthorizationData(data);
         this.utilityService.addTokenSubject(data.access_token);
@@ -50,12 +49,23 @@ export class LoginComponent {
   }
 
   register(usercreds) {
+
     this.dataService.postUserEntity('users', usercreds)
       .then((resCustomerData : any) => {
+        console.log("abhinab")
+          console.log(this.dataService.PropUris)
+        if(location.origin === 'http://localhost:4200') {
+          location.href = location.origin;
+        }
+        else {
+          let PropertyUris = JSON.parse(localStorage.getItem("PropertyUris"));
+          console.log("Popr" + PropertyUris);
+          console.log(this.dataService.PropUris)
+          if(PropertyUris !== null) {
+                location.href = PropertyUris.appBaseUrl;
+          }
+        }
 
-        location.href = "http://localhost:8080/index.html";
-        console.log(location)
-        location.reload();
       },
       (err) => console.log("users could not be updated :" + err)
       );

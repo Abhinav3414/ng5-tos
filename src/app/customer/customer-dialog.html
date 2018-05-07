@@ -16,18 +16,26 @@
          </mat-form-field>
          <br>
          <mat-form-field >
-            <textarea matInput placeholder="Address" rows="3" name="address" [value]="data.customer.addresses[0].address" [(ngModel)]="data.customer.addresses[0].address" ngModel>
+            <textarea matInput placeholder="Address" rows="3" name="address" [value]="data.customer.address" [(ngModel)]="data.customer.address" ngModel>
             </textarea>
          </mat-form-field>
          <br>
          <mat-form-field >
-            <input matInput placeholder="Country" name="country" [value]="data.customer.addresses[0].country" [(ngModel)]="data.customer.addresses[0].country" ngModel>
+            <input type="text"  name="country"  placeholder="Country" aria-label="country" matInput [formControl]="data.myControl"
+            [(ngModel)]="data.customer.country"
+            [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+               <mat-option *ngFor="let country of data.filteredCountries | async" [value]="country">
+               {{ country }}
+               </mat-option>
+            </mat-autocomplete>
          </mat-form-field>
+         <br>
       </form>
    </mat-dialog-content>
    <mat-dialog-actions>
-      <button mat-raised-button class="tos-primary-button" [mat-dialog-close]=data *ngIf="data.customer.id !== ''">Update</button>
-      <button mat-raised-button class="tos-primary-button" [mat-dialog-close]=data *ngIf="data.customer.id === ''">Add</button>
+      <button mat-raised-button class="tos-primary-button" [mat-dialog-close]=data.customer *ngIf="data.customer.id !== ''">Update</button>
+      <button mat-raised-button class="tos-primary-button" [mat-dialog-close]=data.customer *ngIf="data.customer.id === ''">Add</button>
       <button mat-button mat-dialog-close="dialogDismissed" disableRipple="true" class="tos-button">Cancel</button>
    </mat-dialog-actions>
 </div>

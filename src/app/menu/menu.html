@@ -1,40 +1,13 @@
-<!--
-   <mat-toolbar >
-         <a href="/" class="tos-title-style"> <h2>{{title}}</h2> </a>
-         <span class="example-spacer"></span>
-         <div fxShow="true" fxHide.lt-md="true" class="tos-menu-buttons">
-            <a (click)="navigateHome()">Home</a>
-            <a (click)="navigateEmployeeHome()">Employee</a>
-            <a (click)="navigateCustomers()">Customer</a>
-            <a (click)="navigateProfile()">Profile</a>
-            <a (click)="navigateAbout()">About</a>
-            <a>Logout</a>
-         </div>
-         <div fxShow="false" fxShow.lt-md="true" fxLayout="column">
-            <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
-            <a (click)="navigateHome()">Home</a>
-            <a (click)="navigateEmployeeHome()">Employee</a>
-            <a (click)="navigateCustomers()">Customer</a>
-            <a (click)="navigateProfile()">Profile</a>
-            <a (click)="navigateAbout()">About</a>
-            <a>Logout</a>
-            </mat-menu>
-            <button mat-icon-button [matMenuTriggerFor]="appMenu">
-               <mat-icon>more_vert</mat-icon>
-            </button>
-         </div>
-   </mat-toolbar>
-   -->
 <mat-toolbar >
-   <a href="/index.html" class="tos-title-style">
+   <a href="./index.html" class="tos-title-style">
       <h2 fxShow="true" fxHide.gt-md="true">{{titleXS}}</h2>
       <h2 fxShow="true" fxHide.lt-md="true">{{title}}</h2>
    </a>
    <span class="example-spacer"></span>
    <div fxShow="true" fxHide.lt-md="true" class="tos-menu-buttons">
      <a (click)="navigateHome()">Home</a>
+    <a (click)="navigateCustomers()">Customer</a>
      <a (click)="navigateEmployeeHome()">Employee</a>
-     <a (click)="navigateCustomers()">Customer</a>
      <a (click)="navigateAbout()">About</a>
      <a (click)="logout()">Logout</a>
     <!--  <button mat-button (click)="navigateHome()"  disableRipple="true">Home</button>
@@ -53,8 +26,8 @@
       <button mat-button (click)="navigateAbout()">About</button>
       <button mat-button (click)="logout()">Logout</button>-->
       <a (click)="navigateHome()">Home</a>
-      <a (click)="navigateEmployeeHome()">Employee</a>
       <a (click)="navigateCustomers()">Customer</a>
+      <a (click)="navigateEmployeeHome()">Employee</a>
       <a (click)="navigateAbout()">About</a>
       <a (click)="logout()">Logout</a>
       </mat-menu>
@@ -64,5 +37,3 @@
    </div>
 </mat-toolbar>
 <breadcrumb> </breadcrumb>
-<!--
-   -->

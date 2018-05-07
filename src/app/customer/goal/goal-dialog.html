@@ -7,13 +7,12 @@
             <input matInput placeholder="Description" name="description" [value]="data.customerGoal.description" [(ngModel)]="data.customerGoal.description" ><br>
          </mat-form-field>
          <br>
-         <mat-form-field >
-            <input type="text" placeholder="Pick tenure" name="tenure" matInput  [(ngModel)]="data.customerGoal.tenure" [matAutocomplete]="auto " >
-            <mat-autocomplete #auto="matAutocomplete">
-               <mat-option *ngFor="let option of data.goalTenures" [value]="option">
+         <mat-form-field>
+           <mat-select [(value)]="selected" [(ngModel)]="data.customerGoal.tenure" placeholder="Tenure" name="tenure">
+             <mat-option *ngFor="let option of data.goalTenures" [value]="option">
                {{ option }}
-               </mat-option>
-            </mat-autocomplete>
+             </mat-option>
+           </mat-select>
          </mat-form-field>
          <br>
          <mat-form-field >
@@ -21,11 +20,11 @@
          </mat-form-field>
          <br>
          <mat-form-field >
-            <input matInput placeholder="Notes" name="notes" [value]="data.customerGoal.notes" [(ngModel)]="data.customerGoal.notes" >
+            <input matInput placeholder="Signed By" name="signedBy" [value]="data.customerGoal.signedBy" [(ngModel)]="data.customerGoal.signedBy" >
          </mat-form-field>
          <br>
          <mat-form-field >
-            <input matInput placeholder="Signed By" name="signedBy" [value]="data.customerGoal.signedBy" [(ngModel)]="data.customerGoal.signedBy" >
+            <textarea matInput placeholder="Details" name="details" [value]="data.customerGoal.details" [(ngModel)]="data.customerGoal.details" ngModel></textarea>
          </mat-form-field>
       </form>
    </mat-dialog-content>

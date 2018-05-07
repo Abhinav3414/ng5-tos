@@ -7,8 +7,12 @@
             <input matInput placeholder="Event" name="event" [value]="data.customerProjectRythm.event" [(ngModel)]="data.customerProjectRythm.event" ngModel><br>
          </mat-form-field>
          <br>
-         <mat-form-field >
-            <input matInput placeholder="Frequency" name="frequency" [value]="data.customerProjectRythm.frequency" [(ngModel)]="data.customerProjectRythm.frequency" ngModel>
+         <mat-form-field>
+           <mat-select [(value)]="selected" [(ngModel)]="data.customerProjectRythm.frequency" placeholder="Frequency" name="frequency">
+             <mat-option *ngFor="let option of data.rythmFrequency" [value]="option">
+               {{ option }}
+             </mat-option>
+           </mat-select>
          </mat-form-field>
          <br>
          <mat-form-field >

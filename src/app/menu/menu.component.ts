@@ -36,29 +36,29 @@ export class MenuComponent {
   }
 
   navigateCustomers() {
-    this.utilityService.addBreadCrumb(1, 'Customers', '/customers', 0, 'entities', '');
-    this.router.navigate(['/customers'], { skipLocationChange: false });
+    this.utilityService.addBreadCrumb(1, 'Customers', 'view/customers', 0, 'entities', '');
+    this.router.navigate(['view/customers'], { skipLocationChange: false });
   }
 
   navigateEmployeeHome() {
-    this.utilityService.addBreadCrumb(1, 'Employees', '/employees', 0, 'entities', '');
-    this.router.navigate(['/employees'], { skipLocationChange: false });
+    this.utilityService.addBreadCrumb(1, 'Employees', 'view/employees', 0, 'entities', '');
+    this.router.navigate(['view/employees'], { skipLocationChange: false });
   }
 
   navigateAbout() {
-    this.utilityService.addBreadCrumb(1, 'About', '/about', 0, 'single', '');
-    this.router.navigate(['/about'], { skipLocationChange: false });
+    this.utilityService.addBreadCrumb(1, 'About', 'view/about', 0, 'single', '');
+    this.router.navigate(['view/about'], { skipLocationChange: false });
   }
 
   navigateProfile() {
-    this.utilityService.addBreadCrumb(1, 'Profile', '/profile', 0, 'single', '');
-    this.router.navigate(['/profile'], { skipLocationChange: false });
+    this.utilityService.addBreadCrumb(1, 'Profile', 'view/profile', 0, 'single', '');
+    this.router.navigate(['view/profile'], { skipLocationChange: false });
   }
 
   logout() {
     localStorage.clear();
     this.utilityService.addTokenSubject('');
-    this.router.navigate(['/login']);
+    this.router.navigate(['view/login']);
   }
 
 }

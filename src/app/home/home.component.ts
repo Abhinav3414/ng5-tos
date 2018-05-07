@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocalStorageService } from '../services/localStorage.service';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'home',
@@ -16,12 +17,15 @@ import { LocalStorageService } from '../services/localStorage.service';
   ]
 })
 export class HomeComponent {
-
-  constructor(private router: Router, private route: ActivatedRoute, private localStorageService: LocalStorageService) {
+expression: any;
+  constructor(private router: Router, private route: ActivatedRoute, private localStorageService: LocalStorageService,
+  private dataService: DataService) {
   }
 
   ngOnInit() {
+
     if(this.localStorageService.getValueFromLocalStorage() == null)
-      this.router.navigate(['/login']);
-}
+      this.router.navigate(['view/login']);
+
+    }
 }
