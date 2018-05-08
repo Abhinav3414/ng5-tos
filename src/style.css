@@ -3,6 +3,7 @@
  @import '~@angular/material/prebuilt-themes/indigo-pink.css';
  @import url('https://fonts.googleapis.com/css?family=Montserrat');
  @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+ @import url("https://fonts.googleapis.com/css?family=Roboto");
 /* Available pre-built themes: deeppurple-amber.css indigo-pink.css pink-bluegrey.css purple-green.css */
 /*/
 ////////////////[ FONT ]*/
@@ -22,6 +23,16 @@
      font-family: Poppins-SemiBold;
      src: url('./assets/fonts/poppins/Poppins-SemiBold.ttf');
 }
+@font-face {
+    font-family: Montserrat-Regular;
+    src: url('./assets/fonts/montserrat/Montserrat-Regular.ttf');
+}
+
+@font-face {
+    font-family: Custom-OpenSans-Regular;
+    src: url('./assets/fonts/open_sans/OpenSans-Regular.ttf');
+}
+
  html {
      overflow-y:scroll;
 }
@@ -29,6 +40,7 @@
      font-family: sans-serif;
      font-size: 14px;
      margin: 0;
+     font: 500 14px/32px Roboto,"Helvetica Neue",sans-serif;
 }
  h3 {
      color: #505050;
@@ -410,4 +422,3 @@
     }
 }
  */
- 

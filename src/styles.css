@@ -3,6 +3,7 @@
  @import '~@angular/material/prebuilt-themes/indigo-pink.css';
  @import url('https://fonts.googleapis.com/css?family=Montserrat');
  @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+ @import url("https://fonts.googleapis.com/css?family=Roboto");
 /* Available pre-built themes: deeppurple-amber.css indigo-pink.css pink-bluegrey.css purple-green.css */
 /*/
 ////////////////[ FONT ]*/
@@ -22,6 +23,16 @@
      font-family: Poppins-SemiBold;
      src: url('./assets/fonts/poppins/Poppins-SemiBold.ttf');
 }
+@font-face {
+    font-family: Montserrat-Regular;
+    src: url('./assets/fonts/montserrat/Montserrat-Regular.ttf');
+}
+
+@font-face {
+    font-family: Custom-OpenSans-Regular;
+    src: url('./assets/fonts/open_sans/OpenSans-Regular.ttf');
+}
+
  html {
      overflow-y:scroll;
 }
@@ -29,6 +40,7 @@
      font-family: sans-serif;
      font-size: 14px;
      margin: 0;
+     font: 500 14px/20px Roboto,"Helvetica Neue",sans-serif;
 }
  h3 {
      color: #505050;
@@ -37,13 +49,14 @@
      color: #707070;
 }
  body {
+    /*
      background-color: #e8e4d9;
      background-image: url(./background-9.jpg);
      background-position: center center;
      background-repeat: no-repeat;
      background-size: cover;
      background-attachment: fixed;
-    /* background: #f5f5f5;
+     background: #f5f5f5;
      background: linear-gradient(56deg, #dbdbdb, #f1f1f1);
      background: linear-gradient(96deg, #f4f4f4, #f1f1f1);
      background: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
@@ -52,16 +65,22 @@
      background: linear-gradient(45deg, rgba(242, 34, 50, 0.5), rgba(255, 187, 54, 0.6) 100%);
      */
 }
- .tos-router-container .mat-expansion-panel {
-     background: #efede5db;
+
+.tos-menu-style menu {
+  margin: 20px 0 0 0;
 }
- .tos-router-container .mat-expansion-panel-header.mat-expanded:hover {
-     background: #eae8de17;
+
+.tos-body-style {
+  background-color: #f6f6f6;
+  min-height: 84vh;
+}
+.tos-menu-style {
+  height: 16vh;
 }
  content {
-     min-height: 80vh;
-     display: flex;
-     flex-direction: column;
+   flex-direction: column;
+display: flex;
+width: 100%;
 }
  mat-accordion {
      margin-bottom: 2em;
@@ -154,13 +173,14 @@
     }
 }
  .tos-menu-buttons > a {
-     font-size: .7em;
-     cursor: pointer;
-     padding: 0 1em;
+   font-size: 16px;
+cursor: pointer;
+padding: 0 15px;
 }
  .tos-menu-buttons > a:hover {
-     color: #898989;
-     transition: all 200ms ease;
+   color: #f4cb3c;
+transition: all 80ms ease;
+
 }
 /* XS Menu Styling */
  #cdk-overlay-0 > div {
@@ -211,9 +231,6 @@
      padding: 0 .7em;
      color: #818080;
 }
- .example-card.mat-card {
-     background: #ffffff9c;
-}
  mat-expansion-panel .example-card.mat-card {
      background: #ffffff87;
 }
@@ -263,7 +280,7 @@
      padding-left: 16px;
 }
  .tos-title-style > h2 {
-     font-size: 1.5em;
+     font: 500 30px/32px Roboto,"Helvetica Neue",sans-serif;
 }
  .mat-dialog-actions {
      flex-direction: row-reverse;
@@ -299,10 +316,24 @@
  .mat-card-title h3 {
      margin: 0;
      display: flex;
+     flex-direction: column;
 }
  h3 span {
      color: #505050;
 }
+.tos-stakeholder-title.mat-card-title h3 {
+  height: 46px;
+}
+mat-card-title > h3 > span {
+  font: 500 20px/32px Roboto,"Helvetica Neue",sans-serif;
+}
+ .tos-subtitle {
+     font-size: 13px;
+     font-style: italic;
+     color: #706f6f;
+     line-height: 20px;
+}
+
  .tos-router-container .mat-card-content , customer-view .mat-card-content, employee-view .mat-card-content {
      margin: 0;
 }
@@ -314,8 +345,10 @@
 }
  .tos-router-container {
      display: flex;
-     width: 100%;
+     padding: 0 30px;
      position: relative;
+     background-color: #eee;
+height: 100%;
 }
  login .mat-tab-label {
      min-width: 72px;
@@ -328,10 +361,11 @@
      margin-bottom: 7px;
 }
  .tos-router-container .mat-card {
-     color: #8d8d8d;
+     color: #757575;;
 }
  .tos-router-container .mat-card th {
-     color: #6d6d6d;
+   font-weight: 400;
+  color: black;
 }
  .tos-stars {
      display: flex;
@@ -369,22 +403,20 @@
      box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12), 0 -2px 1px -2px rgba(0,0,0,.2);
 }
  .shake-hover-style .tos-cust-heading {
-     text-decoration: underline;
+     color: #0092e6 !important;
 }
  .shake-hover-style .tos-cust-heading:hover {
-     color: #000000 !important;
     /* transition: all .3s ease;
      transform: scale(1.1);
      (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
  .tos-cust-heading {
      cursor: pointer;
+     font: 500 20px/32px Roboto,"Helvetica Neue",sans-serif;
 }
- .tos-subtitle {
-     font-size: 13px;
-     font-style: italic;
-     color: #706f6f;
-     margin-left: 20px;
+
+mat-card-content {
+      font: 500 15px/20px Roboto,"Helvetica Neue",sans-serif;
 }
  .mat-checkbox-checked.mat-accent .mat-checkbox-background {
      background: #0092e6;
@@ -410,4 +442,3 @@
     }
 }
  */
- 
