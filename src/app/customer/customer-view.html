@@ -104,7 +104,7 @@
       <div fxFlex="30%" *ngFor = "let sholder of customerStakeholders">
          <mat-card class="example-card" >
             <mat-card-header>
-               <mat-card-title>
+               <mat-card-title class="tos-stakeholder-title">
                   <h3><span>{{sholder.name}}</span>
                     <span class="tos-subtitle" *ngIf="sholder.contactPerson === true"> (Contact Person) </span></h3>
                </mat-card-title>

@@ -16,11 +16,6 @@
          </mat-form-field>
          <br>
          <mat-form-field >
-            <textarea matInput placeholder="Address" rows="3" name="address" [value]="data.customer.address" [(ngModel)]="data.customer.address" ngModel>
-            </textarea>
-         </mat-form-field>
-         <br>
-         <mat-form-field >
             <input type="text"  name="country"  placeholder="Country" aria-label="country" matInput [formControl]="data.myControl"
             [(ngModel)]="data.customer.country"
             [matAutocomplete]="auto">
@@ -31,6 +26,10 @@
             </mat-autocomplete>
          </mat-form-field>
          <br>
+         <mat-form-field >
+            <textarea matInput placeholder="Address" rows="3" name="address" [value]="data.customer.address" [(ngModel)]="data.customer.address" ngModel>
+            </textarea>
+         </mat-form-field>
       </form>
    </mat-dialog-content>
    <mat-dialog-actions>

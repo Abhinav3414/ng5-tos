@@ -11,6 +11,7 @@ export class UrlService {
   appBaseUrl = '/tos-app/index.html';
   baseResourceUrl = '/tos-app/tos/';
   baseResourceUserUrl = '/tos-app/tosuser/';
+  propertyUrl = '/properties/uri/';  // Not used for now
 
   baseUrl: string;
 
