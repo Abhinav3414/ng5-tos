@@ -2,46 +2,25 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { UtilityService } from './utility.service';
 import { LocalStorageService } from './localStorage.service';
-
-
+import { UrlService } from './url.service';
 
 @Injectable()
 export class DataService {
   token: any;
   baseResourceURL: string;
-  PropUris = undefined;
 
   constructor(private httpClient: HttpClient, private localStorageService: LocalStorageService,
-    private utilityService: UtilityService) {
+    private utilityService: UtilityService, private urlService: UrlService) {
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
       .set('Accept', 'application/json');
 
-      this.getPropertyUris();
-      let PropertyUris = JSON.parse(localStorage.getItem("PropertyUris"));
-      if(PropertyUris !== null) {
-          this.baseResourceURL = PropertyUris.baseResourceUrl;
-      }
+      this.baseResourceURL = this.urlService.getBaseResourceUrl();
   }
 
   getToken() {
-    if(this.localStorageService.getValueFromLocalStorage() !== null)
+    if (this.localStorageService.getValueFromLocalStorage() !== null)
       return this.token = '?access_token=' + this.localStorageService.getValueFromLocalStorage().access_token;
-    }
-
-    getPropertyUris(): Promise<any> {
-      var propertyUriUrl;
-      if(location.origin === 'http://localhost:4200') {
-        propertyUriUrl = 'http://localhost:8080'
-      }
-      else {
-        propertyUriUrl = location.origin;
-      }
-      return this.httpClient.get<any>( propertyUriUrl + '/tos-app/properties/uri').toPromise()
-        .then((response: Response) => {
-          localStorage.setItem("PropertyUris", JSON.stringify(response));
-          this.PropUris = JSON.stringify(response);
-        });
-    }
+  }
 
   getEntityData(entityName: string, id: number): Promise<any> {
     return this.httpClient.get<any>(this.baseResourceURL + entityName + "/" + id + this.getToken()).toPromise()
@@ -54,12 +33,12 @@ export class DataService {
   }
 
   postEntity(entityName: string, entity: any) {
-    return this.httpClient.post(this.baseResourceURL + entityName + "/" + this.getToken() , entity ).toPromise()
+    return this.httpClient.post(this.baseResourceURL + entityName + "/" + this.getToken(), entity).toPromise()
       .then((response: Response) => response);
   }
 
   updateEntity(entityName: string, id: number, entity: any) {
-    return this.httpClient.put(this.baseResourceURL + entityName + "/" + id + this.getToken() , entity).toPromise()
+    return this.httpClient.put(this.baseResourceURL + entityName + "/" + id + this.getToken(), entity).toPromise()
       .then((response: Response) => response);
   }
 
@@ -69,9 +48,8 @@ export class DataService {
   }
 
   postUserEntity(entityName: string, entity: any) {
-    let PropertyUris = JSON.parse(localStorage.getItem("PropertyUris"));
-    return this.httpClient.post(PropertyUris.baseResourceUserUrl + entityName + "/", entity ).toPromise()
-      .then((response: Response) => console.log(response));
+    return this.httpClient.post(this.urlService.getBaseResourceUserUrl() + entityName + "/", entity).toPromise()
+      .then((response: Response) => response);
   }
 
 }

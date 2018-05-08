@@ -13,15 +13,15 @@ export class ContentComponent {
   tokenSub = undefined;
 
   constructor(private router: Router, private route: ActivatedRoute, private localStorageService: LocalStorageService,
-            private utilityService: UtilityService) {}
+    private utilityService: UtilityService) { }
 
   ngOnInit() {
     this.utilityService.currenttokenSubject.subscribe(tokenSubject => {
       this.tokenSub = tokenSubject;
     })
     var local = this.localStorageService.getValueFromLocalStorage()
-    if( local !== null )
+    if (local !== null)
       this.tokenSub = local.access_token;
 
-    }
+  }
 }

@@ -55,8 +55,8 @@ export class CustomerViewComponent {
   constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
     private dialog: MatDialog, private utilityService: UtilityService, private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer) {
-    this.matIconRegistry.addSvgIcon(`phone`,this.domSanitizer.bypassSecurityTrustResourceUrl("./assets/icons/phone.svg"));
-    this.matIconRegistry.addSvgIcon(`human-greeting`,this.domSanitizer.bypassSecurityTrustResourceUrl("./assets/icons/human-greeting.svg"));
+    this.matIconRegistry.addSvgIcon(`phone`, this.domSanitizer.bypassSecurityTrustResourceUrl("./assets/icons/phone.svg"));
+    this.matIconRegistry.addSvgIcon(`human-greeting`, this.domSanitizer.bypassSecurityTrustResourceUrl("./assets/icons/human-greeting.svg"));
 
   }
   ngOnInit() {

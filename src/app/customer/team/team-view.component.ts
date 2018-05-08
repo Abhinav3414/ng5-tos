@@ -21,7 +21,7 @@ import { ProjectRythm } from './projectrythm/projectrythm';
   templateUrl: './team-view.html',
   animations: [
     trigger('fade', [
-      state('void', style({ opacity: 0})),
+      state('void', style({ opacity: 0 })),
       transition(':enter, :leave', [
         animate('200ms ease-in')
       ])
@@ -45,12 +45,12 @@ export class TeamViewComponent {
   customerProjectRythm = new ProjectRythm();
   customerTeamMember = new TeamMember();
 
-  rythmFrequency = ['Daily','Weekly', 'Monthly', 'Quaterly', 'Yearly'];
+  rythmFrequency = ['Daily', 'Weekly', 'Monthly', 'Quaterly', 'Yearly'];
 
   constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
     private dialog: MatDialog, private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer) {
-        this.matIconRegistry.addSvgIcon(`bullseye-arrow`,this.domSanitizer.bypassSecurityTrustResourceUrl("./assets/icons/bullseye-arrow.svg"));
+    this.matIconRegistry.addSvgIcon(`bullseye-arrow`, this.domSanitizer.bypassSecurityTrustResourceUrl("./assets/icons/bullseye-arrow.svg"));
   }
 
   ngOnInit() {

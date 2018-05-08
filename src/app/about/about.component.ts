@@ -6,7 +6,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   templateUrl: './about.html',
   animations: [
     trigger('fade', [
-      state('void', style({ opacity: 0})),
+      state('void', style({ opacity: 0 })),
       transition(':enter, :leave', [
         animate('200ms ease-in')
       ])

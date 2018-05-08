@@ -5,6 +5,7 @@ import { UtilityService } from '../services/utility.service';
 import { AuthService } from '../services/auth.service';
 import { LocalStorageService } from '../services/localStorage.service';
 import { DataService } from '../services/data.service';
+import { UrlService } from '../services/url.service';
 
 import { Token } from '../token';
 
@@ -14,22 +15,24 @@ import { Token } from '../token';
 })
 export class LoginComponent {
   hide: boolean = true;
-  selected: any;
+
   user = {
     username: '',
     password: '',
     role: ''
   };
+
   newUser = {
     username: '',
     password: ''
   };
+
   userRoles: Array<String>;
   wrongCreds: string = undefined;
 
-  constructor(private router: Router,  private authService: AuthService,
+  constructor(private router: Router, private authService: AuthService,
     private localStorageService: LocalStorageService, private utilityService: UtilityService,
-    private dataService: DataService) { }
+    private dataService: DataService, private urlService: UrlService) { }
 
   ngOnInit() {
     this.userRoles = ['admin', 'manager', 'employee'];
@@ -49,23 +52,9 @@ export class LoginComponent {
   }
 
   register(usercreds) {
-
     this.dataService.postUserEntity('users', usercreds)
-      .then((resCustomerData : any) => {
-        console.log("abhinab")
-          console.log(this.dataService.PropUris)
-        if(location.origin === 'http://localhost:4200') {
-          location.href = location.origin;
-        }
-        else {
-          let PropertyUris = JSON.parse(localStorage.getItem("PropertyUris"));
-          console.log("Popr" + PropertyUris);
-          console.log(this.dataService.PropUris)
-          if(PropertyUris !== null) {
-                location.href = PropertyUris.appBaseUrl;
-          }
-        }
-
+      .then((resCustomerData: any) => {
+        location.href = (location.origin === 'http://localhost:4200') ? location.origin : this.urlService.getAppBaseUrl();
       },
       (err) => console.log("users could not be updated :" + err)
       );

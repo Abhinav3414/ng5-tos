@@ -4,31 +4,24 @@
  @import url('https://fonts.googleapis.com/css?family=Montserrat');
  @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 /* Available pre-built themes: deeppurple-amber.css indigo-pink.css pink-bluegrey.css purple-green.css */
-
-
-/*/////////////////[ FONT ]*/
-
-@font-face {
-  font-family: Poppins-Regular;
-  src: url('./assets/fonts/poppins/Poppins-Regular.ttf');
+/*/
+////////////////[ FONT ]*/
+ @font-face {
+     font-family: Poppins-Regular;
+     src: url('./assets/fonts/poppins/Poppins-Regular.ttf');
 }
-
-@font-face {
-  font-family: Poppins-Medium;
-  src: url('./assets/fonts/poppins/Poppins-Medium.ttf');
+ @font-face {
+     font-family: Poppins-Medium;
+     src: url('./assets/fonts/poppins/Poppins-Medium.ttf');
 }
-
-@font-face {
-  font-family: Poppins-Bold;
-  src: url('./assets/fonts/poppins/Poppins-Bold.ttf');
+ @font-face {
+     font-family: Poppins-Bold;
+     src: url('./assets/fonts/poppins/Poppins-Bold.ttf');
 }
-
-@font-face {
-  font-family: Poppins-SemiBold;
-  src: url('./assets/fonts/poppins/Poppins-SemiBold.ttf');
+ @font-face {
+     font-family: Poppins-SemiBold;
+     src: url('./assets/fonts/poppins/Poppins-SemiBold.ttf');
 }
-
-
  html {
      overflow-y:scroll;
 }
@@ -44,8 +37,7 @@
      color: #707070;
 }
  body {
-
-    background-color: #e8e4d9;
+     background-color: #e8e4d9;
      background-image: url(./background-9.jpg);
      background-position: center center;
      background-repeat: no-repeat;
@@ -93,23 +85,18 @@
  .tos-button.mat-button .mat-button-focus-overlay {
      background-color:transparent;
 }
-
-login .mat-card .mat-tab-group.mat-primary .mat-tab-label:not(.mat-tab-disabled):focus {
-  background-color: white;
+ login .mat-card .mat-tab-group.mat-primary .mat-tab-label:not(.mat-tab-disabled):focus {
+     background-color: white;
 }
-
-.tos-primary-button.mat-raised-button,
- mat-dialog-actions .tos-primary-button.mat-raised-button {
+ .tos-primary-button.mat-raised-button, mat-dialog-actions .tos-primary-button.mat-raised-button {
      box-shadow: none;
      height: 38px;
      background-color: #0092e6;
      color: #ffffff;
 }
-
-login .tos-primary-button.mat-raised-button {
-  margin-left: 15px;
+ login .tos-primary-button.mat-raised-button {
+     margin-left: 15px;
 }
-
  .tos-button.mat-button:hover {
      background-color: #ffffff;
 }
@@ -227,8 +214,7 @@ login .tos-primary-button.mat-raised-button {
  .example-card.mat-card {
      background: #ffffff9c;
 }
-
-mat-expansion-panel .example-card.mat-card {
+ mat-expansion-panel .example-card.mat-card {
      background: #ffffff87;
 }
  .tos-text:hover {
@@ -382,35 +368,27 @@ mat-expansion-panel .example-card.mat-card {
  .container .mat-card:not([class*=mat-elevation-z]):hover {
      box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12), 0 -2px 1px -2px rgba(0,0,0,.2);
 }
-
-.shake-hover-style .tos-cust-heading {
-   text-decoration: underline;
+ .shake-hover-style .tos-cust-heading {
+     text-decoration: underline;
 }
-
  .shake-hover-style .tos-cust-heading:hover {
      color: #000000 !important;
-     /*
-     transition: all .3s ease;
+    /* transition: all .3s ease;
      transform: scale(1.1);
-     (150% zoom - Note: if the zoom is too large, it will go outside of the viewport)
-     */
+     (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
-
-.tos-cust-heading {
-    cursor: pointer;
+ .tos-cust-heading {
+     cursor: pointer;
 }
-
-.tos-subtitle {
-  font-size: 13px;
-  font-style: italic;
-  color: #706f6f;
-  margin-left: 20px;
+ .tos-subtitle {
+     font-size: 13px;
+     font-style: italic;
+     color: #706f6f;
+     margin-left: 20px;
 }
-
-.mat-checkbox-checked.mat-accent .mat-checkbox-background {
-  background: #0092e6;
+ .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+     background: #0092e6;
 }
-
 /* .shake-hover-style:hover {
      animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
      transform: translate3d(0, 0, 0);
@@ -432,3 +410,4 @@ mat-expansion-panel .example-card.mat-card {
     }
 }
  */
+ 
