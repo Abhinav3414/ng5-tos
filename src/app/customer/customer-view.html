@@ -6,7 +6,9 @@
       <mat-icon svgIcon="human-greeting"  title="Contact Person"></mat-icon>
       <a class="tos-text"> {{customer.contactPerson}} &emsp;&emsp;&emsp;</a>
       <mat-icon  title="Domain">domain</mat-icon>
-      <a class="tos-text"> {{customer.domain}} </a>
+      <a class="tos-text"> {{customer.domain}} &emsp;&emsp;&emsp;</a>
+      <mat-icon svgIcon="align" title="align">align</mat-icon>
+      <a class="tos-text" (click)="navigateAlign(customer.id)" style="cursor:pointer"> Start Align Phase </a>
    </span>
 </div>
 <mat-accordion [multi]="true" @fade>

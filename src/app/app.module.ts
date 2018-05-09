@@ -33,6 +33,8 @@ import { CustomerMainComponent } from './customer/customer-main.component';
 import { CustomerViewComponent } from './customer/customer-view.component';
 import { CustomerDialogComponent } from './customer/customer-dialog.component';
 
+import { AlignComponent } from './align/align.component';
+
 import { GoalDialogComponent } from './customer/goal/goal-dialog.component';
 import { TeamDialogComponent } from './customer/team/team-dialog.component';
 import { StakeholderDialogComponent } from './customer/stakeholder/stakeholder-dialog.component';
@@ -83,7 +85,8 @@ import { AuthInterceptor } from './Interceptors/auth.interceptor';
     FooterComponent,
     ContentComponent,
     BreadcrumbComponent,
-    HomeComponent
+    HomeComponent,
+    AlignComponent
   ],
   imports: [
     BrowserModule,

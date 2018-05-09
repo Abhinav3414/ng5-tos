@@ -57,8 +57,9 @@ export class CustomerViewComponent {
     private domSanitizer: DomSanitizer) {
     this.matIconRegistry.addSvgIcon(`phone`, this.domSanitizer.bypassSecurityTrustResourceUrl("./assets/icons/phone.svg"));
     this.matIconRegistry.addSvgIcon(`human-greeting`, this.domSanitizer.bypassSecurityTrustResourceUrl("./assets/icons/human-greeting.svg"));
-
+    this.matIconRegistry.addSvgIcon(`align`, this.domSanitizer.bypassSecurityTrustResourceUrl("./assets/icons/baseline.svg"));
   }
+
   ngOnInit() {
     this.utilityService.currentBreadCrumb.subscribe(bread => this.bread = bread);
 
@@ -176,6 +177,12 @@ export class CustomerViewComponent {
     let entity = this.customerTeams[this.customerTeams.findIndex(t => t.id === teamId)];
     this.utilityService.addBreadCrumb(3, 'Team', 'view/team', teamId, 'entity', entity.name);
     this.router.navigate(['view/team', teamId], { skipLocationChange: false });
+  }
+
+  navigateAlign(customerId) {
+    console.log(customerId)
+    this.utilityService.addBreadCrumb(3, 'Align', 'view/align', customerId, 'entity', 'Phase');
+    this.router.navigate(['view/align', customerId]);
   }
 
   delelteEntity(entityName, id, entityArray) {

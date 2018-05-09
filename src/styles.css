@@ -46,16 +46,16 @@
      color: #505050;
 }
  .tos-content-color {
-     color: #707070;
+     color: #979797e8;
 }
  body {
-    /*
+
      background-color: #e8e4d9;
      background-image: url(./background-9.jpg);
      background-position: center center;
      background-repeat: no-repeat;
      background-size: cover;
-     background-attachment: fixed;
+  /*   background-attachment: fixed;
      background: #f5f5f5;
      background: linear-gradient(56deg, #dbdbdb, #f1f1f1);
      background: linear-gradient(96deg, #f4f4f4, #f1f1f1);
@@ -67,15 +67,19 @@
 }
 
 .tos-menu-style menu {
-  margin: 20px 0 0 0;
+  margin: 17px 0 0 0;
+}
+
+.tos-container-heading {
+  font: 800 16px/16px Roboto,"Helvetica Neue",sans-serif
 }
 
 .tos-body-style {
-  background-color: #f6f6f6;
-  min-height: 84vh;
+  //background-color: #f6f6f6;
+  min-height: 83vh;
 }
 .tos-menu-style {
-  height: 16vh;
+min-height: 15vh;
 }
  content {
    flex-direction: column;
@@ -178,7 +182,7 @@ cursor: pointer;
 padding: 0 15px;
 }
  .tos-menu-buttons > a:hover {
-   color: #f4cb3c;
+   color: #6d6d6b;
 transition: all 80ms ease;
 
 }
@@ -218,8 +222,13 @@ transition: all 80ms ease;
  .mat-toolbar {
      background: none;
 }
- .mat-card-actions {
+ .mat-card .mat-card-actions {
      text-align: right;
+     padding: 0;
+}
+
+.mat-expansion-panel-header-title h3 {
+  font: 400 16px/16px Roboto,"Helvetica Neue",sans-serif;
 }
  .tos-material-button {
      display: flex;
@@ -303,9 +312,13 @@ transition: all 80ms ease;
 }
  .tos-breads {
      padding: .5em 0;
-     color: #8e8080;
      cursor: pointer;
 }
+.tos-crumbs-a a:hover,
+.tos-crumbs-a:hover {
+  color: #6d6d6b;
+}
+
 /*settings for rating stars */
  employee-view .mat-card-title {
      display: flex;
@@ -325,7 +338,7 @@ transition: all 80ms ease;
   height: 46px;
 }
 mat-card-title > h3 > span {
-  font: 500 20px/32px Roboto,"Helvetica Neue",sans-serif;
+  font: 400 19px/22px Roboto,"Helvetica Neue",sans-serif
 }
  .tos-subtitle {
      font-size: 13px;
@@ -345,10 +358,10 @@ mat-card-title > h3 > span {
 }
  .tos-router-container {
      display: flex;
-     padding: 0 30px;
+     //padding: 0 30px;
      position: relative;
-     background-color: #eee;
-height: 100%;
+    // background-color: #eee;
+     //height: 100%;
 }
  login .mat-tab-label {
      min-width: 72px;
@@ -412,7 +425,7 @@ height: 100%;
 }
  .tos-cust-heading {
      cursor: pointer;
-     font: 500 20px/32px Roboto,"Helvetica Neue",sans-serif;
+     font: 400 19px/22px Roboto,"Helvetica Neue",sans-serif;
 }
 
 mat-card-content {

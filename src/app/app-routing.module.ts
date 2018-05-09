@@ -11,6 +11,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ContentComponent } from './content/content.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
+import { AlignComponent } from './align/align.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: 'view/customer/:id', component: CustomerViewComponent },
   { path: 'view/employees', component: EmployeeMainComponent },
   { path: 'view/employee/:id', component: EmployeeViewComponent },
-  { path: 'view/team/:id', component: TeamViewComponent }
+  { path: 'view/team/:id', component: TeamViewComponent },
+  { path: 'view/align/:customerId', component: AlignComponent }
 ];
 
 @NgModule({
