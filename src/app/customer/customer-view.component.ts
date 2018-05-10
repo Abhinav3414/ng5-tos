@@ -48,7 +48,7 @@ export class CustomerViewComponent {
   customerGoal = new Goal();
   customerTravel = new Travel();
   customerTeam = new Team();
-  goalTenures = ['Weekly', 'Monthly', 'Yearly'];
+  goalTenures = ['Weekly', 'Monthly', 'Quarterly', 'Yearly'];
 
   bread: BreadCrumb;
 
@@ -181,7 +181,7 @@ export class CustomerViewComponent {
 
   navigateAlign(customerId) {
     console.log(customerId)
-    this.utilityService.addBreadCrumb(3, 'Align', 'view/align', customerId, 'entity', 'Phase');
+    this.utilityService.addBreadCrumb(3, 'ACE5', 'view/align', customerId, 'entity', 'Process');
     this.router.navigate(['view/align', customerId]);
   }
 

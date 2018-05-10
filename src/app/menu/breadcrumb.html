@@ -1,7 +1,13 @@
-<div class="tos-breads">
-   <a *ngFor="let crumb of crumbs" class="tos-crumbs-a">
-   <span (click)="navigate(crumb)"  >
-   {{crumb.label}}   <a *ngIf="crumb.message !== ''"> {{crumb.message}}  </a> <a  class="tos-arrow" *ngIf="crumbs.length > 1"> &#9658; </a>
-   </span>
-   </a>
+<div style="height:40px">
+  <div class="tos-breads" *ngIf="crumbs.length > 0 && crumbs[0].entityId != -1">
+     <a *ngFor="let crumb of crumbs" class="tos-crumbs-a">
+     <span (click)="navigate(crumb)"  >
+        <span class="tos-breadcrumb-content">  {{crumb.label}}
+            <a class="tos-breadcrumb-content" *ngIf="crumb.message !== ''"> {{crumb.message}}  </a>
+        </span>
+        <a  class="tos-arrow" *ngIf="crumbs.length > 1"> &#9658; </a>
+     </span>
+     </a>
+  </div>
 </div>
+<!--  &#9658; -->

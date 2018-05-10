@@ -6,7 +6,7 @@
  @import url("https://fonts.googleapis.com/css?family=Roboto");
 /* Available pre-built themes: deeppurple-amber.css indigo-pink.css pink-bluegrey.css purple-green.css */
 /*/
-////////////////[ FONT ]*/
+ ////////////////[ FONT ]*/
  @font-face {
      font-family: Poppins-Regular;
      src: url('./assets/fonts/poppins/Poppins-Regular.ttf');
@@ -23,16 +23,14 @@
      font-family: Poppins-SemiBold;
      src: url('./assets/fonts/poppins/Poppins-SemiBold.ttf');
 }
-@font-face {
-    font-family: Montserrat-Regular;
-    src: url('./assets/fonts/montserrat/Montserrat-Regular.ttf');
+ @font-face {
+     font-family: Montserrat-Regular;
+     src: url('./assets/fonts/montserrat/Montserrat-Regular.ttf');
 }
-
-@font-face {
-    font-family: Custom-OpenSans-Regular;
-    src: url('./assets/fonts/open_sans/OpenSans-Regular.ttf');
+ @font-face {
+     font-family: Custom-OpenSans-Regular;
+     src: url('./assets/fonts/open_sans/OpenSans-Regular.ttf');
 }
-
  html {
      overflow-y:scroll;
 }
@@ -40,7 +38,7 @@
      font-family: sans-serif;
      font-size: 14px;
      margin: 0;
-     font: 500 14px/20px Roboto,"Helvetica Neue",sans-serif;
+     font: 400 14px/20px Roboto,"Helvetica Neue",sans-serif;
 }
  h3 {
      color: #505050;
@@ -48,14 +46,16 @@
  .tos-content-color {
      color: #979797e8;
 }
+.tos-login-heading {
+  font: 400 27px/20px Roboto,"Helvetica Neue",sans-serif;
+}
  body {
-
-     background-color: #e8e4d9;
+    background-color: #e8e4d9;
      background-image: url(./background-9.jpg);
-     background-position: center center;
+    // background-position-y: center;
      background-repeat: no-repeat;
      background-size: cover;
-  /*   background-attachment: fixed;
+    /* background-attachment: fixed;
      background: #f5f5f5;
      background: linear-gradient(56deg, #dbdbdb, #f1f1f1);
      background: linear-gradient(96deg, #f4f4f4, #f1f1f1);
@@ -65,26 +65,27 @@
      background: linear-gradient(45deg, rgba(242, 34, 50, 0.5), rgba(255, 187, 54, 0.6) 100%);
      */
 }
-
-.tos-menu-style menu {
-  margin: 17px 0 0 0;
+ .tos-menu-style menu {
+     margin: 12px 0 0 0;
 }
-
-.tos-container-heading {
-  font: 800 16px/16px Roboto,"Helvetica Neue",sans-serif
+ .tos-container-heading {
+     font: 800 16px/16px Roboto,"Helvetica Neue",sans-serif
 }
-
-.tos-body-style {
-  //background-color: #f6f6f6;
-  min-height: 83vh;
+ .tos-body-style {
+     //background-color: #f6f6f6;
+     min-height: 83vh;
 }
-.tos-menu-style {
-min-height: 15vh;
+ .tos-menu-style {
+     min-height: 15vh;
+}
+.tos-entity-name {
+  font: 400 18px/20px Roboto,"Helvetica Neue",sans-serif;
+    padding-bottom: 8px;
 }
  content {
-   flex-direction: column;
-display: flex;
-width: 100%;
+     flex-direction: column;
+     display: flex;
+     width: 100%;
 }
  mat-accordion {
      margin-bottom: 2em;
@@ -167,7 +168,7 @@ width: 100%;
          margin: auto;
     }
      login {
-         margin: 12em auto;
+      margin: 15px auto;
     }
      .tos-router-container .mat-expansion-panel-body {
          flex-direction: column !important;
@@ -177,14 +178,13 @@ width: 100%;
     }
 }
  .tos-menu-buttons > a {
-   font-size: 16px;
-cursor: pointer;
-padding: 0 15px;
+     font-size: 15px;
+     cursor: pointer;
+     padding: 0 12px;
 }
  .tos-menu-buttons > a:hover {
-   color: #6d6d6b;
-transition: all 80ms ease;
-
+     color: #6d6d6b;
+     transition: all 80ms ease;
 }
 /* XS Menu Styling */
  #cdk-overlay-0 > div {
@@ -226,9 +226,8 @@ transition: all 80ms ease;
      text-align: right;
      padding: 0;
 }
-
-.mat-expansion-panel-header-title h3 {
-  font: 400 16px/16px Roboto,"Helvetica Neue",sans-serif;
+ .mat-expansion-panel-header-title h3 {
+     font: 400 16px/16px Roboto,"Helvetica Neue",sans-serif;
 }
  .tos-material-button {
      display: flex;
@@ -277,7 +276,7 @@ transition: all 80ms ease;
          float: right;
     }
      login {
-         top: 25%;
+         top: 20%;
          position: fixed;
          left: 60%;
     }
@@ -289,7 +288,7 @@ transition: all 80ms ease;
      padding-left: 16px;
 }
  .tos-title-style > h2 {
-     font: 500 30px/32px Roboto,"Helvetica Neue",sans-serif;
+     font: 400 28px/28px Roboto,"Helvetica Neue",sans-serif;
 }
  .mat-dialog-actions {
      flex-direction: row-reverse;
@@ -307,18 +306,25 @@ transition: all 80ms ease;
  about .mat-card {
      display: grid;
 }
+ .tos-component-heading {
+     font: 400 15px/15px Roboto,"Helvetica Neue",sans-serif;
+     margin-bottom: 9px;
+     margin-top: 24px;
+}
  employee-main > div.container > div > mat-card > mat-card-content > div > span {
      margin : 0;
 }
  .tos-breads {
-     padding: .5em 0;
+     border-radius: 3px;
+     height: 34px;
+     line-height: 34px;
      cursor: pointer;
+     background: #c3bfb338;
+     padding-left: 10px;
 }
-.tos-crumbs-a a:hover,
-.tos-crumbs-a:hover {
-  color: #6d6d6b;
+ .tos-breadcrumb-content:hover {
+     color: #6d6d6b;
 }
-
 /*settings for rating stars */
  employee-view .mat-card-title {
      display: flex;
@@ -334,11 +340,14 @@ transition: all 80ms ease;
  h3 span {
      color: #505050;
 }
-.tos-stakeholder-title.mat-card-title h3 {
-  height: 46px;
+ .tos-stakeholder-title.mat-card-title h3 {
+     height: 46px;
 }
-mat-card-title > h3 > span {
-  font: 400 19px/22px Roboto,"Helvetica Neue",sans-serif
+ mat-card-title > h3 > span {
+     font: 400 17px/20px Roboto,"Helvetica Neue",sans-serif;
+}
+ mat-card .mat-card-content {
+     font-size: 13px;
 }
  .tos-subtitle {
      font-size: 13px;
@@ -346,21 +355,18 @@ mat-card-title > h3 > span {
      color: #706f6f;
      line-height: 20px;
 }
-
  .tos-router-container .mat-card-content , customer-view .mat-card-content, employee-view .mat-card-content {
      margin: 0;
 }
- .tos-crumbs-a {
-     padding-right: .6em;
-}
  .tos-arrow {
-     font-size: .9em;
+     font-size: 14px;
+     padding: 0 10px;
 }
  .tos-router-container {
      display: flex;
      //padding: 0 30px;
      position: relative;
-    // background-color: #eee;
+     // background-color: #eee;
      //height: 100%;
 }
  login .mat-tab-label {
@@ -374,11 +380,12 @@ mat-card-title > h3 > span {
      margin-bottom: 7px;
 }
  .tos-router-container .mat-card {
-     color: #757575;;
+     color: #757575;
+    ;
 }
  .tos-router-container .mat-card th {
-   font-weight: 400;
-  color: black;
+     font-weight: 400;
+     color: black;
 }
  .tos-stars {
      display: flex;
@@ -386,8 +393,11 @@ mat-card-title > h3 > span {
 }
  .tos-add-button {
      cursor:pointer;
-     color:grey;
+     color:#626262;
      font-size: 2.5em;
+}
+ .tos-add-button:hover {
+     color:grey;
 }
  .mat-card mat-card-content > span {
      cursor: default;
@@ -425,11 +435,10 @@ mat-card-title > h3 > span {
 }
  .tos-cust-heading {
      cursor: pointer;
-     font: 400 19px/22px Roboto,"Helvetica Neue",sans-serif;
+     font: 400 17px/20px Roboto,"Helvetica Neue",sans-serif;
 }
-
-mat-card-content {
-      font: 500 15px/20px Roboto,"Helvetica Neue",sans-serif;
+ mat-card-content {
+     font: 400 14px/20px Roboto,"Helvetica Neue",sans-serif;
 }
  .mat-checkbox-checked.mat-accent .mat-checkbox-background {
      background: #0092e6;

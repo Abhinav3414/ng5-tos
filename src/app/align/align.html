@@ -1,45 +1,93 @@
-<h3>Align for Customer</h3>
+<h3 class="tos-entity-name" >Ace5 Process</h3>
+<!--
+<button mat-raised-button (click)="isOptional = !isOptional">
+  {{!isOptional ? 'Enable optional steps' : 'Disable optional steps'}}
+</button>
+-->
+<mat-horizontal-stepper [linear]="true" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Align Phase</ng-template>
 
-<form id="formNewEmployee2" name="formNewEmployeeUpdate"  #customerDataUpdate="ngForm">
-   <mat-form-field >
-      <input matInput placeholder="accessToEnvironments" name="accessToEnvironments" [value]="align.accessToEnvironments" [(ngModel)]="align.accessToEnvironments" ngModel><br>
-   </mat-form-field>
-   <mat-form-field >
-      <input matInput placeholder="alignDatabase" name="alignDatabase" [value]="align.alignDatabase" [(ngModel)]="align.alignDatabase" ngModel>
-   </mat-form-field>
-   <mat-form-field >
-      <input matInput placeholder="communicator" name="communicator" [value]="align.communicator" [(ngModel)]="align.communicator" ngModel>
-   </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Product Owner" formControlName="firstCtrl" required>
+      </mat-form-field>
 
-   <mat-form-field >
-      <input matInput placeholder="customer_id" name="customer_id" [value]="align.customer_id" [(ngModel)]="align.customer_id" ngModel>
-   </mat-form-field>
-   <mat-form-field >
-      <input matInput placeholder="expectationFromOpd" name="expectationFromOpd" [value]="align.expectationFromOpd" [(ngModel)]="align.expectationFromOpd" ngModel>
-   </mat-form-field>
-   <mat-form-field >
-      <input matInput placeholder="hwRequirement" name="hwRequirement" [value]="align.hwRequirement" [(ngModel)]="align.hwRequirement" ngModel>
-   </mat-form-field>
+      <mat-form-field >
+         <input matInput placeholder="accessToEnvironments" name="accessToEnvironments" [ngModelOptions]="{standalone: true}" [value]="align.accessToEnvironments" [(ngModel)]="align.accessToEnvironments" ><br>
+      </mat-form-field>
+      <mat-form-field >
+         <input matInput placeholder="alignDatabase" name="alignDatabase" [value]="align.alignDatabase" [ngModelOptions]="{standalone: true}" [(ngModel)]="align.alignDatabase" ngModel>
+      </mat-form-field>
+      <mat-form-field >
+         <input matInput placeholder="communicator" name="communicator" [value]="align.communicator" [ngModelOptions]="{standalone: true}" [(ngModel)]="align.communicator" ngModel>
+      </mat-form-field>
 
-   <mat-form-field >
-      <input matInput placeholder="intialDiscussionDate" name="intialDiscussionDate" [value]="align.intialDiscussionDate" [(ngModel)]="align.intialDiscussionDate" ngModel>
-   </mat-form-field>
-   <mat-form-field >
-      <input matInput placeholder="ipRestrictionAndAccess" name="ipRestrictionAndAccess" [value]="align.ipRestrictionAndAccess" [(ngModel)]="align.ipRestrictionAndAccess" ngModel>
-   </mat-form-field>
-   <mat-form-field >
-      <input matInput placeholder="mailAccess" name="mailAccess" [value]="align.mailAccess" [(ngModel)]="align.mailAccess" ngModel>
-   </mat-form-field>
+      <mat-form-field >
+         <input matInput placeholder="customer_id" name="customer_id" [value]="align.customer_id" [ngModelOptions]="{standalone: true}"  [(ngModel)]="align.customer_id" ngModel>
+      </mat-form-field>
+      <mat-form-field >
+         <input matInput placeholder="expectationFromOpd" name="expectationFromOpd" [value]="align.expectationFromOpd"  [ngModelOptions]="{standalone: true}" [(ngModel)]="align.expectationFromOpd" ngModel>
+      </mat-form-field>
+      <mat-form-field >
+         <input matInput placeholder="hwRequirement" name="hwRequirement" [value]="align.hwRequirement" [ngModelOptions]="{standalone: true}"  [(ngModel)]="align.hwRequirement" ngModel>
+      </mat-form-field>
+
+      <mat-form-field >
+         <input matInput placeholder="intialDiscussionDate" name="intialDiscussionDate" [value]="align.intialDiscussionDate" [ngModelOptions]="{standalone: true}"  [(ngModel)]="align.intialDiscussionDate" ngModel>
+      </mat-form-field>
+      <mat-form-field >
+         <input matInput placeholder="ipRestrictionAndAccess" name="ipRestrictionAndAccess" [value]="align.ipRestrictionAndAccess" [ngModelOptions]="{standalone: true}"  [(ngModel)]="align.ipRestrictionAndAccess" ngModel>
+      </mat-form-field>
+      <mat-form-field >
+         <input matInput placeholder="mailAccess" name="mailAccess" [value]="align.mailAccess" [(ngModel)]="align.mailAccess" [ngModelOptions]="{standalone: true}"  ngModel>
+      </mat-form-field>
 
 
-   <mat-form-field >
-      <input matInput placeholder="operatingEnvironment" name="operatingEnvironment" [value]="align.operatingEnvironment" [(ngModel)]="align.operatingEnvironment" ngModel>
-   </mat-form-field>
-   <mat-form-field >
-      <input matInput placeholder="process" name="process" [value]="align.process" [(ngModel)]="align.process" ngModel>
-   </mat-form-field>
-   <mat-form-field >
-      <input matInput placeholder="processOwnerId" name="processOwnerId" [value]="align.processOwnerId" [(ngModel)]="align.processOwnerId" ngModel>
-   </mat-form-field>
-   
-</form>
+      <mat-form-field >
+         <input matInput placeholder="operatingEnvironment" name="operatingEnvironment" [value]="align.operatingEnvironment" [ngModelOptions]="{standalone: true}"  [(ngModel)]="align.operatingEnvironment" ngModel>
+      </mat-form-field>
+      <mat-form-field >
+         <input matInput placeholder="process" name="process" [value]="align.process" [(ngModel)]="align.process" [ngModelOptions]="{standalone: true}"  ngModel>
+      </mat-form-field>
+      <mat-form-field >
+         <input matInput placeholder="processOwnerId" name="processOwnerId" [value]="align.processOwnerId"  [ngModelOptions]="{standalone: true}" [(ngModel)]="align.processOwnerId" ngModel>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Acquire Phase</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Address" formControlName="secondCtrl" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="thirdFormGroup" [optional]="isOptional">
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>Assimilate Phase</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Assimilate" formControlName="thirdCtrl" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    You are now done.
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

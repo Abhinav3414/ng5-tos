@@ -7,6 +7,7 @@ import { UtilityService } from '../services/utility.service';
 import { BreadCrumb } from '../menu/breadCrumb';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { Align } from './align';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'align',
@@ -21,18 +22,31 @@ import { Align } from './align';
   ]
 })
 export class AlignComponent {
-align: any;
+align = new Align();
 customerId: number;
-
+firstFormGroup: FormGroup;
+secondFormGroup: FormGroup;
+thirdFormGroup: FormGroup;
+isOptional: boolean = false;
 
 bread: BreadCrumb;
 
 constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
-   private utilityService: UtilityService) {
+   private utilityService: UtilityService, private _formBuilder: FormBuilder) {
 }
 
   ngOnInit() {
-    console.log("hi")
+    this.firstFormGroup = this._formBuilder.group({
+      firstCtrl: ['', Validators.required]
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      secondCtrl: ''
+    });
+    this.thirdFormGroup = this._formBuilder.group({
+      thirdCtrl: ''
+    });
+
+
     this.utilityService.currentBreadCrumb.subscribe(bread => this.bread = bread);
 
     this.route.params.subscribe(params => {
@@ -40,17 +54,18 @@ constructor(private dataService: DataService, private router: Router, private ro
       if (!isNaN(this.customerId)) {
         this.dataService.getEntityData('aligns', this.customerId)
           .then((resCustomerData) => {
-            this.align = resCustomerData;
-            console.log(this.align)
+            console.log('align from server : ' + resCustomerData)
+            if(resCustomerData !== null) {
+              this.align = resCustomerData;
+            }
           },
           (err) => {
             console.log('No Align entity fount for customer');
-            this.align= new Align();
-            console.log(this.align);
           }
           );
       }
     });
+    console.log(this.align)
   }
 
 }

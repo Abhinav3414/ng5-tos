@@ -16,13 +16,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
 import { MatTabsModule } from '@angular/material/tabs';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatStepperModule} from '@angular/material/stepper';
 
 @NgModule({
   imports: [MatButtonModule, MatToolbarModule, MatCardModule, MatInputModule, MatIconModule, MatCheckboxModule,
     MatMenuModule, MatFormFieldModule, MatDialogModule, MatExpansionModule, MatAutocompleteModule, MatSelectModule,
-    MatDatepickerModule, MatNativeDateModule, MatTabsModule],
+    MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatStepperModule],
   exports: [MatButtonModule, MatToolbarModule, MatCardModule, MatInputModule, MatIconModule, MatCheckboxModule,
     MatMenuModule, MatFormFieldModule, MatDialogModule, MatExpansionModule, MatAutocompleteModule, MatSelectModule,
-    MatDatepickerModule, MatNativeDateModule, MatTabsModule]
+    MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatStepperModule]
 })
 export class CustomMaterialModule { }
