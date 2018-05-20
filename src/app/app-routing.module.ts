@@ -10,6 +10,7 @@ import { EmployeeViewComponent } from './employee/employee-view.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ContentComponent } from './content/content.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { AlignComponent } from './align/align.component';
 
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'view/login', component: LoginComponent },
+  { path: 'view/register', component: RegisterComponent },
   { path: 'contentDashboard', component: ContentComponent },
   { path: 'view/about', component: AboutComponent },
   { path: 'view/profile', component: ProfileComponent },

@@ -1,56 +1,22 @@
-   <h2 class="tos-login-heading">Team Operations System</h2>
-
-<mat-card flex="flex" style="width: 260px">
-   <mat-tab-group  disableRipple="true">
-      <mat-tab label="Login">
-         <!--
-            <mat-toolbar>
-             <div class="mat-toolbar-tools">
-                  <h2><span>Login</span></h2>
-               </div>
-            </mat-toolbar>  -->
-         <mat-card-content>
-            <br>
-            <mat-form-field>
-               <input matInput placeholder="Username"  [(ngModel)]="user.username" required >
-            </mat-form-field>
-            <br>
-            <mat-form-field>
-               <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'"  [(ngModel)]="user.password" required>
-               <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-            </mat-form-field>
-            <!--
-               <mat-form-field>
-                 <mat-select [(value)]="selected" [(ngModel)]="user.role" placeholder="Logging in As" name="role" >
-                   <mat-option *ngFor="let role of userRoles" [value]="role">
-                     {{ role }}
-                   </mat-option>
-                 </mat-select>
-               </mat-form-field>
-               -->
-            <br><br>
-            <button mat-raised-button class="tos-primary-button" (click)="login(user)">Login</button>
-            <br><br>
-            <a *ngIf = "wrongCreds !== undefined" style="padding-left: 16px; color: red; font-size: 12px"> {{wrongCreds}} </a>
-         </mat-card-content>
-      </mat-tab>
-      <mat-tab label="Register">
-         <br>
-         <mat-card-content>
-            <mat-form-field>
-               <input matInput placeholder="Username"  [(ngModel)]="newUser.username" required >
-            </mat-form-field>
-            <br>
-            <mat-form-field>
-               <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'"  [(ngModel)]="newUser.password" required>
-               <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-            </mat-form-field>
-            <br><br>
-            <button mat-raised-button class="tos-primary-button" (click)="register(newUser)">Register</button>
-            <br><br>
-         </mat-card-content>
-      </mat-tab>
-   </mat-tab-group>
+<h2 class="tos-login-heading">Team Operations System</h2>
+<mat-card flex="flex">
+   <h3> Login </h3>
+   <mat-card-content>
+      <br>
+      <mat-form-field>
+         <input matInput placeholder="Username"  [(ngModel)]="user.username" required >
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+         <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'"  [(ngModel)]="user.password" required>
+         <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+      </mat-form-field>
+      <br><br>
+      <button mat-raised-button class="tos-primary-button" (click)="login(user)">Login</button>
+      <br><br>
+      <a *ngIf = "wrongCreds !== undefined" style="padding-left: 16px; color: red; font-size: 12px"> {{wrongCreds}} </a>
+      <p class="font-small grey-text d-flex justify-content-end">Not a member?
+         <a routerLink="../../view/register" href="#" class="blue-text ml-1"> Sign Up</a>
+      </p>
+   </mat-card-content>
 </mat-card>
-<!--
-   -->

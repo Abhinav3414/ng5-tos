@@ -43,12 +43,56 @@
  h3 {
      color: #505050;
 }
+
+table {
+      text-align: center;
+      td {
+          font-weight: 400;
+      }
+}
+
+register mat-card,
+login mat-card {
+  width: 294px;
+    border-radius: 7px;
+    margin-top: 20px;
+}
+mdb-navbar nav.navbar {
+        box-shadow: none;
+}
+
+.navbar.navbar-dark .navbar-nav .nav-item .nav-link:hover {
+  color: #6d6d6b;
+}
+
+.tos-menu-style mdb-navbar nav {
+    padding-left: 0;
+}
+
+.navbar.navbar-dark .navbar-nav .nav-item .nav-link {
+  color: rgba(0,0,0,.87);
+  padding: 1em 0 1em 1.5em;
+}
+menu > mdb-navbar > nav > logo > a {
+    color: #000000 !important;
+}
+body > app-root > content > div.tos-menu-style > div:nth-child(2) > menu > mdb-navbar > nav > logo > a {
+  color: #000000;
+}
+nav links {
+  font: 400 15px/18px Roboto,"Helvetica Neue",sans-serif;
+}
+
  .tos-content-color {
-     color: #979797e8;
+     color: #979797;
 }
 .tos-login-heading {
   font: 400 27px/20px Roboto,"Helvetica Neue",sans-serif;
 }
+.mat-expansion-panel-body .container {
+  padding-left: 0;
+}
+
  body {
     background-color: #e8e4d9;
      background-image: url(./background-9.jpg);
@@ -73,7 +117,7 @@
 }
  .tos-body-style {
      //background-color: #f6f6f6;
-     min-height: 83vh;
+     min-height: 81vh;
 }
  .tos-menu-style {
      min-height: 15vh;
@@ -81,6 +125,7 @@
 .tos-entity-name {
   font: 400 18px/20px Roboto,"Helvetica Neue",sans-serif;
     padding-bottom: 8px;
+    padding-top: 15px;
 }
  content {
      flex-direction: column;
@@ -109,6 +154,7 @@
  .tos-button.mat-button .mat-button-focus-overlay {
      background-color:transparent;
 }
+ register .mat-card .mat-tab-group.mat-primary .mat-tab-label:not(.mat-tab-disabled):focus,
  login .mat-card .mat-tab-group.mat-primary .mat-tab-label:not(.mat-tab-disabled):focus {
      background-color: white;
 }
@@ -118,6 +164,8 @@
      background-color: #0092e6;
      color: #ffffff;
 }
+
+register .tos-primary-button.mat-raised-button,
  login .tos-primary-button.mat-raised-button {
      margin-left: 15px;
 }
@@ -164,9 +212,11 @@
          place-content: stretch flex-start;
          align-items: stretch;
     }
+    register mat-card,
      login mat-card{
          margin: auto;
     }
+    register,
      login {
       margin: 15px auto;
     }
@@ -237,7 +287,7 @@
 }
  .tos-text {
      padding: 0 .7em;
-     color: #818080;
+     color: #818080 !important;
 }
  mat-expansion-panel .example-card.mat-card {
      background: #ffffff87;
@@ -272,23 +322,34 @@
          max-width: 60vw;
          padding:0 5%;
     }
+    register mat-card,
      login mat-card{
          float: right;
     }
+    register,
      login {
          top: 20%;
          position: fixed;
          left: 60%;
     }
+    .navbar.scrolling-navbar {
+      padding-left: 0;
+    }
 }
+register mat-card-content button.mat-button,
  login mat-card-content button.mat-button {
      margin-left: -10px;
 }
+register mat-form-field,
  login mat-form-field {
      padding-left: 16px;
 }
  .tos-title-style > h2 {
-     font: 400 28px/28px Roboto,"Helvetica Neue",sans-serif;
+  //   font: 400 28px/28px Roboto,"Helvetica Neue",sans-serif;
+}
+
+menu > mdb-navbar > nav > logo > a > strong {
+  font: 400 28px/28px Roboto,"Helvetica Neue",sans-serif;
 }
  .mat-dialog-actions {
      flex-direction: row-reverse;
@@ -369,9 +430,12 @@
      // background-color: #eee;
      //height: 100%;
 }
+ register .mat-tab-label,
  login .mat-tab-label {
      min-width: 72px;
 }
+
+ register mat-form-field ,
  login mat-form-field {
      width: 220px;
 }
@@ -379,9 +443,9 @@
  .tos-router-container .mat-card-title {
      margin-bottom: 7px;
 }
+.tos-router-container .mat-card h3,
  .tos-router-container .mat-card {
      color: #757575;
-    ;
 }
  .tos-router-container .mat-card th {
      font-weight: 400;

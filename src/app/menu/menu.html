@@ -1,39 +1,38 @@
-<mat-toolbar >
-   <a href="./index.html" class="tos-title-style">
-      <h2 fxShow="true" fxHide.gt-md="true">{{titleXS}}</h2>
-      <h2 fxShow="true" fxHide.lt-md="true">{{title}}</h2>
-   </a>
-   <span class="example-spacer"></span>
-   <div fxShow="true" fxHide.lt-md="true" class="tos-menu-buttons">
-     <a (click)="navigateHome()">Home</a>
-    <a (click)="navigateCustomers()">Customer</a>
-     <a (click)="navigateEmployeeHome()">Employee</a>
-     <a (click)="navigateAbout()">About</a>
-     <a (click)="logout()">Logout</a>
-    <!--  <button mat-button (click)="navigateHome()"  disableRipple="true">Home</button>
-      <button mat-button (click)="navigateEmployeeHome()">Employee</button>
-      <button mat-button (click)="navigateCustomers()">Customer</button>
-     <button mat-button (click)="navigateProfile()">DashBoard</button>
-      <button mat-button (click)="navigateAbout()">About</button>
-      <button mat-button (click)="logout()">Logout</button> -->
-   </div>
-   <div fxShow="false" fxShow.lt-md="true" fxLayout="column">
-      <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
-    <!--    <button mat-button (click)="navigateHome()">Home</button>
-      <button mat-button (click)="navigateEmployeeHome()">Employee</button>
-      <button mat-button (click)="navigateCustomers()">Customer</button>
-       <button mat-button (click)="navigateProfile()">DashBoard</button>
-      <button mat-button (click)="navigateAbout()">About</button>
-      <button mat-button (click)="logout()">Logout</button>-->
-      <a (click)="navigateHome()">Home</a>
-      <a (click)="navigateCustomers()">Customer</a>
-      <a (click)="navigateEmployeeHome()">Employee</a>
-      <a (click)="navigateAbout()">About</a>
-      <a (click)="logout()">Logout</a>
-      </mat-menu>
-      <button mat-icon-button [matMenuTriggerFor]="appMenu">
-         <mat-icon>more_vert</mat-icon>
-      </button>
-   </div>
-</mat-toolbar>
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark ie-nav" [containerInside]="false">
+   <logo>
+      <a class="logo navbar-brand" href="./index.html"><strong>{{title}}</strong></a>
+   </logo>
+   <links>
+      <ul class="navbar-nav ml-auto">
+         <li class="nav-item waves-light">
+            <a routerLink="/" class="nav-link" (click)="navigateHome()" >Home <span class="sr-only">(current)</span></a>
+         </li>
+         <li class="nav-item waves-light">
+            <a routerLink="view/customers" class="nav-link" (click)="navigateCustomers()">Customer</a>
+         </li>
+         <li class="nav-item waves-light">
+            <a routerLink="view/employees" class="nav-link" (click)="navigateEmployeeHome()">Employee</a>
+         </li>
+         <li class="nav-item waves-light">
+            <a routerLink="view/about" class="nav-link" (click)="navigateAbout()">About</a>
+         </li>
+         <li class="nav-item waves-light">
+            <a routerLink="view/employees" class="nav-link" (click)="logout()">Logout</a>
+         </li>
+      </ul>
+      <!--
+         <ul class="navbar-nav nav-flex-icons">
+             <li class="nav-item waves-light" mdbWavesEffect>
+                 <a class="nav-link"><i class="fa fa-facebook"></i></a>
+             </li>
+             <li class="nav-item waves-light" mdbWavesEffect>
+                 <a class="nav-link"><i class="fa fa-twitter"></i></a>
+             </li>
+             <li class="nav-item waves-light" mdbWavesEffect>
+                 <a class="nav-link"><i class="fa fa-instagram"></i></a>
+             </li>
+         </ul>
+         -->
+   </links>
+</mdb-navbar>
 <breadcrumb> </breadcrumb>

@@ -10,16 +10,15 @@ import { UrlService } from '../services/url.service';
 import { Token } from '../token';
 
 @Component({
-  selector: 'login',
-  templateUrl: './login.html'
+  selector: 'register',
+  templateUrl: './register.html'
 })
-export class LoginComponent {
+export class RegisterComponent {
   hide: boolean = true;
 
-  user = {
+  newUser = {
     username: '',
-    password: '',
-    role: ''
+    password: ''
   };
 
   userRoles: Array<String>;
@@ -33,16 +32,12 @@ export class LoginComponent {
     this.userRoles = ['admin', 'manager', 'employee'];
   }
 
-  login(usercreds) {
-    this.authService.login(usercreds)
-      .then((data) => {
-        this.localStorageService.setAuthorizationData(data);
-        this.utilityService.addTokenSubject(data.access_token);
-        this.router.navigate(['/home']);
+  register(usercreds) {
+    this.dataService.postUserEntity('users', usercreds)
+      .then((resCustomerData: any) => {
+        location.href = (location.origin === 'http://localhost:4200') ? location.origin : this.urlService.getAppBaseUrl();
       },
-      (err) => {
-        this.wrongCreds = "Invalid Credentials"
-      }
+      (err) => console.log("users could not be updated :" + err)
       );
   }
 

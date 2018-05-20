@@ -4,7 +4,7 @@
    <mat-dialog-content>
       <form id="formNewStakeholderUpdate" name="formNewStakeholderUpdate"  #stakeholderDataUpdate="ngForm" >
           <mat-checkbox [value]="data.customerStakeholder.contactPerson" name="contactPerson"
-           [(ngModel)]="data.customerStakeholder.contactPerson" disableRipple="true">Contact Person</mat-checkbox>
+           [(ngModel)]="data.customerStakeholder.contactPerson" disableRipple="true" [disabled]="data.getDisabled(data.customerStakeholder.id)">Contact Person</mat-checkbox>
         <br><br>
          <mat-form-field >
             <input matInput placeholder="Name" name="name" [value]="data.name" [(ngModel)]="data.customerStakeholder.name" ngModel>

@@ -44,6 +44,8 @@ export class CustomerViewComponent {
   customerStakeholders = [];
   customerTravels = [];
 
+  mainStakeHolderId: any = undefined;
+
   customerStakeholder = new Stakeholder();
   customerGoal = new Goal();
   customerTravel = new Travel();
@@ -73,11 +75,23 @@ export class CustomerViewComponent {
 
             this.customer.goals.forEach(e => this.customerGoals.push(e));
             this.customer.teams.forEach(e => this.customerTeams.push(e));
-            this.customer.stakeHolders.forEach(e => this.customerStakeholders.push(e));
             this.customer.travels.forEach(e => this.customerTravels.push(e));
+            this.customer.stakeHolders.forEach(e => {
+              this.customerStakeholders.push(e);
+              if (e.contactPerson === true) { this.mainStakeHolderId = e.id; }
+            });
           });
       }
     });
+
+  }
+
+  //function to have only single StakeHolder as customer contactPerson
+  getDisabled(id) {
+    if (this.mainStakeHolderId === undefined) {
+      return false;
+    }
+    return (this.mainStakeHolderId === id) ? false : true;
   }
 
   openDialog(entityName): void {
@@ -114,9 +128,17 @@ export class CustomerViewComponent {
   }
 
   addNewEntity(entityName, entity, entityArray) {
+    if (entityName === 'stakeholders' && entity.contactPerson === true) {
+      this.customer.contactPerson = entity.name;
+    }
+    this.dataService.updateEntity('customers', +this.customer.id, this.customer);
+
     entity.customerId = this.id;
     this.dataService.postEntity(entityName, entity)
       .then((resCustomerData) => {
+        if (entityName === 'stakeholders' && entity.contactPerson === true) {
+          this.mainStakeHolderId = resCustomerData["id"];
+        }
         entityArray.push(resCustomerData);
       },
       (err) => console.log(entityName + " could not be added :" + err)
@@ -164,6 +186,13 @@ export class CustomerViewComponent {
   }
 
   updateEntity(entityName, id, entity, entityArray) {
+    // Logic to update Stakeholder as Contact Person in Customer
+    if (entityName === 'stakeholders' && (this.mainStakeHolderId === entity.id || this.mainStakeHolderId === undefined)) {
+      this.mainStakeHolderId = (entity.contactPerson === false) ? undefined : entity.id;
+    }
+    this.customer.contactPerson = (this.mainStakeHolderId !== undefined) ? entity.name : '';
+    this.dataService.updateEntity('customers', +this.customer.id, this.customer);
+
     this.dataService.updateEntity(entityName, id, entity)
       .then((resCustomerData) => {
         let index = entityArray.findIndex(e => e.id === entity.id);
@@ -180,12 +209,17 @@ export class CustomerViewComponent {
   }
 
   navigateAlign(customerId) {
-    console.log(customerId)
     this.utilityService.addBreadCrumb(3, 'ACE5', 'view/align', customerId, 'entity', 'Process');
     this.router.navigate(['view/align', customerId]);
   }
 
   delelteEntity(entityName, id, entityArray) {
+    if (entityName === 'stakeholders' && this.mainStakeHolderId === id) {
+      this.mainStakeHolderId = undefined;
+      this.customer.contactPerson = '';
+      this.dataService.updateEntity('customers', +this.customer.id, this.customer);
+    }
+
     this.dataService.delelteEntity(entityName, id)
       .then((resCustomerData) => {
         entityArray.splice(entityArray.findIndex(function(i) {

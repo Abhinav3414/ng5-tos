@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { AngularSvgIconModule } from 'angular-svg-icon';
 
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { RouterModule, Routes } from '@angular/router';
@@ -17,6 +16,7 @@ import { CustomMaterialModule } from './custom-material.module';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 import { FooterComponent } from './footer/footer.component';
 import { ContentComponent } from './content/content.component';
 import { MenuComponent } from './menu/menu.component';
@@ -56,10 +56,13 @@ import { LocalStorageService } from './services/localStorage.service';
 import { UrlService } from './services/url.service';
 import { AuthInterceptor } from './Interceptors/auth.interceptor';
 
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    RegisterComponent,
     EmployeeMainComponent,
     AboutComponent,
     MenuComponent,
@@ -99,10 +102,11 @@ import { AuthInterceptor } from './Interceptors/auth.interceptor';
     HttpModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AngularSvgIconModule
+    MDBBootstrapModule.forRoot()
   ],
+  schemas: [NO_ERRORS_SCHEMA],
   exports: [],
-  providers: [DataService,UtilityService,AuthService,LocalStorageService,UrlService,
+  providers: [DataService, UtilityService, AuthService, LocalStorageService, UrlService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

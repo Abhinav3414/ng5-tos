@@ -4,7 +4,8 @@
       <mat-icon svgIcon="phone" title="Contact"></mat-icon>
       <a class="tos-text"> {{customer.contact}} &emsp;&emsp;&emsp;</a>
       <mat-icon svgIcon="human-greeting"  title="Contact Person"></mat-icon>
-      <a class="tos-text"> {{customer.contactPerson}} &emsp;&emsp;&emsp;</a>
+      <a class="tos-text" *ngIf="mainStakeHolderId"> {{customer.contactPerson}} &emsp;&emsp;&emsp;</a>
+      <a class="tos-text" *ngIf="mainStakeHolderId === undefined"> No Contact Person Assigned &emsp;&emsp;&emsp;</a>
       <mat-icon  title="Domain">domain</mat-icon>
       <a class="tos-text"> {{customer.domain}} &emsp;&emsp;&emsp;</a>
       <mat-icon svgIcon="align" title="align">align</mat-icon>
