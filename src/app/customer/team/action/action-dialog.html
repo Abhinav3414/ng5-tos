@@ -1,8 +1,16 @@
-<div *ngIf="  data.customerAction!==undefined" >
+<div *ngIf="data.customerAction!==undefined" >
    <h2 *ngIf="data.customerAction.id === ''" mat-dialog-title>Create Action</h2>
    <h2   *ngIf="data.customerAction.id !== ''" mat-dialog-title>Update Action</h2>
    <mat-dialog-content>
       <form id="formNewActionUpdate" name="formNewActionUpdate"  #actionUpdate="ngForm">
+        <mat-form-field *ngIf="data.customerAction.customerId != null">
+          <mat-select [(value)]="selected" [(ngModel)]="data.customerAction.goalId" placeholder="Goal" name="goalId" >
+            <mat-option *ngFor="let goal of data.customerGoals" [value]="goal.id">
+              {{ goal.description }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <a *ngIf="data.customerAction.customerId != null"> <br> </a>
          <mat-form-field >
             <input matInput placeholder="Details" name="details" [value]="data.customerAction.details" [(ngModel)]="data.customerAction.details" ngModel><br>
          </mat-form-field><br>

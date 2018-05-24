@@ -1,0 +1,128 @@
+<h3 class="tos-entity-name" >Ace5 Process</h3>
+<!--
+   <button mat-raised-button (click)="isOptional = !isOptional">
+     {{!isOptional ? 'Enable optional steps' : 'Disable optional steps'}}
+   </button>
+   -->
+<mat-horizontal-stepper [linear]="true" #stepper *ngIf="ace5 !== null && customer !== undefined">
+<mat-step [stepControl]="firstFormGroup">
+   <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Ace5 Phase</ng-template>
+      <mat-form-field>
+         <input matInput placeholder="Product Owner" formControlName="firstCtrl" required>
+      </mat-form-field>
+      <mat-form-field >
+         <input matInput placeholder="customerId" name="customerId" [value]="ace5.customerId" [ngModelOptions]="{standalone: true}"  [(ngModel)]="ace5.customerId" ngModel>
+      </mat-form-field>
+      <mat-form-field >
+         <input matInput placeholder="intialDiscussionDate" name="intialDiscussionDate" [value]="ace5.intialDiscussionDate" [ngModelOptions]="{standalone: true}"  [(ngModel)]="ace5.intialDiscussionDate" ngModel>
+      </mat-form-field>
+      <mat-form-field >
+         <input matInput placeholder="processTools" name="processTools" [value]="customer.processTools" [ngModelOptions]="{standalone: true}"  [(ngModel)]="customer.processTools" ngModel>
+      </mat-form-field>
+      <mat-form-field >
+         <input matInput placeholder="solutionProduct" name="solutionProduct" [value]="customer.solutionProduct" [ngModelOptions]="{standalone: true}"  [(ngModel)]="customer.solutionProduct" ngModel>
+      </mat-form-field>
+      <mat-form-field >
+         <input matInput placeholder="databaseUsed" name="databaseUsed" [value]="customer.databaseUsed" [ngModelOptions]="{standalone: true}"  [(ngModel)]="customer.databaseUsed" ngModel>
+      </mat-form-field>
+      <mat-form-field >
+         <input matInput placeholder="operatingEnvironment" name="operatingEnvironment" [value]="customer.operatingEnvironment" [ngModelOptions]="{standalone: true}"  [(ngModel)]="customer.operatingEnvironment" ngModel>
+      </mat-form-field>
+      <mat-form-field >
+         <input matInput placeholder="remoteMachineDetails" name="remoteMachineDetails" [value]="customer.remoteMachineDetails" [ngModelOptions]="{standalone: true}"  [(ngModel)]="customer.remoteMachineDetails" ngModel>
+      </mat-form-field>
+      <mat-form-field >
+         <input matInput placeholder="process" name="vpnDetails" [value]="customer.vpnDetails" [ngModelOptions]="{standalone: true}"  [(ngModel)]="customer.vpnDetails" ngModel>
+      </mat-form-field>
+      <mat-form-field >
+         <input matInput placeholder="communicator" name="communicator" [value]="customer.communicator" [ngModelOptions]="{standalone: true}"  [(ngModel)]="customer.communicator" ngModel>
+      </mat-form-field>
+      <mat-form-field >
+         <input matInput placeholder="communicator" name="skillsReuired" [value]="customer.skillsReuired" [ngModelOptions]="{standalone: true}"  [(ngModel)]="customer.skillsReuired" ngModel>
+      </mat-form-field>
+<hr>
+       <br>
+      <mat-accordion [multi]="true" @fade>
+         <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true" >
+         <mat-expansion-panel-header>
+            <mat-panel-title>
+               <h3>Actions</h3>
+            </mat-panel-title>
+            <mat-panel-description>
+               <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
+            </mat-panel-description>
+         </mat-expansion-panel-header>
+         <div class=" tos-button-right">
+            <span  (click)="openDialog('actions')" class="tos-add-button">+</span>
+         </div>
+         <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
+            <div fxFlex="30%" *ngFor = "let action of ace5.actions">
+               <mat-card class="example-card" >
+                  <mat-card-header>
+                     <mat-card-title>
+                        <h3><span >{{action.details}}</span></h3>
+                     </mat-card-title>
+                     <mat-card-subtitle></mat-card-subtitle>
+                  </mat-card-header>
+                  <mat-card-content>
+                     cause: {{action.cause}} <br>
+                     platform: {{action.platform}}<br>
+                     status: {{action.status}}
+                  </mat-card-content>
+                  <mat-card-actions>
+                     <span (click)="openUpdateDialog('actions',action.id)" style="cursor:pointer;color:grey">
+                        <mat-icon  >create</mat-icon>
+                     </span>
+                     &emsp;
+                     <span (click)="delelteEntity('actions',action.id,ace5.actions)" style="cursor:pointer; color:grey">
+                        <mat-icon  >delete</mat-icon>
+                     </span>
+                  </mat-card-actions>
+               </mat-card>
+            </div>
+            <div *ngIf="ace5.actions.length===0" class="tos-content-color">No Actions Defined </div>
+         </div>
+         </mat-expansion-panel>
+       </mat-accordion>
+
+   <br>   <br>
+       <div>
+         <button mat-button matStepperNext>Next</button>
+      </div>
+   </form>
+
+</mat-step>
+<mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
+<form [formGroup]="secondFormGroup">
+   <ng-template matStepLabel>Acquire Phase</ng-template>
+   <mat-form-field>
+      <input matInput placeholder="Address" formControlName="secondCtrl" required>
+   </mat-form-field>
+   <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+   </div>
+</form>
+</mat-step>
+<mat-step [stepControl]="thirdFormGroup" [optional]="isOptional">
+<form [formGroup]="thirdFormGroup">
+   <ng-template matStepLabel>Assimilate Phase</ng-template>
+   <mat-form-field>
+      <input matInput placeholder="Assimilate" formControlName="thirdCtrl" required>
+   </mat-form-field>
+   <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+   </div>
+</form>
+</mat-step>
+<mat-step>
+   <ng-template matStepLabel>Done</ng-template>
+   You are now done.
+   <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+   </div>
+</mat-step>
+</mat-horizontal-stepper>

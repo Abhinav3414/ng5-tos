@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { MatIconRegistry } from "@angular/material/icon";
-import { DomSanitizer } from "@angular/platform-browser";
 
 import { DataService } from '../services/data.service';
 import { UtilityService } from '../services/utility.service';
@@ -10,12 +8,15 @@ import { UtilityService } from '../services/utility.service';
 import { Customer } from './customer';
 import { StakeholderDialogComponent } from './stakeholder/stakeholder-dialog.component';
 import { GoalDialogComponent } from './goal/goal-dialog.component';
+import { ActionDialogComponent } from './team/action/action-dialog.component';
 import { TeamDialogComponent } from './team/team-dialog.component';
 import { TravelDialogComponent } from './travel/travel-dialog.component';
 
 import { BreadCrumb } from '../menu/breadCrumb';
 import { Team } from './team/team';
+import { Ace5 } from '../ace5/ace5';
 import { Goal } from './goal/goal';
+import { Action } from './team/action/action';
 import { Stakeholder } from './stakeholder/stakeholder';
 import { Travel } from './travel/travel';
 import { trigger, state, style, animate, transition } from '@angular/animations';
@@ -41,6 +42,7 @@ export class CustomerViewComponent {
   customerAddresses = [];
   customerTeams = [];
   customerGoals = [];
+  customerActions = [];
   customerStakeholders = [];
   customerTravels = [];
 
@@ -48,6 +50,7 @@ export class CustomerViewComponent {
 
   customerStakeholder = new Stakeholder();
   customerGoal = new Goal();
+  customerAction = new Action();
   customerTravel = new Travel();
   customerTeam = new Team();
   goalTenures = ['Weekly', 'Monthly', 'Quarterly', 'Yearly'];
@@ -55,11 +58,7 @@ export class CustomerViewComponent {
   bread: BreadCrumb;
 
   constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
-    private dialog: MatDialog, private utilityService: UtilityService, private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer) {
-    this.matIconRegistry.addSvgIcon(`phone`, this.domSanitizer.bypassSecurityTrustResourceUrl("./assets/icons/phone.svg"));
-    this.matIconRegistry.addSvgIcon(`human-greeting`, this.domSanitizer.bypassSecurityTrustResourceUrl("./assets/icons/human-greeting.svg"));
-    this.matIconRegistry.addSvgIcon(`align`, this.domSanitizer.bypassSecurityTrustResourceUrl("./assets/icons/baseline.svg"));
+    private dialog: MatDialog, private utilityService: UtilityService) {
   }
 
   ngOnInit() {
@@ -74,6 +73,7 @@ export class CustomerViewComponent {
             this.customer = resCustomerData;
 
             this.customer.goals.forEach(e => this.customerGoals.push(e));
+            this.customer.actions.forEach(e => this.customerActions.push(e));
             this.customer.teams.forEach(e => this.customerTeams.push(e));
             this.customer.travels.forEach(e => this.customerTravels.push(e));
             this.customer.stakeHolders.forEach(e => {
@@ -94,6 +94,11 @@ export class CustomerViewComponent {
     return (this.mainStakeHolderId === id) ? false : true;
   }
 
+  getGoalDesc(goalId) {
+    var index = this.customerGoals.findIndex(e => e.id === goalId);
+    return this.customerGoals[index].description;
+  }
+
   openDialog(entityName): void {
     if (entityName === 'teams') {
       this.customerTeam = new Team();
@@ -102,6 +107,11 @@ export class CustomerViewComponent {
     else if (entityName === 'goals') {
       this.customerGoal = new Goal();
       this.openEntityDialog(GoalDialogComponent, entityName, this.customerGoals);
+    }
+    else if (entityName === 'actions') {
+      this.customerAction = new Action();
+      this.customerAction.customerId = this.id;
+      this.openEntityDialog(ActionDialogComponent, entityName, this.customerActions);
     }
     else if (entityName === 'stakeholders') {
       this.customerStakeholder = new Stakeholder();
@@ -132,7 +142,6 @@ export class CustomerViewComponent {
       this.customer.contactPerson = entity.name;
     }
     this.dataService.updateEntity('customers', +this.customer.id, this.customer);
-
     entity.customerId = this.id;
     this.dataService.postEntity(entityName, entity)
       .then((resCustomerData) => {
@@ -153,6 +162,10 @@ export class CustomerViewComponent {
     else if (entityName === 'goals') {
       this.customerGoal = this.customerGoals[this.customerGoals.findIndex(e => e.id === id)];
       this.openEntityUpdateDialog(entityName, GoalDialogComponent, id, this.customerGoals);
+    }
+    else if (entityName === 'actions') {
+      this.customerAction = this.customerActions[this.customerActions.findIndex(e => e.id === id)];
+      this.openEntityUpdateDialog(entityName, ActionDialogComponent, id, this.customerActions);
     }
     else if (entityName === 'stakeholders') {
       this.customerStakeholder = this.customerStakeholders[this.customerStakeholders.findIndex(e => e.id === id)];
@@ -208,9 +221,27 @@ export class CustomerViewComponent {
     this.router.navigate(['view/team', teamId], { skipLocationChange: false });
   }
 
-  navigateAlign(customerId) {
-    this.utilityService.addBreadCrumb(3, 'ACE5', 'view/align', customerId, 'entity', 'Process');
-    this.router.navigate(['view/align', customerId]);
+  navigateAce5(customerId) {
+    this.dataService.getEntityData('ace5s', customerId)
+      .then((resCustomerData) => {
+          if(resCustomerData === null) {
+            var ace5 = new Ace5();
+            ace5.customerId = customerId;
+            ace5.intialDiscussionDate = new Date();
+            console.log("Creating new Ace5 process for customer");
+            this.dataService.postEntity('ace5s', ace5)
+              .then((resCustomerData) => {
+                console.log(resCustomerData);
+              },
+              (err) => console.log( "ace5 could not be created :" + err)
+              );
+          }
+        },
+        (err) => console.log("ace5 could not be fetched :" + err)
+        );
+
+    this.utilityService.addBreadCrumb(3, 'Ace5', 'view/ace5', customerId, 'entity', 'Process');
+    this.router.navigate(['view/ace5', customerId]);
   }
 
   delelteEntity(entityName, id, entityArray) {

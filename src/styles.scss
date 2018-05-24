@@ -50,39 +50,19 @@ table {
           font-weight: 400;
       }
 }
-
 register mat-card,
 login mat-card {
   width: 294px;
     border-radius: 7px;
     margin-top: 20px;
 }
-mdb-navbar nav.navbar {
-        box-shadow: none;
+.tos-icons {
+  font-size: 22px;
+    color: grey;
 }
-
-.navbar.navbar-dark .navbar-nav .nav-item .nav-link:hover {
-  color: #6d6d6b;
+.tos-entity-top-content > a {
+  padding-right: 2.5em;
 }
-
-.tos-menu-style mdb-navbar nav {
-    padding-left: 0;
-}
-
-.navbar.navbar-dark .navbar-nav .nav-item .nav-link {
-  color: rgba(0,0,0,.87);
-  padding: 1em 0 1em 1.5em;
-}
-menu > mdb-navbar > nav > logo > a {
-    color: #000000 !important;
-}
-body > app-root > content > div.tos-menu-style > div:nth-child(2) > menu > mdb-navbar > nav > logo > a {
-  color: #000000;
-}
-nav links {
-  font: 400 15px/18px Roboto,"Helvetica Neue",sans-serif;
-}
-
  .tos-content-color {
      color: #979797;
 }
@@ -203,42 +183,25 @@ register .tos-primary-button.mat-raised-button,
  menu .mat-toolbar-single-row {
      padding: 0;
 }
- @media only screen and (max-width: 600px) {
-     customer-view .container, customer-main .container, employee-view .container, employee-main .container {
-         flex-direction: column;
-         box-sizing: border-box;
-         display: flex;
-         max-height: 100%;
-         place-content: stretch flex-start;
-         align-items: stretch;
-    }
-    register mat-card,
-     login mat-card{
-         margin: auto;
-    }
-    register,
-     login {
-      margin: 15px auto;
-    }
-     .tos-router-container .mat-expansion-panel-body {
-         flex-direction: column !important;
-    }
-     .tos-button-right {
-         padding-bottom: 10px;
-    }
-}
  .tos-menu-buttons > a {
      font-size: 15px;
      cursor: pointer;
      padding: 0 12px;
 }
  .tos-menu-buttons > a:hover {
-     color: #6d6d6b;
-     transition: all 80ms ease;
+     color: #6d6d6b !important;
+     transition: all 80ms ease !important;
+}
+.tos-menu-buttons {
+  font: 400 20px/32px Roboto,"Helvetica Neue",sans-serif;
 }
 /* XS Menu Styling */
+
+
  #cdk-overlay-0 > div {
-     border-radius: 2px;
+   border-radius: 4px;
+   padding-left: 2px;
+   margin-right: 1.6em;
 }
  #cdk-overlay-0 > div > div {
      display: flex;
@@ -251,6 +214,11 @@ register .tos-primary-button.mat-raised-button,
  #cdk-overlay-0 > div > div > a:hover {
      color: #898989;
      transition: all 200ms ease;
+}
+.tos-menu-icon {
+  cursor: pointer;
+  padding: 0 1.2em;
+  color: #5a5a5a;
 }
  .mat-fab.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary {
      height: 35px;
@@ -317,6 +285,39 @@ register .tos-primary-button.mat-raised-button,
  .mat-icon {
      color: #818080;
 }
+@media only screen and (max-width: 600px) {
+    customer-view .container, customer-main .container, employee-view .container, employee-main .container {
+        flex-direction: column;
+        box-sizing: border-box;
+        display: flex;
+        max-height: 100%;
+        place-content: stretch flex-start;
+        align-items: stretch;
+   }
+   register mat-card,
+    login mat-card{
+        margin: auto;
+   }
+   register,
+    login {
+     margin: 15px auto;
+   }
+    .tos-router-container .mat-expansion-panel-body {
+        flex-direction: column !important;
+   }
+    .tos-button-right {
+        padding-bottom: 10px;
+   }
+   .tos-title-style > h2 {
+     padding-left: 2em;
+  }
+  .title-xs {
+    display: block;
+  }
+  .title-gt-xs {
+    display: none;
+  }
+}
  @media only screen and (min-width: 601px) {
      customer-main .container > div {
          max-width: 60vw;
@@ -335,6 +336,12 @@ register .tos-primary-button.mat-raised-button,
     .navbar.scrolling-navbar {
       padding-left: 0;
     }
+    .title-xs {
+      display: none;
+    }
+    .title-gt-xs {
+      display: block;
+    }
 }
 register mat-card-content button.mat-button,
  login mat-card-content button.mat-button {
@@ -345,12 +352,9 @@ register mat-form-field,
      padding-left: 16px;
 }
  .tos-title-style > h2 {
-  //   font: 400 28px/28px Roboto,"Helvetica Neue",sans-serif;
+   font: 400 28px/28px Roboto,"Helvetica Neue",sans-serif;
 }
 
-menu > mdb-navbar > nav > logo > a > strong {
-  font: 400 28px/28px Roboto,"Helvetica Neue",sans-serif;
-}
  .mat-dialog-actions {
      flex-direction: row-reverse;
 }

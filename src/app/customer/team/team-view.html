@@ -1,8 +1,8 @@
    <div *ngIf="team != undefined">
       <h2 class="tos-entity-name">{{team.name}}</h2>
     <span class="tos-entity-top-content">
-       <mat-icon svgIcon="bullseye-arrow" title="Team Specialization">bullseye-arrow</mat-icon>
-       <a class="tos-text">{{team.specialization}} &emsp;&emsp;&emsp;</a>
+       <i class="fa fa-bullseye tos-icons" title="Team Specialization" aria-hidden="true"></i>
+       <a class="tos-text">{{team.specialization}}</a>
     </span>
    </div>
    <mat-accordion [multi]="true" @fade>

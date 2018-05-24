@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../../services/data.service';
-import { MatIconRegistry } from "@angular/material/icon";
-import { DomSanitizer } from "@angular/platform-browser";
 
 import { ProjectRythmDialogComponent } from './projectrythm/projectrythm-dialog.component';
 import { ActionDialogComponent } from './action/action-dialog.component';
@@ -48,9 +46,7 @@ export class TeamViewComponent {
   rythmFrequency = ['Daily', 'Weekly', 'Monthly', 'Quaterly', 'Yearly'];
 
   constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
-    private dialog: MatDialog, private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer) {
-    this.matIconRegistry.addSvgIcon(`bullseye-arrow`, this.domSanitizer.bypassSecurityTrustResourceUrl("./assets/icons/bullseye-arrow.svg"));
+    private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -166,7 +162,6 @@ export class TeamViewComponent {
     const index = entityArray.findIndex(e => e.id === id);
     let entity = entityArray[index];
     var entityCopy = Object.assign({}, entity);
-
     let dialogRef = this.dialog.open(dialogComponent, {
       data: this
     });

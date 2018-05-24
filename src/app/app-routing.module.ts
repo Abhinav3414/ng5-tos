@@ -12,7 +12,7 @@ import { ContentComponent } from './content/content.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
-import { AlignComponent } from './align/align.component';
+import { Ace5Component } from './ace5/ace5.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'view/employees', component: EmployeeMainComponent },
   { path: 'view/employee/:id', component: EmployeeViewComponent },
   { path: 'view/team/:id', component: TeamViewComponent },
-  { path: 'view/align/:customerId', component: AlignComponent }
+  { path: 'view/ace5/:customerId', component: Ace5Component }
 ];
 
 @NgModule({

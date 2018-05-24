@@ -1,9 +1,13 @@
 <div *ngIf="employee != undefined">
    <h2 class="tos-entity-name">{{employee.name}} </h2>
    <span class="tos-entity-top-content">
-   <a class="tos-text"> <b> Joining Date : </b> {{employee.joiningDate | date : 'd-M-yy'}}  &emsp;&emsp;&emsp;</a>
-   <a class="tos-text"><b> Responsibilities : </b> {{employee.responsibilities}} &emsp;&emsp;&emsp;</a>
-   <a class="tos-text"> <b> Total years of Experience : </b> {{employee.yearsOfExperience}}  </a>
+
+     <i class="fa fa-calendar tos-icons" title="Joining Date" aria-hidden="true"></i>
+     <a class="tos-text">{{employee.joiningDate | date : 'd-M-yy'}}  </a>
+     <i class="fa fa-mortar-board tos-icons" title="Responsibilities" aria-hidden="true"></i>
+   <a class="tos-text">{{employee.responsibilities}} </a>
+   <i class="fa fa-certificate tos-icons" title="Years of Experience" aria-hidden="true"></i>
+   <a class="tos-text">{{employee.yearsOfExperience}} years of Experience </a>
    </span>
 </div>
 <mat-accordion [multi]="true" @fade>

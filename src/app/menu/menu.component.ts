@@ -11,7 +11,7 @@ import { BreadCrumb } from '../menu/breadCrumb';
 export class MenuComponent {
   items: any[];
   title = 'Team Operations System';
-  titleXS = 'TOS';
+  titleXS = 'Team Operations';
   bread: BreadCrumb;
 
   constructor(private utilityService: UtilityService, private router: Router, private route: ActivatedRoute) { }

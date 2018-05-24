@@ -1,15 +1,15 @@
 <div *ngIf="customer != undefined">
    <h2 class="tos-entity-name">{{customer.name}}</h2>
    <span class="tos-entity-top-content">
-      <mat-icon svgIcon="phone" title="Contact"></mat-icon>
-      <a class="tos-text"> {{customer.contact}} &emsp;&emsp;&emsp;</a>
-      <mat-icon svgIcon="human-greeting"  title="Contact Person"></mat-icon>
-      <a class="tos-text" *ngIf="mainStakeHolderId"> {{customer.contactPerson}} &emsp;&emsp;&emsp;</a>
-      <a class="tos-text" *ngIf="mainStakeHolderId === undefined"> No Contact Person Assigned &emsp;&emsp;&emsp;</a>
-      <mat-icon  title="Domain">domain</mat-icon>
-      <a class="tos-text"> {{customer.domain}} &emsp;&emsp;&emsp;</a>
-      <mat-icon svgIcon="align" title="align">align</mat-icon>
-      <a class="tos-text" (click)="navigateAlign(customer.id)" style="cursor:pointer"> Ace5 Process </a>
+      <i class="fa fa-phone tos-icons" title="Contact Number" aria-hidden="true"></i>
+      <a class="tos-text"> {{customer.contact}} </a>
+      <i class="fa fa-user-secret tos-icons" title="Contact person" aria-hidden="true"></i>
+      <a class="tos-text" *ngIf="mainStakeHolderId"> {{customer.contactPerson}} </a>
+      <a class="tos-text" *ngIf="mainStakeHolderId === undefined"> No Contact Person Assigned </a>
+      <i class="fa fa-globe tos-icons" aria-hidden="true" title="Domain" ></i>
+      <a class="tos-text"> {{customer.domain}} </a>
+      <i class="fa fa-snowflake-o tos-icons"  title="Ace5 Process" aria-hidden="true"></i>
+      <a class="tos-text" (click)="navigateAce5(customer.id)" style="cursor:pointer"> Ace5 Process </a>
    </span>
 </div>
 <mat-accordion [multi]="true" @fade>
@@ -52,6 +52,45 @@
          </mat-card>
       </div>
       <div *ngIf="customerGoals.length===0" class="tos-content-color">No Goals Defined </div>
+   </div>
+   </mat-expansion-panel>
+   <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true" >
+   <mat-expansion-panel-header>
+      <mat-panel-title>
+         <h3>Customer Actions</h3>
+      </mat-panel-title>
+      <mat-panel-description>
+         <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
+      </mat-panel-description>
+   </mat-expansion-panel-header>
+   <div class=" tos-button-right">
+      <span  (click)="openDialog('actions')" class="tos-add-button">+</span>
+   </div>
+   <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
+      <div fxFlex="30%" *ngFor = "let action of customerActions">
+         <mat-card class="example-card" >
+            <mat-card-header>
+               <mat-card-title>
+                  <h3><span >{{action.details}}</span></h3>
+               </mat-card-title>
+               <mat-card-subtitle *ngIf="action.goalId !== null">Goal: {{ getGoalDesc(action.goalId)}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              Cause: {{action.cause}}<br>
+              PLatform: {{action.platform}}<br> Status: {{action.status}}
+            </mat-card-content>
+            <mat-card-actions>
+               <span (click)="openUpdateDialog('actions',action.id)" style="cursor:pointer;color:grey">
+                  <mat-icon  >create</mat-icon>
+               </span>
+               &emsp;
+               <span (click)="delelteEntity('actions',action.id,customerActions)" style="cursor:pointer; color:grey">
+                  <mat-icon  >delete</mat-icon>
+               </span>
+            </mat-card-actions>
+         </mat-card>
+      </div>
+      <div *ngIf="customerActions.length===0" class="tos-content-color">No Actions Defined </div>
    </div>
    </mat-expansion-panel>
    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">

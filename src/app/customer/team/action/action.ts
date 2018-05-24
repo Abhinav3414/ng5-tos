@@ -1,7 +1,10 @@
 export class Action {
   id = '';
   details = '';
-  teamId = '';
+  goalId = '';
+  teamId = null;
+  customerId = null;
+  ace5Id = null;
   cause = '';
   platform = '';
   status = '';

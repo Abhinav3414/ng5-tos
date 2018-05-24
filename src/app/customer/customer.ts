@@ -6,11 +6,25 @@ export class Customer {
   domain = '';
   address = '';
   country = '';
-  createdAt = '';
+
+  expectationFromOpd = '';
+  process = '';
+  processTools = '';
+  solutionProduct ='';
+  databaseUsed ='';
+  operatingEnvironment ='';
+  remoteMachineDetails ='';
+  vpnDetails ='';
+  communicator ='';
+  skillsReuired ='';
+
   goals = [];
+  actions = [];
   teams = [];
   stakeHolders = [];
   travels = [];
+  createdAt = '';
+
   constructor(values: Object = {}) {
     Object.assign(this, values);
   }
