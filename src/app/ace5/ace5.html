@@ -4,7 +4,7 @@
      {{!isOptional ? 'Enable optional steps' : 'Disable optional steps'}}
    </button>
    -->
-<mat-horizontal-stepper [linear]="true" #stepper *ngIf="ace5 !== null && customer !== undefined">
+<mat-horizontal-stepper [linear]="true" #stepper *ngIf="ace5 !== null && customer !== undefined" @fade>
 <mat-step [stepControl]="firstFormGroup">
    <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>Ace5 Phase</ng-template>
@@ -57,7 +57,7 @@
             <span  (click)="openDialog('actions')" class="tos-add-button">+</span>
          </div>
          <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
-            <div fxFlex="30%" *ngFor = "let action of ace5.actions">
+            <div fxFlex="30%" *ngFor = "let action of customerActions">
                <mat-card class="example-card" >
                   <mat-card-header>
                      <mat-card-title>
@@ -81,7 +81,7 @@
                   </mat-card-actions>
                </mat-card>
             </div>
-            <div *ngIf="ace5.actions.length===0" class="tos-content-color">No Actions Defined </div>
+            <div *ngIf="customerActions.length===0" class="tos-content-color">No Actions Defined </div>
          </div>
          </mat-expansion-panel>
        </mat-accordion>

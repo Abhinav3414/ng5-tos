@@ -111,7 +111,7 @@ export class EmployeeMainComponent {
 
   navigateViewEmployee(id) {
     let entity = this.employees[this.employees.findIndex(e => e.id === id)];
-    this.utilityService.addBreadCrumb(2, 'Employee', 'view/employee', id, 'entity', entity.name);
+    this.utilityService.addBreadCrumb(2, '', 'view/employee', id, 'entity', entity.name);
     this.router.navigate(['view/employee', id], { skipLocationChange: false });
   }
 

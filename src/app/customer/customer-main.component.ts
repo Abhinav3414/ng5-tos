@@ -67,6 +67,10 @@ export class CustomerMainComponent {
   ngOnInit() {
     this.utilityService.currentBreadCrumb.subscribe(bread => this.bread = bread);
 
+    console.log("hi")
+    this.dataService.getUsers()
+    .then((resCustomerData) => console.log(resCustomerData));
+    
     this.dataService.getEntityAllData('customers')
       .then((resCustomerData) => {
         resCustomerData.forEach(e => this.customers.push(e));
@@ -149,7 +153,7 @@ export class CustomerMainComponent {
 
   navigateViewCustomer(id) {
     let entity = this.customers[this.customers.findIndex(c => c.id === id)];
-    this.utilityService.addBreadCrumb(2, 'Customer', 'view/customer', id, 'entity', entity.name);
+    this.utilityService.addBreadCrumb(2, '', 'view/customer', id, 'entity', entity.name);
     this.router.navigate(['view/customer', id], { skipLocationChange: false });
   }
 

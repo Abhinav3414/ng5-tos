@@ -3,7 +3,7 @@
    <h2   *ngIf="data.customerAction.id !== ''" mat-dialog-title>Update Action</h2>
    <mat-dialog-content>
       <form id="formNewActionUpdate" name="formNewActionUpdate"  #actionUpdate="ngForm">
-        <mat-form-field *ngIf="data.customerAction.customerId != null">
+        <mat-form-field *ngIf="data.customerAction.customerId != null && data.customerAction.ace5Id === null">
           <mat-select [(value)]="selected" [(ngModel)]="data.customerAction.goalId" placeholder="Goal" name="goalId" >
             <mat-option *ngFor="let goal of data.customerGoals" [value]="goal.id">
               {{ goal.description }}

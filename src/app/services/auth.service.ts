@@ -17,7 +17,7 @@ export class AuthService {
   }
 
   login(usercreds): Promise<Token> {
-    // Basic bXktdHJ1c3RlZC1jbGllbnQ6c2VjcmV0
+    // Authorization code is : Basic bXktdHJ1c3RlZC1jbGllbnQ6c2VjcmV0
     let headersForTokenAPI = new Headers();
     headersForTokenAPI.append("Content-Type", "application/x-www-form-urlencoded");
     headersForTokenAPI.append("Authorization", "Basic bXktdHJ1c3RlZC1jbGllbnQ6c2VjcmV0");

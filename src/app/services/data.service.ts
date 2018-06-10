@@ -32,6 +32,11 @@ export class DataService {
       .then((response: Response) => response);
   }
 
+  getUsers(): Promise<any> {
+    return this.httpClient.get<any>('http://localhost:8080/tos-app/tosuser/tosadmin/users' + "/" + this.getToken()).toPromise()
+      .then((response: Response) => response);
+  }
+
   postEntity(entityName: string, entity: any) {
     return this.httpClient.post(this.baseResourceURL + entityName + "/" + this.getToken(), entity).toPromise()
       .then((response: Response) => response);

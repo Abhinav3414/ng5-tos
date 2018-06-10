@@ -71,11 +71,14 @@ export class CustomerViewComponent {
         this.dataService.getEntityData('customers', this.id)
           .then((resCustomerData) => {
             this.customer = resCustomerData;
-
             this.customer.goals.forEach(e => this.customerGoals.push(e));
-            this.customer.actions.forEach(e => this.customerActions.push(e));
             this.customer.teams.forEach(e => this.customerTeams.push(e));
             this.customer.travels.forEach(e => this.customerTravels.push(e));
+            this.customer.actions.forEach(e => {
+              if (e.ace5Id === null) {
+                this.customerActions.push(e);
+              }
+            });
             this.customer.stakeHolders.forEach(e => {
               this.customerStakeholders.push(e);
               if (e.contactPerson === true) { this.mainStakeHolderId = e.id; }
@@ -149,6 +152,9 @@ export class CustomerViewComponent {
           this.mainStakeHolderId = resCustomerData["id"];
         }
         entityArray.push(resCustomerData);
+        entityName = (entityName === 'stakeholders') ? 'stakeHolders' : entityName;
+        this.customer[entityName].push(resCustomerData);
+
       },
       (err) => console.log(entityName + " could not be added :" + err)
       );
@@ -208,8 +214,14 @@ export class CustomerViewComponent {
 
     this.dataService.updateEntity(entityName, id, entity)
       .then((resCustomerData) => {
+
         let index = entityArray.findIndex(e => e.id === entity.id);
         entityArray[index] = entity;
+
+        entityName = (entityName === 'stakeholders') ? 'stakeHolders' : entityName;
+        let indexOfCustomer = this.customer[entityName].findIndex(e => e.id === entity.id);
+        this.customer[entityName][indexOfCustomer] = entity;
+
       },
       (err) => console.log(entityName + " could not be updated :" + err)
       );
@@ -224,22 +236,28 @@ export class CustomerViewComponent {
   navigateAce5(customerId) {
     this.dataService.getEntityData('ace5s', customerId)
       .then((resCustomerData) => {
-          if(resCustomerData === null) {
-            var ace5 = new Ace5();
-            ace5.customerId = customerId;
-            ace5.intialDiscussionDate = new Date();
-            console.log("Creating new Ace5 process for customer");
-            this.dataService.postEntity('ace5s', ace5)
-              .then((resCustomerData) => {
-                console.log(resCustomerData);
-              },
-              (err) => console.log( "ace5 could not be created :" + err)
-              );
-          }
-        },
-        (err) => console.log("ace5 could not be fetched :" + err)
-        );
+        if (resCustomerData === null) {
+          var ace5 = new Ace5();
+          ace5.customerId = customerId;
+          ace5.intialDiscussionDate = new Date();
+          console.log("Creating new Ace5 process for customer");
+          this.dataService.postEntity('ace5s', ace5)
+            .then((resCustomerData) => {
+              console.log(resCustomerData);
+              this.navigateAce5Router(customerId);
+            },
+            (err) => console.log("ace5 could not be created :" + err)
+            );
+        }
+        else {
+          this.navigateAce5Router(customerId);
+        }
+      },
+      (err) => console.log("ace5 could not be fetched :" + err)
+      );
+  }
 
+  navigateAce5Router(customerId) {
     this.utilityService.addBreadCrumb(3, 'Ace5', 'view/ace5', customerId, 'entity', 'Process');
     this.router.navigate(['view/ace5', customerId]);
   }
@@ -250,15 +268,33 @@ export class CustomerViewComponent {
       this.customer.contactPerson = '';
       this.dataService.updateEntity('customers', +this.customer.id, this.customer);
     }
+    let goalAlert = false;
+    if (entityName === 'goals') {
+      let index = this.customerActions.findIndex(e => e.goalId === id);
+      if (index !== -1) {
+        goalAlert = true;
+      }
+    }
+    if (goalAlert === false) {
+      this.dataService.delelteEntity(entityName, id)
+        .then((resCustomerData) => {
+          entityArray.splice(entityArray.findIndex(function(i) {
+            return i.id === id;
+          }), 1);
+          entityName = (entityName === 'stakeholders') ? 'stakeHolders' : entityName;
+          this.customer[entityName].splice(this.customer[entityName].findIndex(function(i) {
+            return i.id === id;
+          }), 1);
+        },
+        (err) => console.log(entityName + " could not be deleted :" + err)
+        );
+    }
+    else {
+      alert("Goal is assigned to an action");
+    }
 
-    this.dataService.delelteEntity(entityName, id)
-      .then((resCustomerData) => {
-        entityArray.splice(entityArray.findIndex(function(i) {
-          return i.id === id;
-        }), 1);
-      },
-      (err) => console.log(entityName + " could not be deleted :" + err)
-      );
+
+
   }
 
 }

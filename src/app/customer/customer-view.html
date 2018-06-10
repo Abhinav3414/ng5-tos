@@ -67,8 +67,8 @@
       <span  (click)="openDialog('actions')" class="tos-add-button">+</span>
    </div>
    <div class="container" fxlayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="flex-start">
-      <div fxFlex="30%" *ngFor = "let action of customerActions">
-         <mat-card class="example-card" >
+      <div fxFlex="30%" *ngFor = "let action of customerActions" >
+         <mat-card class="example-card" *ngIf="action.ace5Id === null">
             <mat-card-header>
                <mat-card-title>
                   <h3><span >{{action.details}}</span></h3>
